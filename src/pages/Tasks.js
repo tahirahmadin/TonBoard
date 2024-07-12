@@ -439,7 +439,7 @@ const Tasks = () => {
                 }}
               >
                 <img
-                  src={LEAGUE_LEVEL_DATA[playerData.level].img}
+                  src={LEAGUE_LEVEL_DATA[playerData.leagueLevel].img}
                   style={{
                     width: 28,
                     height: 25,

@@ -8,38 +8,7 @@ import { AUTH_TYPE_ENUM } from "../utils/constants";
 
 export const useServerAuth = (hookInit = false) => {
   const [walletStatus, setWalletStatus] = useState(0);
-  const { telegramUserId, telegramReferId } = useTelegramSDK();
-
-  //Local:: To check if user session is stored in localStorage
-  // useEffect(() => {
-  //   const init = async () => {
-  //     try {
-  //       let localAuthRes = await localStorage.getItem("authRes");
-
-  //       if (localAuthRes) {
-  //         await updateEtherServicesClassData(localAuthRes);
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   if (hookInit) {
-  //     init();
-  //   }
-  // }, [hookInit]);
-
-  //Local:: To check if user session is stored in localStorage
-  // useEffect(() => {
-  //   async function asyncFn() {
-  //     let localAuthRes = await localStorage.getItem("authRes");
-  //     if (!localAuthRes) {
-  //       await _loginWithTelegram();
-  //     }
-  //   }
-  //   if (hookInit && telegramUserId) {
-  //     asyncFn();
-  //   }
-  // }, [hookInit, telegramUserId, telegramReferId]);
+  const { telegramUserId, telegramReferId } = useTelegramSDK(true);
 
   //1. SIGNUP:: Login/SignUp User
   useEffect(() => {

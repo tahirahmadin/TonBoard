@@ -119,9 +119,9 @@ const Work = () => {
           />
         </Grid>
       </Grid>
-      <Grid container spacing={1}>
+      <Grid container spacing={1} mt={1}>
         <Grid item xs={6} md={6}>
-          <WorkCard
+          <WorkCard2
             title={"API3 TASKS"}
             img="https://cryptologos.cc/logos/api3-api3-logo.png"
             sub_heading1="5000 $API3"

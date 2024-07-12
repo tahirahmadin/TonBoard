@@ -8,7 +8,8 @@ import {
 } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getLocalDataSyncWithRedux,
+  updateLocalDataToRedux,
+  updateBackendDataToLocal,
   setSuccessPopup,
   updateEnergyLeft,
   updateFullHungerStamp,
@@ -20,10 +21,11 @@ import {
   updateScore,
   updateScreenLoaded,
   updateTapScore,
+  updateBackendToRedux,
 } from "../reducers/UiReducers";
 import {
   getUserLeaderboardData,
-  updateGameDataToBackendAPI,
+  updateLocalDataToBackendAPI,
 } from "../actions/serverActions";
 
 const useGameHook = (hookInit = false) => {
@@ -47,34 +49,36 @@ const useGameHook = (hookInit = false) => {
   useEffect(() => {
     async function asyncFn() {
       if (hookInit && accountSC) {
-        // Load Backend
+        //1.  Load Backend
         let backendData = await getUserLeaderboardData(accountSC);
         console.log(backendData);
-        // Load LocalStorage
+
+        //2.  Load LocalStorage
         let localData = await localStorage.getItem("ui");
         let localDataObj = JSON.parse(localData);
-        console.log(JSON.parse(localData));
 
-        if (localData?.lastUpdatedAt < backendData.lastUpdated) {
-          // Update :: LocalStorage
-          await dispatch(getLocalDataSyncWithRedux());
-          await dispatch(updateScreenLoaded(true));
+        if (!localData && backendData) {
+          // Update :: Backend data to local
+          await dispatch(updateBackendToRedux(backendData));
         }
-        if (localData?.lastUpdatedAt > backendData.lastUpdated) {
-          // Update :: Backend
-          await updateGameDataToBackendAPI(localDataObj, accountSC);
-        }
-        // Sync latest data to redux
-        await dispatch(getLocalDataSyncWithRedux());
-        await dispatch(updateScreenLoaded(true));
-
-        // To update username
         if (
-          (backendData.username === "" && username) ||
+          localDataObj &&
+          backendData &&
+          localDataObj.lastUpdatedAt > backendData.lastUpdatedAt
+        ) {
+          // Update :: Backend from local
+          await updateLocalDataToBackendAPI(localDataObj, accountSC);
+          await dispatch(updateLocalDataToRedux());
+        }
+        // To update username to backend
+        if (
+          (backendData && username && backendData.username === "") ||
           backendData.username !== username
         ) {
-          await updateGameDataToBackendAPI({ username: username }, accountSC);
+          // Update Local Data to Backend
+          await updateLocalDataToBackendAPI({ username: username }, accountSC);
         }
+        await dispatch(updateScreenLoaded(true));
       }
     }
 
@@ -236,7 +240,7 @@ const useGameHook = (hookInit = false) => {
   // FUNCTION:: Claim League level
   const _claimLeague = async (inputLevel) => {
     console.log(inputLevel);
-    let pointsToAdd = LEAGUE_LEVEL_DATA[inputLevel].coinsRequired;
+    let pointsToAdd = LEAGUE_LEVEL_DATA[inputLevel].coinsReward;
     await dispatch(updateScore(score + pointsToAdd));
     await dispatch(updateLeagueLevel(inputLevel + 1));
     dispatch(setSuccessPopup(true));

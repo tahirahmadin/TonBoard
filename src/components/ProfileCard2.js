@@ -1,15 +1,5 @@
-import {
-  Box,
-  Button,
-  Fade,
-  Grow,
-  Theme,
-  Typography,
-  Zoom,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
+import React from "react";
 
 import makeStyles from "@mui/styles/makeStyles";
 
@@ -25,15 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const WorkCard = ({
-  img,
-  title,
-  sub_heading1,
-  sub_heading2,
-  description,
-  color1,
-  color2,
-}) => {
+const ProfileCard2 = ({}) => {
   const classes = useStyles();
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
@@ -43,16 +25,11 @@ const WorkCard = ({
       <Box
         sx={{
           width: "100%",
-          maxWidth: 180,
           borderRadius: "22px",
           position: "relative",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          padding: "0.2px",
-          boxShadow: `0 0.5px 6px 0.5px ${color1}`,
-          inset: "0",
-          background: `linear-gradient(180deg, ${color1} 0%, ${color2} 100%)`,
         }}
       >
         <Box
@@ -79,6 +56,20 @@ const WorkCard = ({
             }}
           >
             <img
+              src={
+                "https://cdn3d.iconscout.com/3d/premium/thumb/manager-10946991-8770014.png"
+              }
+              alt="TaskDao"
+              width={70}
+              height={70}
+              style={{
+                minWidth: 70,
+                minHeight: 70,
+                zIndex: 1,
+                borderRadius: 10,
+              }}
+            />
+            <img
               src="star.png"
               alt="TaskDao"
               width={20}
@@ -103,18 +94,7 @@ const WorkCard = ({
                 zIndex: 1,
               }}
             />
-            <img
-              src={img}
-              alt="TaskDao"
-              width={70}
-              height={70}
-              style={{
-                minWidth: 70,
-                minHeight: 70,
-                zIndex: 1,
-                borderRadius: 10,
-              }}
-            />
+
             <Box
               style={{
                 width: "100%",
@@ -145,7 +125,7 @@ const WorkCard = ({
                     marginTop: "10px",
                   }}
                 >
-                  {title}
+                  Tahir Ahmad
                 </Typography>
                 <Typography
                   style={{
@@ -153,7 +133,7 @@ const WorkCard = ({
                     minHeight: "33.53px",
                     borderRadius: "10px",
                     transform: "rotate(-4deg)",
-                    background: color2,
+                    background: "#03429F",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -168,9 +148,9 @@ const WorkCard = ({
                     zIndex: 2,
                   }}
                 >
-                  {sub_heading1}
+                  tahirahmadin
                   <br />
-                  <span style={{ color: "#fff" }}>{sub_heading2}</span>
+                  <span style={{ color: "#fff" }}>Working</span>
                 </Typography>
               </Box>
               <Typography
@@ -180,7 +160,7 @@ const WorkCard = ({
                   minHeight: 50,
                 }}
               >
-                {description}
+                tahirahmadin
               </Typography>
               <Box
                 style={{
@@ -216,4 +196,4 @@ const WorkCard = ({
   );
 };
 
-export default WorkCard;
+export default ProfileCard2;

@@ -3,7 +3,7 @@ import WebApp from "@twa-dev/sdk";
 import ethersServiceProvider from "../services/ethersServicesProvider";
 
 const useTelegramSDK = (hookInit = false) => {
-  const [userId, setUserID] = useState(1118251880);
+  const [userId, setUserID] = useState(null);
   const [referParam, setReferParam] = useState(0);
 
   useEffect(() => {
@@ -15,6 +15,10 @@ const useTelegramSDK = (hookInit = false) => {
         setReferParam(WebApp.initDataUnsafe?.start_param);
       }
 
+      setTimeout(() => {
+        console.log("Loaded");
+        setUserID(1026953902);
+      }, 2000);
       // WebApp.initParams({ tgWebVersion: "6.9" });
     }
   }, [WebApp, hookInit]);

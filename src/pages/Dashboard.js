@@ -6,6 +6,8 @@ import { getDashboardData, getReferralsData } from "../actions/serverActions";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 import Explainer from "../components/DashCard";
 import FancyCard from "../components/DashCard";
+import ProfileCard from "../components/ProfileCard";
+import ProfileCard2 from "../components/ProfileCard2";
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState({});
@@ -29,13 +31,17 @@ const Dashboard = () => {
         position: "relative",
         background: "#161811",
         paddingTop: "25px",
+        paddingLeft: "1%",
+        paddingRight: "1%",
         zIndex: 0,
       }}
     >
-      <Profile />
-      <Box display={"flex"} justifyContent={"center"}>
+      <ProfileCard />
+      {/* <ProfileCard2 /> */}
+
+      {/* <Box display={"flex"} justifyContent={"center"}>
         <FancyCard />
-      </Box>
+      </Box> */}
       <img
         src="/images/bg_grid.png"
         alt="TaskDao"

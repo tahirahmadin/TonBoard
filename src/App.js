@@ -14,6 +14,8 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { BackButton } from "@twa-dev/sdk/react";
 import Work from "./pages/Work";
+import { Quiz } from "@mui/icons-material";
+import QuizPage from "./pages/Quiz";
 
 function App() {
   const theme = useTheme();
@@ -39,6 +41,9 @@ function App() {
           paddingBottom: 60,
           height: "100vh",
           background: "linear-gradient(135deg, #000000, #212121)",
+          paddingLeft: "1%",
+          paddingRight: "1%",
+          padding: "8% 0",
         }}
       >
         {pathname !== "/" && <BackButton />}
@@ -47,7 +52,7 @@ function App() {
           <Route exact path="/league" element={<League />} />
           <Route exact path="/referral" element={<Referral />} />
           <Route exact path="/tasks" element={<Tasks />} />
-          <Route exact path="/boost" element={<Boost />} />
+          <Route exact path="/boost" element={<QuizPage />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/work" element={<Work />} />
         </Routes>

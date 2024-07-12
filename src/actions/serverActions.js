@@ -103,6 +103,7 @@ export const updateTaskStatusAPI = async (userId, task, taskStatus) => {
     userId: userId,
     task: task,
     status: taskStatus,
+    lastUpdatedAt: Date.now(),
   };
 
   //Encrypted data
@@ -146,9 +147,9 @@ export const getReferralsData = async (telegramId) => {
 };
 
 //6. USER:: Update Game Data to backend
-export const updateGameDataToBackendAPI = async (dataObj, userId) => {
+export const updateLocalDataToBackendAPI = async (dataObj, userId) => {
   let url = `${apiUrl}/user/updateUserData`;
-
+  console.log(dataObj);
   let updateObj = { ...dataObj, userId: userId };
   //Encrypted data
   let encryptedData = getCipherText(updateObj);

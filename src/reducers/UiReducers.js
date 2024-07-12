@@ -3,13 +3,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const initialState = {
   score: 0,
   tapScore: 0,
+  leagueLevel: 0,
+  energyLeft: 0,
   screenLoaded: false,
   multiTapFlag: false,
   lastUpdatedAt: Date.now(),
   multiTapStamp: [],
   fullHungerStamp: [],
-  leagueLevel: 0,
-  energyLeft: 0,
   playLevels: {
     tap: 0,
     energy: 0,
@@ -24,9 +24,9 @@ const initialState = {
   successPopup: false,
 };
 
-// Database -  user Leader data from database
-export const getLocalDataSyncWithRedux = createAsyncThunk(
-  "getLocalDataSyncWithRedux",
+// Function:: update localData to redux
+export const updateLocalDataToRedux = createAsyncThunk(
+  "updateLocalDataToRedux",
   async () => {
     try {
       let tempLocalStorageData = await localStorage.getItem("ui");
@@ -34,6 +34,18 @@ export const getLocalDataSyncWithRedux = createAsyncThunk(
         return JSON.parse(tempLocalStorageData);
       }
       return tempLocalStorageData;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+/// Function:: update backendData to local
+export const updateBackendToRedux = createAsyncThunk(
+  "updateBackendToRedux",
+  async (backendDataObj) => {
+    try {
+      return backendDataObj;
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +72,6 @@ const UiReducer = createSlice({
     updateScreenLoaded(state, action) {
       state.screenLoaded = action.payload;
     },
-
     updateMultiTap(state, action) {
       state.multiTapFlag = action.payload;
     },
@@ -88,7 +99,7 @@ const UiReducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getLocalDataSyncWithRedux.fulfilled, (state, action) => {
+    builder.addCase(updateLocalDataToRedux.fulfilled, (state, action) => {
       const response = action.payload;
       if (response) {
         state.score = response.score;
@@ -100,6 +111,17 @@ const UiReducer = createSlice({
         state.energyLeft = response.energyLeft;
         state.playLevels = response.playLevels;
         state.playValues = response.playValues;
+      }
+    });
+    builder.addCase(updateBackendToRedux.fulfilled, (state, action) => {
+      const response = action.payload;
+      if (response) {
+        state.score = response.score;
+        state.tapScore = response.tapScore;
+
+        state.leagueLevel = response.leagueLevel;
+        state.energyLeft = response.energyLeft;
+        state.playLevels = response.playLevels;
       }
     });
   },

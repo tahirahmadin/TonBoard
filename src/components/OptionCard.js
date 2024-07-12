@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const WorkCard = ({
+const OptionCard = ({
+  option,
   img,
   title,
   sub_heading1,
@@ -44,15 +45,15 @@ const WorkCard = ({
         sx={{
           width: "100%",
           maxWidth: 180,
+          minWidth: 120,
           borderRadius: "22px",
           position: "relative",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          padding: "0.2px",
-          boxShadow: `0 0.5px 6px 0.5px ${color1}`,
+          padding: "2px",
+
           inset: "0",
-          background: `linear-gradient(180deg, ${color1} 0%, ${color2} 100%)`,
         }}
       >
         <Box
@@ -147,31 +148,6 @@ const WorkCard = ({
                 >
                   {title}
                 </Typography>
-                <Typography
-                  style={{
-                    width: "130.03px",
-                    minHeight: "33.53px",
-                    borderRadius: "10px",
-                    transform: "rotate(-4deg)",
-                    background: color2,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexDirection: "column",
-                    fontFamily: "'Rubik'",
-                    fontWeight: 800,
-                    fontSize: 12,
-                    lineHeight: "100%",
-                    textAlign: "center",
-                    color: "#64FF99",
-                    margin: "7px 0",
-                    zIndex: 2,
-                  }}
-                >
-                  {sub_heading1}
-                  <br />
-                  <span style={{ color: "#fff" }}>{sub_heading2}</span>
-                </Typography>
               </Box>
               <Typography
                 className={classes.description}
@@ -180,34 +156,8 @@ const WorkCard = ({
                   minHeight: 50,
                 }}
               >
-                {description}
+                {description}+
               </Typography>
-              <Box
-                style={{
-                  width: "100%",
-                  height: "30px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexDirection: "row",
-                }}
-              >
-                <img
-                  src="https://png.pngtree.com/png-clipart/20220612/original/pngtree-dollar-coin-icon-3d-png-image_7966148.png"
-                  style={{
-                    width: 18,
-                    height: 18,
-                  }}
-                />
-                <Typography
-                  variant="body2"
-                  style={{
-                    textAlign: "center",
-                  }}
-                >
-                  +5,000
-                </Typography>
-              </Box>
             </Box>
           </Box>
         </Box>
@@ -216,4 +166,4 @@ const WorkCard = ({
   );
 };
 
-export default WorkCard;
+export default OptionCard;
