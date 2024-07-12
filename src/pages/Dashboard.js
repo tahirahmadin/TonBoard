@@ -7,7 +7,6 @@ import useTelegramSDK from "../hooks/useTelegramSDK";
 import Explainer from "../components/DashCard";
 import FancyCard from "../components/DashCard";
 import ProfileCard from "../components/ProfileCard";
-import ProfileCard2 from "../components/ProfileCard2";
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState({});
@@ -30,32 +29,13 @@ const Dashboard = () => {
         minHeight: "calc(100vh - 60px)",
         position: "relative",
         background: "#161811",
-        paddingTop: "25px",
+        paddingTop: 25,
         paddingLeft: "1%",
         paddingRight: "1%",
         zIndex: 0,
       }}
     >
       <ProfileCard />
-      {/* <ProfileCard2 /> */}
-
-      {/* <Box display={"flex"} justifyContent={"center"}>
-        <FancyCard />
-      </Box> */}
-      <img
-        src="/images/bg_grid.png"
-        alt="TaskDao"
-        className="portrait"
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          zIndex: -1,
-          top: 0,
-          left: 0,
-          objectFit: "cover",
-        }}
-      />
     </Box>
   );
 };

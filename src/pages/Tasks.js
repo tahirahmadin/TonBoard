@@ -362,25 +362,15 @@ const Tasks = () => {
         background: "#161811",
         paddingTop: "25px",
         zIndex: 0,
+        paddingTop: 25,
+        paddingLeft: "1%",
+        paddingRight: "1%",
       }}
     >
       {pageLoaded && (
         <Box>
           <SuccessSnackbar text="Reward claimed succesfully!" />
-          <img
-            src="/images/bg_grid.png"
-            alt="TaskDao"
-            className="portrait"
-            style={{
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-              zIndex: -1,
-              top: 0,
-              left: 0,
-              objectFit: "cover",
-            }}
-          />
+
           <Profile />
           <Box
             style={{

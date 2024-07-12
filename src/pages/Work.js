@@ -33,10 +33,10 @@ const Work = () => {
         minHeight: "calc(100vh - 60px)",
         position: "relative",
         background: "#161811",
-        paddingTop: "25px",
         paddingBottom: "100px",
-        paddingLeft: "2%",
-        paddingRight: "2%",
+        paddingTop: "25px",
+        paddingLeft: "1%",
+        paddingRight: "1%",
         zIndex: 0,
       }}
     >
@@ -50,6 +50,7 @@ const Work = () => {
       >
         <Box
           style={{
+            marginTop: 10,
             width: "90%",
             height: 45,
             background: "#000",
@@ -57,8 +58,9 @@ const Work = () => {
             justifyContent: "space-around",
             alignItems: "center",
             backgroundColor: "#212121",
-            borderTopLeftRadius: 10,
-            borderTopRightRadius: 10,
+            borderRadius: 10,
+            paddingLeft: 5,
+            paddingRight: 5,
           }}
         >
           {topTabs.map((ele, i) => (

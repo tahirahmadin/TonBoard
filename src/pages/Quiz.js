@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import WebApp from "@twa-dev/sdk";
 import { updateScore, updateTapScore } from "../reducers/UiReducers";
 import OptionCard from "../components/OptionCard";
+import Profile from "../components/Profile";
 
 const QuizPage = () => {
   const dispatch = useDispatch();
@@ -67,7 +68,7 @@ const QuizPage = () => {
   };
 
   return (
-    <Box>
+    <Box style={{ paddingTop: 25, paddingLeft: "1%", paddingRight: "1%" }}>
       {screenLoaded && (
         <Box
           style={{
@@ -85,39 +86,7 @@ const QuizPage = () => {
             backgroundPosition: "center center",
           }}
         >
-          <Box
-            style={{
-              width: "90%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-              flexDirection: "row",
-            }}
-          >
-            <img
-              src="https://cdn3d.iconscout.com/3d/premium/thumb/manager-10946991-8770014.png"
-              style={{
-                width: 36,
-                height: 36,
-                backgroundColor: "#212121",
-                borderRadius: 10,
-                padding: 4,
-              }}
-            />
-            <Typography
-              style={{
-                fontFamily: "Rubik",
-                fontWeight: 500,
-                fontSize: 12,
-                lineHeight: "110%",
-                textAlign: "center",
-                color: "#ffffff",
-                paddingLeft: 8,
-              }}
-            >
-              Tahir Ahmad
-            </Typography>
-          </Box>
+          <Profile />
           <Box
             style={{
               width: "100%",

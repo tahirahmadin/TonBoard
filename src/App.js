@@ -41,9 +41,6 @@ function App() {
           paddingBottom: 60,
           height: "100vh",
           background: "linear-gradient(135deg, #000000, #212121)",
-          paddingLeft: "1%",
-          paddingRight: "1%",
-          padding: "8% 0",
         }}
       >
         {pathname !== "/" && <BackButton />}

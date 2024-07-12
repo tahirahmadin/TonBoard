@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import WebApp from "@twa-dev/sdk";
 import { updateScore, updateTapScore } from "../reducers/UiReducers";
+import Profile from "../components/Profile";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -67,62 +68,25 @@ const Home = () => {
   };
 
   return (
-    <Box>
+    <Box style={{ paddingLeft: "1%", paddingRight: "1%", paddingTop: 25 }}>
       {screenLoaded && (
         <Box
           style={{
             width: "100%",
-            minHeight: "calc(100vh - 60px)",
+            minHeight: "calc(100vh - 100px)",
             position: "relative",
-            padding: "8% 0",
             zIndex: 0,
             position: "relative",
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-around",
+            justifyContent: "space-between",
             flexDirection: "column",
             overflow: "hidden",
             backgroundSize: "cover",
             backgroundPosition: "center center",
           }}
         >
-          <Box
-            style={{
-              width: "90%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-              flexDirection: "row",
-            }}
-          >
-            <img
-              src="https://cdn3d.iconscout.com/3d/premium/thumb/manager-10946991-8770014.png"
-              style={{
-                width: 36,
-                height: 36,
-                backgroundColor: "#212121",
-                borderRadius: 10,
-                padding: 4,
-              }}
-            />
-            <Typography
-              onClick={() => {
-                dispatch(updateScore(score + 100000));
-                dispatch(updateTapScore(tapScore + 100000));
-              }}
-              style={{
-                fontFamily: "Rubik",
-                fontWeight: 500,
-                fontSize: 12,
-                lineHeight: "110%",
-                textAlign: "center",
-                color: "#ffffff",
-                paddingLeft: 8,
-              }}
-            >
-              Tahir Ahmad
-            </Typography>
-          </Box>
+          <Profile />
           <Box
             style={{
               width: "100%",
