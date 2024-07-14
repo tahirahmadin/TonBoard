@@ -1,6 +1,12 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { KeyboardArrowRight } from "@mui/icons-material";
 import ProgressBar from "../components/ProgressBar";
 import useGameHook from "../hooks/useGameHook";
@@ -12,9 +18,23 @@ import WebApp from "@twa-dev/sdk";
 import { updateScore, updateTapScore } from "../reducers/UiReducers";
 import OptionCard from "../components/OptionCard";
 import Profile from "../components/Profile";
+import makeStyles from "@mui/styles/makeStyles";
 
+const useStyles = makeStyles((theme) => ({
+  description: {
+    width: "100%",
+    textAlign: "center",
+    fontSize: 16,
+    lineHeight: "130%",
+    color: "rgba(253, 255, 245, 0.8)",
+    position: "relative",
+    zIndex: 1,
+  },
+}));
 const QuizPage = () => {
   const dispatch = useDispatch();
+  const classes = useStyles();
+  const theme = useTheme();
   const { gamePercentageLeft, updateOnTapAction } = useGameHook();
   const { viberate, telegramUsername } = useTelegramSDK();
   const score = useSelector((state) => state.ui.score);
@@ -68,7 +88,87 @@ const QuizPage = () => {
   };
 
   return (
-    <Box style={{ paddingTop: 25, paddingLeft: "1%", paddingRight: "1%" }}>
+    <Box>
+      <Box
+        mt={2}
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            backgroundColor: "green",
+            borderTopRightRadius: 20,
+            borderBottomRightRadius: 20,
+            paddingRight: 10,
+            paddingLeft: 5,
+          }}
+        >
+          <img
+            src={
+              "https://cdn3d.iconscout.com/3d/premium/thumb/jewish-man-avatar-10971658-8779370.png?f=webp"
+            }
+            alt="TaskDao"
+            width={30}
+            height={30}
+          />
+          <Typography
+            style={{
+              width: "100%",
+              fontFamily: "'Rubik'",
+              fontWeight: 500,
+              fontSize: 10,
+              lineHeight: "110%",
+              textAlign: "center",
+              color: "#ffffff",
+            }}
+          >
+            Senior Manager 6/9
+          </Typography>
+        </Box>
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            backgroundColor: "green",
+            borderTopLeftRadius: 20,
+            borderBottomLeftRadius: 20,
+            paddingLeft: 10,
+            paddingRight: 5,
+          }}
+        >
+          <img
+            src={
+              "https://png.pngtree.com/png-clipart/20220612/original/pngtree-dollar-coin-icon-3d-png-image_7966148.png"
+            }
+            alt="CoinDAO"
+            width={30}
+            height={30}
+          />
+          <Typography
+            style={{
+              width: "100%",
+              fontFamily: "'Rubik'",
+              fontWeight: 500,
+              fontSize: 10,
+              lineHeight: "110%",
+              textAlign: "center",
+              color: "#ffffff",
+            }}
+          >
+            13.5M Points
+          </Typography>
+        </Box>
+      </Box>
       {screenLoaded && (
         <Box
           style={{
@@ -86,7 +186,44 @@ const QuizPage = () => {
             backgroundPosition: "center center",
           }}
         >
-          <Profile />
+          {/* <Profile /> */}
+          <Box
+            display={"flex"}
+            flexDirection="column"
+            justifyContent={"center"}
+            alignItems={"center"}
+            mt={4}
+          >
+            <Typography
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+                fontFamily: "Rubik",
+                fontWeight: 800,
+                fontSize: 14,
+                lineHeight: "100%",
+                textAlign: "center",
+                color: "#64FF99",
+              }}
+            >
+              Current Points
+            </Typography>
+            <Typography
+              style={{
+                width: "100%",
+                fontFamily: "Rubik",
+                fontWeight: 700,
+                fontSize: 28,
+                lineHeight: "110%",
+                textAlign: "center",
+                color: "#ffffff",
+              }}
+            >
+              13,435,545
+            </Typography>
+          </Box>
           <Box
             style={{
               width: "100%",
@@ -139,6 +276,7 @@ const QuizPage = () => {
                 description="32,430"
                 color1="#4886FF"
                 color2="#03429F"
+                tick={true}
               />
               <OptionCard
                 title="ORACLE"
@@ -147,6 +285,7 @@ const QuizPage = () => {
                 description="1,203"
                 color1="#4886FF"
                 color2="#03429F"
+                tick={false}
               />
             </Box>
           </Box>
@@ -183,7 +322,7 @@ const QuizPage = () => {
                   color: "#ffffff",
                 }}
               >
-                2,000,0000
+                4/10
               </Typography>
             </Box>
             <Box

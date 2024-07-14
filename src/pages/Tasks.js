@@ -386,34 +386,49 @@ const Tasks = () => {
               gap: "5px",
             }}
           >
-            <Typography
-              style={{
-                fontWeight: 600,
-                fontSize: "40px",
-                lineHeight: "100%",
-                color: "#FAFF00",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "5px",
-              }}
+            <Box
+              display={"flex"}
+              flexDirection="column"
+              justifyContent={"center"}
+              alignItems={"center"}
             >
-              <img
-                src="https://png.pngtree.com/png-clipart/20220612/original/pngtree-dollar-coin-icon-3d-png-image_7966148.png"
+              <Typography
                 style={{
-                  width: 35,
-                  height: 35,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  fontFamily: "Rubik",
+                  fontWeight: 800,
+                  fontSize: 14,
+                  lineHeight: "100%",
+                  textAlign: "center",
+                  color: "#64FF99",
                 }}
-              />
-              {score.toLocaleString()}
-            </Typography>
+              >
+                Current Points
+              </Typography>
+              <Typography
+                style={{
+                  width: "100%",
+                  fontFamily: "Rubik",
+                  fontWeight: 700,
+                  fontSize: 28,
+                  lineHeight: "110%",
+                  textAlign: "center",
+                  color: "#ffffff",
+                }}
+              >
+                {score.toLocaleString()}
+              </Typography>
+            </Box>
 
             <Link to="/league">
               <Typography
                 style={{
                   minWidth: 125,
                   height: 21,
-                  background: "#D6672C",
+                  background: "orange",
 
                   fontWeight: 700,
                   fontSize: "14px",
@@ -421,8 +436,7 @@ const Tasks = () => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  color: "#FFFFFF",
-                  opacity: 0.8,
+                  color: "#000000",
                   padding: "0 5px 0 0",
                   borderRadius: "8px",
                   whiteSpace: "nowrap",

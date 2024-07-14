@@ -32,8 +32,7 @@ const OptionCard = ({
   sub_heading1,
   sub_heading2,
   description,
-  color1,
-  color2,
+  tick,
 }) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -46,14 +45,18 @@ const OptionCard = ({
           width: "100%",
           maxWidth: 180,
           minWidth: 120,
+          height: 220,
           borderRadius: "22px",
           position: "relative",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           padding: "2px",
-
           inset: "0",
+
+          background: tick
+            ? `linear-gradient(180deg, #4886FF 0%, green 100%)`
+            : "transparent",
         }}
       >
         <Box
@@ -153,11 +156,21 @@ const OptionCard = ({
                 className={classes.description}
                 style={{
                   textAlign: "center",
-                  minHeight: 50,
+                  minHeight: 20,
                 }}
               >
                 {description}+
               </Typography>
+              {tick && (
+                <img
+                  src="https://cdn3d.iconscout.com/3d/premium/thumb/successfully-done-5108472-4288033.png"
+                  style={{
+                    width: 42,
+                    height: 42,
+                    objectFit: "contain",
+                  }}
+                />
+              )}
             </Box>
           </Box>
         </Box>

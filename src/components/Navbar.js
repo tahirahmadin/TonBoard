@@ -24,31 +24,100 @@ const Navbar = () => {
   const navLinks = [
     {
       url: "/work",
-      image: <TaskSharp color="success" />,
-      imageActive: <TaskSharp />,
+      image: (
+        <img
+          src={
+            "https://cdn3d.iconscout.com/3d/premium/thumb/earning-9146255-7451279.png"
+          }
+          style={{
+            width: 24,
+            height: 24,
+            objectFit: "contain",
+          }}
+        />
+      ),
+
+      imageActive: (
+        <img
+          src={
+            "https://cdn3d.iconscout.com/3d/premium/thumb/task-8327158-6649009.png"
+          }
+          style={{
+            width: 24,
+            height: 24,
+            objectFit: "contain",
+          }}
+        />
+      ),
       name: "Work",
     },
     {
       url: "/tasks",
-      image: <Balance />,
+      image: (
+        <img
+          src={
+            "https://cdn3d.iconscout.com/3d/premium/thumb/task-8327158-6649009.png"
+          }
+          style={{
+            width: 24,
+            height: 24,
+            objectFit: "contain",
+          }}
+        />
+      ),
       imageActive: <Balance />,
       name: "Tasks",
     },
+
     {
       url: "/",
-      image: <Analytics />,
+      image: (
+        <img
+          src={
+            "https://cdn3d.iconscout.com/3d/premium/thumb/income-5012983-4171838.png?f=webp"
+          }
+          style={{
+            width: 24,
+            height: 24,
+            objectFit: "contain",
+          }}
+        />
+      ),
       imageActive: <Analytics />,
       name: "Tap",
     },
     {
       url: "/boost",
-      image: <Group />,
+      image: (
+        <img
+          src={
+            "https://cdn3d.iconscout.com/3d/premium/thumb/dialogue-question-8691328-6963911.png?f=webp"
+          }
+          style={{
+            width: 24,
+            height: 24,
+            objectFit: "contain",
+          }}
+        />
+      ),
+
       imageActive: <Group />,
-      name: "Boost",
+      name: "Bonus",
     },
     {
       url: "/dashboard",
-      image: <Group />,
+      image: (
+        <img
+          src={
+            "https://cdn3d.iconscout.com/3d/premium/thumb/profile-6073860-4996977.png?f=webp"
+          }
+          style={{
+            width: 24,
+            height: 24,
+            objectFit: "contain",
+          }}
+        />
+      ),
       imageActive: <Group />,
       name: "Dashboard",
     },

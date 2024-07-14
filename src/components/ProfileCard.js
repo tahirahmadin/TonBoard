@@ -22,13 +22,15 @@ const ProfileCard = ({}) => {
 
   return (
     <Box
-      sx={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        gap: 2,
+      display={"flex"}
+      flexDirection="row"
+      justifyContent={"space-around"}
+      alignItems={"center"}
+      style={{
+        borderRadius: "22px",
+        paddingTop: 10,
+        paddingBottom: 10,
+        backgroundColor: "green",
       }}
     >
       <Box
@@ -50,7 +52,7 @@ const ProfileCard = ({}) => {
             justifyContent: "center",
             alignItems: "center",
             background:
-              "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
+              "linear-gradient(241.27deg, #41472E -5.59%, #41472E 100%)",
           }}
         >
           <img

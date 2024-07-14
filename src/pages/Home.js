@@ -88,28 +88,30 @@ const Home = () => {
         >
           <Profile />
           <Box
-            style={{
-              width: "100%",
-              height: "50px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "row",
-            }}
+            display={"flex"}
+            flexDirection="column"
+            justifyContent={"center"}
+            alignItems={"center"}
           >
-            <img
-              src="https://png.pngtree.com/png-clipart/20220612/original/pngtree-dollar-coin-icon-3d-png-image_7966148.png"
-              style={{
-                width: 45,
-                height: 45,
-              }}
-            />
             <Typography
-              onClick={() => {
-                dispatch(updateScore(score + 100000));
-                dispatch(updateTapScore(tapScore + 100000));
-              }}
               style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+                fontFamily: "Rubik",
+                fontWeight: 800,
+                fontSize: 14,
+                lineHeight: "100%",
+                textAlign: "center",
+                color: "#64FF99",
+              }}
+            >
+              Current Points
+            </Typography>
+            <Typography
+              style={{
+                width: "100%",
                 fontFamily: "Rubik",
                 fontWeight: 700,
                 fontSize: 28,
@@ -120,38 +122,6 @@ const Home = () => {
             >
               {score.toLocaleString()}
             </Typography>
-
-            {/* <Link to="/league">
-              <Typography
-                style={{
-                  minWidth: 125,
-                  height: 21,
-                  background: "#D6672C",
-                  fontWeight: 700,
-                  fontSize: "14px",
-                  lineHeight: "16px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  color: "#FFFFFF",
-                  opacity: 0.8,
-                  padding: "0 5px",
-                  borderRadius: "8px",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                <img
-                  src={LEAGUE_LEVEL_DATA[leagueLevel].img}
-                  style={{
-                    width: 28,
-                    height: 25,
-                    objectFit: "contain",
-                  }}
-                />
-                {LEAGUE_LEVEL_DATA[leagueLevel].title}
-                <KeyboardArrowRight style={{ color: "#fff" }} />
-              </Typography>
-            </Link> */}
           </Box>
           <Box
             style={{
