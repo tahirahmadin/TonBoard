@@ -54,6 +54,18 @@
       (function () {
         document.body.classList.add("mobile-body");
 
+        const draggable = document.getElementById("draggable");
+        draggable.addEventListener(
+          "touchmove",
+          (e) => {
+            e.preventDefault();
+            e.target.textContent = JSON.stringify({
+              x: e.touches[0].clientX,
+              y: e.touches[0].clientY,
+            });
+          },
+          { passive: false }
+        );
         window.scrollTo(0, 100);
       })();
     </script>
