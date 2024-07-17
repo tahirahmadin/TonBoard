@@ -321,7 +321,7 @@ const Dashboard = () => {
             lineHeight: "110%",
             textAlign: "center",
             color: "#ffffff",
-            backgroundColor: "#26A4E4",
+            backgroundColor: "green",
             height: 52,
             borderRadius: "22px",
           }}
