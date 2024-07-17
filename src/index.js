@@ -11,7 +11,7 @@ import { Buffer } from "buffer";
 
 window.Buffer = Buffer;
 
-const root = ReactDOM.createRoot(document.getElementById("draggable"));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <ThemeProvider theme={theme}>
