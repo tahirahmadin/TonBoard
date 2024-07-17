@@ -48,13 +48,13 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root" class="root"></div>
 
     <script>
       (function () {
         document.body.classList.add("mobile-body");
 
-        const draggable = document.getElementById("draggable");
+        const draggable = document.getElementById("root");
         draggable.addEventListener(
           "touchmove",
           (e) => {
