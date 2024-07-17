@@ -90,7 +90,7 @@ const QuizPage = () => {
   };
 
   return (
-    <Box mt={1}>
+    <Box pt={1} style={{ maxHeight: "100vh" }}>
       <Profile />
       <ScoreComp />
 
