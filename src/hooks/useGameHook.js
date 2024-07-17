@@ -1,15 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useServerAuth } from "./useServerAuth";
 import {
   ENERGY_LIMIT_DATA,
   LEAGUE_LEVEL_DATA,
+  LEAGUE_TASKS_DATA,
   RECHARGE_SPEED_DATA,
   TAP_DATA,
 } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateLocalDataToRedux,
-  updateBackendDataToLocal,
   setSuccessPopup,
   updateEnergyLeft,
   updateFullHungerStamp,
@@ -21,12 +21,14 @@ import {
   updateScore,
   updateScreenLoaded,
   updateTapScore,
-  updateBackendToRedux,
+  updateReferralCount,
+  updateReferralPoints,
 } from "../reducers/UiReducers";
 import {
   getUserLeaderboardData,
   updateLocalDataToBackendAPI,
 } from "../actions/serverActions";
+import useTelegramSDK from "./useTelegramSDK";
 
 const useGameHook = (hookInit = false) => {
   const dispatch = useDispatch();
@@ -40,50 +42,49 @@ const useGameHook = (hookInit = false) => {
   const leagueLevel = useSelector((state) => state.ui.leagueLevel);
   const playLevels = useSelector((state) => state.ui.playLevels);
   const playValues = useSelector((state) => state.ui.playValues);
+  const referralCount = useSelector((state) => state.ui.referralCount);
+  const referralPoints = useSelector((state) => state.ui.referralPoints);
+
+  const specialTasksStatus = useSelector(
+    (state) => state.ui.specialTasksStatus
+  );
+  const leagueTasksStatus = useSelector((state) => state.ui.leagueTasksStatus);
+  const refTasksStatus = useSelector((state) => state.ui.refTasksStatus);
 
   const _percentageLeft = (energyLeft * 100) / playValues.energy;
 
   const { accountSC, username } = useServerAuth();
+  const { telegramUsername, telegramPhotoUrl } = useTelegramSDK();
 
   //1.  To Manage initial loading of the application
   useEffect(() => {
     async function asyncFn() {
       if (hookInit && accountSC) {
+        await dispatch(updateLocalDataToRedux());
         //1.  Load Backend
         let backendData = await getUserLeaderboardData(accountSC);
-        console.log(backendData);
 
-        //2.  Load LocalStorage
-        let localData = await localStorage.getItem("ui");
-        let localDataObj = JSON.parse(localData);
-
-        if (!localData && backendData) {
-          // Update :: Backend data to local
-          await dispatch(updateBackendToRedux(backendData));
+        if (backendData.referralPoints) {
+          await dispatch(updateReferralCount(backendData.referralCount));
+          await dispatch(updateReferralPoints(backendData.referralPoints));
         }
         if (
-          localDataObj &&
-          backendData &&
-          localDataObj.lastUpdatedAt > backendData.lastUpdatedAt
+          (backendData && telegramUsername && backendData.username === "") ||
+          backendData.username !== telegramUsername
         ) {
-          // Update :: Backend from local
-          await updateLocalDataToBackendAPI(localDataObj, accountSC);
-          await dispatch(updateLocalDataToRedux());
+          // Update Local Data to Backend server
+          await updateLocalDataToBackendAPI(
+            { username: telegramUsername },
+            accountSC
+          );
         }
-        // To update username to backend
-        if (
-          (backendData && username && backendData.username === "") ||
-          backendData.username !== username
-        ) {
-          // Update Local Data to Backend
-          await updateLocalDataToBackendAPI({ username: username }, accountSC);
-        }
+
         await dispatch(updateScreenLoaded(true));
       }
     }
 
     asyncFn();
-  }, [accountSC, hookInit]);
+  }, [accountSC, hookInit, telegramUsername]);
 
   //2. Updating localStorage on every change
   useEffect(() => {
@@ -97,6 +98,9 @@ const useGameHook = (hookInit = false) => {
   }, [
     score,
     leagueLevel,
+    specialTasksStatus,
+    leagueTasksStatus,
+    refTasksStatus,
     tapScore,
     energyLeft,
     playLevels.tap,
@@ -105,6 +109,8 @@ const useGameHook = (hookInit = false) => {
     playValues.tap,
     playValues.energy,
     playValues.recharge,
+    referralCount,
+    referralPoints,
   ]);
 
   //3. Update playValues after levelData changes
@@ -137,20 +143,19 @@ const useGameHook = (hookInit = false) => {
     return () => clearInterval(interval); // Clear interval on component unmount
   }, [playValues.recharge, playValues.energy, energyLeft]);
 
-  //5. Energy Full on Purchase of Energy Booster
-  useEffect(() => {
-    if (hookInit) {
-      dispatch(updateEnergyLeft(playValues.energy));
-    }
-  }, [playValues.energy, hookInit]);
+  // Final Score = score + referral score
+  const finalScore = useMemo(() => {
+    return score + referralPoints;
+  }, [score, referralPoints]);
 
   // FUNCTION:: Handle tap on screen
   const _updateOnTapAction = () => {
     let tapPoints = multiTapFlag ? playValues.tap * 5 : playValues.tap;
+    let energyToReduce = multiTapFlag ? 0 : playValues.tap;
     console.log(tapPoints);
     dispatch(updateScore(score + tapPoints));
     dispatch(updateTapScore(tapScore + tapPoints));
-    dispatch(updateEnergyLeft(energyLeft - tapPoints));
+    dispatch(updateEnergyLeft(energyLeft - energyToReduce));
   };
 
   // FUNCTION:: Handle upgrade booster
@@ -198,7 +203,7 @@ const useGameHook = (hookInit = false) => {
       dispatch(setSuccessPopup(true));
       setTimeout(() => {
         dispatch(updateMultiTap(false));
-      }, 20000);
+      }, 60000);
     }
 
     if (multiTapStamp.length === 3 && nextUnlockTime > multiTapStamp[0]) {
@@ -208,7 +213,7 @@ const useGameHook = (hookInit = false) => {
       dispatch(setSuccessPopup(true));
       setTimeout(() => {
         dispatch(updateMultiTap(false));
-      }, 20000);
+      }, 60000);
     }
   };
 
@@ -239,10 +244,9 @@ const useGameHook = (hookInit = false) => {
   };
   // FUNCTION:: Claim League level
   const _claimLeague = async (inputLevel) => {
-    console.log(inputLevel);
-    let pointsToAdd = LEAGUE_LEVEL_DATA[inputLevel].coinsReward;
+    let pointsToAdd = LEAGUE_TASKS_DATA[inputLevel].points;
     await dispatch(updateScore(score + pointsToAdd));
-    await dispatch(updateLeagueLevel(inputLevel + 1));
+    await dispatch(updateLeagueLevel(inputLevel));
     dispatch(setSuccessPopup(true));
   };
 
@@ -254,7 +258,7 @@ const useGameHook = (hookInit = false) => {
   };
 
   return {
-    gameScore: score,
+    gameScore: finalScore,
     gameLeagueLevel: leagueLevel,
     gameEnergyLeft: energyLeft,
     gamePlayLevels: playLevels,

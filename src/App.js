@@ -45,11 +45,11 @@ function App() {
       >
         {pathname !== "/" && <BackButton />}
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={<QuizPage />} />
+          <Route exact path="/boost" element={<Boost />} />
           <Route exact path="/league" element={<League />} />
           <Route exact path="/referral" element={<Referral />} />
           <Route exact path="/tasks" element={<Tasks />} />
-          <Route exact path="/boost" element={<QuizPage />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/work" element={<Work />} />
         </Routes>

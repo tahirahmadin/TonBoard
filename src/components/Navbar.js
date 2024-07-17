@@ -27,28 +27,13 @@ const Navbar = () => {
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/earning-9146255-7451279.png"
+            "https://static.vecteezy.com/system/resources/thumbnails/022/442/216/small_2x/icon-money-3d-illustration-png.png"
           }
-          style={{
-            width: 24,
-            height: 24,
-            objectFit: "contain",
-          }}
+          height={28}
+          width={24}
         />
       ),
 
-      imageActive: (
-        <img
-          src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/task-8327158-6649009.png"
-          }
-          style={{
-            width: 24,
-            height: 24,
-            objectFit: "contain",
-          }}
-        />
-      ),
       name: "Work",
     },
     {
@@ -56,16 +41,13 @@ const Navbar = () => {
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/task-8327158-6649009.png"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/accept-date-10615968-8579878.png?f=webp"
           }
-          style={{
-            width: 24,
-            height: 24,
-            objectFit: "contain",
-          }}
+          height={24}
+          width={24}
         />
       ),
-      imageActive: <Balance />,
+
       name: "Tasks",
     },
 
@@ -74,51 +56,41 @@ const Navbar = () => {
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/income-5012983-4171838.png?f=webp"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/chalk-board-6624230-5487990.png"
           }
-          style={{
-            width: 24,
-            height: 24,
-            objectFit: "contain",
-          }}
+          height={24}
+          width={24}
         />
       ),
-      imageActive: <Analytics />,
-      name: "Tap",
+
+      name: "Quiz",
     },
     {
       url: "/boost",
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/dialogue-question-8691328-6963911.png?f=webp"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/go-green-11413832-9197004.png?f=webp"
           }
-          style={{
-            width: 24,
-            height: 24,
-            objectFit: "contain",
-          }}
+          height={24}
+          width={24}
         />
       ),
 
-      imageActive: <Group />,
-      name: "Bonus",
+      name: "Boost",
     },
     {
       url: "/dashboard",
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/profile-6073860-4996977.png?f=webp"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/green-house-6855144-5625017.png?f=webp"
           }
-          style={{
-            width: 24,
-            height: 24,
-            objectFit: "contain",
-          }}
+          height={24}
+          width={24}
         />
       ),
-      imageActive: <Group />,
+
       name: "Dashboard",
     },
   ];

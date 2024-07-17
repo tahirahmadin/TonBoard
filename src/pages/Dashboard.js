@@ -62,12 +62,12 @@ const Dashboard = () => {
           position: "relative",
           height: 200,
           backgroundImage:
-            "url(https://rare-gallery.com/thumbs/583092-htc-u11-plus.jpg)",
+            "url(https://plus.unsplash.com/premium_photo-1685114647471-46f2fc552bd9?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
           backgroundSize: "cover",
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
-          borderBottomLeftRadius: "50%",
-          borderBottomRightRadius: "50%",
+          borderBottomLeftRadius: "60%",
+          borderBottomRightRadius: "60%",
         }}
       >
         <Box

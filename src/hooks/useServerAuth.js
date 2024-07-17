@@ -54,6 +54,11 @@ export const useServerAuth = (hookInit = false) => {
     );
 
     if (authRes && !authRes.error) {
+      if (authRes.result.signUpFlag) {
+        //Remove old states of localStorage
+        await localStorage.clear();
+        console.log("cleared");
+      }
       return await updateEtherServicesClassData(authRes.result.userId);
     } else {
       return false;

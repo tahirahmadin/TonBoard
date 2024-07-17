@@ -19,6 +19,8 @@ import { updateScore, updateTapScore } from "../reducers/UiReducers";
 import OptionCard from "../components/OptionCard";
 import Profile from "../components/Profile";
 import makeStyles from "@mui/styles/makeStyles";
+import SmallProgressBar from "../components/SmallProgressBar";
+import ScoreComp from "../components/Score";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -88,9 +90,9 @@ const QuizPage = () => {
   };
 
   return (
-    <Box>
+    <Box mt={1}>
+      {/* {Level} */}
       <Box
-        mt={2}
         style={{
           display: "flex",
           flexDirection: "row",
@@ -104,11 +106,13 @@ const QuizPage = () => {
             flexDirection: "row",
             justifyContent: "flex-start",
             alignItems: "center",
-            backgroundColor: "green",
-            borderTopRightRadius: 20,
-            borderBottomRightRadius: 20,
-            paddingRight: 10,
-            paddingLeft: 5,
+            backgroundColor: "#212121",
+            borderTopRightRadius: 25,
+            borderBottomRightRadius: 25,
+            paddingRight: 30,
+            paddingLeft: 7,
+            paddingTop: 7,
+            paddingBottom: 7,
           }}
         >
           <img
@@ -119,242 +123,149 @@ const QuizPage = () => {
             width={30}
             height={30}
           />
-          <Typography
-            style={{
-              width: "100%",
-              fontFamily: "'Rubik'",
-              fontWeight: 500,
-              fontSize: 10,
-              lineHeight: "110%",
-              textAlign: "center",
-              color: "#ffffff",
-            }}
-          >
-            Senior Manager 6/9
-          </Typography>
-        </Box>
-        <Box
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            alignItems: "center",
-            backgroundColor: "green",
-            borderTopLeftRadius: 20,
-            borderBottomLeftRadius: 20,
-            paddingLeft: 10,
-            paddingRight: 5,
-          }}
-        >
-          <img
-            src={
-              "https://png.pngtree.com/png-clipart/20220612/original/pngtree-dollar-coin-icon-3d-png-image_7966148.png"
-            }
-            alt="CoinDAO"
-            width={30}
-            height={30}
-          />
-          <Typography
-            style={{
-              width: "100%",
-              fontFamily: "'Rubik'",
-              fontWeight: 500,
-              fontSize: 10,
-              lineHeight: "110%",
-              textAlign: "center",
-              color: "#ffffff",
-            }}
-          >
-            13.5M Points
-          </Typography>
-        </Box>
-      </Box>
-      {screenLoaded && (
-        <Box
-          style={{
-            width: "100%",
-            minHeight: "calc(100vh - 120px)",
-            position: "relative",
-            zIndex: 0,
-            position: "relative",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignItems: "center",
-            overflow: "hidden",
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-          }}
-        >
-          {/* <Profile /> */}
-          <Box
-            display={"flex"}
-            flexDirection="column"
-            justifyContent={"center"}
-            alignItems={"center"}
-            mt={4}
-          >
-            <Typography
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-                fontFamily: "Rubik",
-                fontWeight: 800,
-                fontSize: 14,
-                lineHeight: "100%",
-                textAlign: "center",
-                color: "#64FF99",
-              }}
-            >
-              Current Points
-            </Typography>
+          <Box>
             <Typography
               style={{
                 width: "100%",
-                fontFamily: "Rubik",
-                fontWeight: 700,
-                fontSize: 28,
+                fontFamily: "'Rubik'",
+                fontWeight: 500,
+                fontSize: 10,
                 lineHeight: "110%",
                 textAlign: "center",
                 color: "#ffffff",
+                marginBottom: 3,
               }}
             >
-              13,435,545
+              Senior Manager 6/9
             </Typography>
-          </Box>
-          <Box
-            style={{
-              width: "100%",
-              position: "relative",
-              zIndex: 0,
-              position: "relative",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Box
-              style={{
-                width: "90%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row",
-              }}
-            >
-              <Typography
-                style={{
-                  fontFamily: "Rubik",
-                  fontWeight: 600,
-                  fontSize: 28,
-                  lineHeight: "120%",
-                  textAlign: "center",
-                  color: "#ffffff",
-                }}
-              >
-                What is the most suitable category for IO.net Token?
-              </Typography>
-            </Box>
-
-            <Box
-              style={{
-                width: "90%",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-around",
-                marginTop: 20,
-              }}
-            >
-              <OptionCard
-                title="GPU/DEPIN"
-                img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-a-letter-effect-text-9423674-7664624.png"
-                sub_heading1="200M $TASK"
-                description="32,430"
-                color1="#4886FF"
-                color2="#03429F"
-                tick={true}
-              />
-              <OptionCard
-                title="ORACLE"
-                img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-b-letter-effect-text-9423689-7664639.png"
-                sub_heading1="200M $TASK"
-                description="1,203"
-                color1="#4886FF"
-                color2="#03429F"
-                tick={false}
-              />
-            </Box>
-          </Box>
-          <Box
-            style={{
-              width: "90%",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Box
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src="/images/energy.png"
-                style={{
-                  width: 25,
-                  height: 25,
-                  objectFit: "contain",
-                }}
-              />
-
-              <Typography
-                style={{
-                  width: "100%",
-                  fontWeight: 600,
-                  fontSize: 18,
-                  color: "#ffffff",
-                }}
-              >
-                4/10
-              </Typography>
-            </Box>
-            <Box
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src="https://cdn3d.iconscout.com/3d/premium/thumb/business-startup-5825143-4874125.png"
-                style={{
-                  width: 25,
-                  height: 25,
-                  objectFit: "contain",
-                }}
-              />
-
-              <Typography
-                style={{
-                  width: "100%",
-                  fontWeight: 600,
-                  fontSize: 18,
-                  color: "#ffffff",
-                }}
-              >
-                Boost
-              </Typography>
-            </Box>
+            <SmallProgressBar value={60} />
           </Box>
         </Box>
-      )}
+      </Box>
+
+      {/* Points*/}
+      <ScoreComp />
+
+      {/* Question */}
+      <Box
+        mt={6}
+        style={{
+          width: "100%",
+
+          position: "relative",
+          zIndex: 0,
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "center",
+          overflow: "hidden",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+        }}
+      >
+        <Box
+          style={{
+            width: "90%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "row",
+          }}
+        >
+          <Typography
+            style={{
+              fontFamily: "Rubik",
+              fontWeight: 600,
+              fontSize: 28,
+              lineHeight: "120%",
+              textAlign: "center",
+              color: "#ffffff",
+            }}
+          >
+            What is the most suitable category for IO.net Token?
+          </Typography>
+        </Box>
+        <Box
+          style={{
+            width: "90%",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-around",
+            marginTop: 20,
+          }}
+        >
+          <OptionCard
+            title="GPU/DEPIN"
+            img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-a-letter-effect-text-9423674-7664624.png"
+            sub_heading1="200M $TASK"
+            description="32,430"
+            color1="#4886FF"
+            color2="#03429F"
+            tick={true}
+          />
+          <OptionCard
+            title="ORACLE"
+            img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-b-letter-effect-text-9423689-7664639.png"
+            sub_heading1="200M $TASK"
+            description="1,203"
+            color1="#4886FF"
+            color2="#03429F"
+            tick={false}
+          />
+        </Box>
+        <Box
+          mt={2}
+          sx={{
+            width: "100%",
+            maxWidth: 180,
+            minWidth: 120,
+            height: 60,
+            borderRadius: "22px",
+            position: "relative",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          <Typography
+            style={{
+              width: "100%",
+              fontWeight: 600,
+              fontSize: 18,
+              color: "#ffffff",
+            }}
+          >
+            Great! Right answer
+          </Typography>
+        </Box>
+        <Box pt={5}>
+          <Typography
+            className={classes.description}
+            style={{
+              textAlign: "center",
+            }}
+          >
+            Next question coming in
+          </Typography>
+          <Typography
+            style={{
+              width: "100%",
+              fontFamily: "'Rubik'",
+              fontWeight: 700,
+              fontSize: 21,
+              lineHeight: "110%",
+              textAlign: "center",
+              color: "#ffffff",
+              marginTop: "10px",
+            }}
+          >
+            03:41:23
+          </Typography>
+        </Box>
+      </Box>
+
       {!screenLoaded && (
         <Box
           display="flex"

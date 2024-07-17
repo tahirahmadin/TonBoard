@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Profile from "../components/Profile";
 import { Box, Button, Typography } from "@mui/material";
 import { ArrowForwardIos } from "@mui/icons-material";
@@ -12,6 +12,8 @@ import {
 import useGameHook from "../hooks/useGameHook";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 import SuccessSnackbar from "../components/SuccessSnackbar";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import SmallProgressBar from "../components/SmallProgressBar";
 
 const BoosterCard = ({
   title,
@@ -21,6 +23,7 @@ const BoosterCard = ({
   type,
   description1,
   description2,
+  isFull,
 }) => {
   const { viberate } = useTelegramSDK();
   const score = useSelector((state) => state.ui.score);
@@ -29,18 +32,16 @@ const BoosterCard = ({
   const [open, setOpen] = useState(false);
 
   const handlePurchaseButton = async () => {
-    // if (score > price) {
     await upgradeBoosterLevel(type, price);
     setOpen(false);
-    // }
   };
 
   return (
     <Box
       style={{
         width: "100%",
-        height: 55,
-        minHeight: 55,
+        height: 60,
+        minHeight: 60,
         background:
           "linear-gradient(254.51deg, #00CCCC 5.63%, #009999 61.19%, #6666FF 116.96%)",
         borderRadius: "8px",
@@ -48,7 +49,7 @@ const BoosterCard = ({
         transition: "height 250ms",
       }}
       onClick={() => {
-        if (!open) {
+        if (!open && !isFull) {
           viberate("light");
           setOpen(true);
         }
@@ -60,7 +61,7 @@ const BoosterCard = ({
         description2={description2}
         img={img}
         price={price}
-        level={level}
+        level={level + 1}
         openPopup={open}
         closePopup={() => {
           viberate("light");
@@ -149,18 +150,23 @@ const BoosterCard = ({
                   display: "flex",
                   alignItems: "center",
                   gap: "3px",
-
+                  fontFamily: "'Karla'",
                   fontWeight: 400,
                   fontSize: "14px",
                   lineHeight: "16px",
                   color: "#FFFFFF",
                 }}
               >
-                <img
-                  src="https://png.pngtree.com/png-clipart/20220612/original/pngtree-dollar-coin-icon-3d-png-image_7966148.png"
-                  style={{ width: 24, height: 24 }}
-                />
-                {price}
+                {isFull && "FULLY UPGRADED"}
+                {!isFull && (
+                  <span>
+                    <img
+                      src="https://cdn3d.iconscout.com/3d/premium/thumb/usd-coin-5839397-4884145.png?f=webp"
+                      style={{ width: 24, height: 24 }}
+                    />
+                    {price}
+                  </span>
+                )}
               </Typography>
               <Box
                 style={{
@@ -184,12 +190,12 @@ const BoosterCard = ({
           </Box>
           <ArrowForwardIos
             style={{
-              fill: "#faff00",
+              fill: "#ffffff",
               position: "absolute",
               margin: "auto 0",
               right: 10,
             }}
-            onClick={() => setOpen(true)}
+            onClick={isFull ? null : () => setOpen(true)}
           />
         </Box>
       </Box>
@@ -199,7 +205,8 @@ const BoosterCard = ({
 
 const Boost = () => {
   const { viberate } = useTelegramSDK();
-  const { enableMultiTap, claimFullEnergy } = useGameHook();
+  const navigate = useNavigate();
+  const { enableMultiTap, claimFullEnergy, gameScore } = useGameHook();
   const score = useSelector((state) => state.ui.score);
   const multiTapStamp = useSelector((state) => state.ui.multiTapStamp);
   const multiTapFlag = useSelector((state) => state.ui.multiTapFlag);
@@ -211,11 +218,13 @@ const Boost = () => {
   const handleMultiTapFn = async () => {
     enableMultiTap();
     setMultiTapPopup(false);
+    navigate("/");
   };
 
   const handleFullHungerFn = async () => {
     claimFullEnergy();
     setFullHungerPopup(false);
+    navigate("/");
   };
 
   const multiTapCloseCondition = useMemo(() => {
@@ -236,334 +245,154 @@ const Boost = () => {
 
   return (
     <Box
+      mt={1}
       style={{
         width: "100%",
-        minHeight: "calc(100vh - 60px)",
-        position: "relative",
-        background: "#161811",
-        paddingTop: "25px",
-        zIndex: 0,
       }}
     >
-      <BoostDetailsPopup
-        title="MULTI TAP"
-        description1="Multiply your tap income by x5 for 20 seconds."
-        description2="Do not use energy while active."
-        img="/images/upgrade.png"
-        price={0}
-        openPopup={multiTapPopup}
-        closePopup={() => {
-          viberate("light");
-          setMultiTapPopup(false);
-        }}
-        onClick={handleMultiTapFn}
-      />
-      <BoostDetailsPopup
-        title="FULL HUNGER"
-        description1="Fill your energy to the max."
-        description2={<br />}
-        img="/images/hunger.png"
-        price={0}
-        openPopup={fullHungerPopup}
-        closePopup={() => {
-          viberate("light");
-          setFullHungerPopup(false);
-        }}
-        onClick={handleFullHungerFn}
-      />
-      <SuccessSnackbar text="Booster claimed successfully!" />
-      <img
-        src="/images/bg_grid.png"
-        alt="TaskDao"
-        className="portrait"
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          zIndex: -1,
-          top: 0,
-          left: 0,
-          objectFit: "cover",
-        }}
-      />
-
+      {/* {Level} */}
       <Box
         style={{
-          width: "90%",
-          height: "87px",
-          background: "linear-gradient(180deg, #FF97FF 0%, #CC37CC 100%)",
-          borderRadius: "24px",
-          padding: "1px",
-          marginTop: "15px",
-          marginLeft: "5%",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         <Box
           style={{
-            width: "100%",
-            height: "100%",
-            background: "#2B2D25",
-            borderRadius: "24px",
             display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-start",
             alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            gap: "5px",
+            backgroundColor: "#212121",
+            borderTopRightRadius: 25,
+            borderBottomRightRadius: 25,
+            paddingRight: 30,
+            paddingLeft: 7,
+            paddingTop: 7,
+            paddingBottom: 7,
           }}
         >
-          <Typography
-            style={{ fontWeight: 400, fontSize: "16px", lineHeight: "19px" }}
-          >
-            Your Share Balance
-          </Typography>
-          <Typography
-            style={{
-              fontWeight: 600,
-              fontSize: "40px",
-              lineHeight: "100%",
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "5px",
-            }}
-          >
-            <img
-              src="https://png.pngtree.com/png-clipart/20220612/original/pngtree-dollar-coin-icon-3d-png-image_7966148.png"
+          <img
+            src={
+              "https://cdn3d.iconscout.com/3d/premium/thumb/character-11212176-8973527.png?f=webp"
+            }
+            alt="TaskDao"
+            width={30}
+            height={30}
+          />
+          <Box>
+            <Typography
               style={{
-                width: 35,
-                height: 35,
+                width: "100%",
+                fontFamily: "'Rubik'",
+                fontWeight: 500,
+                fontSize: 10,
+                lineHeight: "110%",
+                textAlign: "center",
+                color: "#ffffff",
+                marginBottom: 3,
               }}
-            />
-            {score.toLocaleString()}
-          </Typography>
+            >
+              Senior Manager 6/9
+            </Typography>
+            <SmallProgressBar value={60} />
+          </Box>
         </Box>
       </Box>
+
       <Box
+        mt={5}
         style={{
           width: "100%",
-          height: 121,
           display: "flex",
-          justifyContent: "flex-start",
-          marginTop: "-25px",
-          paddingLeft: "5%",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <img
-          src="https://png.pngtree.com/png-clipart/20220612/original/pngtree-dollar-coin-icon-3d-png-image_7966148.png"
-          style={{
-            width: 155,
-            height: 125,
-            objectFit: "contain",
-            zIndex: 0,
-            marginRight: "auto",
-          }}
+          src={
+            "https://static.vecteezy.com/system/resources/thumbnails/022/442/216/small_2x/icon-money-3d-illustration-png.png"
+          }
+          height={"10%"}
+          width={"40%"}
         />
+        <Typography
+          style={{
+            width: "100%",
+            fontFamily: "Rubik",
+            fontWeight: 700,
+            fontSize: 28,
+            lineHeight: "110%",
+            textAlign: "center",
+            color: "#ffffff",
+          }}
+        >
+          Boosters
+        </Typography>
       </Box>
+
+      {/* Cards */}
       <Box
+        mt={8}
         style={{
           width: "100%",
           height: "100%",
-          background: "linear-gradient(180deg, #4886FF 0%, #03429F 100%)",
-          borderRadius: "32px 32px 0px 0px",
-          padding: "1px 1px 0",
-          marginTop: "-3px",
-          zIndex: 2,
           position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Box
           style={{
-            width: "100%",
-            height: "calc(100vh - 281px)",
-            minHeight: "calc(100vh - 281px)",
-            background: "#2B2D25",
-            borderRadius: "32px 32px 0px 0px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "5px",
-            padding: "25px 5%",
+            width: "90%",
+            height: "100%",
+            zIndex: 0,
+            position: "relative",
           }}
         >
-          <Typography
-            style={{
-              fontWeight: 600,
-              fontSize: "16px",
-              lineHeight: "150%",
-              color: "#FAFF00",
-            }}
-          >
-            Your Daily Boosters
-          </Typography>
-          <Box
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-              gap: "25px",
-            }}
-          >
-            <Button
+          <Box>
+            <Box
               style={{
-                width: "50%",
-                height: 55,
-                background: "linear-gradient(180deg, #7848FF 0%, #346DFF 100%)",
-                borderRadius: "8px",
-                padding: "1px",
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                gap: "5px",
               }}
-              onClick={() =>
-                !multiTapCloseCondition ? setMultiTapPopup(true) : null
-              }
             >
-              <Box
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  background: !multiTapPopup && "#2B2D25",
-                  borderRadius: "8px",
-                  padding: "0 10px",
-                }}
-              >
-                <img
-                  src="/images/upgrade.png"
-                  style={{ width: 41, height: 42 }}
-                />
-                <Box
-                  style={{
-                    fontWeight: 600,
-                    fontSize: "12px",
-                    lineHeight: "100%",
-                    color: "#FAFF00",
-
-                    textAlign: "left",
-                  }}
-                >
-                  MULTI TAP
-                  <br />
-                  <Typography
-                    style={{
-                      fontWeight: 800,
-                      fontSize: "24px",
-                      lineHeight: "28px",
-                      color: multiTapCloseCondition ? "#bdbdbd" : "#64FF99",
-                    }}
-                  >
-                    {3 - multiTapStamp.length}/3
-                  </Typography>
-                </Box>
-              </Box>
-            </Button>
-            <Button
-              style={{
-                width: "50%",
-                height: 55,
-                background: "linear-gradient(180deg, #7848FF 0%, #346DFF 100%)",
-                borderRadius: "8px",
-                padding: "1px",
-              }}
-              onClick={() =>
-                !fullHungerCloseCondition ? setFullHungerPopup(true) : null
-              }
-            >
-              <Box
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  background: !fullHungerPopup && "#2B2D25",
-                  borderRadius: "8px",
-                  padding: "0 10px",
-                }}
-              >
-                <img
-                  src="/images/hunger.png"
-                  style={{ width: 41, height: 42 }}
-                />
-                <Box
-                  style={{
-                    fontWeight: 600,
-                    fontSize: "12px",
-                    lineHeight: "100%",
-                    color: "#FAFF00",
-
-                    textAlign: "left",
-                  }}
-                >
-                  Full Hunger
-                  <br />
-                  <Typography
-                    style={{
-                      fontWeight: 800,
-                      fontSize: "24px",
-                      lineHeight: "28px",
-                      color: fullHungerCloseCondition ? "#bdbdbd" : "#64FF99",
-                    }}
-                  >
-                    {3 - fullHungerStamp.length}/3
-                  </Typography>
-                </Box>
-              </Box>
-            </Button>
-          </Box>
-          <Box
-            style={{
-              width: "66%",
-              height: "0px",
-              opacity: 0.2,
-              border: "1px solid #FFFFFF",
-              margin: "5% auto",
-            }}
-          />
-          <Typography
-            style={{
-              fontWeight: 600,
-              fontSize: "14px",
-              lineHeight: "120%",
-              color: "#FAFF00",
-            }}
-          >
-            Boosters
-          </Typography>
-          <Box
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              gap: "5px",
-            }}
-          >
-            <BoosterCard
-              title="UPGRADE LEVEL"
-              img="/images/booster/upgrade_level.png"
-              price={TAP_DATA[playLevels.tap + 1].coins}
-              level={playLevels.tap + 1}
-              type={"TAP"}
-              description1="Unlock new dishes & increase your earnings per feed."
-              description2="+1 per feed for each level."
-            />
-            <BoosterCard
-              title="EXPAND TUMMY"
-              img="/images/booster/expand_tummy.png"
-              price={ENERGY_LIMIT_DATA[playLevels.energy + 1].coins}
-              level={playLevels.energy + 1}
-              type={"ENERGY"}
-              description1="Size up TASK stomach so he can eat more at one time."
-              description2="+500 Tummy Expand for each level."
-            />
-            <BoosterCard
-              title="HUNGER PANGS"
-              img="/images/booster/hunger_pangs.png"
-              price={RECHARGE_SPEED_DATA[playLevels.recharge + 1].coins}
-              level={playLevels.recharge + 1}
-              type={"RECHARGE"}
-              description1="Get TASK hungry faster! More Hunger Pangs mean TaskDao feeds more."
-              description2="+1 per second."
-            />
+              <BoosterCard
+                title="Upgrade Timer"
+                img="https://cdn3d.iconscout.com/3d/premium/thumb/fasting-8156958-6516912.png?f=webp"
+                price={
+                  TAP_DATA[playLevels.tap + 1]
+                    ? TAP_DATA[playLevels.tap + 1].coins
+                    : 0
+                }
+                level={playLevels.tap + 1}
+                type={"TAP"}
+                description1="Unlock new dishes & increase your earnings per feed."
+                description2="+1 per feed for each level."
+                isFull={TAP_DATA[playLevels.tap + 1] ? false : true}
+              />
+              <BoosterCard
+                title="Upgrade Reward"
+                img="https://cdn3d.iconscout.com/3d/premium/thumb/financial-growth-11104869-8938742.png"
+                price={
+                  ENERGY_LIMIT_DATA[playLevels.energy + 1]
+                    ? ENERGY_LIMIT_DATA[playLevels.energy + 1].coins
+                    : 0
+                }
+                level={playLevels.energy + 1}
+                type={"ENERGY"}
+                description1="Size up Gobbl’s stomach so he can eat more at one time."
+                description2="+500 Tummy Expand for each level."
+                isFull={ENERGY_LIMIT_DATA[playLevels.energy + 1] ? false : true}
+              />
+            </Box>
           </Box>
         </Box>
       </Box>
