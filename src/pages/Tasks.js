@@ -583,7 +583,7 @@ const Tasks = () => {
             <Box
               style={{
                 width: "100%",
-                height: "calc(100vh - 333px)",
+                height: "calc(100vh - 203px)",
                 background: "#2B2D25",
                 borderRadius: "32px 32px 0px 0px",
                 display: "flex",
@@ -628,7 +628,7 @@ const Tasks = () => {
             <Box
               style={{
                 width: "100%",
-                height: "calc(100vh - 333px)",
+                height: "calc(100vh - 203px)",
                 background: "#2B2D25",
                 borderRadius: "32px 32px 0px 0px",
                 display: "flex",

@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     textAlign: "center",
     fontSize: 16,
-    lineHeight: "130%",
+    lineHeight: "120%",
     color: "rgba(253, 255, 245, 0.8)",
     position: "relative",
     zIndex: 1,
@@ -91,59 +91,7 @@ const QuizPage = () => {
 
   return (
     <Box mt={1}>
-      {/* {Level} */}
-      <Box
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Box
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            backgroundColor: "#212121",
-            borderTopRightRadius: 25,
-            borderBottomRightRadius: 25,
-            paddingRight: 30,
-            paddingLeft: 7,
-            paddingTop: 7,
-            paddingBottom: 7,
-          }}
-        >
-          <img
-            src={
-              "https://cdn3d.iconscout.com/3d/premium/thumb/jewish-man-avatar-10971658-8779370.png?f=webp"
-            }
-            alt="TaskDao"
-            width={30}
-            height={30}
-          />
-          <Box>
-            <Typography
-              style={{
-                width: "100%",
-                fontFamily: "'Rubik'",
-                fontWeight: 500,
-                fontSize: 10,
-                lineHeight: "110%",
-                textAlign: "center",
-                color: "#ffffff",
-                marginBottom: 3,
-              }}
-            >
-              Senior Manager 6/9
-            </Typography>
-            <SmallProgressBar value={60} />
-          </Box>
-        </Box>
-      </Box>
-
-      {/* Points*/}
+      <Profile />
       <ScoreComp />
 
       {/* Question */}
@@ -151,7 +99,6 @@ const QuizPage = () => {
         mt={6}
         style={{
           width: "100%",
-
           position: "relative",
           zIndex: 0,
           position: "relative",
@@ -177,7 +124,7 @@ const QuizPage = () => {
             style={{
               fontFamily: "Rubik",
               fontWeight: 600,
-              fontSize: 28,
+              fontSize: 22,
               lineHeight: "120%",
               textAlign: "center",
               color: "#ffffff",
@@ -215,54 +162,104 @@ const QuizPage = () => {
             tick={false}
           />
         </Box>
-        <Box
-          mt={2}
-          sx={{
+        <Typography
+          mt={3}
+          style={{
             width: "100%",
-            maxWidth: 180,
-            minWidth: 120,
-            height: 60,
-            borderRadius: "22px",
-            position: "relative",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
+            fontWeight: 600,
+            fontSize: 16,
+            color: "#64FF99",
+            textAlign: "center",
           }}
         >
-          <Typography
-            style={{
-              width: "100%",
-              fontWeight: 600,
-              fontSize: 18,
-              color: "#ffffff",
-            }}
-          >
-            Great! Right answer
-          </Typography>
-        </Box>
-        <Box pt={5}>
+          Great! Right answer
+        </Typography>
+        <Box pt={3}>
           <Typography
             className={classes.description}
             style={{
               textAlign: "center",
             }}
           >
-            Next question coming in
+            Next question in
           </Typography>
           <Typography
             style={{
               width: "100%",
-              fontFamily: "'Rubik'",
+              fontFamily: "Rubik",
               fontWeight: 700,
               fontSize: 21,
               lineHeight: "110%",
               textAlign: "center",
               color: "#ffffff",
-              marginTop: "10px",
             }}
           >
-            03:41:23
+            01:41:23
           </Typography>
+        </Box>
+        <Box
+          style={{
+            width: "90%",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src="/images/energy.png"
+              style={{
+                width: 22,
+                height: 22,
+                objectFit: "contain",
+              }}
+            />
+
+            <Typography
+              style={{
+                width: "100%",
+                fontWeight: 600,
+                fontSize: 16,
+                color: "#ffffff",
+              }}
+            >
+              9/10
+            </Typography>
+          </Box>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src="https://cdn3d.iconscout.com/3d/premium/thumb/business-startup-5825143-4874125.png"
+              style={{
+                width: 22,
+                height: 22,
+                objectFit: "contain",
+              }}
+            />
+
+            <Typography
+              style={{
+                width: "100%",
+                fontWeight: 600,
+                fontSize: 16,
+                color: "#ffffff",
+              }}
+            >
+              Boost
+            </Typography>
+          </Box>
         </Box>
       </Box>
 

@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
   description: {
     width: "100%",
     textAlign: "center",
-    fontSize: 14,
-    lineHeight: "130%",
+    fontSize: 12,
+    lineHeight: "120%",
     color: "rgba(253, 255, 245, 0.8)",
     position: "relative",
     zIndex: 1,
@@ -43,9 +43,9 @@ const OptionCard = ({
       <Box
         sx={{
           width: "100%",
-          maxWidth: 180,
-          minWidth: 120,
-          height: 220,
+          maxWidth: 150,
+          minWidth: 100,
+          height: 170,
           borderRadius: "22px",
           position: "relative",
           display: "flex",
@@ -76,8 +76,8 @@ const OptionCard = ({
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              padding: "20px 20px",
-              gap: "10px",
+              padding: "5px 5px",
+              gap: "5px",
               background:
                 "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
             }}
@@ -102,23 +102,12 @@ const OptionCard = ({
               style={{
                 position: "absolute",
                 left: "10%",
-                top: "30%",
+                top: "25%",
                 bottom: "",
                 zIndex: 1,
               }}
             />
-            <img
-              src={img}
-              alt="TaskDao"
-              width={70}
-              height={70}
-              style={{
-                minWidth: 70,
-                minHeight: 70,
-                zIndex: 1,
-                borderRadius: 10,
-              }}
-            />
+            <img src={img} alt="TaskDao" width={50} height={50} style={{}} />
             <Box
               style={{
                 width: "100%",
@@ -156,6 +145,7 @@ const OptionCard = ({
                 className={classes.description}
                 style={{
                   textAlign: "center",
+                  fontSize: 14,
                   minHeight: 20,
                 }}
               >

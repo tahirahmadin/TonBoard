@@ -439,4 +439,21 @@ export const REFERRAL_TASKS_DATA = [
   },
 ];
 
+export const QUIZ_DATA = [
+  {
+    id: 0,
+    title: "Who invented the Bitcoin?",
+    option1: "Satoshi Nakamoto",
+    option2: "Vitalink Buterin",
+    correct: 1,
+  },
+  {
+    id: 1,
+    title: "What is most suitable category io.net token?",
+    option1: "GPU/DePin",
+    option2: "Oracle",
+    correct: 1,
+  },
+];
+
 export default constants;

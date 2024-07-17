@@ -13,7 +13,7 @@ const ScoreComp = () => {
       flexDirection="column"
       justifyContent={"center"}
       alignItems={"space-between"}
-      mt={3}
+      mt={2}
     >
       <Typography
         style={{
@@ -22,7 +22,7 @@ const ScoreComp = () => {
           justifyContent: "center",
           flexDirection: "column",
           fontFamily: "Rubik",
-          fontWeight: 800,
+          fontWeight: 500,
           fontSize: 14,
           lineHeight: "100%",
           textAlign: "center",
