@@ -42,6 +42,7 @@ const useGameHook = (hookInit = false) => {
   useEffect(() => {
     async function asyncFn() {
       if (hookInit && accountSC) {
+        await localStorage.removeItem("ui");
         await dispatch(updateLocalDataToRedux());
         //1.  Load Backend
         // let backendData = await getUserLeaderboardData(accountSC);
