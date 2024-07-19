@@ -62,23 +62,24 @@ const useGameHook = (hookInit = false) => {
       if (hookInit && accountSC) {
         await dispatch(updateLocalDataToRedux());
         //1.  Load Backend
-        let backendData = await getUserLeaderboardData(accountSC);
+        // let backendData = await getUserLeaderboardData(accountSC);
+        // console.log(backendData);
 
-        if (backendData.referralPoints) {
-          await dispatch(updateReferralCount(backendData.referralCount));
-          await dispatch(updateReferralPoints(backendData.referralPoints));
-        }
-        if (
-          (backendData && telegramUsername && backendData.username === "") ||
-          backendData.username !== telegramUsername
-        ) {
-          // Update Local Data to Backend server
-          await updateLocalDataToBackendAPI(
-            { username: telegramUsername },
-            accountSC
-          );
-        }
-
+        // if (backendData.referralPoints) {
+        //   await dispatch(updateReferralCount(backendData.referralCount));
+        //   await dispatch(updateReferralPoints(backendData.referralPoints));
+        // }
+        // if (
+        //   (backendData && telegramUsername && backendData.username === "") ||
+        //   backendData.username !== telegramUsername
+        // ) {
+        //   // Update Local Data to Backend server
+        //   await updateUsernameToBackendAPI(
+        //     { username: telegramUsername },
+        //     accountSC
+        //   );
+        // }
+        // await dispatch(updateLocalDataToBackend(accountSC));
         await dispatch(updateScreenLoaded(true));
       }
     }

@@ -8,6 +8,7 @@ const Profile = () => {
 
   return (
     <Box
+      mt={1}
       style={{
         display: "flex",
         flexDirection: "row",

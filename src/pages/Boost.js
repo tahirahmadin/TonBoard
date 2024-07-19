@@ -245,65 +245,14 @@ const Boost = () => {
 
   return (
     <Box
-      mt={1}
       style={{
         width: "100%",
       }}
     >
-      {/* {Level} */}
-      <Box
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Box
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            backgroundColor: "#212121",
-            borderTopRightRadius: 25,
-            borderBottomRightRadius: 25,
-            paddingRight: 30,
-            paddingLeft: 7,
-            paddingTop: 7,
-            paddingBottom: 7,
-          }}
-        >
-          <img
-            src={
-              "https://cdn3d.iconscout.com/3d/premium/thumb/character-11212176-8973527.png?f=webp"
-            }
-            alt="TaskDao"
-            width={30}
-            height={30}
-          />
-          <Box>
-            <Typography
-              style={{
-                width: "100%",
-                fontFamily: "'Rubik'",
-                fontWeight: 500,
-                fontSize: 10,
-                lineHeight: "110%",
-                textAlign: "center",
-                color: "#ffffff",
-                marginBottom: 3,
-              }}
-            >
-              Senior Manager 6/9
-            </Typography>
-            <SmallProgressBar value={60} />
-          </Box>
-        </Box>
-      </Box>
+      <Profile />
 
       <Box
-        mt={5}
+        mt={2}
         style={{
           width: "100%",
           display: "flex",
@@ -374,8 +323,8 @@ const Boost = () => {
                 }
                 level={playLevels.tap + 1}
                 type={"TAP"}
-                description1="Unlock new dishes & increase your earnings per feed."
-                description2="+1 per feed for each level."
+                description1="Upgrade timer to increase your quiz frequency."
+                description2="+10 mins each level."
                 isFull={TAP_DATA[playLevels.tap + 1] ? false : true}
               />
               <BoosterCard
@@ -388,8 +337,8 @@ const Boost = () => {
                 }
                 level={playLevels.energy + 1}
                 type={"ENERGY"}
-                description1="Size up Gobbl’s stomach so he can eat more at one time."
-                description2="+500 Tummy Expand for each level."
+                description1="Increase the rewards per correct question."
+                description2="+100,000 Reward Increase for each level."
                 isFull={ENERGY_LIMIT_DATA[playLevels.energy + 1] ? false : true}
               />
             </Box>
