@@ -4,16 +4,11 @@ import { Box, Button, Typography } from "@mui/material";
 import { ArrowForwardIos } from "@mui/icons-material";
 import BoostDetailsPopup from "../components/BoostDetailsPopup";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  ENERGY_LIMIT_DATA,
-  RECHARGE_SPEED_DATA,
-  TAP_DATA,
-} from "../utils/constants";
+import { REWARDS_BOOST_DATA, TIMER_BOOST_DATA } from "../utils/constants";
 import useGameHook from "../hooks/useGameHook";
 import useTelegramSDK from "../hooks/useTelegramSDK";
-import SuccessSnackbar from "../components/SuccessSnackbar";
+
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import SmallProgressBar from "../components/SmallProgressBar";
 
 const BoosterCard = ({
   title,
@@ -206,42 +201,7 @@ const BoosterCard = ({
 const Boost = () => {
   const { viberate } = useTelegramSDK();
   const navigate = useNavigate();
-  const { enableMultiTap, claimFullEnergy, gameScore } = useGameHook();
-  const score = useSelector((state) => state.ui.score);
-  const multiTapStamp = useSelector((state) => state.ui.multiTapStamp);
-  const multiTapFlag = useSelector((state) => state.ui.multiTapFlag);
-  const fullHungerStamp = useSelector((state) => state.ui.fullHungerStamp);
   const playLevels = useSelector((state) => state.ui.playLevels);
-  const [multiTapPopup, setMultiTapPopup] = useState(false);
-  const [fullHungerPopup, setFullHungerPopup] = useState(false);
-
-  const handleMultiTapFn = async () => {
-    enableMultiTap();
-    setMultiTapPopup(false);
-    navigate("/");
-  };
-
-  const handleFullHungerFn = async () => {
-    claimFullEnergy();
-    setFullHungerPopup(false);
-    navigate("/");
-  };
-
-  const multiTapCloseCondition = useMemo(() => {
-    if (multiTapFlag || multiTapStamp.length === 3) {
-      return true;
-    } else {
-      return false;
-    }
-  }, [multiTapFlag, multiTapStamp]);
-
-  const fullHungerCloseCondition = useMemo(() => {
-    if (fullHungerStamp.length === 3) {
-      return true;
-    } else {
-      return false;
-    }
-  }, [fullHungerStamp]);
 
   return (
     <Box
@@ -317,29 +277,31 @@ const Boost = () => {
                 title="Upgrade Timer"
                 img="https://cdn3d.iconscout.com/3d/premium/thumb/fasting-8156958-6516912.png?f=webp"
                 price={
-                  TAP_DATA[playLevels.tap + 1]
-                    ? TAP_DATA[playLevels.tap + 1].coins
+                  TIMER_BOOST_DATA[playLevels.timer + 1]
+                    ? TIMER_BOOST_DATA[playLevels.timer + 1].coins
                     : 0
                 }
-                level={playLevels.tap + 1}
-                type={"TAP"}
+                level={playLevels.timer + 1}
+                type={"TIMER"}
                 description1="Upgrade timer to increase your quiz frequency."
                 description2="+10 mins each level."
-                isFull={TAP_DATA[playLevels.tap + 1] ? false : true}
+                isFull={TIMER_BOOST_DATA[playLevels.timer + 1] ? false : true}
               />
               <BoosterCard
                 title="Upgrade Reward"
                 img="https://cdn3d.iconscout.com/3d/premium/thumb/financial-growth-11104869-8938742.png"
                 price={
-                  ENERGY_LIMIT_DATA[playLevels.energy + 1]
-                    ? ENERGY_LIMIT_DATA[playLevels.energy + 1].coins
+                  REWARDS_BOOST_DATA[playLevels.rewards + 1]
+                    ? REWARDS_BOOST_DATA[playLevels.rewards + 1].coins
                     : 0
                 }
-                level={playLevels.energy + 1}
-                type={"ENERGY"}
+                level={playLevels.rewards + 1}
+                type={"REWARDS"}
                 description1="Increase the rewards per correct question."
                 description2="+100,000 Reward Increase for each level."
-                isFull={ENERGY_LIMIT_DATA[playLevels.energy + 1] ? false : true}
+                isFull={
+                  REWARDS_BOOST_DATA[playLevels.rewards + 1] ? false : true
+                }
               />
             </Box>
           </Box>

@@ -95,119 +95,72 @@ export const LEAGUE_LEVEL_DATA = [
   },
 ];
 
-// Tap data
-export const TAP_DATA = [
+// Timer data
+export const TIMER_BOOST_DATA = [
   {
     level: 0,
-    dish: "/images/dishes/dish0.png",
     coins: 0,
-    tapCount: 1,
   },
   {
     level: 1,
-    dish: "/images/dishes/dish1.png",
     coins: 2000,
-    tapCount: 2,
   },
   {
     level: 2,
-    dish: "/images/dishes/dish2.png",
     coins: 5000,
-    tapCount: 3,
   },
   {
     level: 3,
-    dish: "/images/dishes/dish3.png",
     coins: 10000,
-    tapCount: 4,
   },
   {
     level: 4,
-    dish: "/images/dishes/dish4.png",
     coins: 20000,
-    tapCount: 5,
   },
   {
     level: 5,
-    dish: "/images/dishes/dish5.png",
     coins: 40000,
-    tapCount: 6,
   },
   {
     level: 6,
-    dish: "/images/dishes/dish6.png",
     coins: 80000,
-    tapCount: 7,
   },
   {
     level: 7,
-    dish: "/images/dishes/dish7.png",
     coins: 200000,
-    tapCount: 8,
   },
   {
     level: 8,
-    dish: "/images/dishes/dish8.png",
     coins: 500000,
-    tapCount: 9,
   },
   {
     level: 9,
-    dish: "/images/dishes/dish9.png",
     coins: 1000000,
-    tapCount: 10,
   },
   {
     level: 10,
-    dish: "/images/dishes/dish10.png",
     coins: 2500000,
-    tapCount: 11,
   },
   {
     level: 11,
-    dish: "/images/dishes/dish11.png",
     coins: 5000000,
-    tapCount: 12,
   },
 ];
 
 // Energy Limit
-export const ENERGY_LIMIT_DATA = [
-  { level: 0, coins: 0, energyLimit: 2000 },
-  { level: 1, coins: 200, energyLimit: 2500 },
-  { level: 2, coins: 500, energyLimit: 3000 },
-  { level: 3, coins: 1000, energyLimit: 3500 },
-  { level: 4, coins: 2000, energyLimit: 4000 },
-  { level: 5, coins: 4000, energyLimit: 4500 },
-  { level: 6, coins: 8000, energyLimit: 5000 },
-  { level: 7, coins: 16000, energyLimit: 5500 },
-  { level: 8, coins: 25000, energyLimit: 6000 },
-  { level: 9, coins: 50000, energyLimit: 6500 },
-  { level: 10, coins: 100000, energyLimit: 7000 },
-  { level: 11, coins: 200000, energyLimit: 7500 },
-  { level: 12, coins: 300000, energyLimit: 8000 },
-  { level: 13, coins: 400000, energyLimit: 8500 },
-  { level: 14, coins: 500000, energyLimit: 9000 },
-  { level: 15, coins: 600000, energyLimit: 9500 },
-  { level: 16, coins: 700000, energyLimit: 10000 },
-  { level: 17, coins: 800000, energyLimit: 10500 },
-  { level: 18, coins: 900000, energyLimit: 11000 },
-  { level: 19, coins: 1000000, energyLimit: 11500 },
-];
-
-// Recharge speed
-export const RECHARGE_SPEED_DATA = [
-  { level: 0, coins: 0, speed: 1 },
-  { level: 1, coins: 2000, speed: 2 },
-  { level: 2, coins: 10000, speed: 3 },
-  { level: 3, coins: 100000, speed: 4 },
-  { level: 4, coins: 250000, speed: 5 },
-  { level: 5, coins: 500000, speed: 6 },
-  { level: 6, coins: 1000000, speed: 7 },
-  { level: 7, coins: 2000000, speed: 8 },
-  { level: 8, coins: 4000000, speed: 9 },
-  { level: 9, coins: 8000000, speed: 10 },
-  { level: 10, coins: 25000000, speed: 11 },
+export const REWARDS_BOOST_DATA = [
+  { level: 0, coins: 0 },
+  { level: 1, coins: 200 },
+  { level: 2, coins: 500 },
+  { level: 3, coins: 1000 },
+  { level: 4, coins: 2000 },
+  { level: 5, coins: 4000 },
+  { level: 6, coins: 8000 },
+  { level: 7, coins: 16000 },
+  { level: 8, coins: 25000 },
+  { level: 9, coins: 50000 },
+  { level: 10, coins: 100000 },
+  { level: 11, coins: 200000 },
 ];
 
 // League levels
@@ -404,7 +357,7 @@ export const QUIZ_DATA = [
     title: "What is most suitable category io.net token?",
     option1: "GPU/DePin",
     option2: "Oracle",
-    correct: 1,
+    correct: 2,
   },
 ];
 

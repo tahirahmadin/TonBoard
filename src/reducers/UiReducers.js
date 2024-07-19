@@ -2,32 +2,28 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   score: 550000,
-  tapScore: 0,
+  quizScore: 500000,
   leagueLevel: 0,
-  energyLeft: 0,
-  screenLoaded: false,
-  multiTapFlag: false,
-  lastUpdatedAt: Date.now(),
-  multiTapStamp: [],
-  fullHungerStamp: [],
-  specialTasksStatus: [],
-  leagueTasksStatus: [],
-  refTasksStatus: [],
+  currentQueNo: 0,
+  ansSelected: [],
 
   playLevels: {
-    tap: 0,
-    energy: 0,
-    recharge: 0,
+    timer: 0,
+    rewards: 0,
   },
   playValues: {
-    tap: 0,
-    energy: 0,
-    recharge: 0,
+    timer: 0,
+    rewards: 0,
   },
   refetch: 0,
   successPopup: false,
   referralCount: 0,
   referralPoints: 0,
+
+  specialTasksStatus: [],
+  leagueTasksStatus: [],
+  refTasksStatus: [],
+  screenLoaded: false,
 };
 
 // Function:: update localData to redux
@@ -66,8 +62,14 @@ const UiReducer = createSlice({
     updateScore(state, action) {
       state.score = action.payload;
     },
-    updateTapScore(state, action) {
-      state.tapScore = action.payload;
+    updateQuizScore(state, action) {
+      state.quizScore = action.payload;
+    },
+    updateCurrentQueNo(state, action) {
+      state.currentQueNo = action.payload;
+    },
+    updateAnsSelected(state, action) {
+      state.ansSelected = action.payload;
     },
 
     updateReferralCount(state, action) {
@@ -76,18 +78,11 @@ const UiReducer = createSlice({
     updateReferralPoints(state, action) {
       state.referralPoints = action.payload;
     },
-    updateFullHungerStamp(state, action) {
-      state.fullHungerStamp = action.payload;
-    },
-    updateMultiTapStamp(state, action) {
-      state.multiTapStamp = action.payload;
-    },
+
     updateScreenLoaded(state, action) {
       state.screenLoaded = action.payload;
     },
-    updateMultiTap(state, action) {
-      state.multiTapFlag = action.payload;
-    },
+
     updateSpecialTaskStatusState(state, action) {
       state.specialTasksStatus = action.payload;
     },
@@ -101,7 +96,7 @@ const UiReducer = createSlice({
       state.leagueLevel = action.payload;
     },
     updateEnergyLeft(state, action) {
-      state.energyLeft = action.payload;
+      state.queLeft = action.payload;
     },
     updatePlayLevels(state, action) {
       state.playLevels = action.payload;
@@ -115,24 +110,17 @@ const UiReducer = createSlice({
     setSuccessPopup(state, action) {
       state.successPopup = action.payload;
     },
-    // Booster Function
-    buyNewBooster(state, action) {
-      state.refetch = action.payload;
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(updateLocalDataToRedux.fulfilled, (state, action) => {
       const response = action.payload;
       if (response) {
         state.score = response.score;
-        state.tapScore = response.tapScore;
+        state.ansSelected = response.ansSelected;
+        state.currentQueNo = response.currentQueNo;
         state.leagueLevel = response.leagueLevel;
 
-        state.multiTapFlag = response.multiTapFlag;
-        state.multiTapStamp = response.multiTapStamp;
-        state.fullHungerStamp = response.fullHungerStamp;
-
-        state.energyLeft = response.energyLeft;
+        state.queLeft = response.queLeft;
         state.playLevels = response.playLevels;
         state.playValues = response.playValues;
 
@@ -140,21 +128,20 @@ const UiReducer = createSlice({
         state.specialTasksStatus = response.specialTasksStatus;
         state.leagueTasksStatus = response.leagueTasksStatus;
         state.refTasksStatus = response.refTasksStatus;
-
-        state.initialLoaded = true;
+        state.screenLoaded = true;
       }
     });
     builder.addCase(updateBackendToRedux.fulfilled, (state, action) => {
       const response = action.payload;
       if (response) {
         state.score = response.score;
-        state.tapScore = response.tapScore;
+        state.ansSelected = response.ansSelected;
+        state.currentQueNo = response.currentQueNo;
         state.leagueLevel = response.leagueLevel;
-        state.energyLeft = response.energyLeft;
+        state.queLeft = response.queLeft;
         state.playLevels = response.playLevels;
-        state.multiTapFlag = response.multiTapFlag;
-        state.multiTapStamp = response.multiTapStamp;
-        state.referralCount = response.referralCount;
+        state.playValues = response.playValues;
+
         //Tasks states
         state.specialTasksStatus = response.specialTasksStatus;
         state.leagueTasksStatus = response.leagueTasksStatus;
@@ -168,18 +155,16 @@ const { actions } = UiReducer;
 
 export const {
   updateScore,
-  updateTapScore,
+  updateCurrentQueNo,
+  updateAnsSelected,
   updateReferralPoints,
   updateReferralCount,
   updateScreenLoaded,
-  updateMultiTap,
   updateLeagueLevel,
   updateEnergyLeft,
   updatePlayLevels,
   updatePlayValues,
   setSuccessPopup,
-  updateFullHungerStamp,
-  updateMultiTapStamp,
   updateSpecialTaskStatusState,
   updateLeagueTaskStatusState,
   updateRefTaskStatusState,

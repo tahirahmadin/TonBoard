@@ -241,7 +241,7 @@ const SingleNonSpecialTask = ({
   const dispatch = useDispatch();
   const { claimLeagueLevel, claimReferralLevel } = useGameHook();
   const { accountSC } = useServerAuth();
-  const tapScore = useSelector((state) => state.ui.tapScore);
+  const quizScore = useSelector((state) => state.ui.quizScore);
   const leagueLevel = useSelector((state) => state.ui.leagueLevel);
   const leagueTasksStatus = useSelector((state) => state.ui.leagueTasksStatus);
   const refTasksStatus = useSelector((state) => state.ui.refTasksStatus);
@@ -264,7 +264,7 @@ const SingleNonSpecialTask = ({
 
   let isClaimableStatus = () => {
     if (currentTabValue === 1) {
-      return tapScore >= LEAGUE_LEVEL_DATA[taskId + 1].tapsRequired;
+      return quizScore >= LEAGUE_LEVEL_DATA[taskId + 1].tapsRequired;
     }
     return referralCount >= REFERRAL_TASKS_DATA[taskId].referralRequired;
   };
@@ -275,7 +275,7 @@ const SingleNonSpecialTask = ({
     let totalLevels = LEAGUE_LEVEL_DATA.length;
     if (
       currentTabValue === 1 &&
-      tapScore >= points &&
+      quizScore >= points &&
       leagueLevel < totalLevels
     ) {
       await claimLeagueLevel(taskId);
@@ -296,8 +296,7 @@ const SingleNonSpecialTask = ({
       style={{
         width: "100%",
         minHeight: "55.86px",
-        background:
-          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
+        background: "linear-gradient(271.44deg, #7848FF 0.29%, #346DFF 98.45%)",
         border: "0.498756px solid #FFFFFF",
         borderRadius: "12px",
         position: "relative",
@@ -310,7 +309,6 @@ const SingleNonSpecialTask = ({
       <Box
         style={{
           width: "70%",
-
           fontWeight: 700,
           fontSize: "18px",
           lineHeight: "21px",
@@ -321,7 +319,7 @@ const SingleNonSpecialTask = ({
 
         {currentTabValue === 1 && (
           <ProgressBar
-            value={(100 * tapScore) / points}
+            value={(100 * quizScore) / points}
             containerStyle={{ height: 9, margin: "3px 0 10px" }}
             outerStyle={{ minHeight: 9 }}
             innerStyle={{ height: 5 }}
@@ -385,11 +383,11 @@ const Tasks = () => {
         minHeight: "calc(100vh - 60px)",
         position: "relative",
         background: "#161811",
-        paddingTop: "25px",
         zIndex: 0,
       }}
     >
       <Box>
+        <Profile />
         <SuccessSnackbar text="Reward claimed succesfully!" />
         <img
           src="/images/bg_grid.png"

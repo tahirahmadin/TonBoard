@@ -12,6 +12,7 @@ import {
 import React, { useEffect, useState } from "react";
 
 import makeStyles from "@mui/styles/makeStyles";
+import useGameHook from "../hooks/useGameHook";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -26,26 +27,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const OptionCard = ({
-  option,
   img,
   title,
-  sub_heading1,
-  sub_heading2,
   description,
   tick,
+  onClick,
+  inputOption,
 }) => {
   const classes = useStyles();
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const { handleAnswerSelected } = useGameHook();
+
+  const handleSelect = async () => {
+    handleAnswerSelected(inputOption);
+  };
+
   return (
     <>
       <Box
+        onClick={handleSelect}
         sx={{
           width: "100%",
           maxWidth: 150,
           minWidth: 100,
-          height: 170,
+          height: 185,
           borderRadius: "22px",
           position: "relative",
           display: "flex",
@@ -136,6 +143,7 @@ const OptionCard = ({
                     textAlign: "center",
                     color: "#FAFF00",
                     marginTop: "10px",
+                    minHeight: 36,
                   }}
                 >
                   {title}
