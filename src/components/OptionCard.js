@@ -169,6 +169,17 @@ const OptionCard = ({
                   }}
                 />
               )}
+
+              {!tick && (
+                <img
+                  src="https://cdn3d.iconscout.com/3d/premium/thumb/wrong-9090242-7480311.png?f=webp"
+                  style={{
+                    width: 42,
+                    height: 42,
+                    objectFit: "contain",
+                  }}
+                />
+              )}
             </Box>
           </Box>
         </Box>

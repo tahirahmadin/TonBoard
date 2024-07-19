@@ -34,6 +34,10 @@ const QuizPage = () => {
   const ansSelected = useSelector((state) => state.ui.ansSelected);
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
 
+  const quizMessageStatus = React.useMemo(() => {
+    return ansSelected[currentQueNo] === QUIZ_DATA[currentQueNo].correct;
+  }, [currentQueNo, ansSelected]);
+
   return (
     <Box>
       <Profile />
@@ -94,20 +98,14 @@ const QuizPage = () => {
               title={QUIZ_DATA[currentQueNo].option1}
               img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-a-letter-effect-text-9423674-7664624.png"
               description="32,430"
-              tick={
-                ansSelected[currentQueNo] === QUIZ_DATA[currentQueNo].correct &&
-                ansSelected[currentQueNo] === 1
-              }
+              tick={quizMessageStatus && ansSelected[currentQueNo] === 1}
             />
             <OptionCard
               inputOption={2}
               title={QUIZ_DATA[currentQueNo].option2}
               img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-b-letter-effect-text-9423689-7664639.png"
               description="1,203"
-              tick={
-                ansSelected[currentQueNo] === QUIZ_DATA[currentQueNo].correct &&
-                ansSelected[currentQueNo] === 2
-              }
+              tick={quizMessageStatus && ansSelected[currentQueNo] === 2}
             />
           </Box>
           <Typography
@@ -116,11 +114,12 @@ const QuizPage = () => {
               width: "100%",
               fontWeight: 600,
               fontSize: 16,
-              color: "#64FF99",
+              color: quizMessageStatus ? "#64FF99" : "red",
               textAlign: "center",
             }}
           >
-            Great! Right answer
+            {quizMessageStatus && "Great! Right answer"}
+            {!quizMessageStatus && "Sorry! Try next time!"}
           </Typography>
           <Box pt={3}>
             <Typography
