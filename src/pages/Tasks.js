@@ -365,6 +365,8 @@ const SingleNonSpecialTask = ({
   );
 };
 const Tasks = () => {
+  const topTabs = ["Social", "League", "Referrals"];
+
   const { viberate } = useTelegramSDK();
   const { gameScore } = useGameHook();
   const score = useSelector((state) => state.ui.score);
@@ -389,20 +391,6 @@ const Tasks = () => {
       <Box>
         <Profile />
         <SuccessSnackbar text="Reward claimed succesfully!" />
-        <img
-          src="/images/bg_grid.png"
-          alt="Foodverse"
-          className="portrait"
-          style={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            zIndex: -1,
-            top: 0,
-            left: 0,
-            objectFit: "cover",
-          }}
-        />
 
         <Box
           style={{
@@ -486,85 +474,60 @@ const Tasks = () => {
 
         <Box
           style={{
-            width: "90%",
-            height: 52,
-            borderRadius: "6px",
             display: "flex",
-            alignItems: "center",
-            gap: "5px",
-            padding: "5px",
-            margin: "5% 5% 7%",
-            position: "relative",
+            justifyContent: "center",
+            backgroundColor: "transparent",
+            marginBottom: 20,
           }}
         >
           <Box
             style={{
-              width: "100%",
-              height: 52,
-              background: "linear-gradient(180deg, #7848FF 0%, #346DFF 100%)",
-              borderRadius: "6px",
-              padding: "1px",
-              top: 0,
-              left: 0,
-              position: "absolute",
-              zIndex: -2,
+              marginTop: 10,
+              width: "90%",
+              height: 45,
+              background: "#000",
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              backgroundColor: "#212121",
+              borderRadius: 10,
+              paddingLeft: 5,
+              paddingRight: 5,
             }}
           >
-            <Box
-              style={{
-                width: "100%",
-                height: "100%",
-                background: "#161811",
-                borderRadius: "6px",
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-                padding: "5px",
-              }}
-            />
-          </Box>
-          {tabs.map((ele, i) => (
-            <Button
-              key={ele.no}
-              style={{
-                width: "100%",
-                height: "100%",
-                fontWeight: 400,
-                fontSize: "16px",
-                lineHeight: "11px",
-                textAlign: "center",
-                color: tabValue === ele.no ? "#000000" : "#fff",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                background: tabValue === ele.no ? "#FF9CFF" : "",
-                borderRadius: "8px",
-                position: "relative",
-                zIndex: 3,
-                textTransform: "capitalize",
-              }}
-              onClick={() => {
-                viberate("light");
-                setTabValue(ele.no);
-              }}
-            >
-              {ele.name}
-              {tabValue !== ele.no && (
-                <span
+            {topTabs.map((ele, i) => (
+              <Button
+                key={i}
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  position: "relative",
+                  backgroundColor: tabValue === i ? "black" : "transparent",
+                  borderRadius: 10,
+                  height: 40,
+                }}
+                onClick={() => {
+                  viberate("light");
+                  setTabValue(i);
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  textTransform={"Capitalize"}
                   style={{
-                    width: "7px",
-                    height: "7px",
-                    borderRadius: "50%",
-                    background: "#FF4C4C",
-                    position: "absolute",
-                    top: 7,
-                    right: 13,
-                    zIndex: 3,
+                    fontWeight: tabValue === i ? 700 : 400,
+                    fontSize: 11,
+                    color: tabValue === i ? "#64FF99" : "#FFFFFF",
                   }}
-                />
-              )}
-            </Button>
-          ))}
+                >
+                  {ele}
+                </Typography>
+              </Button>
+            ))}
+          </Box>
         </Box>
         {tabValue === 0 && (
           <Box
@@ -574,7 +537,7 @@ const Tasks = () => {
               background: "linear-gradient(180deg, #4886FF 0%, #03429F 100%)",
               borderRadius: "32px 32px 0px 0px",
               padding: "1px 1px 0",
-              marginTop: "-7px",
+
               zIndex: 1,
             }}
           >
@@ -619,7 +582,7 @@ const Tasks = () => {
               background: "linear-gradient(180deg, #4886FF 0%, #03429F 100%)",
               borderRadius: "32px 32px 0px 0px",
               padding: "1px 1px 0",
-              marginTop: "-7px",
+
               zIndex: 1,
             }}
           >

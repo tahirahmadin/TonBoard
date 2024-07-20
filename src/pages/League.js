@@ -108,11 +108,11 @@ const League = () => {
         height: "100%",
         position: "relative",
         background: "#161811",
-        paddingTop: "25px",
         zIndex: 0,
         overflow: "hidden",
       }}
     >
+      <Profile />
       <img
         src="/images/bg_grid.png"
         alt="TaskDao"
@@ -127,7 +127,7 @@ const League = () => {
           objectFit: "cover",
         }}
       />
-      <Profile />
+
       <Box
         style={{
           width: "90%",

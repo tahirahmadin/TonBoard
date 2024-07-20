@@ -38,6 +38,7 @@ const Work = () => {
         paddingLeft: "1%",
         paddingRight: "1%",
         zIndex: 0,
+        overflowX: "hidden",
       }}
     >
       <Profile />
