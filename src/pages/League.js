@@ -4,7 +4,7 @@ import { Box, Button, Typography } from "@mui/material";
 import ProgressBar from "../components/ProgressBar";
 import useGameHook from "../hooks/useGameHook";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
-import { LEAGUE_LEVEL_DATA } from "../utils/constants";
+import { LEAGUE_LEVEL_DATA, LEAGUE_TASKS_DATA } from "../utils/constants";
 import Slider from "react-slick";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 import { useSelector } from "react-redux";
@@ -153,7 +153,7 @@ const League = () => {
         >
           <Box style={{ width: "100%", position: "relative", zIndex: 1 }}>
             <Slider {...settings}>
-              {LEAGUE_LEVEL_DATA?.map((level, i) => (
+              {LEAGUE_TASKS_DATA?.map((level, i) => (
                 <Box
                   key={i}
                   style={{

@@ -21,6 +21,7 @@ const BoostDetailsPopup = ({
   description1,
   description2,
   price,
+  priceText,
   level,
   openPopup,
   closePopup,
@@ -208,7 +209,7 @@ const BoostDetailsPopup = ({
                     src="https://png.pngtree.com/png-clipart/20220612/original/pngtree-dollar-coin-icon-3d-png-image_7966148.png"
                     style={{ width: 24, height: 24 }}
                   />
-                  {price > 0 ? price : "FREE"}
+                  {price > 0 ? priceText : "FREE"}
                 </Typography>
                 {level && (
                   <Box

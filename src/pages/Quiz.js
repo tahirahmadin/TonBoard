@@ -105,7 +105,7 @@ const QuizPage = () => {
               title={QUIZ_DATA[currentQueNo].option2}
               img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-b-letter-effect-text-9423689-7664639.png"
               description="1,203"
-              tick={quizMessageStatus && ansSelected[currentQueNo] === 2}
+              tick={!quizMessageStatus && ansSelected[currentQueNo] === 2}
             />
           </Box>
           <Typography
@@ -128,11 +128,12 @@ const QuizPage = () => {
                 textAlign: "center",
               }}
             >
-              Next question in
+              Next slot in
             </Typography>
-            <TimerComp endTime={Date.now() + 864000} />
+            <TimerComp endTime={Date.now() + 21600000} />
           </Box>
           <Box
+            pt={4}
             style={{
               width: "90%",
               display: "flex",

@@ -2,9 +2,12 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 import SmallProgressBar from "./SmallProgressBar";
+import { useSelector } from "react-redux";
+import { LEAGUE_TASKS_DATA } from "../utils/constants";
 
 const Profile = () => {
   const { telegramUsername, telegramPhotoUrl } = useTelegramSDK();
+  const leagueLevel = useSelector((state) => state.ui.leagueLevel);
 
   return (
     <Box
@@ -23,21 +26,19 @@ const Profile = () => {
           justifyContent: "flex-start",
           alignItems: "center",
           backgroundColor: "#212121",
-          borderTopRightRadius: 25,
-          borderBottomRightRadius: 25,
-          paddingRight: 30,
+          borderTopRightRadius: 12,
+          borderBottomRightRadius: 12,
+          paddingRight: 20,
           paddingLeft: 7,
           paddingTop: 7,
           paddingBottom: 7,
         }}
       >
         <img
-          src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/character-11212176-8973527.png?f=webp"
-          }
+          src={LEAGUE_TASKS_DATA[leagueLevel].img}
           alt="TaskDao"
-          width={30}
-          height={30}
+          width={24}
+          height={24}
         />
         <Box>
           <Typography
@@ -52,7 +53,7 @@ const Profile = () => {
               marginBottom: 3,
             }}
           >
-            Senior Manager 6/9
+            {LEAGUE_TASKS_DATA[leagueLevel].title} 6/9
           </Typography>
           <SmallProgressBar value={60} />
         </Box>

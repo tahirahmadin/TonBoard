@@ -14,6 +14,7 @@ const BoosterCard = ({
   title,
   img,
   price,
+  priceText,
   level,
   type,
   description1,
@@ -56,6 +57,7 @@ const BoosterCard = ({
         description2={description2}
         img={img}
         price={price}
+        priceText={priceText}
         level={level + 1}
         openPopup={open}
         closePopup={() => {
@@ -159,7 +161,7 @@ const BoosterCard = ({
                       src="https://cdn3d.iconscout.com/3d/premium/thumb/usd-coin-5839397-4884145.png?f=webp"
                       style={{ width: 24, height: 24 }}
                     />
-                    {price}
+                    {priceText}
                   </span>
                 )}
               </Typography>
@@ -274,17 +276,22 @@ const Boost = () => {
               }}
             >
               <BoosterCard
-                title="Upgrade Timer"
+                title="Upgrade Slot"
                 img="https://cdn3d.iconscout.com/3d/premium/thumb/fasting-8156958-6516912.png?f=webp"
                 price={
                   TIMER_BOOST_DATA[playLevels.timer + 1]
                     ? TIMER_BOOST_DATA[playLevels.timer + 1].coins
                     : 0
                 }
+                priceText={
+                  TIMER_BOOST_DATA[playLevels.timer + 1]
+                    ? TIMER_BOOST_DATA[playLevels.timer + 1].coinsText
+                    : 0
+                }
                 level={playLevels.timer + 1}
                 type={"TIMER"}
-                description1="Upgrade timer to increase your quiz frequency."
-                description2="+10 mins each level."
+                description1="Upgrade timer to increase your slot frequency."
+                description2="+1 hrs each level."
                 isFull={TIMER_BOOST_DATA[playLevels.timer + 1] ? false : true}
               />
               <BoosterCard
@@ -295,10 +302,15 @@ const Boost = () => {
                     ? REWARDS_BOOST_DATA[playLevels.rewards + 1].coins
                     : 0
                 }
+                priceText={
+                  REWARDS_BOOST_DATA[playLevels.rewards + 1]
+                    ? REWARDS_BOOST_DATA[playLevels.rewards + 1].coinsText
+                    : 0
+                }
                 level={playLevels.rewards + 1}
                 type={"REWARDS"}
                 description1="Increase the rewards per correct question."
-                description2="+100,000 Reward Increase for each level."
+                description2="+1M Reward Increase for each level."
                 isFull={
                   REWARDS_BOOST_DATA[playLevels.rewards + 1] ? false : true
                 }
