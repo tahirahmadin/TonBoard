@@ -16,6 +16,7 @@ import ProfileCard from "../components/ProfileCard";
 import { Wallet } from "@mui/icons-material";
 
 import makeStyles from "@mui/styles/makeStyles";
+import ScoreComp from "../components/Score";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -33,6 +34,7 @@ const Dashboard = () => {
   const classes = useStyles();
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
+  const score = useSelector((state) => state.ui.score);
 
   const [dashboardData, setDashboardData] = useState({});
 
@@ -115,114 +117,7 @@ const Dashboard = () => {
         </Typography>
       </Box>
 
-      {/* Profile card */}
-      {/* <Box
-        display={"flex"}
-        flexDirection="row"
-        justifyContent={"flex-start"}
-        alignItems={"center"}
-        style={{
-          borderRadius: "22px",
-          paddingTop: 10,
-          paddingBottom: 10,
-          paddingLeft: 10,
-          paddingRight: 10,
-        }}
-      >
-        <Box
-          style={{
-            width: 120,
-            height: 90,
-            background: "#161811",
-            borderRadius: "22px",
-          }}
-        >
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "22px",
-              position: "relative",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <img
-              src={
-                "https://cdn3d.iconscout.com/3d/premium/thumb/jewish-man-avatar-10971658-8779370.png?f=webp"
-              }
-              alt="TaskDao"
-              width={70}
-              height={70}
-            />
-          </Box>
-        </Box>
-        <Box pl={2}>
-          <Typography
-            style={{
-              width: "100%",
-              fontFamily: "'Rubik'",
-              fontWeight: 700,
-              fontSize: 21,
-              lineHeight: "110%",
-              textAlign: "left",
-              color: "#ffffff",
-              marginTop: "10px",
-            }}
-          >
-            Tahir Ahmad
-          </Typography>
-
-          <Typography
-            className={classes.description}
-            style={{
-              textAlign: "left",
-            }}
-          >
-            Manager
-          </Typography>
-        </Box>
-      </Box> */}
-      {/* <ProfileCard /> */}
-      <Box
-        display={"flex"}
-        flexDirection="column"
-        justifyContent={"center"}
-        alignItems={"center"}
-        mt={4}
-      >
-        <Typography
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            fontFamily: "Rubik",
-            fontWeight: 800,
-            fontSize: 14,
-            lineHeight: "100%",
-            textAlign: "center",
-            color: "#64FF99",
-          }}
-        >
-          Current Points
-        </Typography>
-        <Typography
-          style={{
-            width: "100%",
-            fontFamily: "Rubik",
-            fontWeight: 700,
-            fontSize: 28,
-            lineHeight: "110%",
-            textAlign: "center",
-            color: "#ffffff",
-          }}
-        >
-          13,435,545
-        </Typography>
-      </Box>
+      <ScoreComp />
       {/* <Box
         display={"flex"}
         flexDirection="row"

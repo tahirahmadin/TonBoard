@@ -123,31 +123,7 @@ const Home = () => {
               {score.toLocaleString()}
             </Typography>
           </Box>
-          <Box
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column",
-              alignItems: "center",
-              height: "45vh",
-              position: "relative",
-            }}
-            onTouchStart={handleTouch}
-          >
-            <img
-              src="task-logo-transparent.png"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-                position: "absolute",
-                filter: "drop-shadow(0 0 0.75rem #bdbdbd)",
 
-                zIndex: 1,
-              }}
-            />
-          </Box>
           <Box
             style={{
               width: "90%",

@@ -9,6 +9,7 @@ import useGameHook from "../hooks/useGameHook";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import ScoreComp from "../components/Score";
 
 const BoosterCard = ({
   title,
@@ -204,6 +205,7 @@ const Boost = () => {
   const { viberate } = useTelegramSDK();
   const navigate = useNavigate();
   const playLevels = useSelector((state) => state.ui.playLevels);
+  const score = useSelector((state) => state.ui.score);
 
   return (
     <Box
@@ -212,7 +214,7 @@ const Boost = () => {
       }}
     >
       <Profile />
-
+      <ScoreComp />
       <Box
         mt={2}
         style={{
@@ -231,6 +233,7 @@ const Boost = () => {
           width={"40%"}
         />
         <Typography
+          mt={1}
           style={{
             width: "100%",
             fontFamily: "Rubik",
@@ -247,7 +250,7 @@ const Boost = () => {
 
       {/* Cards */}
       <Box
-        mt={8}
+        mt={4}
         style={{
           width: "100%",
           height: "100%",

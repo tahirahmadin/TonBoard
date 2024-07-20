@@ -16,15 +16,15 @@ const Work = () => {
   const topTabs = ["Social", "Airdrop", "Testnet"];
 
   // API call: to fetch tasks
-  useEffect(() => {
-    async function asyncFn() {
-      let res = await getDashboardData();
-      if (res) {
-        setDashboardData(res);
-      }
-    }
-    asyncFn();
-  }, []);
+  // useEffect(() => {
+  //   async function asyncFn() {
+  //     let res = await getDashboardData();
+  //     if (res) {
+  //       setDashboardData(res);
+  //     }
+  //   }
+  //   asyncFn();
+  // }, []);
 
   return (
     <Box
@@ -34,7 +34,7 @@ const Work = () => {
         position: "relative",
         background: "#161811",
         paddingBottom: "100px",
-        paddingTop: "25px",
+
         paddingLeft: "1%",
         paddingRight: "1%",
         zIndex: 0,
