@@ -166,7 +166,7 @@ const QuizPage = () => {
                   color: "#ffffff",
                 }}
               >
-                9/10
+                4/5
               </Typography>
             </Box>
             <Box
