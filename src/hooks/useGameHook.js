@@ -23,7 +23,6 @@ const useGameHook = (hookInit = false) => {
   const score = useSelector((state) => state.ui.score);
   const currentQueNo = useSelector((state) => state.ui.currentQueNo);
   const ansSelected = useSelector((state) => state.ui.ansSelected);
-
   const leagueLevel = useSelector((state) => state.ui.leagueLevel);
   const playLevels = useSelector((state) => state.ui.playLevels);
   const referralCount = useSelector((state) => state.ui.referralCount);
@@ -92,23 +91,6 @@ const useGameHook = (hookInit = false) => {
     leagueTasksStatus,
     refTasksStatus,
   ]);
-
-  //4. Energy Restore per second
-  // useEffect(() => {
-  //   const interval = setTimeout(() => {
-  //     if (energyLeft && playValues.recharge && playValues.energy) {
-  //       let newEnergyValue = Math.min(
-  //         energyLeft + playValues.recharge,
-  //         playValues.energy
-  //       );
-  //       dispatch(updateEnergyLeft(newEnergyValue));
-  //     } else {
-  //       dispatch(updateEnergyLeft(playValues.energy));
-  //     }
-  //   }, 1000); // Restore energy points every second
-
-  //   return () => clearInterval(interval); // Clear interval on component unmount
-  // }, [playValues.recharge, playValues.energy, energyLeft]);
 
   // Final Score = score + referral score
   const finalScore = useMemo(() => {

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Home from "./pages/Home";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Box, CircularProgress, useTheme } from "@mui/material";
 import Navbar from "./components/Navbar";
@@ -14,7 +13,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { BackButton } from "@twa-dev/sdk/react";
 import Work from "./pages/Work";
-import { Quiz } from "@mui/icons-material";
 import QuizPage from "./pages/Quiz";
 
 function App() {

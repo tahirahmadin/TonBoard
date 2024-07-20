@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import useGameHook from "../hooks/useGameHook";
 import useTelegramSDK from "../hooks/useTelegramSDK";
@@ -30,13 +30,18 @@ const QuizPage = () => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
   const currentQueNo = useSelector((state) => state.ui.currentQueNo);
   const ansSelected = useSelector((state) => state.ui.ansSelected);
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
 
+  const questionData = useMemo(() => {
+    return QUIZ_DATA[currentQueNo];
+  }, [currentQueNo, currentSlotNo]);
+
   const quizMessageStatus = React.useMemo(() => {
-    return ansSelected[currentQueNo] === QUIZ_DATA[currentQueNo].correct;
-  }, [currentQueNo, ansSelected]);
+    return ansSelected[currentQueNo] === questionData.correct;
+  }, [currentQueNo, ansSelected, questionData]);
 
   return (
     <Box>
@@ -80,7 +85,7 @@ const QuizPage = () => {
                 color: "#ffffff",
               }}
             >
-              {QUIZ_DATA[currentQueNo].title}
+              {questionData.title}
             </Typography>
           </Box>
           <Box
@@ -95,14 +100,14 @@ const QuizPage = () => {
           >
             <OptionCard
               inputOption={1}
-              title={QUIZ_DATA[currentQueNo].option1}
+              title={questionData.option1}
               img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-a-letter-effect-text-9423674-7664624.png"
               description="32,430"
               tick={quizMessageStatus && ansSelected[currentQueNo] === 1}
             />
             <OptionCard
               inputOption={2}
-              title={QUIZ_DATA[currentQueNo].option2}
+              title={questionData.option2}
               img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-b-letter-effect-text-9423689-7664639.png"
               description="1,203"
               tick={!quizMessageStatus && ansSelected[currentQueNo] === 2}
@@ -166,7 +171,7 @@ const QuizPage = () => {
                   color: "#ffffff",
                 }}
               >
-                4/5
+                {5 - currentQueNo}/5
               </Typography>
             </Box>
             <Box

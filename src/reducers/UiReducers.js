@@ -2,16 +2,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   score: 550000,
-  quizScore: 500000,
   leagueLevel: 0,
+  currentSlotNo: 0,
   currentQueNo: 0,
   ansSelected: [],
 
   playLevels: {
-    timer: 0,
-    rewards: 0,
-  },
-  playValues: {
     timer: 0,
     rewards: 0,
   },
@@ -62,8 +58,9 @@ const UiReducer = createSlice({
     updateScore(state, action) {
       state.score = action.payload;
     },
-    updateQuizScore(state, action) {
-      state.quizScore = action.payload;
+
+    updateCurrentSlotNo(state, action) {
+      state.currentSlotNo = action.payload;
     },
     updateCurrentQueNo(state, action) {
       state.currentQueNo = action.payload;
@@ -101,9 +98,7 @@ const UiReducer = createSlice({
     updatePlayLevels(state, action) {
       state.playLevels = action.payload;
     },
-    updatePlayValues(state, action) {
-      state.playValues = action.payload;
-    },
+
     updateRefetch(state, action) {
       state.refetch = action.payload;
     },
@@ -122,7 +117,6 @@ const UiReducer = createSlice({
 
         state.queLeft = response.queLeft;
         state.playLevels = response.playLevels;
-        state.playValues = response.playValues;
 
         //Tasks states
         state.specialTasksStatus = response.specialTasksStatus;
@@ -140,7 +134,6 @@ const UiReducer = createSlice({
         state.leagueLevel = response.leagueLevel;
         state.queLeft = response.queLeft;
         state.playLevels = response.playLevels;
-        state.playValues = response.playValues;
 
         //Tasks states
         state.specialTasksStatus = response.specialTasksStatus;
@@ -155,6 +148,7 @@ const { actions } = UiReducer;
 
 export const {
   updateScore,
+  updateCurrentSlotNo,
   updateCurrentQueNo,
   updateAnsSelected,
   updateReferralPoints,
@@ -163,7 +157,6 @@ export const {
   updateLeagueLevel,
   updateEnergyLeft,
   updatePlayLevels,
-  updatePlayValues,
   setSuccessPopup,
   updateSpecialTaskStatusState,
   updateLeagueTaskStatusState,

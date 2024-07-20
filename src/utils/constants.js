@@ -323,6 +323,34 @@ export const QUIZ_DATA = [
     option2: "Oracle",
     correct: 2,
   },
+  {
+    id: 2,
+    title: "What is most suitable category io.net token?",
+    option1: "GPU/DePin",
+    option2: "Oracle",
+    correct: 2,
+  },
+  {
+    id: 3,
+    title: "What is most suitable category io.net token?",
+    option1: "GPU/DePin",
+    option2: "Oracle",
+    correct: 2,
+  },
+  {
+    id: 4,
+    title: "What is most suitable category io.net token?",
+    option1: "GPU/DePin",
+    option2: "Oracle",
+    correct: 2,
+  },
+  {
+    id: 5,
+    title: "What is most suitable category io.net token?",
+    option1: "GPU/DePin",
+    option2: "Oracle",
+    correct: 2,
+  },
 ];
 
 export default constants;

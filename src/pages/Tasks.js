@@ -241,7 +241,7 @@ const SingleNonSpecialTask = ({
   const dispatch = useDispatch();
   const { claimLeagueLevel, claimReferralLevel } = useGameHook();
   const { accountSC } = useServerAuth();
-  const quizScore = useSelector((state) => state.ui.quizScore);
+  const score = useSelector((state) => state.ui.score);
   const leagueLevel = useSelector((state) => state.ui.leagueLevel);
   const leagueTasksStatus = useSelector((state) => state.ui.leagueTasksStatus);
   const refTasksStatus = useSelector((state) => state.ui.refTasksStatus);
@@ -264,7 +264,7 @@ const SingleNonSpecialTask = ({
 
   let isClaimableStatus = () => {
     if (currentTabValue === 1) {
-      return quizScore >= LEAGUE_LEVEL_DATA[taskId + 1].tapsRequired;
+      return score >= LEAGUE_LEVEL_DATA[taskId + 1].tapsRequired;
     }
     return referralCount >= REFERRAL_TASKS_DATA[taskId].referralRequired;
   };
@@ -273,11 +273,7 @@ const SingleNonSpecialTask = ({
   const onClickClaim = async () => {
     // Update status to progress
     let totalLevels = LEAGUE_LEVEL_DATA.length;
-    if (
-      currentTabValue === 1 &&
-      quizScore >= points &&
-      leagueLevel < totalLevels
-    ) {
+    if (currentTabValue === 1 && score >= points && leagueLevel < totalLevels) {
       await claimLeagueLevel(taskId);
       var tempArray = [...leagueTasksStatus];
       tempArray[taskId] = 2;
@@ -319,7 +315,7 @@ const SingleNonSpecialTask = ({
 
         {currentTabValue === 1 && (
           <ProgressBar
-            value={(100 * quizScore) / points}
+            value={(100 * score) / points}
             containerStyle={{ height: 9, margin: "3px 0 10px" }}
             outerStyle={{ minHeight: 9 }}
             innerStyle={{ height: 5 }}
