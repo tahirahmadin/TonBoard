@@ -10,6 +10,9 @@ import {
   updateScore,
   updateScreenLoaded,
   updateAnsSelected,
+  updateCurrentQueNo,
+  updateNextButtonFlag,
+  updateTimerValue,
 } from "../reducers/UiReducers";
 import {
   getUserLeaderboardData,
@@ -22,6 +25,7 @@ const useGameHook = (hookInit = false) => {
   const ui = useSelector((state) => state.ui);
   const score = useSelector((state) => state.ui.score);
   const currentQueNo = useSelector((state) => state.ui.currentQueNo);
+  const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
   const ansSelected = useSelector((state) => state.ui.ansSelected);
   const leagueLevel = useSelector((state) => state.ui.leagueLevel);
   const playLevels = useSelector((state) => state.ui.playLevels);
@@ -41,7 +45,7 @@ const useGameHook = (hookInit = false) => {
   useEffect(() => {
     async function asyncFn() {
       if (hookInit && accountSC) {
-        await localStorage.removeItem("ui");
+        // await localStorage.removeItem("ui");
         await dispatch(updateLocalDataToRedux());
         //1.  Load Backend
         // let backendData = await getUserLeaderboardData(accountSC);
@@ -99,13 +103,34 @@ const useGameHook = (hookInit = false) => {
 
   // FUNCTION:: Handle select question
   const _handleAnswerSelected = (inputOption) => {
-    let rewardsOnCorrect = 1000 * playLevels.rewards;
+    //Update answers array
     let tempAns = [...ansSelected];
     tempAns[currentQueNo] = inputOption;
     dispatch(updateAnsSelected(tempAns));
 
-    if (QUIZ_DATA[currentQueNo].correct === inputOption) {
-      dispatch(updateScore(score + rewardsOnCorrect));
+    if (ansSelected.length !== 0 && ansSelected.length % 5 === 0) {
+      let nextTimerValue = Date.now() + 21600000;
+      dispatch(updateTimerValue(nextTimerValue));
+    } else {
+      dispatch(updateNextButtonFlag(true));
+    }
+  };
+
+  // FUNCTION:: Handle next button click
+  const _handleNextButtonClick = () => {
+    let rewardsOnCorrect = 100000 * playLevels.rewards;
+    let rewardsOnWrong = 10000 * playLevels.rewards;
+
+    if (ansSelected.length === 0 || ansSelected.length % 5 !== 0) {
+      let inputOption = ansSelected[ansSelected.length - 1];
+      //Update user score
+      if (QUIZ_DATA[currentQueNo].correct === inputOption) {
+        dispatch(updateScore(score + rewardsOnCorrect));
+      } else {
+        dispatch(updateScore(score + rewardsOnWrong));
+      }
+      dispatch(updateCurrentQueNo(currentQueNo + 1));
+      dispatch(updateNextButtonFlag(false));
     }
   };
 
@@ -155,6 +180,8 @@ const useGameHook = (hookInit = false) => {
   return {
     gameScore: finalScore,
     handleAnswerSelected: _handleAnswerSelected,
+    handleNextButtonClick: _handleNextButtonClick,
+
     upgradeBoosterLevel: _upgradeBoosterLevel,
     claimTaskPoints: _claimTaskPoints,
     claimLeagueLevel: _claimLeague,

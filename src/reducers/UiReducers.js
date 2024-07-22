@@ -20,6 +20,8 @@ const initialState = {
   leagueTasksStatus: [],
   refTasksStatus: [],
   screenLoaded: false,
+  nextButtonFlag: false,
+  timerValue: 0,
 };
 
 // Function:: update localData to redux
@@ -58,10 +60,16 @@ const UiReducer = createSlice({
     updateScore(state, action) {
       state.score = action.payload;
     },
-
+    updateNextButtonFlag(state, action) {
+      state.nextButtonFlag = action.payload;
+    },
+    updateTimerValue(state, action) {
+      state.timerValue = action.payload;
+    },
     updateCurrentSlotNo(state, action) {
       state.currentSlotNo = action.payload;
     },
+
     updateCurrentQueNo(state, action) {
       state.currentQueNo = action.payload;
     },
@@ -111,6 +119,7 @@ const UiReducer = createSlice({
       const response = action.payload;
       if (response) {
         state.score = response.score;
+        state.nextButtonFlag = response.nextButtonFlag;
         state.ansSelected = response.ansSelected;
         state.currentQueNo = response.currentQueNo;
         state.leagueLevel = response.leagueLevel;
@@ -129,6 +138,7 @@ const UiReducer = createSlice({
       const response = action.payload;
       if (response) {
         state.score = response.score;
+        state.nextButtonFlag = response.nextButtonFlag;
         state.ansSelected = response.ansSelected;
         state.currentQueNo = response.currentQueNo;
         state.leagueLevel = response.leagueLevel;
@@ -148,6 +158,8 @@ const { actions } = UiReducer;
 
 export const {
   updateScore,
+  updateNextButtonFlag,
+  updateTimerValue,
   updateCurrentSlotNo,
   updateCurrentQueNo,
   updateAnsSelected,

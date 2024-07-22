@@ -13,6 +13,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import ScoreComp from "../components/Score";
 import TimerComp from "../components/TimerComp";
 import { QUIZ_DATA } from "../utils/constants";
+import { updateCurrentQueNo } from "../reducers/UiReducers";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -33,13 +34,20 @@ const QuizPage = () => {
   const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
   const currentQueNo = useSelector((state) => state.ui.currentQueNo);
   const ansSelected = useSelector((state) => state.ui.ansSelected);
+  const nextButtonFlag = useSelector((state) => state.ui.nextButtonFlag);
+  const timerValue = useSelector((state) => state.ui.timerValue);
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
+
+  const { handleNextButtonClick, handleClaimPoints } = useGameHook();
 
   const questionData = useMemo(() => {
     return QUIZ_DATA[currentQueNo];
   }, [currentQueNo, currentSlotNo]);
 
   const quizMessageStatus = React.useMemo(() => {
+    if (ansSelected[currentQueNo] === undefined) {
+      return null;
+    }
     return ansSelected[currentQueNo] === questionData.correct;
   }, [currentQueNo, ansSelected, questionData]);
 
@@ -113,6 +121,7 @@ const QuizPage = () => {
               tick={!quizMessageStatus && ansSelected[currentQueNo] === 2}
             />
           </Box>
+
           <Typography
             mt={3}
             style={{
@@ -123,20 +132,41 @@ const QuizPage = () => {
               textAlign: "center",
             }}
           >
-            {quizMessageStatus && "Great! Right answer"}
-            {!quizMessageStatus && "Sorry! Try next time!"}
+            {quizMessageStatus !== null &&
+              quizMessageStatus &&
+              "Great! Right answer"}
+            {quizMessageStatus !== null &&
+              !quizMessageStatus &&
+              "Sorry! Try next time!"}
           </Typography>
+          {timerValue !== 0 && (
+            <Box pt={3}>
+              <Typography
+                className={classes.description}
+                style={{
+                  textAlign: "center",
+                }}
+              >
+                Next slot in
+              </Typography>
+              <TimerComp endTime={timerValue} />
+            </Box>
+          )}
+
           <Box pt={3}>
             <Typography
+              onClick={nextButtonFlag ? handleNextButtonClick : null}
               className={classes.description}
               style={{
                 textAlign: "center",
+                color: "yellow",
+                fontWeight: 700,
               }}
             >
-              Next slot in
+              {nextButtonFlag && "Claim Points"}
             </Typography>
-            <TimerComp endTime={Date.now() + 21600000} />
           </Box>
+
           <Box
             pt={4}
             style={{
