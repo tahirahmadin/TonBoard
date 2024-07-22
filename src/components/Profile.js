@@ -53,7 +53,7 @@ const Profile = () => {
               marginBottom: 3,
             }}
           >
-            {LEAGUE_TASKS_DATA[leagueLevel].title} 6/9
+            {LEAGUE_TASKS_DATA[leagueLevel].title} (0/5)
           </Typography>
           <SmallProgressBar value={60} />
         </Box>

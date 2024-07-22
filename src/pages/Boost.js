@@ -37,8 +37,8 @@ const BoosterCard = ({
     <Box
       style={{
         width: "100%",
-        height: 60,
-        minHeight: 60,
+        height: 72,
+        minHeight: 72,
         background:
           "linear-gradient(254.51deg, #00CCCC 5.63%, #009999 61.19%, #6666FF 116.96%)",
         borderRadius: "8px",
@@ -275,7 +275,7 @@ const Boost = () => {
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
-                gap: "5px",
+                gap: "10px",
               }}
             >
               <BoosterCard

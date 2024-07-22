@@ -158,7 +158,8 @@ const SingleTask = ({
       style={{
         width: "100%",
         minHeight: "55.86px",
-        background: "linear-gradient(271.44deg, #212121 0.59%, #000000 98.45%)",
+        background:
+          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
         border: "0.498756px solid #FFFFFF",
         borderRadius: "12px",
         position: "relative",
@@ -275,7 +276,8 @@ const SingleNonSpecialTask = ({
       style={{
         width: "100%",
         minHeight: "55.86px",
-        background: "linear-gradient(271.44deg, #212121 0.59%, #000000 98.45%)",
+        background:
+          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
         border: "0.498756px solid #FFFFFF",
         borderRadius: "12px",
         position: "relative",
@@ -291,7 +293,7 @@ const SingleNonSpecialTask = ({
           fontWeight: 700,
           fontSize: "18px",
           lineHeight: "21px",
-          color: "#FFFFFF",
+          color: "#64FF99",
         }}
       >
         {name}
@@ -351,7 +353,7 @@ const Tasks = () => {
     <Box
       style={{
         width: "100%",
-        minHeight: "calc(100vh - 60px)",
+        minHeight: "calc(100vh - 100px)",
         position: "relative",
         background: "#161811",
         zIndex: 0,
@@ -506,15 +508,14 @@ const Tasks = () => {
               background: "linear-gradient(180deg, #64FF99 0%, #03429F 100%)",
               borderRadius: "32px 32px 0px 0px",
               padding: "1px 1px 0",
-
               zIndex: 1,
             }}
           >
             <Box
               style={{
                 width: "100%",
-                height: "calc(100vh - 203px)",
-                background: "#2B2D25",
+                height: "calc(100vh - 200px)",
+                background: "#161811",
                 borderRadius: "32px 32px 0px 0px",
                 display: "flex",
                 alignItems: "center",
@@ -543,15 +544,14 @@ const Tasks = () => {
             </Box>
           </Box>
         )}
-        {tabValue !== 0 && (
+        {tabValue === 1 && (
           <Box
             style={{
               width: "100%",
               height: "100%",
-              background: "linear-gradient(180deg, #4886FF 0%, #03429F 100%)",
+              background: "linear-gradient(180deg, #64FF99 0%, #03429F 100%)",
               borderRadius: "32px 32px 0px 0px",
               padding: "1px 1px 0",
-
               zIndex: 1,
             }}
           >
@@ -559,7 +559,7 @@ const Tasks = () => {
               style={{
                 width: "100%",
                 height: "calc(100vh - 203px)",
-                background: "#2B2D25",
+                background: "#161811",
                 borderRadius: "32px 32px 0px 0px",
                 display: "flex",
                 alignItems: "center",

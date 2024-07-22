@@ -53,14 +53,16 @@ const QuizPage = () => {
 
   return (
     <Box>
-      <Profile />
-      <ScoreComp />
+      <Profile style={{ height: "10vh" }} />
+      <Box style={{ height: "10vh" }}>
+        <ScoreComp />
+      </Box>
 
       {/* Question */}
       {screenLoaded && (
         <Box
-          mt={6}
           style={{
+            height: "70vh",
             width: "100%",
             position: "relative",
             zIndex: 0,
@@ -76,6 +78,7 @@ const QuizPage = () => {
         >
           <Box
             style={{
+              height: "10vh",
               width: "90%",
               display: "flex",
               alignItems: "center",
@@ -98,6 +101,7 @@ const QuizPage = () => {
           </Box>
           <Box
             style={{
+              height: "30vh",
               width: "90%",
               display: "flex",
               flexDirection: "row",
@@ -187,8 +191,8 @@ const QuizPage = () => {
               <img
                 src="/images/energy.png"
                 style={{
-                  width: 22,
-                  height: 22,
+                  width: 20,
+                  height: 20,
                   objectFit: "contain",
                 }}
               />
@@ -245,6 +249,7 @@ const QuizPage = () => {
           <img
             type="image/svg+xml"
             src="https://cdn3d.iconscout.com/3d/premium/thumb/businesswoman-satisfied-after-investment-growth-6219694-5106203.png"
+            height={"200px"}
           />
         </Box>
       )}

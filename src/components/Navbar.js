@@ -102,7 +102,7 @@ const Navbar = () => {
           style={{
             position: "fixed",
             left: 0,
-            bottom: 0,
+            bottom: 10,
             right: 0,
             display: "flex",
             justifyContent: "center",
@@ -118,8 +118,9 @@ const Navbar = () => {
               justifyContent: "space-around",
               alignItems: "center",
               backgroundColor: "#212121",
-              borderTopLeftRadius: 10,
-              borderTopRightRadius: 10,
+              // borderTopLeftRadius: 10,
+              // borderTopRightRadius: 10,
+              borderRadius: 10,
             }}
           >
             {navLinks.map((nav, i) => (

@@ -117,15 +117,14 @@ const Dashboard = () => {
         </Typography>
       </Box>
 
-      <ScoreComp />
-      {/* <Box
+      <Box
         display={"flex"}
         flexDirection="row"
         justifyContent={"space-around"}
         alignItems={"center"}
         style={{
           borderRadius: "22px",
-          paddingTop: 10,
+          paddingTop: 30,
           paddingBottom: 10,
         }}
       >
@@ -147,7 +146,7 @@ const Dashboard = () => {
               marginTop: "10px",
             }}
           >
-            133
+            0
           </Typography>
           <Typography
             style={{
@@ -157,11 +156,11 @@ const Dashboard = () => {
               fontSize: 14,
               lineHeight: "110%",
               textAlign: "center",
-              color: "#ffffff",
+              color: "#64FF99",
               marginTop: "10px",
             }}
           >
-            Tasks completed
+            Tasks
           </Typography>
         </Box>
         <Box
@@ -182,7 +181,7 @@ const Dashboard = () => {
               marginTop: "10px",
             }}
           >
-            10
+            $0
           </Typography>
           <Typography
             style={{
@@ -192,26 +191,26 @@ const Dashboard = () => {
               fontSize: 14,
               lineHeight: "110%",
               textAlign: "center",
-              color: "#ffffff",
+              color: "#64FF99",
               marginTop: "10px",
             }}
           >
             Revenue
           </Typography>
         </Box>
-      </Box> */}
+      </Box>
       <Box
         display={"flex"}
         flexDirection="column"
         justifyContent={"center"}
         alignItems={"center"}
-        mt={4}
+        mt={5}
       >
         <Button
           style={{
             width: "80%",
             fontFamily: "Rubik",
-            fontWeight: 400,
+            fontWeight: 500,
             fontSize: 16,
             lineHeight: "110%",
             textAlign: "center",
@@ -229,9 +228,11 @@ const Dashboard = () => {
               width: 30,
               height: 30,
               objectFit: "contain",
+              marginRight: 10,
             }}
           />{" "}
-          Connect your wallet
+          wallet{" "}
+          <span style={{ fontSize: 12, paddingLeft: 5 }}>(Coming soon)</span>
         </Button>
       </Box>
     </Box>

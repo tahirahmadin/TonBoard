@@ -48,6 +48,15 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root" class="root"></div>
+    <div id="root"></div>
+
+    <script>
+      const documentHeight = () => {
+        const doc = document.documentElement;
+        doc.style.setProperty("--doc-height", `${window.innerHeight}px`);
+      };
+      window.addEventListener("resize", documentHeight);
+      documentHeight();
+    </script>
   </body>
 </html>
