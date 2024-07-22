@@ -158,9 +158,7 @@ const SingleTask = ({
       style={{
         width: "100%",
         minHeight: "55.86px",
-        background: background
-          ? background
-          : "linear-gradient(271.44deg, #7848FF 0.29%, #346DFF 98.45%)",
+        background: "linear-gradient(271.44deg, #212121 0.59%, #000000 98.45%)",
         border: "0.498756px solid #FFFFFF",
         borderRadius: "12px",
         position: "relative",
@@ -175,7 +173,7 @@ const SingleTask = ({
           fontWeight: 700,
           fontSize: "18px",
           lineHeight: "21px",
-          color: "#FFFFFF",
+          color: "#64FF99",
         }}
       >
         {name}
@@ -184,7 +182,7 @@ const SingleTask = ({
         style={{
           width: currentTaskStatus() === 2 ? "97px" : "83px",
           height: "22px",
-          background: currentTaskStatus() === 2 ? "#018724" : "#FAFF00",
+          background: currentTaskStatus() === 2 ? "#018724" : "#ffffff",
           borderRadius: "8px",
 
           fontWeight: 500,
@@ -232,8 +230,6 @@ const SingleTask = ({
 const SingleNonSpecialTask = ({
   taskId,
   name,
-  index,
-  taskNumber,
   points,
   pointsText,
   currentTabValue,
@@ -242,7 +238,7 @@ const SingleNonSpecialTask = ({
   const { claimLeagueLevel, claimReferralLevel } = useGameHook();
   const { accountSC } = useServerAuth();
   const score = useSelector((state) => state.ui.score);
-  const leagueLevel = useSelector((state) => state.ui.leagueLevel);
+
   const leagueTasksStatus = useSelector((state) => state.ui.leagueTasksStatus);
   const refTasksStatus = useSelector((state) => state.ui.refTasksStatus);
   const referralCount = useSelector((state) => state.ui.referralCount);
@@ -263,28 +259,15 @@ const SingleNonSpecialTask = ({
   }, [taskId, currentTabValue, leagueTasksStatus, refTasksStatus]);
 
   let isClaimableStatus = () => {
-    if (currentTabValue === 1) {
-      return score >= LEAGUE_LEVEL_DATA[taskId + 1].tapsRequired;
-    }
     return referralCount >= REFERRAL_TASKS_DATA[taskId].referralRequired;
   };
 
   // Claim Rewards
   const onClickClaim = async () => {
-    // Update status to progress
-    let totalLevels = LEAGUE_LEVEL_DATA.length;
-    if (currentTabValue === 1 && score >= points && leagueLevel < totalLevels) {
-      await claimLeagueLevel(taskId);
-      var tempArray = [...leagueTasksStatus];
-      tempArray[taskId] = 2;
-      await dispatch(updateLeagueTaskStatusState(tempArray));
-    }
-    if (currentTabValue === 2) {
-      await claimReferralLevel(points);
-      var tempArray = [...refTasksStatus];
-      tempArray[taskId] = 2;
-      await dispatch(updateRefTaskStatusState(tempArray));
-    }
+    await claimReferralLevel(points);
+    var tempArray = [...refTasksStatus];
+    tempArray[taskId] = 2;
+    await dispatch(updateRefTaskStatusState(tempArray));
   };
 
   return (
@@ -292,7 +275,7 @@ const SingleNonSpecialTask = ({
       style={{
         width: "100%",
         minHeight: "55.86px",
-        background: "linear-gradient(271.44deg, #7848FF 0.29%, #346DFF 98.45%)",
+        background: "linear-gradient(271.44deg, #212121 0.59%, #000000 98.45%)",
         border: "0.498756px solid #FFFFFF",
         borderRadius: "12px",
         position: "relative",
@@ -312,24 +295,14 @@ const SingleNonSpecialTask = ({
         }}
       >
         {name}
-
-        {currentTabValue === 1 && (
-          <ProgressBar
-            value={(100 * score) / points}
-            containerStyle={{ height: 9, margin: "3px 0 10px" }}
-            outerStyle={{ minHeight: 9 }}
-            innerStyle={{ height: 5 }}
-          />
-        )}
       </Box>
 
       <Typography
         style={{
           width: currentTaskStatus === 2 ? "97px" : "83px",
           height: "22px",
-          background: currentTaskStatus === 2 ? "#018724" : "#FAFF00",
+          background: currentTaskStatus === 2 ? "#018724" : "#ffffff",
           borderRadius: "8px",
-
           fontWeight: 500,
           fontSize: "12px",
           display: "flex",
@@ -361,7 +334,7 @@ const SingleNonSpecialTask = ({
   );
 };
 const Tasks = () => {
-  const topTabs = ["Social", "League", "Referrals"];
+  const topTabs = ["Social", "Referrals"];
 
   const { viberate } = useTelegramSDK();
   const { gameScore } = useGameHook();
@@ -404,7 +377,7 @@ const Tasks = () => {
         >
           <ScoreComp />
 
-          <Link to="/league">
+          {/* <Link to="/league">
             <Box
               style={{
                 width: "max-content",
@@ -465,7 +438,7 @@ const Tasks = () => {
               </Box>
               <KeyboardArrowRight style={{ color: "#fff" }} />
             </Box>
-          </Link>
+          </Link> */}
         </Box>
 
         <Box
@@ -530,7 +503,7 @@ const Tasks = () => {
             style={{
               width: "100%",
               height: "100%",
-              background: "linear-gradient(180deg, #4886FF 0%, #03429F 100%)",
+              background: "linear-gradient(180deg, #64FF99 0%, #03429F 100%)",
               borderRadius: "32px 32px 0px 0px",
               padding: "1px 1px 0",
 

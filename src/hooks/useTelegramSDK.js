@@ -17,7 +17,7 @@ const useTelegramSDK = (hookInit = false) => {
 
       setTimeout(() => {
         console.log("Loaded");
-        setUserID(1026953902);
+        setUserID(1118251880);
       }, 2000);
       // WebApp.initParams({ tgWebVersion: "6.9" });
     }
