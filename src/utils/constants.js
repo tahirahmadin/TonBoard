@@ -149,12 +149,12 @@ export const REFERRAL_COUNT_DATA = [1, 3, 10, 25, 50, 100];
 export const SPECIAL_TASKS_DATA = [
   {
     id: 0,
-    title: "Follow TaskDao on X",
+    title: "Follow Tasker on X",
     pointsText: "25K",
     points: 25000,
     taskNumber: 101,
     type: "SPECIAL",
-    url: "https://x.com/intent/follow?screen_name=gmgobbl",
+    url: "https://x.com/tahirahmadin",
   },
   {
     id: 1,
@@ -163,7 +163,7 @@ export const SPECIAL_TASKS_DATA = [
     points: 25000,
     taskNumber: 102,
     type: "SPECIAL",
-    url: "https://x.com/intent/like?tweet_id=1805921302760260012",
+    url: "https://x.com/tahirahmadin",
   },
   {
     id: 2,
@@ -172,7 +172,7 @@ export const SPECIAL_TASKS_DATA = [
     points: 50000,
     taskNumber: 103,
     type: "SPECIAL",
-    url: "https://x.com/intent/retweet?tweet_id=1805921302760260012",
+    url: "https://x.com/tahirahmadin",
   },
 ];
 
@@ -254,7 +254,6 @@ export const REFERRAL_TASKS_DATA = [
     pointsText: "2.5K",
     taskNumber: 301,
     type: "REFERRAL",
-    url: "https://x.com/intent/retweet?tweet_id=1805921302760260012",
   },
   {
     id: 1,
@@ -264,7 +263,6 @@ export const REFERRAL_TASKS_DATA = [
     points: 50000,
     taskNumber: 302,
     type: "REFERRAL",
-    url: "https://x.com/intent/retweet?tweet_id=1805921302760260012",
   },
   {
     id: 2,
@@ -274,7 +272,6 @@ export const REFERRAL_TASKS_DATA = [
     points: 200000,
     taskNumber: 303,
     type: "REFERRAL",
-    url: "https://x.com/intent/retweet?tweet_id=1805921302760260012",
   },
   {
     id: 3,
@@ -284,7 +281,6 @@ export const REFERRAL_TASKS_DATA = [
     points: 250000,
     taskNumber: 304,
     type: "REFERRAL",
-    url: "https://x.com/intent/retweet?tweet_id=1805921302760260012",
   },
   {
     id: 4,
@@ -294,7 +290,6 @@ export const REFERRAL_TASKS_DATA = [
     points: 300000,
     taskNumber: 305,
     type: "REFERRAL",
-    url: "https://x.com/intent/retweet?tweet_id=1805921302760260012",
   },
   {
     id: 5,
@@ -304,7 +299,6 @@ export const REFERRAL_TASKS_DATA = [
     points: 500000,
     taskNumber: 306,
     type: "REFERRAL",
-    url: "https://x.com/intent/retweet?tweet_id=1805921302760260012",
   },
 ];
 

@@ -14,6 +14,7 @@ import ScoreComp from "../components/Score";
 import TimerComp from "../components/TimerComp";
 import { QUIZ_DATA } from "../utils/constants";
 import { updateCurrentQueNo } from "../reducers/UiReducers";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -227,33 +228,35 @@ const QuizPage = () => {
                 {5 - currentQueNo}/5
               </Typography>
             </Box>
-            <Box
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src="https://cdn3d.iconscout.com/3d/premium/thumb/business-startup-5825143-4874125.png"
+            <Link to="/boost">
+              <Box
                 style={{
-                  width: 22,
-                  height: 22,
-                  objectFit: "contain",
-                }}
-              />
-
-              <Typography
-                style={{
-                  width: "100%",
-                  fontWeight: 600,
-                  fontSize: 16,
-                  color: "#ffffff",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                Boost
-              </Typography>
-            </Box>
+                <img
+                  src="https://cdn3d.iconscout.com/3d/premium/thumb/go-green-11413832-9197004.png?f=webp"
+                  style={{
+                    width: 22,
+                    height: 22,
+                    objectFit: "contain",
+                  }}
+                />
+
+                <Typography
+                  style={{
+                    width: "100%",
+                    fontWeight: 600,
+                    fontSize: 16,
+                    color: "#ffffff",
+                  }}
+                >
+                  Boost
+                </Typography>
+              </Box>
+            </Link>
           </Box>
         </Box>
       )}

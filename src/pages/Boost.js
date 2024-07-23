@@ -37,8 +37,8 @@ const BoosterCard = ({
     <Box
       style={{
         width: "100%",
-        height: 72,
-        minHeight: 72,
+        height: 64,
+        minHeight: 64,
         background:
           "linear-gradient(254.51deg, #00CCCC 5.63%, #009999 61.19%, #6666FF 116.96%)",
         borderRadius: "8px",
@@ -159,8 +159,11 @@ const BoosterCard = ({
                 {!isFull && (
                   <span>
                     <img
-                      src="https://cdn3d.iconscout.com/3d/premium/thumb/usd-coin-5839397-4884145.png?f=webp"
-                      style={{ width: 24, height: 24 }}
+                      src={
+                        "https://cdn3d.iconscout.com/3d/premium/thumb/dollar-coin-2997232-2516270.png?f=webp"
+                      }
+                      height={22}
+                      width={22}
                     />
                     {priceText}
                   </span>
@@ -244,7 +247,7 @@ const Boost = () => {
             color: "#ffffff",
           }}
         >
-          Boosters
+          Booster cards
         </Typography>
       </Box>
 

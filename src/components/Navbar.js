@@ -66,18 +66,18 @@ const Navbar = () => {
       name: "Quiz",
     },
     {
-      url: "/boost",
+      url: "/leader",
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/go-green-11413832-9197004.png?f=webp"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/silver-rank-badges-11275520-9023827.png?f=webp"
           }
           height={24}
           width={24}
         />
       ),
 
-      name: "Boost",
+      name: "Rankings",
     },
     {
       url: "/dashboard",

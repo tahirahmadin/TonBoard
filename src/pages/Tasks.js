@@ -1,42 +1,31 @@
 import React, { useMemo, useState } from "react";
-import Profile from "../components/Profile";
 import {
   Box,
   Button,
   CircularProgress,
+  Grow,
+  Slide,
   Typography,
   useMediaQuery,
+  Zoom,
 } from "@mui/material";
-import { KeyboardArrowRight } from "@mui/icons-material";
 import { useTheme } from "@mui/styles";
 import { useServerAuth } from "../hooks/useServerAuth";
-import { updateTaskStatusAPI } from "../actions/serverActions";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 import {
-  LEAGUE_LEVEL_DATA,
   LEAGUE_TASKS_DATA,
-  REFERRAL_COUNT_DATA,
   REFERRAL_TASKS_DATA,
   SPECIAL_TASKS_DATA,
 } from "../utils/constants";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import useGameHook from "../hooks/useGameHook";
 import SuccessSnackbar from "../components/SuccessSnackbar";
 import {
-  setSuccessPopup,
   updateSpecialTaskStatusState,
-  updateLeagueTaskStatusState,
   updateRefTaskStatusState,
 } from "../reducers/UiReducers";
-import ProgressBar from "../components/ProgressBar";
 import ScoreComp from "../components/Score";
-
-const tabs = [
-  { no: 0, name: "Special" },
-  { no: 1, name: "Leagues" },
-  { no: 2, name: "Ref Tasks" },
-];
+import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 
 const ActionButton = ({
   children,
@@ -103,10 +92,9 @@ const SingleTask = ({
   taskId,
   name,
   url,
-  taskNumber,
+
   points,
-  pointsText,
-  background,
+
   inProgress,
   setInProgress,
 }) => {
@@ -160,48 +148,47 @@ const SingleTask = ({
         minHeight: "55.86px",
         background:
           "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
-        border: "0.498756px solid #FFFFFF",
+        border: "1px solid #414141",
         borderRadius: "12px",
-        position: "relative",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0 15px",
+        padding: "5px 15px",
       }}
     >
-      <Typography
-        style={{
-          fontWeight: 700,
-          fontSize: "18px",
-          lineHeight: "21px",
-          color: "#64FF99",
-        }}
-      >
-        {name}
-      </Typography>
-      <Typography
-        style={{
-          width: currentTaskStatus() === 2 ? "97px" : "83px",
-          height: "22px",
-          background: currentTaskStatus() === 2 ? "#018724" : "#ffffff",
-          borderRadius: "8px",
-
-          fontWeight: 500,
-          fontSize: "12px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          color: currentTaskStatus() === 2 ? "#FAFF00" : "#000000",
-          position: "absolute",
-          bottom: -11,
-        }}
-      >
-        {currentTaskStatus() === 2 && (
-          <img src="/images/check.png" style={{ width: 16, height: 16 }} />
-        )}
-        +{pointsText} Points
-      </Typography>
+      <Box>
+        <Typography
+          style={{
+            fontWeight: 700,
+            fontSize: "18px",
+            lineHeight: "21px",
+            color: "#64FF99",
+          }}
+        >
+          {name}
+        </Typography>
+        <Typography
+          style={{
+            borderRadius: "8px",
+            fontWeight: 500,
+            fontSize: "12px",
+            textAlign: "left",
+            color: currentTaskStatus() === 2 ? "#FAFF00" : "#ffffff",
+          }}
+        >
+          {currentTaskStatus() === 2 && (
+            <img src="/images/check.png" style={{ width: 16, height: 16 }} />
+          )}
+          <img
+            src={
+              "https://cdn3d.iconscout.com/3d/premium/thumb/dollar-coin-2997232-2516270.png?f=webp"
+            }
+            height={22}
+            width={22}
+          />{" "}
+          +{getNumbersInFormatOnlyMillions(points)}
+        </Typography>
+      </Box>
 
       {currentTaskStatus() === 0 && (
         <ActionButton onClick={() => onClickAction(taskId)}>Start</ActionButton>
@@ -228,17 +215,11 @@ const SingleTask = ({
   );
 };
 
-const SingleNonSpecialTask = ({
-  taskId,
-  name,
-  points,
-  pointsText,
-  currentTabValue,
-}) => {
+const SingleNonSpecialTask = ({ taskId, name, points }) => {
   const dispatch = useDispatch();
-  const { claimLeagueLevel, claimReferralLevel } = useGameHook();
+
+  const { claimReferralLevel } = useGameHook();
   const { accountSC } = useServerAuth();
-  const score = useSelector((state) => state.ui.score);
 
   const leagueTasksStatus = useSelector((state) => state.ui.leagueTasksStatus);
   const refTasksStatus = useSelector((state) => state.ui.refTasksStatus);
@@ -246,18 +227,14 @@ const SingleNonSpecialTask = ({
 
   let currentTaskStatus = useMemo(() => {
     let tempValue = 0;
-    if (currentTabValue === 1) {
-      tempValue = leagueTasksStatus[taskId];
-    } else {
-      tempValue = refTasksStatus[taskId];
-    }
+    tempValue = refTasksStatus[taskId];
 
     if (tempValue === undefined) {
       return 0;
     } else {
       return tempValue;
     }
-  }, [taskId, currentTabValue, leagueTasksStatus, refTasksStatus]);
+  }, [taskId, leagueTasksStatus, refTasksStatus]);
 
   let isClaimableStatus = () => {
     return referralCount >= REFERRAL_TASKS_DATA[taskId].referralRequired;
@@ -278,49 +255,48 @@ const SingleNonSpecialTask = ({
         minHeight: "55.86px",
         background:
           "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
-        border: "0.498756px solid #FFFFFF",
+        border: "1px solid #414141",
         borderRadius: "12px",
-        position: "relative",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0 15px",
+        padding: "5px 15px",
       }}
     >
-      <Box
-        style={{
-          width: "70%",
-          fontWeight: 700,
-          fontSize: "18px",
-          lineHeight: "21px",
-          color: "#64FF99",
-        }}
-      >
-        {name}
+      <Box>
+        <Typography
+          style={{
+            fontWeight: 700,
+            fontSize: "18px",
+            lineHeight: "21px",
+            color: "#64FF99",
+          }}
+        >
+          {name}
+        </Typography>
+        <Typography
+          style={{
+            borderRadius: "8px",
+            fontWeight: 500,
+            fontSize: "12px",
+            textAlign: "left",
+            color: currentTaskStatus === 2 ? "#FAFF00" : "#ffffff",
+          }}
+        >
+          {currentTaskStatus === 2 && (
+            <img src="/images/check.png" style={{ width: 16, height: 16 }} />
+          )}
+          <img
+            src={
+              "https://cdn3d.iconscout.com/3d/premium/thumb/dollar-coin-2997232-2516270.png?f=webp"
+            }
+            height={22}
+            width={22}
+          />{" "}
+          +{getNumbersInFormatOnlyMillions(points)}
+        </Typography>
       </Box>
 
-      <Typography
-        style={{
-          width: currentTaskStatus === 2 ? "97px" : "83px",
-          height: "22px",
-          background: currentTaskStatus === 2 ? "#018724" : "#ffffff",
-          borderRadius: "8px",
-          fontWeight: 500,
-          fontSize: "12px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          color: currentTaskStatus === 2 ? "#FAFF00" : "#000000",
-          position: "absolute",
-          bottom: -11,
-        }}
-      >
-        {currentTaskStatus === 2 && (
-          <img src="/images/check.png" style={{ width: 16, height: 16 }} />
-        )}
-        +{pointsText} Points
-      </Typography>
       {currentTaskStatus === 2 && (
         <ActionButton disabled={true}>Claimed</ActionButton>
       )}
@@ -359,255 +335,187 @@ const Tasks = () => {
         zIndex: 0,
       }}
     >
-      <Box>
-        {/* <Profile /> */}
-        <SuccessSnackbar text="Reward claimed succesfully!" />
+      <Zoom direction="down" in={true}>
+        <Box>
+          <SuccessSnackbar text="Reward claimed succesfully!" />
 
-        <Box
-          style={{
-            width: "90%",
-            height: "87px",
-            padding: "1px",
+          <Box
+            pt={5}
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src={
+                "https://static.vecteezy.com/system/resources/previews/008/854/703/original/dollar-coin-3d-illustration-png.png"
+              }
+              height={"10%"}
+              width={"40%"}
+              style={{ filter: "drop-shadow(0 -6mm 14mm #BC831E)" }}
+            />
+            <Typography
+              mt={1}
+              style={{
+                width: "100%",
+                fontFamily: "Rubik",
+                fontWeight: 700,
+                fontSize: 28,
+                lineHeight: "110%",
+                textAlign: "center",
+                color: "#ffffff",
+              }}
+            >
+              Earn more points
+            </Typography>
+          </Box>
 
-            marginLeft: "5%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            gap: "5px",
-          }}
-        >
-          <ScoreComp />
-
-          {/* <Link to="/league">
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              backgroundColor: "transparent",
+              marginTop: 14,
+            }}
+          >
             <Box
               style={{
-                width: "max-content",
-                minWidth: 115,
-                height: 28,
-                background:
-                  leagueLevel === 1
-                    ? "#9EAB08"
-                    : leagueLevel === 2
-                    ? "#1CB172"
-                    : leagueLevel === 3
-                    ? "#0DB2BC"
-                    : leagueLevel === 4
-                    ? "#5339EF"
-                    : leagueLevel === 5
-                    ? "#AA2CD6"
-                    : leagueLevel === 6
-                    ? "#D62C88"
-                    : leagueLevel === 7
-                    ? "#FF5C00"
-                    : leagueLevel === 8
-                    ? "#D1BD07"
-                    : leagueLevel === 9
-                    ? "#59B200"
-                    : "#D6672C",
+                width: "90%",
+                height: 45,
+                background: "#000",
                 display: "flex",
+                justifyContent: "space-around",
                 alignItems: "center",
-                justifyContent: "space-between",
-                paddingLeft: "5px",
-                borderRadius: "8px",
+                backgroundColor: "#212121",
+                borderRadius: 10,
+                paddingLeft: 5,
+                paddingRight: 5,
+              }}
+            >
+              {topTabs.map((ele, i) => (
+                <Button
+                  key={i}
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    position: "relative",
+                    backgroundColor: tabValue === i ? "black" : "transparent",
+                    borderRadius: 10,
+                    height: 40,
+                  }}
+                  onClick={() => {
+                    viberate("light");
+                    setTabValue(i);
+                  }}
+                >
+                  <Typography
+                    variant="body1"
+                    textTransform={"Capitalize"}
+                    style={{
+                      fontWeight: tabValue === i ? 700 : 400,
+                      fontSize: 11,
+                      color: tabValue === i ? "#64FF99" : "#FFFFFF",
+                    }}
+                  >
+                    {ele}
+                  </Typography>
+                </Button>
+              ))}
+            </Box>
+          </Box>
+          {tabValue === 0 && (
+            <Box
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "32px 32px 0px 0px",
+                padding: "1px 1px 0",
+                zIndex: 1,
               }}
             >
               <Box
                 style={{
                   width: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "2px",
 
-                  fontWeight: 700,
-                  fontSize: "14px",
-                  lineHeight: "16px",
-                  color: "#FFFFFF",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                <img
-                  src={LEAGUE_LEVEL_DATA[leagueLevel].img}
-                  style={{
-                    width: 26,
-                    height: 24,
-                    objectFit: "contain",
-                    transform:
-                      leagueLevel % 2 == 0 ? "rotate(-15deg)" : "rotate(15deg)",
-                  }}
-                />
-                {LEAGUE_LEVEL_DATA[leagueLevel].title}
-              </Box>
-              <KeyboardArrowRight style={{ color: "#fff" }} />
-            </Box>
-          </Link> */}
-        </Box>
-
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            backgroundColor: "transparent",
-            marginBottom: 20,
-          }}
-        >
-          <Box
-            style={{
-              marginTop: 10,
-              width: "90%",
-              height: 45,
-              background: "#000",
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "center",
-              backgroundColor: "#212121",
-              borderRadius: 10,
-              paddingLeft: 5,
-              paddingRight: 5,
-            }}
-          >
-            {topTabs.map((ele, i) => (
-              <Button
-                key={i}
-                style={{
-                  width: "100%",
+                  background: "#161811",
+                  borderRadius: "32px 32px 0px 0px",
                   display: "flex",
-                  justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                  position: "relative",
-                  backgroundColor: tabValue === i ? "black" : "transparent",
-                  borderRadius: 10,
-                  height: 40,
-                }}
-                onClick={() => {
-                  viberate("light");
-                  setTabValue(i);
+                  gap: "18px",
+                  padding: "25px 5%",
+                  overflowY: "auto",
                 }}
               >
-                <Typography
-                  variant="body1"
-                  textTransform={"Capitalize"}
-                  style={{
-                    fontWeight: tabValue === i ? 700 : 400,
-                    fontSize: 11,
-                    color: tabValue === i ? "#64FF99" : "#FFFFFF",
-                  }}
-                >
-                  {ele}
-                </Typography>
-              </Button>
-            ))}
-          </Box>
-        </Box>
-        {tabValue === 0 && (
-          <Box
-            style={{
-              width: "100%",
-              height: "100%",
-              background: "linear-gradient(180deg, #64FF99 0%, #03429F 100%)",
-              borderRadius: "32px 32px 0px 0px",
-              padding: "1px 1px 0",
-              zIndex: 1,
-            }}
-          >
-            <Box
-              style={{
-                width: "100%",
-                height: "calc(100vh - 200px)",
-                background: "#161811",
-                borderRadius: "32px 32px 0px 0px",
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "column",
-                gap: "18px",
-                padding: "25px 5%",
-                overflowY: "auto",
-              }}
-            >
-              {SPECIAL_TASKS_DATA.map((ele, i) => (
-                <SingleTask
-                  key={i}
-                  taskId={ele.id}
-                  taskNumber={ele.taskNumber}
-                  name={ele.title}
-                  url={ele.url}
-                  points={ele.points}
-                  pointsText={ele.pointsText}
-                  inProgress={inProgress}
-                  setInProgress={setInProgress}
-                />
-              ))}
-              {SPECIAL_TASKS_DATA.length === 0 && (
-                <Box style={{ textAlign: "center" }}>No tasks found</Box>
-              )}
-            </Box>
-          </Box>
-        )}
-        {tabValue === 1 && (
-          <Box
-            style={{
-              width: "100%",
-              height: "100%",
-              background: "linear-gradient(180deg, #64FF99 0%, #03429F 100%)",
-              borderRadius: "32px 32px 0px 0px",
-              padding: "1px 1px 0",
-              zIndex: 1,
-            }}
-          >
-            <Box
-              style={{
-                width: "100%",
-                height: "calc(100vh - 203px)",
-                background: "#161811",
-                borderRadius: "32px 32px 0px 0px",
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "column",
-                gap: "18px",
-                padding: "25px 5%",
-                overflowY: "auto",
-                paddingBottom: 150,
-              }}
-            >
-              {tabValue === 1 &&
-                LEAGUE_TASKS_DATA.map((ele, i) => {
-                  return (
-                    leagueTasksStatus[ele.id] !== 2 && (
-                      <SingleNonSpecialTask
-                        key={i}
-                        index={i}
-                        taskId={ele.id}
-                        taskNumber={ele.taskNumber}
-                        name={ele.title}
-                        pointsText={ele.pointsText}
-                        points={ele.points}
-                        currentTabValue={tabValue}
-                      />
-                    )
-                  );
-                })}
-              {tabValue === 2 &&
-                REFERRAL_TASKS_DATA.map((ele, i) => (
-                  <SingleNonSpecialTask
+                {SPECIAL_TASKS_DATA.map((ele, i) => (
+                  <SingleTask
                     key={i}
-                    index={i}
                     taskId={ele.id}
                     taskNumber={ele.taskNumber}
                     name={ele.title}
+                    url={ele.url}
                     points={ele.points}
-                    pointsText={ele.pointsText}
-                    currentTabValue={tabValue}
+                    inProgress={inProgress}
+                    setInProgress={setInProgress}
                   />
                 ))}
-
-              {REFERRAL_TASKS_DATA.length === 0 && (
-                <Box style={{ textAlign: "center" }}>No tasks found</Box>
-              )}
+                {SPECIAL_TASKS_DATA.length === 0 && (
+                  <Box style={{ textAlign: "center" }}>No tasks found</Box>
+                )}
+              </Box>
             </Box>
-          </Box>
-        )}
-      </Box>
+          )}
+          {tabValue === 1 && (
+            <Box
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "32px 32px 0px 0px",
+                padding: "1px 1px 0",
+                zIndex: 1,
+              }}
+            >
+              <Box
+                style={{
+                  width: "100%",
+                  background: "#161811",
+                  borderRadius: "32px 32px 0px 0px",
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  gap: "18px",
+                  padding: "25px 5%",
+                  overflowY: "auto",
+                  paddingBottom: 150,
+                }}
+              >
+                {REFERRAL_TASKS_DATA.map((ele, i) => {
+                  return (
+                    <SingleNonSpecialTask
+                      key={i}
+                      index={i}
+                      taskId={ele.id}
+                      taskNumber={ele.taskNumber}
+                      name={ele.title}
+                      points={ele.points}
+                    />
+                  );
+                })}
+
+                {REFERRAL_TASKS_DATA.length === 0 && (
+                  <Box style={{ textAlign: "center" }}>No tasks found</Box>
+                )}
+              </Box>
+            </Box>
+          )}
+        </Box>
+      </Zoom>
     </Box>
   );
 };
