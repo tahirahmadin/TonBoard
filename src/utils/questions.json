@@ -1,0 +1,2120 @@
+[
+  {
+    "id": 0,
+    "title": "Who invented Bitcoin?",
+    "option1": "Satoshi Nakamoto",
+    "option2": "Vitalik Buterin",
+    "correct": 1
+  },
+  {
+    "id": 1,
+    "title": "When was Bitcoin created?",
+    "option1": "2008",
+    "option2": "2010",
+    "correct": 1
+  },
+  {
+    "id": 2,
+    "title": "What is the maximum supply of Bitcoin?",
+    "option1": "21 million",
+    "option2": "100 million",
+    "correct": 1
+  },
+  {
+    "id": 3,
+    "title": "What is Bitcoin's smallest unit called?",
+    "option1": "Microbitcoin",
+    "option2": "Satoshi",
+    "correct": 2
+  },
+  {
+    "id": 4,
+    "title": "Which technology underpins Bitcoin?",
+    "option1": "Blockchain",
+    "option2": "Cloud computing",
+    "correct": 1
+  },
+  {
+    "id": 5,
+    "title": "What is the process of verifying Bitcoin transactions called?",
+    "option1": "Mining",
+    "option2": "Harvesting",
+    "correct": 1
+  },
+  {
+    "id": 6,
+    "title": "What is the reward for mining a new block in Bitcoin?",
+    "option1": "50 BTC",
+    "option2": "6.25 BTC",
+    "correct": 2
+  },
+  {
+    "id": 7,
+    "title": "Which of the following is a Bitcoin wallet?",
+    "option1": "Electrum",
+    "option2": "PayPal",
+    "correct": 1
+  },
+  {
+    "id": 8,
+    "title": "What is the purpose of a Bitcoin address?",
+    "option1": "To send and receive Bitcoins",
+    "option2": "To store transaction history",
+    "correct": 1
+  },
+  {
+    "id": 9,
+    "title": "What is a private key in Bitcoin?",
+    "option1": "A public address for receiving Bitcoin",
+    "option2": "A secret key to access Bitcoin funds",
+    "correct": 2
+  },
+  {
+    "id": 10,
+    "title": "What does 'HODL' stand for in the Bitcoin community?",
+    "option1": "Hold On for Dear Life",
+    "option2": "Hold Only During Lows",
+    "correct": 1
+  },
+  {
+    "id": 11,
+    "title": "What is the halving event in Bitcoin?",
+    "option1": "Reduction of transaction fees",
+    "option2": "Halving of the block reward",
+    "correct": 2
+  },
+  {
+    "id": 12,
+    "title": "What is a Bitcoin fork?",
+    "option1": "A split in the blockchain",
+    "option2": "A method to secure Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 13,
+    "title": "Which of these is a Bitcoin fork?",
+    "option1": "Bitcoin Cash",
+    "option2": "Ethereum",
+    "correct": 1
+  },
+  {
+    "id": 14,
+    "title": "What is a Bitcoin exchange?",
+    "option1": "A platform to buy and sell Bitcoin",
+    "option2": "A place to store Bitcoin securely",
+    "correct": 1
+  },
+  {
+    "id": 15,
+    "title": "What does 'Satoshi' refer to?",
+    "option1": "The smallest unit of Bitcoin",
+    "option2": "A Bitcoin transaction fee",
+    "correct": 1
+  },
+  {
+    "id": 16,
+    "title": "Which is the first Bitcoin transaction?",
+    "option1": "Purchase of pizza",
+    "option2": "Buying a car",
+    "correct": 1
+  },
+  {
+    "id": 17,
+    "title": "What is a Bitcoin node?",
+    "option1": "A computer that participates in the Bitcoin network",
+    "option2": "A place to mine Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 18,
+    "title": "What is the purpose of Bitcoin mining?",
+    "option1": "To secure the network and process transactions",
+    "option2": "To create new blockchain addresses",
+    "correct": 1
+  },
+  {
+    "id": 19,
+    "title": "Which organization manages Bitcoin?",
+    "option1": "Bitcoin Foundation",
+    "option2": "No central authority",
+    "correct": 2
+  },
+  {
+    "id": 20,
+    "title": "What is Bitcoin's market cap?",
+    "option1": "Total value of all Bitcoins in circulation",
+    "option2": "The highest price Bitcoin has reached",
+    "correct": 1
+  },
+  {
+    "id": 21,
+    "title": "What does 'decentralized' mean in the context of Bitcoin?",
+    "option1": "Controlled by multiple central banks",
+    "option2": "Not controlled by any single entity",
+    "correct": 2
+  },
+  {
+    "id": 22,
+    "title": "How often are Bitcoin blocks created?",
+    "option1": "Every 10 minutes",
+    "option2": "Every 30 minutes",
+    "correct": 1
+  },
+  {
+    "id": 23,
+    "title": "What is a Bitcoin address?",
+    "option1": "A public key used to receive Bitcoin",
+    "option2": "A private key for signing transactions",
+    "correct": 1
+  },
+  {
+    "id": 24,
+    "title": "What does the term 'fiat currency' refer to?",
+    "option1": "Government-issued currency",
+    "option2": "Cryptocurrency",
+    "correct": 1
+  },
+  {
+    "id": 25,
+    "title": "Which famous quote is embedded in Bitcoin's genesis block?",
+    "option1": "Chancellor on brink of second bailout for banks",
+    "option2": "In cryptography we trust",
+    "correct": 1
+  },
+  {
+    "id": 26,
+    "title": "What is Bitcoin's ticker symbol?",
+    "option1": "BTC",
+    "option2": "BCH",
+    "correct": 1
+  },
+  {
+    "id": 27,
+    "title": "Who verifies Bitcoin transactions?",
+    "option1": "Miners",
+    "option2": "Banks",
+    "correct": 1
+  },
+  {
+    "id": 28,
+    "title": "What does a Bitcoin transaction fee do?",
+    "option1": "Incentivizes miners to process transactions",
+    "option2": "Reduces the total supply of Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 29,
+    "title": "What is a Bitcoin whitepaper?",
+    "option1": "A document outlining Bitcoin's protocol and vision",
+    "option2": "A legal document for buying Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 30,
+    "title": "Which year did Bitcoin reach its first peak price of $20,000?",
+    "option1": "2017",
+    "option2": "2015",
+    "correct": 1
+  },
+  {
+    "id": 31,
+    "title": "What does 'double spending' mean in Bitcoin?",
+    "option1": "Spending the same Bitcoin twice",
+    "option2": "Sending Bitcoin to two different addresses simultaneously",
+    "correct": 1
+  },
+  {
+    "id": 32,
+    "title": "What is a 'hard fork' in the context of Bitcoin?",
+    "option1": "A permanent split in the blockchain",
+    "option2": "A temporary network slowdown",
+    "correct": 1
+  },
+  {
+    "id": 33,
+    "title": "Which major retailer was among the first to accept Bitcoin?",
+    "option1": "Overstock.com",
+    "option2": "Amazon",
+    "correct": 1
+  },
+  {
+    "id": 34,
+    "title": "What is a Bitcoin 'whale'?",
+    "option1": "Someone who owns a large amount of Bitcoin",
+    "option2": "A miner with specialized hardware",
+    "correct": 1
+  },
+  {
+    "id": 35,
+    "title": "What does 'private key' enable you to do?",
+    "option1": "Access and spend your Bitcoin",
+    "option2": "Receive Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 36,
+    "title": "How can Bitcoin be stored securely?",
+    "option1": "Using a hardware wallet",
+    "option2": "Leaving it on an exchange",
+    "correct": 1
+  },
+  {
+    "id": 37,
+    "title": "What is a 'Bitcoin ATM'?",
+    "option1": "A kiosk that allows buying and selling Bitcoin",
+    "option2": "A machine that prints Bitcoin paper wallets",
+    "correct": 1
+  },
+  {
+    "id": 38,
+    "title": "What is the term for losing access to your Bitcoin due to a lost private key?",
+    "option1": "Unrecoverable loss",
+    "option2": "Burned Bitcoin",
+    "correct": 2
+  },
+  {
+    "id": 39,
+    "title": "Which country recognized Bitcoin as legal tender in 2021?",
+    "option1": "El Salvador",
+    "option2": "Japan",
+    "correct": 1
+  },
+  {
+    "id": 40,
+    "title": "What is a 'hot wallet'?",
+    "option1": "A wallet connected to the internet",
+    "option2": "A wallet stored offline",
+    "correct": 1
+  },
+  {
+    "id": 41,
+    "title": "What is a 'cold wallet'?",
+    "option1": "A wallet stored offline",
+    "option2": "A wallet connected to the internet",
+    "correct": 1
+  },
+  {
+    "id": 42,
+    "title": "What is 'Bitcoin Lightning Network'?",
+    "option1": "A layer-2 scaling solution for faster transactions",
+    "option2": "A new type of Bitcoin mining hardware",
+    "correct": 1
+  },
+  {
+    "id": 43,
+    "title": "What is 'SegWit' in Bitcoin?",
+    "option1": "A protocol upgrade to improve scalability",
+    "option2": "A new type of mining algorithm",
+    "correct": 1
+  },
+  {
+    "id": 44,
+    "title": "What does the term 'block size' refer to in Bitcoin?",
+    "option1": "The amount of data a block can contain",
+    "option2": "The time it takes to mine a block",
+    "correct": 1
+  },
+  {
+    "id": 45,
+    "title": "What is a 'Bitcoin block explorer'?",
+    "option1": "A tool to view Bitcoin transactions and blocks",
+    "option2": "A new type of Bitcoin mining software",
+    "correct": 1
+  },
+  {
+    "id": 46,
+    "title": "What is 'Bitcoin dominance'?",
+    "option1": "The ratio of Bitcoin's market cap to the total cryptocurrency market cap",
+    "option2": "The number of transactions per second",
+    "correct": 1
+  },
+  {
+    "id": 47,
+    "title": "What is 'Bitcoin maximalism'?",
+    "option1": "The belief that Bitcoin is the only cryptocurrency worth investing in",
+    "option2": "The practice of mining multiple cryptocurrencies",
+    "correct": 1
+  },
+  {
+    "id": 48,
+    "title": "What is the purpose of a 'Bitcoin faucet'?",
+    "option1": "To distribute small amounts of Bitcoin to new users",
+    "option2": "To increase mining rewards",
+    "correct": 1
+  },
+  {
+    "id": 49,
+    "title": "What does 'TA' stand for in Bitcoin trading?",
+    "option1": "Technical Analysis",
+    "option2": "Token Allocation",
+    "correct": 1
+  },
+
+  {
+    "id": 50,
+    "title": "What is a blockchain?",
+    "option1": "A decentralized ledger",
+    "option2": "A centralized database",
+    "correct": 1
+  },
+  {
+    "id": 51,
+    "title": "What is the first blockchain ever created?",
+    "option1": "Bitcoin",
+    "option2": "Ethereum",
+    "correct": 1
+  },
+  {
+    "id": 52,
+    "title": "What is a smart contract?",
+    "option1": "A self-executing contract with the terms directly written into code",
+    "option2": "A traditional paper contract",
+    "correct": 1
+  },
+  {
+    "id": 53,
+    "title": "Which blockchain introduced smart contracts?",
+    "option1": "Ethereum",
+    "option2": "Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 54,
+    "title": "What does 'decentralized' mean in blockchain?",
+    "option1": "Not controlled by any single entity",
+    "option2": "Controlled by a central authority",
+    "correct": 1
+  },
+  {
+    "id": 55,
+    "title": "What is a node in a blockchain network?",
+    "option1": "A computer that participates in the network",
+    "option2": "A type of cryptocurrency",
+    "correct": 1
+  },
+  {
+    "id": 56,
+    "title": "What is consensus in blockchain?",
+    "option1": "Agreement among nodes on the state of the blockchain",
+    "option2": "A type of smart contract",
+    "correct": 1
+  },
+  {
+    "id": 57,
+    "title": "What is a public blockchain?",
+    "option1": "A blockchain where anyone can join and participate",
+    "option2": "A blockchain controlled by a single entity",
+    "correct": 1
+  },
+  {
+    "id": 58,
+    "title": "What is a private blockchain?",
+    "option1": "A blockchain restricted to specific participants",
+    "option2": "A blockchain open to the public",
+    "correct": 1
+  },
+  {
+    "id": 59,
+    "title": "What is a blockchain fork?",
+    "option1": "A split in the blockchain creating two separate chains",
+    "option2": "A new type of consensus algorithm",
+    "correct": 1
+  },
+  {
+    "id": 60,
+    "title": "What is an ICO?",
+    "option1": "Initial Coin Offering",
+    "option2": "Initial Contract Offering",
+    "correct": 1
+  },
+  {
+    "id": 61,
+    "title": "What is a token in blockchain?",
+    "option1": "A digital asset built on a blockchain",
+    "option2": "A type of cryptographic key",
+    "correct": 1
+  },
+  {
+    "id": 62,
+    "title": "What does 'mining' mean in blockchain?",
+    "option1": "The process of validating transactions and adding them to the blockchain",
+    "option2": "Creating new blockchain addresses",
+    "correct": 1
+  },
+  {
+    "id": 63,
+    "title": "What is Proof of Work?",
+    "option1": "A consensus algorithm using computational effort",
+    "option2": "A method to store blockchain data",
+    "correct": 1
+  },
+  {
+    "id": 64,
+    "title": "What is Proof of Stake?",
+    "option1": "A consensus algorithm using the stake of participants",
+    "option2": "A method to encrypt blockchain data",
+    "correct": 1
+  },
+  {
+    "id": 65,
+    "title": "What is a blockchain explorer?",
+    "option1": "A tool to view blockchain transactions and blocks",
+    "option2": "A new type of cryptocurrency",
+    "correct": 1
+  },
+  {
+    "id": 66,
+    "title": "What is the primary function of a blockchain node?",
+    "option1": "To validate and relay transactions",
+    "option2": "To store user data",
+    "correct": 1
+  },
+  {
+    "id": 67,
+    "title": "What is a blockchain ledger?",
+    "option1": "A record of all transactions on the blockchain",
+    "option2": "A type of digital wallet",
+    "correct": 1
+  },
+  {
+    "id": 68,
+    "title": "What is an immutable ledger?",
+    "option1": "A ledger that cannot be altered",
+    "option2": "A ledger that is easily editable",
+    "correct": 1
+  },
+  {
+    "id": 69,
+    "title": "What is a decentralized application (dApp)?",
+    "option1": "An application that runs on a decentralized network",
+    "option2": "A traditional web application",
+    "correct": 1
+  },
+  {
+    "id": 70,
+    "title": "What is the purpose of a blockchain consensus algorithm?",
+    "option1": "To achieve agreement on the state of the blockchain",
+    "option2": "To create new blockchain nodes",
+    "correct": 1
+  },
+  {
+    "id": 71,
+    "title": "What is an NFT?",
+    "option1": "Non-Fungible Token",
+    "option2": "New Found Token",
+    "correct": 1
+  },
+  {
+    "id": 72,
+    "title": "What is the Ethereum Virtual Machine (EVM)?",
+    "option1": "A runtime environment for smart contracts",
+    "option2": "A type of mining hardware",
+    "correct": 1
+  },
+  {
+    "id": 73,
+    "title": "What is gas in the context of Ethereum?",
+    "option1": "A fee for executing transactions and smart contracts",
+    "option2": "A type of cryptocurrency",
+    "correct": 1
+  },
+  {
+    "id": 74,
+    "title": "What is a sidechain?",
+    "option1": "A separate blockchain that runs parallel to the main chain",
+    "option2": "A type of smart contract",
+    "correct": 1
+  },
+  {
+    "id": 75,
+    "title": "What is a blockchain oracle?",
+    "option1": "A service that provides external data to smart contracts",
+    "option2": "A type of consensus algorithm",
+    "correct": 1
+  },
+  {
+    "id": 76,
+    "title": "What is a blockchain protocol?",
+    "option1": "A set of rules governing the operation of the blockchain",
+    "option2": "A type of digital wallet",
+    "correct": 1
+  },
+  {
+    "id": 77,
+    "title": "What is a hash function in blockchain?",
+    "option1": "A function that converts input data into a fixed-size string of characters",
+    "option2": "A method to store blockchain data",
+    "correct": 1
+  },
+  {
+    "id": 78,
+    "title": "What is a Merkle tree in blockchain?",
+    "option1": "A structure that allows efficient and secure verification of data",
+    "option2": "A type of mining algorithm",
+    "correct": 1
+  },
+  {
+    "id": 79,
+    "title": "What is a decentralized autonomous organization (DAO)?",
+    "option1": "An organization governed by smart contracts and code",
+    "option2": "A traditional corporation",
+    "correct": 1
+  },
+  {
+    "id": 80,
+    "title": "What is the primary benefit of a blockchain?",
+    "option1": "Increased transparency and security",
+    "option2": "Centralized control",
+    "correct": 1
+  },
+  {
+    "id": 81,
+    "title": "What is the primary purpose of a blockchain consensus algorithm?",
+    "option1": "To prevent double spending and ensure network agreement",
+    "option2": "To create new digital assets",
+    "correct": 1
+  },
+  {
+    "id": 82,
+    "title": "What is the role of a validator in a Proof of Stake blockchain?",
+    "option1": "To validate transactions and propose new blocks",
+    "option2": "To mine new coins",
+    "correct": 1
+  },
+  {
+    "id": 83,
+    "title": "What is the primary function of a blockchain miner?",
+    "option1": "To validate and add transactions to the blockchain",
+    "option2": "To create new smart contracts",
+    "correct": 1
+  },
+  {
+    "id": 84,
+    "title": "What is a block in a blockchain?",
+    "option1": "A collection of transactions recorded on the blockchain",
+    "option2": "A unit of cryptocurrency",
+    "correct": 1
+  },
+  {
+    "id": 85,
+    "title": "What is a genesis block?",
+    "option1": "The first block in a blockchain",
+    "option2": "A block that contains smart contracts",
+    "correct": 1
+  },
+  {
+    "id": 86,
+    "title": "What is a decentralized finance (DeFi) application?",
+    "option1": "A financial application built on blockchain technology",
+    "option2": "A traditional banking application",
+    "correct": 1
+  },
+  {
+    "id": 87,
+    "title": "What is the primary use of a decentralized exchange (DEX)?",
+    "option1": "To facilitate peer-to-peer trading of cryptocurrencies",
+    "option2": "To store cryptocurrency",
+    "correct": 1
+  },
+  {
+    "id": 88,
+    "title": "What is the primary purpose of a blockchain explorer?",
+    "option1": "To view transactions and blocks on the blockchain",
+    "option2": "To mine new coins",
+    "correct": 1
+  },
+  {
+    "id": 89,
+    "title": "What is a permissionless blockchain?",
+    "option1": "A blockchain where anyone can join and participate",
+    "option2": "A blockchain with restricted access",
+    "correct": 1
+  },
+  {
+    "id": 90,
+    "title": "What is a permissioned blockchain?",
+    "option1": "A blockchain with restricted access",
+    "option2": "A blockchain where anyone can join and participate",
+    "correct": 1
+  },
+  {
+    "id": 91,
+    "title": "What is the purpose of a blockchain timestamp?",
+    "option1": "To record the exact time a transaction was added to the blockchain",
+    "option2": "To create new blocks",
+    "correct": 1
+  },
+  {
+    "id": 92,
+    "title": "What is a decentralized ledger?",
+    "option1": "A ledger that is distributed across multiple nodes",
+    "option2": "A ledger controlled by a single entity",
+    "correct": 1
+  },
+  {
+    "id": 93,
+    "title": "What is the primary benefit of a decentralized ledger?",
+    "option1": "Increased security and transparency",
+    "option2": "Centralized control",
+    "correct": 1
+  },
+  {
+    "id": 94,
+    "title": "What is a blockchain address?",
+    "option1": "A unique identifier used to receive and send transactions",
+    "option2": "A type of digital wallet",
+    "correct": 1
+  },
+  {
+    "id": 95,
+    "title": "What is the purpose of a blockchain address?",
+    "option1": "To receive and send transactions",
+    "option2": "To store digital assets",
+    "correct": 1
+  },
+  {
+    "id": 96,
+    "title": "What is a blockchain transaction?",
+    "option1": "An action that changes the state of the blockchain",
+    "option2": "A type of smart contract",
+    "correct": 1
+  },
+  {
+    "id": 97,
+    "title": "What is the primary purpose of a blockchain transaction?",
+    "option1": "To transfer digital assets",
+    "option2": "To create new blocks",
+    "correct": 1
+  },
+  {
+    "id": 98,
+    "title": "What is the primary function of a blockchain wallet?",
+    "option1": "To store and manage digital assets",
+    "option2": "To create new smart contracts",
+    "correct": 1
+  },
+  {
+    "id": 99,
+    "title": "What is a blockchain private key?",
+    "option1": "A secret key used to sign transactions",
+    "option2": "A type of cryptocurrency",
+    "correct": 1
+  },
+
+  {
+    "id": 100,
+    "title": "What is a Layer 1 blockchain?",
+    "option1": "A base layer blockchain that processes transactions and provides security",
+    "option2": "A secondary layer built on top of another blockchain",
+    "correct": 1
+  },
+  {
+    "id": 101,
+    "title": "Which of the following is an example of a Layer 1 blockchain?",
+    "option1": "Ethereum",
+    "option2": "Lightning Network",
+    "correct": 1
+  },
+  {
+    "id": 102,
+    "title": "What is the main purpose of Layer 1 solutions?",
+    "option1": "To enhance the base layer of the blockchain",
+    "option2": "To build applications on top of existing blockchains",
+    "correct": 1
+  },
+  {
+    "id": 103,
+    "title": "Which consensus algorithm is commonly used in Layer 1 blockchains?",
+    "option1": "Proof of Work",
+    "option2": "Proof of Stake",
+    "correct": 1
+  },
+  {
+    "id": 104,
+    "title": "What is a characteristic feature of Layer 1 blockchains?",
+    "option1": "They are independent blockchains",
+    "option2": "They rely on other blockchains for security",
+    "correct": 1
+  },
+  {
+    "id": 105,
+    "title": "Which of the following blockchains uses Proof of Stake as its consensus mechanism?",
+    "option1": "Ethereum 2.0",
+    "option2": "Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 106,
+    "title": "What is the purpose of a blockchain's native token?",
+    "option1": "To facilitate transactions and incentivize network participation",
+    "option2": "To store digital assets",
+    "correct": 1
+  },
+  {
+    "id": 107,
+    "title": "What is scalability in the context of Layer 1 blockchains?",
+    "option1": "The ability to process a large number of transactions",
+    "option2": "The ability to integrate with other blockchains",
+    "correct": 1
+  },
+  {
+    "id": 108,
+    "title": "What is the main challenge addressed by Layer 1 blockchains?",
+    "option1": "Scalability, security, and decentralization",
+    "option2": "Integration with traditional financial systems",
+    "correct": 1
+  },
+  {
+    "id": 109,
+    "title": "What is a hard fork in a Layer 1 blockchain?",
+    "option1": "A permanent divergence creating two separate chains",
+    "option2": "A minor software update",
+    "correct": 1
+  },
+  {
+    "id": 110,
+    "title": "Which blockchain is known for introducing smart contracts?",
+    "option1": "Ethereum",
+    "option2": "Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 111,
+    "title": "What is block time in a Layer 1 blockchain?",
+    "option1": "The time it takes to create a new block",
+    "option2": "The time it takes to validate a transaction",
+    "correct": 1
+  },
+  {
+    "id": 112,
+    "title": "Which Layer 1 blockchain is known for its focus on privacy?",
+    "option1": "Monero",
+    "option2": "Ethereum",
+    "correct": 1
+  },
+  {
+    "id": 113,
+    "title": "What is the role of validators in a Proof of Stake blockchain?",
+    "option1": "To validate transactions and propose new blocks",
+    "option2": "To mine new coins",
+    "correct": 1
+  },
+  {
+    "id": 114,
+    "title": "Which of the following is a key advantage of Layer 1 blockchains?",
+    "option1": "They provide the foundational security and transaction processing",
+    "option2": "They offer cross-chain interoperability",
+    "correct": 1
+  },
+  {
+    "id": 115,
+    "title": "What is the primary function of gas in a Layer 1 blockchain like Ethereum?",
+    "option1": "To measure the computational work required for transactions",
+    "option2": "To store transaction data",
+    "correct": 1
+  },
+  {
+    "id": 116,
+    "title": "What is the 'trilemma' in blockchain development?",
+    "option1": "The challenge of achieving scalability, security, and decentralization simultaneously",
+    "option2": "The difficulty of integrating blockchain with traditional systems",
+    "correct": 1
+  },
+  {
+    "id": 117,
+    "title": "Which Layer 1 blockchain is known for its high throughput and low transaction fees?",
+    "option1": "Solana",
+    "option2": "Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 118,
+    "title": "What is transaction finality in the context of Layer 1 blockchains?",
+    "option1": "The point at which a transaction cannot be reversed",
+    "option2": "The time taken to confirm a transaction",
+    "correct": 1
+  },
+  {
+    "id": 119,
+    "title": "Which Layer 1 blockchain uses the Delegated Proof of Stake (DPoS) consensus mechanism?",
+    "option1": "EOS",
+    "option2": "Bitcoin",
+    "correct": 1
+  },
+
+  {
+    "id": 120,
+    "title": "What is a Layer 2 solution?",
+    "option1": "A secondary framework built on top of a Layer 1 blockchain to improve scalability",
+    "option2": "A type of blockchain consensus algorithm",
+    "correct": 1
+  },
+  {
+    "id": 121,
+    "title": "Which of the following is an example of a Layer 2 solution?",
+    "option1": "Lightning Network",
+    "option2": "Ethereum",
+    "correct": 1
+  },
+  {
+    "id": 122,
+    "title": "What is the primary purpose of Layer 2 solutions?",
+    "option1": "To improve transaction throughput and reduce fees",
+    "option2": "To store digital assets",
+    "correct": 1
+  },
+  {
+    "id": 123,
+    "title": "What is a state channel in Layer 2 technology?",
+    "option1": "A method that allows multiple transactions off-chain before settling on-chain",
+    "option2": "A type of smart contract",
+    "correct": 1
+  },
+  {
+    "id": 124,
+    "title": "What is a sidechain in the context of Layer 2?",
+    "option1": "A separate blockchain that is interoperable with the main chain",
+    "option2": "A consensus algorithm",
+    "correct": 1
+  },
+  {
+    "id": 125,
+    "title": "Which blockchain uses the Lightning Network as a Layer 2 solution?",
+    "option1": "Bitcoin",
+    "option2": "Ethereum",
+    "correct": 1
+  },
+  {
+    "id": 126,
+    "title": "What is Plasma in Layer 2 solutions?",
+    "option1": "A framework for creating scalable applications on Ethereum",
+    "option2": "A type of digital wallet",
+    "correct": 1
+  },
+  {
+    "id": 127,
+    "title": "What is a rollup in Layer 2 technology?",
+    "option1": "A method that bundles multiple transactions into a single transaction",
+    "option2": "A type of consensus algorithm",
+    "correct": 1
+  },
+  {
+    "id": 128,
+    "title": "What is the difference between optimistic rollups and ZK rollups?",
+    "option1": "Optimistic rollups assume transactions are valid by default; ZK rollups use cryptographic proofs",
+    "option2": "Optimistic rollups use Proof of Work; ZK rollups use Proof of Stake",
+    "correct": 1
+  },
+  {
+    "id": 129,
+    "title": "Which Layer 2 solution focuses on improving Ethereum's scalability?",
+    "option1": "Optimistic Rollups",
+    "option2": "Bitcoin Lightning Network",
+    "correct": 1
+  },
+  {
+    "id": 130,
+    "title": "What is the primary advantage of using Layer 2 solutions?",
+    "option1": "Increased transaction throughput and reduced costs",
+    "option2": "Increased centralization",
+    "correct": 1
+  },
+  {
+    "id": 131,
+    "title": "What is the purpose of the Lightning Network?",
+    "option1": "To enable faster and cheaper Bitcoin transactions",
+    "option2": "To store digital assets",
+    "correct": 1
+  },
+  {
+    "id": 132,
+    "title": "What is a main characteristic of Layer 2 solutions?",
+    "option1": "They operate off-chain while relying on Layer 1 for security",
+    "option2": "They operate exclusively on-chain",
+    "correct": 1
+  },
+  {
+    "id": 133,
+    "title": "Which of the following describes a hybrid Layer 2 solution?",
+    "option1": "Combining features of different Layer 2 technologies like state channels and rollups",
+    "option2": "A consensus algorithm",
+    "correct": 1
+  },
+  {
+    "id": 134,
+    "title": "How do Layer 2 solutions enhance privacy?",
+    "option1": "By processing transactions off-chain",
+    "option2": "By storing data in a public ledger",
+    "correct": 1
+  },
+  {
+    "id": 135,
+    "title": "Which blockchain is primarily known for developing the Plasma framework?",
+    "option1": "Ethereum",
+    "option2": "Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 136,
+    "title": "What is the role of a validator in a Layer 2 solution?",
+    "option1": "To validate transactions and maintain the security of the Layer 2 network",
+    "option2": "To create new blocks in the Layer 1 blockchain",
+    "correct": 1
+  },
+  {
+    "id": 137,
+    "title": "What is the purpose of fraud proofs in optimistic rollups?",
+    "option1": "To detect and correct invalid transactions",
+    "option2": "To encrypt transaction data",
+    "correct": 1
+  },
+  {
+    "id": 138,
+    "title": "What is the main goal of Layer 2 scaling solutions?",
+    "option1": "To improve the scalability of Layer 1 blockchains",
+    "option2": "To replace Layer 1 blockchains",
+    "correct": 1
+  },
+  {
+    "id": 139,
+    "title": "Which of the following is an advantage of using ZK rollups?",
+    "option1": "High security through cryptographic proofs",
+    "option2": "High transaction costs",
+    "correct": 1
+  },
+
+  {
+    "id": 140,
+    "title": "What does NFT stand for?",
+    "option1": "Non-Fungible Token",
+    "option2": "New Financial Technology",
+    "correct": 1
+  },
+  {
+    "id": 141,
+    "title": "What is a key characteristic of an NFT?",
+    "option1": "It is unique and cannot be replicated",
+    "option2": "It is interchangeable with other tokens",
+    "correct": 1
+  },
+  {
+    "id": 142,
+    "title": "Which blockchain is most commonly used for NFTs?",
+    "option1": "Ethereum",
+    "option2": "Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 143,
+    "title": "What is the purpose of an NFT?",
+    "option1": "To represent ownership of a unique digital or physical asset",
+    "option2": "To facilitate peer-to-peer lending",
+    "correct": 1
+  },
+  {
+    "id": 144,
+    "title": "What is the ERC-721 standard?",
+    "option1": "A standard for creating non-fungible tokens on Ethereum",
+    "option2": "A standard for creating fungible tokens on Ethereum",
+    "correct": 1
+  },
+  {
+    "id": 145,
+    "title": "What is the difference between ERC-721 and ERC-1155?",
+    "option1": "ERC-721 is for single NFTs; ERC-1155 allows multiple token types",
+    "option2": "ERC-721 is for fungible tokens; ERC-1155 is for non-fungible tokens",
+    "correct": 1
+  },
+  {
+    "id": 146,
+    "title": "What is a digital collectible?",
+    "option1": "A unique digital item that can be bought, sold, or traded",
+    "option2": "A type of cryptocurrency",
+    "correct": 1
+  },
+  {
+    "id": 147,
+    "title": "What is the primary use of NFTs in gaming?",
+    "option1": "To represent in-game assets that players can own and trade",
+    "option2": "To create game levels",
+    "correct": 1
+  },
+  {
+    "id": 148,
+    "title": "What does it mean to 'mint' an NFT?",
+    "option1": "To create a new NFT and record it on the blockchain",
+    "option2": "To destroy an existing NFT",
+    "correct": 1
+  },
+  {
+    "id": 149,
+    "title": "Which of the following platforms is known for NFT art auctions?",
+    "option1": "OpenSea",
+    "option2": "Binance",
+    "correct": 1
+  },
+  {
+    "id": 150,
+    "title": "What is a smart contract in the context of NFTs?",
+    "option1": "A self-executing contract with the terms directly written into code",
+    "option2": "A legal document",
+    "correct": 1
+  },
+  {
+    "id": 151,
+    "title": "How can NFTs provide royalties to creators?",
+    "option1": "By including royalty clauses in the smart contract",
+    "option2": "By charging transaction fees",
+    "correct": 1
+  },
+  {
+    "id": 152,
+    "title": "What is the purpose of a digital wallet for NFTs?",
+    "option1": "To store and manage NFTs and other cryptocurrencies",
+    "option2": "To mine new NFTs",
+    "correct": 1
+  },
+  {
+    "id": 153,
+    "title": "What is an NFT marketplace?",
+    "option1": "A platform where users can buy, sell, and trade NFTs",
+    "option2": "A platform for exchanging cryptocurrencies",
+    "correct": 1
+  },
+  {
+    "id": 154,
+    "title": "What is 'tokenization' in the context of NFTs?",
+    "option1": "The process of converting an asset into a token on the blockchain",
+    "option2": "The process of validating transactions",
+    "correct": 1
+  },
+  {
+    "id": 155,
+    "title": "Which of the following is an example of a virtual world using NFTs?",
+    "option1": "Decentraland",
+    "option2": "Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 156,
+    "title": "What is the main advantage of NFTs for artists?",
+    "option1": "They can sell their digital art directly to buyers without intermediaries",
+    "option2": "They can use NFTs to create physical art",
+    "correct": 1
+  },
+  {
+    "id": 157,
+    "title": "What is a 'gas fee' in the context of NFTs?",
+    "option1": "A transaction fee required to mint or transfer NFTs on the blockchain",
+    "option2": "A fee for storing NFTs",
+    "correct": 1
+  },
+  {
+    "id": 158,
+    "title": "What is 'provenance' in the context of NFTs?",
+    "option1": "The history of ownership of an NFT",
+    "option2": "The process of creating an NFT",
+    "correct": 1
+  },
+  {
+    "id": 159,
+    "title": "What does 'fractional ownership' of an NFT mean?",
+    "option1": "Multiple people can own a fraction of the same NFT",
+    "option2": "Owning an NFT for a limited time",
+    "correct": 1
+  },
+
+  {
+    "id": 160,
+    "title": "What does DeFi stand for?",
+    "option1": "Decentralized Finance",
+    "option2": "Digital Finance",
+    "correct": 1
+  },
+  {
+    "id": 161,
+    "title": "What is the primary goal of DeFi?",
+    "option1": "To create a financial system without intermediaries",
+    "option2": "To enhance traditional banking services",
+    "correct": 1
+  },
+  {
+    "id": 162,
+    "title": "Which blockchain is most commonly used for DeFi applications?",
+    "option1": "Ethereum",
+    "option2": "Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 163,
+    "title": "What is a smart contract in the context of DeFi?",
+    "option1": "A self-executing contract with the terms written into code",
+    "option2": "A traditional legal contract",
+    "correct": 1
+  },
+  {
+    "id": 164,
+    "title": "What is a decentralized exchange (DEX)?",
+    "option1": "A platform for trading cryptocurrencies without intermediaries",
+    "option2": "A centralized platform for trading stocks",
+    "correct": 1
+  },
+  {
+    "id": 165,
+    "title": "Which of the following is an example of a decentralized exchange?",
+    "option1": "Uniswap",
+    "option2": "Coinbase",
+    "correct": 1
+  },
+  {
+    "id": 166,
+    "title": "What is yield farming in DeFi?",
+    "option1": "Earning rewards by providing liquidity to DeFi protocols",
+    "option2": "Growing crops with digital tools",
+    "correct": 1
+  },
+  {
+    "id": 167,
+    "title": "What is a liquidity pool?",
+    "option1": "A pool of tokens locked in a smart contract for trading",
+    "option2": "A traditional savings account",
+    "correct": 1
+  },
+  {
+    "id": 168,
+    "title": "What does AMM stand for in DeFi?",
+    "option1": "Automated Market Maker",
+    "option2": "Asset Management Model",
+    "correct": 1
+  },
+  {
+    "id": 169,
+    "title": "What is the primary function of an Automated Market Maker (AMM)?",
+    "option1": "To facilitate trading by automatically adjusting prices",
+    "option2": "To manage investment portfolios",
+    "correct": 1
+  },
+  {
+    "id": 170,
+    "title": "What is a stablecoin?",
+    "option1": "A cryptocurrency pegged to a stable asset like the US dollar",
+    "option2": "A cryptocurrency with volatile prices",
+    "correct": 1
+  },
+  {
+    "id": 171,
+    "title": "Which of the following is a popular stablecoin?",
+    "option1": "USDC",
+    "option2": "Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 172,
+    "title": "What is the purpose of collateral in DeFi lending?",
+    "option1": "To secure a loan and reduce risk for the lender",
+    "option2": "To increase transaction speed",
+    "correct": 1
+  },
+  {
+    "id": 173,
+    "title": "Which platform is known for DeFi lending and borrowing?",
+    "option1": "Aave",
+    "option2": "PayPal",
+    "correct": 1
+  },
+  {
+    "id": 174,
+    "title": "What is flash loan in DeFi?",
+    "option1": "An uncollateralized loan that must be repaid within the same transaction",
+    "option2": "A long-term loan with low interest rates",
+    "correct": 1
+  },
+  {
+    "id": 175,
+    "title": "What is the primary risk associated with DeFi?",
+    "option1": "Smart contract vulnerabilities",
+    "option2": "Regulatory approval",
+    "correct": 1
+  },
+  {
+    "id": 176,
+    "title": "What is impermanent loss in the context of DeFi?",
+    "option1": "Losses incurred by providing liquidity due to price changes in the assets",
+    "option2": "Permanent loss of funds due to hacks",
+    "correct": 1
+  },
+  {
+    "id": 177,
+    "title": "What is a governance token?",
+    "option1": "A token that gives holders voting power in a DeFi protocol",
+    "option2": "A token used for transaction fees",
+    "correct": 1
+  },
+  {
+    "id": 178,
+    "title": "Which of the following is an example of a governance token?",
+    "option1": "COMP (Compound)",
+    "option2": "BTC (Bitcoin)",
+    "correct": 1
+  },
+  {
+    "id": 179,
+    "title": "What is a decentralized autonomous organization (DAO)?",
+    "option1": "An organization governed by smart contracts and voting",
+    "option2": "A centralized financial institution",
+    "correct": 1
+  },
+
+  {
+    "id": 180,
+    "title": "What is the primary purpose of DeFi lending?",
+    "option1": "To enable users to borrow and lend assets without intermediaries",
+    "option2": "To create new cryptocurrencies",
+    "correct": 1
+  },
+  {
+    "id": 181,
+    "title": "Which platform is known for its DeFi lending services?",
+    "option1": "Aave",
+    "option2": "PayPal",
+    "correct": 1
+  },
+  {
+    "id": 182,
+    "title": "What is collateral in the context of DeFi lending?",
+    "option1": "Assets pledged by a borrower to secure a loan",
+    "option2": "Interest paid on a loan",
+    "correct": 1
+  },
+  {
+    "id": 183,
+    "title": "What is overcollateralization in DeFi lending?",
+    "option1": "Providing more collateral than the amount of the loan",
+    "option2": "Providing less collateral than the amount of the loan",
+    "correct": 1
+  },
+  {
+    "id": 184,
+    "title": "What is a flash loan?",
+    "option1": "An uncollateralized loan that must be repaid within the same transaction",
+    "option2": "A long-term loan with low interest rates",
+    "correct": 1
+  },
+  {
+    "id": 185,
+    "title": "What is the primary risk for lenders in DeFi?",
+    "option1": "Smart contract vulnerabilities",
+    "option2": "High transaction fees",
+    "correct": 1
+  },
+  {
+    "id": 186,
+    "title": "What is a loan-to-value (LTV) ratio?",
+    "option1": "The ratio of a loan to the value of the collateral",
+    "option2": "The interest rate of a loan",
+    "correct": 1
+  },
+  {
+    "id": 187,
+    "title": "What is a stablecoin in the context of DeFi lending?",
+    "option1": "A cryptocurrency pegged to a stable asset like the US dollar",
+    "option2": "A volatile cryptocurrency",
+    "correct": 1
+  },
+  {
+    "id": 188,
+    "title": "What does liquidation mean in DeFi lending?",
+    "option1": "Selling collateral to cover a defaulted loan",
+    "option2": "Increasing the interest rate on a loan",
+    "correct": 1
+  },
+  {
+    "id": 189,
+    "title": "Which platform uses the COMP token for governance?",
+    "option1": "Compound",
+    "option2": "Ethereum",
+    "correct": 1
+  },
+  {
+    "id": 190,
+    "title": "What is the purpose of interest rates in DeFi lending?",
+    "option1": "To compensate lenders for providing funds",
+    "option2": "To increase transaction speeds",
+    "correct": 1
+  },
+  {
+    "id": 191,
+    "title": "What is the role of a borrower in DeFi lending?",
+    "option1": "To provide collateral and repay the loan with interest",
+    "option2": "To validate transactions",
+    "correct": 1
+  },
+  {
+    "id": 192,
+    "title": "What is a decentralized money market?",
+    "option1": "A platform where users can lend and borrow assets",
+    "option2": "A place to trade physical currencies",
+    "correct": 1
+  },
+  {
+    "id": 193,
+    "title": "What is a governance token in DeFi lending?",
+    "option1": "A token that gives holders voting power in protocol decisions",
+    "option2": "A token used for transaction fees",
+    "correct": 1
+  },
+  {
+    "id": 194,
+    "title": "What does APR stand for?",
+    "option1": "Annual Percentage Rate",
+    "option2": "Average Performance Ratio",
+    "correct": 1
+  },
+  {
+    "id": 195,
+    "title": "What is a DeFi lending protocol?",
+    "option1": "A system that facilitates lending and borrowing without intermediaries",
+    "option2": "A centralized lending institution",
+    "correct": 1
+  },
+  {
+    "id": 196,
+    "title": "Which of the following is a risk for DeFi borrowers?",
+    "option1": "High collateral requirements",
+    "option2": "Centralized control",
+    "correct": 1
+  },
+  {
+    "id": 197,
+    "title": "What is compound interest in DeFi lending?",
+    "option1": "Interest calculated on the initial principal and also on the accumulated interest",
+    "option2": "A fixed interest rate",
+    "correct": 1
+  },
+  {
+    "id": 198,
+    "title": "What is a liquidation threshold?",
+    "option1": "The point at which collateral is sold to cover a defaulted loan",
+    "option2": "The maximum loan amount available",
+    "correct": 1
+  },
+  {
+    "id": 199,
+    "title": "Which DeFi platform is known for its algorithmic stablecoin?",
+    "option1": "MakerDAO",
+    "option2": "Aave",
+    "correct": 1
+  },
+
+  {
+    "id": 200,
+    "title": "What is staking in the context of cryptocurrencies?",
+    "option1": "The process of holding and locking up tokens to support network operations",
+    "option2": "Trading tokens on an exchange",
+    "correct": 1
+  },
+  {
+    "id": 201,
+    "title": "Which consensus mechanism commonly involves staking?",
+    "option1": "Proof of Stake (PoS)",
+    "option2": "Proof of Work (PoW)",
+    "correct": 1
+  },
+  {
+    "id": 202,
+    "title": "What is a validator in a staking network?",
+    "option1": "A participant who validates transactions and secures the network",
+    "option2": "A user who trades cryptocurrencies",
+    "correct": 1
+  },
+  {
+    "id": 203,
+    "title": "What does APR stand for in staking?",
+    "option1": "Annual Percentage Rate",
+    "option2": "Asset Performance Ratio",
+    "correct": 1
+  },
+  {
+    "id": 204,
+    "title": "What is a staking reward?",
+    "option1": "The return or interest earned from staking tokens",
+    "option2": "A penalty for unstaking tokens",
+    "correct": 1
+  },
+  {
+    "id": 205,
+    "title": "What is the difference between staking and yield farming?",
+    "option1": "Staking involves locking up tokens to support a network; yield farming involves providing liquidity to earn rewards",
+    "option2": "Staking involves trading tokens; yield farming involves holding tokens",
+    "correct": 1
+  },
+  {
+    "id": 206,
+    "title": "What does 'unstaking' refer to?",
+    "option1": "The process of withdrawing staked tokens from the network",
+    "option2": "The process of depositing tokens into a staking pool",
+    "correct": 1
+  },
+  {
+    "id": 207,
+    "title": "Which blockchain platform is known for its staking rewards?",
+    "option1": "Ethereum 2.0",
+    "option2": "Bitcoin",
+    "correct": 1
+  },
+  {
+    "id": 208,
+    "title": "What is a staking pool?",
+    "option1": "A group of participants who pool their tokens together to stake and share rewards",
+    "option2": "A market for trading staked tokens",
+    "correct": 1
+  },
+  {
+    "id": 209,
+    "title": "What is 'slashing' in the context of staking?",
+    "option1": "The penalty imposed on validators for misbehaving or failing to perform their duties",
+    "option2": "The process of increasing staking rewards",
+    "correct": 1
+  },
+  {
+    "id": 210,
+    "title": "What is the purpose of staking in a Proof of Stake (PoS) network?",
+    "option1": "To secure the network and validate transactions",
+    "option2": "To create new tokens",
+    "correct": 1
+  },
+  {
+    "id": 211,
+    "title": "What is the typical duration for staking a token?",
+    "option1": "Varies by network; can be days, weeks, or months",
+    "option2": "Fixed duration of one month",
+    "correct": 1
+  },
+  {
+    "id": 212,
+    "title": "What is a staking reward rate?",
+    "option1": "The percentage of return on staked tokens",
+    "option2": "The amount of transaction fees collected",
+    "correct": 1
+  },
+  {
+    "id": 213,
+    "title": "Which of the following is an advantage of staking?",
+    "option1": "Earn rewards while supporting the network",
+    "option2": "High transaction fees",
+    "correct": 1
+  },
+  {
+    "id": 214,
+    "title": "What is 'lock-up period' in staking?",
+    "option1": "The time during which staked tokens cannot be withdrawn",
+    "option2": "The period during which staking rewards are paid",
+    "correct": 1
+  },
+  {
+    "id": 215,
+    "title": "What does 'delegated staking' mean?",
+    "option1": "Delegating staking responsibilities to a trusted validator or pool",
+    "option2": "Transferring ownership of staked tokens",
+    "correct": 1
+  },
+  {
+    "id": 216,
+    "title": "What is a common staking reward mechanism?",
+    "option1": "Earning additional tokens as a reward for staking",
+    "option2": "Receiving cash payments",
+    "correct": 1
+  },
+  {
+    "id": 217,
+    "title": "What role do staking rewards play in a blockchain network?",
+    "option1": "Incentivize participants to support the network and secure it",
+    "option2": "Reduce transaction speeds",
+    "correct": 1
+  },
+  {
+    "id": 218,
+    "title": "Which platform uses the DOT token for staking?",
+    "option1": "Polkadot",
+    "option2": "Ripple",
+    "correct": 1
+  },
+  {
+    "id": 219,
+    "title": "What is a staking 'delegate'?",
+    "option1": "A participant who assigns their tokens to a validator for staking",
+    "option2": "A validator who manages multiple staking pools",
+    "correct": 1
+  },
+  {
+    "id": 220,
+    "title": "What is 'staking duration'?",
+    "option1": "The length of time tokens are staked",
+    "option2": "The amount of staking rewards received",
+    "correct": 1
+  },
+
+  {
+    "id": 221,
+    "title": "What is yield farming?",
+    "option1": "The practice of earning rewards by providing liquidity to a DeFi protocol",
+    "option2": "Growing crops on a farm",
+    "correct": 1
+  },
+  {
+    "id": 222,
+    "title": "Which token is commonly used in yield farming?",
+    "option1": "LP tokens",
+    "option2": "Stablecoins",
+    "correct": 1
+  },
+  {
+    "id": 223,
+    "title": "What does 'LP' stand for in the context of farming?",
+    "option1": "Liquidity Pool",
+    "option2": "Long Position",
+    "correct": 1
+  },
+  {
+    "id": 224,
+    "title": "What is a liquidity pool?",
+    "option1": "A collection of funds locked in a smart contract to facilitate trading",
+    "option2": "A database of farming yields",
+    "correct": 1
+  },
+  {
+    "id": 225,
+    "title": "What is an 'impermanent loss' in yield farming?",
+    "option1": "The loss incurred due to changes in the value of assets in a liquidity pool",
+    "option2": "The permanent loss of staked tokens",
+    "correct": 1
+  },
+  {
+    "id": 226,
+    "title": "Which of the following is a popular yield farming platform?",
+    "option1": "Yearn.Finance",
+    "option2": "Coinbase",
+    "correct": 1
+  },
+  {
+    "id": 227,
+    "title": "What is a 'farming reward'?",
+    "option1": "The interest or tokens earned from providing liquidity",
+    "option2": "The cost of participating in a farming pool",
+    "correct": 1
+  },
+  {
+    "id": 228,
+    "title": "What does 'staking' mean in the context of farming?",
+    "option1": "Locking up assets to earn rewards from a protocol",
+    "option2": "Selling assets for profit",
+    "correct": 1
+  },
+  {
+    "id": 229,
+    "title": "What is a 'yield aggregator'?",
+    "option1": "A tool or platform that optimizes yield farming strategies across different protocols",
+    "option2": "A type of agricultural equipment",
+    "correct": 1
+  },
+  {
+    "id": 230,
+    "title": "What is the main risk associated with yield farming?",
+    "option1": "Smart contract vulnerabilities and impermanent loss",
+    "option2": "High transaction fees",
+    "correct": 1
+  },
+  {
+    "id": 231,
+    "title": "What is a 'farming pool'?",
+    "option1": "A collection of users who pool their assets together for farming rewards",
+    "option2": "A place to trade agricultural goods",
+    "correct": 1
+  },
+  {
+    "id": 232,
+    "title": "What is a 'farming strategy'?",
+    "option1": "A plan or method used to maximize rewards from yield farming",
+    "option2": "A plan for crop rotation",
+    "correct": 1
+  },
+  {
+    "id": 233,
+    "title": "What does 'impermanent loss' refer to?",
+    "option1": "Temporary losses due to fluctuations in asset prices in a liquidity pool",
+    "option2": "Permanent loss of assets due to a hack",
+    "correct": 1
+  },
+  {
+    "id": 234,
+    "title": "Which metric is used to measure yield farming performance?",
+    "option1": "Annual Percentage Yield (APY)",
+    "option2": "Gross Domestic Product (GDP)",
+    "correct": 1
+  },
+  {
+    "id": 235,
+    "title": "What is the purpose of 'liquidity mining'?",
+    "option1": "To incentivize users to provide liquidity to a protocol",
+    "option2": "To mine new cryptocurrencies",
+    "correct": 1
+  },
+  {
+    "id": 236,
+    "title": "What is 'compounding' in the context of yield farming?",
+    "option1": "Reinvesting earned rewards to generate additional rewards",
+    "option2": "Selling earned rewards immediately for profit",
+    "correct": 1
+  },
+  {
+    "id": 237,
+    "title": "What is 'yield farming' in decentralized finance (DeFi)?",
+    "option1": "The practice of earning returns by supplying liquidity to DeFi platforms",
+    "option2": "Farming crops using blockchain technology",
+    "correct": 1
+  },
+  {
+    "id": 238,
+    "title": "Which of the following is a key benefit of yield farming?",
+    "option1": "Potentially high returns on staked assets",
+    "option2": "Guaranteed returns on every investment",
+    "correct": 1
+  },
+  {
+    "id": 239,
+    "title": "What is 'yield farming risk management'?",
+    "option1": "Strategies to minimize risks associated with yield farming, such as impermanent loss",
+    "option2": "A method to increase farming yield",
+    "correct": 1
+  },
+  {
+    "id": 240,
+    "title": "What does 'smart contract' refer to in yield farming?",
+    "option1": "A digital contract that automates and enforces the terms of farming activities",
+    "option2": "A traditional legal contract",
+    "correct": 1
+  },
+
+  {
+    "id": 241,
+    "title": "What does AMM stand for in the context of decentralized finance?",
+    "option1": "Automated Market Maker",
+    "option2": "Automated Money Manager",
+    "correct": 1
+  },
+  {
+    "id": 242,
+    "title": "What is the primary function of an Automated Market Maker (AMM)?",
+    "option1": "To facilitate trading of assets without a centralized order book",
+    "option2": "To manage a cryptocurrency wallet",
+    "correct": 1
+  },
+  {
+    "id": 243,
+    "title": "Which of the following is a popular AMM protocol?",
+    "option1": "Uniswap",
+    "option2": "Coinbase",
+    "correct": 1
+  },
+  {
+    "id": 244,
+    "title": "How does an AMM determine the price of assets?",
+    "option1": "Using mathematical formulas based on the ratio of assets in the liquidity pool",
+    "option2": "By a centralized authority",
+    "correct": 1
+  },
+  {
+    "id": 245,
+    "title": "What is a liquidity pool in the context of AMMs?",
+    "option1": "A pool of funds provided by users to facilitate trading on the AMM",
+    "option2": "A fund managed by a central bank",
+    "correct": 1
+  },
+  {
+    "id": 246,
+    "title": "What does 'slippage' refer to in AMM trading?",
+    "option1": "The difference between the expected price of a trade and the actual price",
+    "option2": "The cost of withdrawing funds from the pool",
+    "correct": 1
+  },
+  {
+    "id": 247,
+    "title": "What is 'impermanent loss' in AMMs?",
+    "option1": "The loss that liquidity providers may face due to price fluctuations of assets in the pool",
+    "option2": "The loss due to transaction fees",
+    "correct": 1
+  },
+  {
+    "id": 248,
+    "title": "What is 'automated liquidity provision'?",
+    "option1": "The process by which AMMs automatically adjust liquidity based on user trades",
+    "option2": "Manually adjusting liquidity by the pool owner",
+    "correct": 1
+  },
+  {
+    "id": 249,
+    "title": "What is the role of liquidity providers in an AMM?",
+    "option1": "To supply assets to the liquidity pool and earn fees from trades",
+    "option2": "To manage the AMM protocol's code",
+    "correct": 1
+  },
+  {
+    "id": 250,
+    "title": "What is a 'constant product market maker'?",
+    "option1": "An AMM model where the product of the quantities of two assets remains constant",
+    "option2": "A model that changes asset prices based on supply and demand",
+    "correct": 1
+  },
+  {
+    "id": 251,
+    "title": "Which AMM model is used by Uniswap?",
+    "option1": "Constant product market maker",
+    "option2": "Constant sum market maker",
+    "correct": 1
+  },
+  {
+    "id": 252,
+    "title": "What is 'virtual AMM'?",
+    "option1": "An AMM that provides liquidity in a decentralized manner but operates off-chain",
+    "option2": "An AMM that is managed by a centralized entity",
+    "correct": 1
+  },
+  {
+    "id": 253,
+    "title": "How do AMMs differ from traditional exchanges?",
+    "option1": "AMMs use smart contracts and liquidity pools, while traditional exchanges use order books",
+    "option2": "AMMs are faster than traditional exchanges",
+    "correct": 1
+  },
+  {
+    "id": 254,
+    "title": "What is 'yield farming' in relation to AMMs?",
+    "option1": "The practice of earning rewards by providing liquidity to AMMs",
+    "option2": "A method to increase transaction speed",
+    "correct": 1
+  },
+  {
+    "id": 255,
+    "title": "What is 'deep liquidity' in AMMs?",
+    "option1": "A large amount of assets available in the liquidity pool to facilitate large trades",
+    "option2": "A low volume of assets in the liquidity pool",
+    "correct": 1
+  },
+  {
+    "id": 256,
+    "title": "What does 'pool token' refer to in AMMs?",
+    "option1": "A token representing a share of the liquidity pool's assets",
+    "option2": "A token used for transaction fees",
+    "correct": 1
+  },
+  {
+    "id": 257,
+    "title": "Which of the following is a common fee structure in AMMs?",
+    "option1": "A small percentage fee on each trade",
+    "option2": "A fixed fee per transaction",
+    "correct": 1
+  },
+  {
+    "id": 258,
+    "title": "What does 'arbitrage' mean in the context of AMMs?",
+    "option1": "Taking advantage of price differences between AMMs and other exchanges",
+    "option2": "Creating new tokens for the liquidity pool",
+    "correct": 1
+  },
+  {
+    "id": 259,
+    "title": "What is a 'constant sum market maker'?",
+    "option1": "An AMM model where the sum of the quantities of two assets remains constant",
+    "option2": "A model that maintains a constant price for assets",
+    "correct": 1
+  },
+  {
+    "id": 260,
+    "title": "What is the purpose of 'bonding curves' in AMMs?",
+    "option1": "To set the price of assets based on the supply in the liquidity pool",
+    "option2": "To determine the amount of collateral needed for trades",
+    "correct": 1
+  },
+
+  {
+    "id": 261,
+    "title": "What is a cryptocurrency wallet?",
+    "option1": "A digital tool for storing and managing cryptocurrencies",
+    "option2": "A physical bank account",
+    "correct": 1
+  },
+  {
+    "id": 262,
+    "title": "What is the primary function of a crypto wallet?",
+    "option1": "To store, send, and receive digital assets",
+    "option2": "To exchange currencies",
+    "correct": 1
+  },
+  {
+    "id": 263,
+    "title": "Which type of wallet is most secure for long-term storage of cryptocurrencies?",
+    "option1": "Hardware wallet",
+    "option2": "Web wallet",
+    "correct": 1
+  },
+  {
+    "id": 264,
+    "title": "What is a hot wallet?",
+    "option1": "A wallet connected to the internet for frequent transactions",
+    "option2": "A wallet stored offline for security",
+    "correct": 1
+  },
+  {
+    "id": 265,
+    "title": "What is a cold wallet?",
+    "option1": "A wallet that is not connected to the internet and is used for secure storage",
+    "option2": "A wallet used for daily transactions",
+    "correct": 1
+  },
+  {
+    "id": 266,
+    "title": "What is a seed phrase?",
+    "option1": "A series of words used to recover a cryptocurrency wallet",
+    "option2": "A password for accessing an online account",
+    "correct": 1
+  },
+  {
+    "id": 267,
+    "title": "Which of the following is a type of hardware wallet?",
+    "option1": "Ledger Nano S",
+    "option2": "MetaMask",
+    "correct": 1
+  },
+  {
+    "id": 268,
+    "title": "What does 'backup' mean in the context of cryptocurrency wallets?",
+    "option1": "Creating a copy of wallet data to prevent loss",
+    "option2": "Transferring funds to another wallet",
+    "correct": 1
+  },
+  {
+    "id": 269,
+    "title": "What is a software wallet?",
+    "option1": "A wallet that runs as a program on a computer or mobile device",
+    "option2": "A physical wallet for cash",
+    "correct": 1
+  },
+  {
+    "id": 270,
+    "title": "Which type of wallet allows for the most convenience in transactions?",
+    "option1": "Web wallet",
+    "option2": "Hardware wallet",
+    "correct": 1
+  },
+  {
+    "id": 271,
+    "title": "What is a multi-signature wallet?",
+    "option1": "A wallet that requires multiple signatures to authorize a transaction",
+    "option2": "A wallet that supports multiple cryptocurrencies",
+    "correct": 1
+  },
+  {
+    "id": 272,
+    "title": "What is the primary advantage of using a hardware wallet?",
+    "option1": "Enhanced security by keeping private keys offline",
+    "option2": "Faster transaction speeds",
+    "correct": 1
+  },
+  {
+    "id": 273,
+    "title": "What does 'private key' refer to in cryptocurrency wallets?",
+    "option1": "A secret key used to access and manage funds in a wallet",
+    "option2": "A public key used to receive funds",
+    "correct": 1
+  },
+  {
+    "id": 274,
+    "title": "What is a custodial wallet?",
+    "option1": "A wallet managed by a third-party provider on behalf of the user",
+    "option2": "A wallet that the user manages independently",
+    "correct": 1
+  },
+  {
+    "id": 275,
+    "title": "What is a non-custodial wallet?",
+    "option1": "A wallet where the user has full control of their private keys",
+    "option2": "A wallet where a third party controls the private keys",
+    "correct": 1
+  },
+  {
+    "id": 276,
+    "title": "What is a wallet address?",
+    "option1": "A unique identifier used to send and receive cryptocurrencies",
+    "option2": "A URL for accessing an online wallet",
+    "correct": 1
+  },
+  {
+    "id": 277,
+    "title": "Which wallet type is typically used for frequent trading?",
+    "option1": "Hot wallet",
+    "option2": "Cold wallet",
+    "correct": 1
+  },
+  {
+    "id": 278,
+    "title": "What does 'importing a wallet' mean?",
+    "option1": "Restoring access to a wallet using its private key or seed phrase",
+    "option2": "Creating a new wallet from scratch",
+    "correct": 1
+  },
+  {
+    "id": 279,
+    "title": "What is 'address whitelisting' in cryptocurrency wallets?",
+    "option1": "A security feature that restricts transactions to approved addresses",
+    "option2": "A method to increase wallet transaction speed",
+    "correct": 1
+  },
+  {
+    "id": 280,
+    "title": "What is the main purpose of wallet encryption?",
+    "option1": "To protect wallet data from unauthorized access",
+    "option2": "To increase transaction speeds",
+    "correct": 1
+  },
+
+  {
+    "id": 281,
+    "title": "What is a deterministic wallet?",
+    "option1": "A wallet that generates all addresses from a single seed phrase",
+    "option2": "A wallet that requires multiple passwords",
+    "correct": 1
+  },
+  {
+    "id": 282,
+    "title": "What does 'address reuse' mean in cryptocurrency wallets?",
+    "option1": "Using the same address multiple times for transactions",
+    "option2": "Creating multiple addresses for a single wallet",
+    "correct": 1
+  },
+  {
+    "id": 283,
+    "title": "What is a 'watch-only wallet'?",
+    "option1": "A wallet that allows viewing of balances and transactions but not making transactions",
+    "option2": "A wallet that can only be accessed by multiple users",
+    "correct": 1
+  },
+  {
+    "id": 284,
+    "title": "Which type of wallet is most suitable for holding large amounts of cryptocurrency securely?",
+    "option1": "Cold wallet",
+    "option2": "Hot wallet",
+    "correct": 1
+  },
+  {
+    "id": 285,
+    "title": "What is the purpose of 'two-factor authentication' (2FA) in crypto wallets?",
+    "option1": "To provide an additional layer of security during wallet access",
+    "option2": "To speed up transaction processing",
+    "correct": 1
+  },
+  {
+    "id": 286,
+    "title": "What is a 'paper wallet'?",
+    "option1": "A physical printout of a wallet's private and public keys",
+    "option2": "A type of digital wallet for storing assets",
+    "correct": 1
+  },
+  {
+    "id": 287,
+    "title": "What does 'wallet recovery' involve?",
+    "option1": "Restoring access to a wallet using backup phrases or keys",
+    "option2": "Transferring funds to a new wallet",
+    "correct": 1
+  },
+  {
+    "id": 288,
+    "title": "What is the difference between a wallet's 'public key' and 'private key'?",
+    "option1": "The public key is used to receive funds, while the private key is used to authorize transactions",
+    "option2": "The public key is for making transactions, while the private key is for receiving funds",
+    "correct": 1
+  },
+  {
+    "id": 289,
+    "title": "What is a 'light wallet'?",
+    "option1": "A wallet that does not require downloading the entire blockchain",
+    "option2": "A wallet with enhanced security features",
+    "correct": 1
+  },
+  {
+    "id": 290,
+    "title": "What is a 'full node wallet'?",
+    "option1": "A wallet that requires downloading and maintaining the entire blockchain",
+    "option2": "A wallet that stores only a subset of the blockchain",
+    "correct": 1
+  },
+  {
+    "id": 291,
+    "title": "What is the main advantage of using a multi-signature wallet?",
+    "option1": "Increased security by requiring multiple approvals for transactions",
+    "option2": "Faster transaction processing",
+    "correct": 1
+  },
+  {
+    "id": 292,
+    "title": "What does 'wallet synchronization' refer to?",
+    "option1": "The process of updating a wallet with the latest blockchain data",
+    "option2": "The process of linking multiple wallets together",
+    "correct": 1
+  },
+  {
+    "id": 293,
+    "title": "What is 'transaction batching' in cryptocurrency wallets?",
+    "option1": "Combining multiple transactions into a single transaction to save on fees",
+    "option2": "Separating large transactions into smaller ones",
+    "correct": 1
+  },
+  {
+    "id": 294,
+    "title": "What is a 'hardware wallet recovery seed'?",
+    "option1": "A series of words used to recover access to a hardware wallet",
+    "option2": "A password for accessing a hardware wallet",
+    "correct": 1
+  },
+  {
+    "id": 295,
+    "title": "What is 'wallet software'?",
+    "option1": "The program or application used to manage a cryptocurrency wallet",
+    "option2": "The hardware used to store a wallet",
+    "correct": 1
+  },
+  {
+    "id": 296,
+    "title": "What does 'wallet import' mean?",
+    "option1": "Bringing an existing wallet into a new wallet application using keys or seed phrases",
+    "option2": "Creating a new wallet from scratch",
+    "correct": 1
+  },
+  {
+    "id": 297,
+    "title": "What is the purpose of 'wallet address generation'?",
+    "option1": "To create a unique address for receiving cryptocurrency",
+    "option2": "To create multiple private keys for a wallet",
+    "correct": 1
+  },
+  {
+    "id": 298,
+    "title": "What does 'wallet security' involve?",
+    "option1": "Implementing measures to protect the wallet from unauthorized access or theft",
+    "option2": "Increasing the speed of transactions",
+    "correct": 1
+  },
+  {
+    "id": 299,
+    "title": "What is 'wallet migration'?",
+    "option1": "The process of moving a wallet's assets to a new wallet or platform",
+    "option2": "Creating a backup of a wallet",
+    "correct": 1
+  },
+  {
+    "id": 300,
+    "title": "What does 'wallet compatibility' refer to?",
+    "option1": "The ability of a wallet to work with different cryptocurrencies and platforms",
+    "option2": "The ability of a wallet to perform multiple transactions at once",
+    "correct": 1
+  }
+]

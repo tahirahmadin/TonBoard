@@ -1,15 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  score: 550000,
+  score: 0,
+  quizPoints: 0,
+  refferalPoints: 0,
+  workPoints: 0,
   leagueLevel: 0,
   currentSlotNo: 0,
   currentQueNo: 0,
   ansSelected: [],
 
   playLevels: {
-    timer: 0,
-    rewards: 0,
+    timer: 1,
+    rewards: 1,
   },
   refetch: 0,
   successPopup: false,
@@ -29,7 +32,7 @@ export const updateLocalDataToRedux = createAsyncThunk(
   "updateLocalDataToRedux",
   async () => {
     try {
-      let tempLocalStorageData = await localStorage.getItem("ui");
+      let tempLocalStorageData = localStorage.getItem("ui");
       if (tempLocalStorageData) {
         return JSON.parse(tempLocalStorageData);
       }
@@ -58,6 +61,7 @@ const UiReducer = createSlice({
 
   reducers: {
     updateScore(state, action) {
+      console.log("updating score ", action.payload);
       state.score = action.payload;
     },
     updateNextButtonFlag(state, action) {
@@ -67,6 +71,10 @@ const UiReducer = createSlice({
       state.timerValue = action.payload;
     },
     updateCurrentSlotNo(state, action) {
+      console.log("updating slot number", {
+        old: state.currentSlotNo,
+        new: action.payload,
+      });
       state.currentSlotNo = action.payload;
     },
 
@@ -122,7 +130,10 @@ const UiReducer = createSlice({
         state.nextButtonFlag = response.nextButtonFlag;
         state.ansSelected = response.ansSelected;
         state.currentQueNo = response.currentQueNo;
+        state.currentSlotNo = response.currentSlotNo;
         state.leagueLevel = response.leagueLevel;
+
+        state.leagueTasksStatus = response.leagueTasksStatus;
 
         state.queLeft = response.queLeft;
         state.playLevels = response.playLevels;
@@ -131,7 +142,13 @@ const UiReducer = createSlice({
         state.specialTasksStatus = response.specialTasksStatus;
         state.leagueTasksStatus = response.leagueTasksStatus;
         state.refTasksStatus = response.refTasksStatus;
+        state.referralCount = response.referralCount;
+        state.referralPoints = response.referralPoints;
+
+        state.specialTasksStatus = response.specialTasksStatus;
+
         state.screenLoaded = true;
+        state.timerValue = response.timerValue;
       }
     });
     builder.addCase(updateBackendToRedux.fulfilled, (state, action) => {
