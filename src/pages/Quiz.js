@@ -53,7 +53,7 @@ const QuizPage = () => {
 
   return (
     <Box>
-      <Profile style={{ height: "10vh" }} />
+      {/* <Profile style={{ height: "10vh" }} /> */}
       <Box style={{ height: "10vh" }}>
         <ScoreComp />
       </Box>
@@ -78,12 +78,11 @@ const QuizPage = () => {
         >
           <Box
             style={{
-              height: "10vh",
               width: "90%",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              flexDirection: "row",
+              flexDirection: "column",
             }}
           >
             <Typography
@@ -98,10 +97,31 @@ const QuizPage = () => {
             >
               {questionData.title}
             </Typography>
+            <Typography
+              style={{
+                fontFamily: "Rubik",
+                fontWeight: 400,
+                fontSize: 12,
+                lineHeight: "120%",
+                textAlign: "center",
+                color: "#4286f4",
+                marginTop: 10,
+              }}
+            >
+              <img
+                src="https://cdn-icons-png.freepik.com/512/3845/3845829.png"
+                style={{
+                  width: 14,
+                  height: 14,
+                  objectFit: "contain",
+                  marginRight: 3,
+                }}
+              />
+              Hint : Learn here
+            </Typography>
           </Box>
           <Box
             style={{
-              height: "30vh",
               width: "90%",
               display: "flex",
               flexDirection: "row",
@@ -127,7 +147,6 @@ const QuizPage = () => {
           </Box>
 
           <Typography
-            mt={3}
             style={{
               width: "100%",
               fontWeight: 600,

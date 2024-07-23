@@ -143,7 +143,7 @@ const Dashboard = () => {
               lineHeight: "110%",
               textAlign: "center",
               color: "#ffffff",
-              marginTop: "10px",
+              marginTop: "4px",
             }}
           >
             0
@@ -157,7 +157,6 @@ const Dashboard = () => {
               lineHeight: "110%",
               textAlign: "center",
               color: "#64FF99",
-              marginTop: "10px",
             }}
           >
             Tasks
@@ -192,7 +191,7 @@ const Dashboard = () => {
               lineHeight: "110%",
               textAlign: "center",
               color: "#64FF99",
-              marginTop: "10px",
+              marginTop: "4px",
             }}
           >
             Revenue

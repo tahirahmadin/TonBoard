@@ -112,7 +112,7 @@ const Navbar = () => {
           <Box
             style={{
               width: "90%",
-              height: 55,
+              height: 60,
               background: "#000",
               display: "flex",
               justifyContent: "space-around",
@@ -121,6 +121,8 @@ const Navbar = () => {
               // borderTopLeftRadius: 10,
               // borderTopRightRadius: 10,
               borderRadius: 10,
+              paddingLeft: 5,
+              paddingRight: 5,
             }}
           >
             {navLinks.map((nav, i) => (

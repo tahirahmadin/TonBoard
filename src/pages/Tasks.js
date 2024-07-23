@@ -360,7 +360,7 @@ const Tasks = () => {
       }}
     >
       <Box>
-        <Profile />
+        {/* <Profile /> */}
         <SuccessSnackbar text="Reward claimed succesfully!" />
 
         <Box
@@ -368,7 +368,7 @@ const Tasks = () => {
             width: "90%",
             height: "87px",
             padding: "1px",
-            marginTop: "15px",
+
             marginLeft: "5%",
             display: "flex",
             alignItems: "center",

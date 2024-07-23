@@ -30,18 +30,18 @@ const Work = () => {
     <Box
       style={{
         width: "100%",
+        height: "90vh",
         // minHeight: "calc(100vh - 60px)",
         position: "relative",
         background: "#161811",
         paddingBottom: "100px",
-
         paddingLeft: "1%",
         paddingRight: "1%",
         zIndex: 0,
         overflowX: "hidden",
+        overflowY: "hidden",
       }}
     >
-      <Profile />
       <Box
         style={{
           display: "flex",
@@ -53,7 +53,7 @@ const Work = () => {
           style={{
             marginTop: 10,
             width: "90%",
-            height: 45,
+            height: 50,
             background: "#000",
             display: "flex",
             justifyContent: "space-around",
@@ -131,7 +131,7 @@ const Work = () => {
         </Typography>
       </Box>
 
-      <Box style={{ opacity: 0.2, height: "66vh", overflowY: "hidden" }}>
+      <Box style={{ opacity: 0.2, height: "80vh", overflowY: "hidden" }}>
         <Grid container spacing={1} mt={1}>
           <Grid item xs={6} md={6}>
             <WorkCard2
