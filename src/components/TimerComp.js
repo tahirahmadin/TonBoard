@@ -24,7 +24,6 @@ function TimerComp({ endTime }) {
       };
       timeString = `${timeLeft.HOURS}:${timeLeft.MINS}:${timeLeft.SECONDS}`;
     }
-    // console.log(timeLeft);
     setTimeLeft(timeString);
     return timeString;
   };
@@ -33,10 +32,13 @@ function TimerComp({ endTime }) {
     const timer = setInterval(() => {
       calculateTimeLeft();
     }, 1000);
+
+    if (timeLeft !== null && timeLeft === "") {
+    }
     return () => {
       clearInterval(timer);
     };
-  }, [endTime]);
+  }, [endTime, timeLeft]);
 
   return (
     <div>
@@ -66,9 +68,7 @@ function TimerComp({ endTime }) {
             textAlign: "center",
             color: "#ffffff",
           }}
-        >
-          Refreshing...
-        </Typography>
+        ></Typography>
       )}
     </div>
   );

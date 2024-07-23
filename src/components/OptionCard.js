@@ -33,6 +33,7 @@ const OptionCard = ({
   tick,
   onClick,
   inputOption,
+  isSelected,
 }) => {
   const classes = useStyles();
   const theme = useTheme();

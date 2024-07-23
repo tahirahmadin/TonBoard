@@ -1,6 +1,7 @@
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useServerAuth } from "./useServerAuth";
-import { LEAGUE_TASKS_DATA, QUIZ_DATA } from "../utils/constants";
+import { LEAGUE_TASKS_DATA } from "../utils/constants";
+import QUIZ_DATA from "../utils/questions.json";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateLocalDataToRedux,
@@ -13,6 +14,7 @@ import {
   updateCurrentQueNo,
   updateNextButtonFlag,
   updateTimerValue,
+  updateCurrentSlotNo,
 } from "../reducers/UiReducers";
 import {
   getUserLeaderboardData,
@@ -31,6 +33,8 @@ const useGameHook = (hookInit = false) => {
   const playLevels = useSelector((state) => state.ui.playLevels);
   const referralCount = useSelector((state) => state.ui.referralCount);
   const referralPoints = useSelector((state) => state.ui.referralPoints);
+  const timerValue = useSelector((state) => state.ui.timerValue);
+  const screenLoaded = useSelector((state) => state.ui.screenLoaded);
 
   const specialTasksStatus = useSelector(
     (state) => state.ui.specialTasksStatus
@@ -66,12 +70,12 @@ const useGameHook = (hookInit = false) => {
         //   );
         // }
         // await dispatch(updateLocalDataToBackend(accountSC));
-        await dispatch(updateScreenLoaded(true));
+        dispatch(updateScreenLoaded(true));
       }
     }
 
     asyncFn();
-  }, [accountSC, hookInit, telegramUsername]);
+  }, [accountSC, hookInit, telegramUsername, dispatch]);
 
   //2. Updating localStorage on every change
   useEffect(() => {
@@ -82,19 +86,7 @@ const useGameHook = (hookInit = false) => {
     }
 
     asyncFn();
-  }, [
-    score,
-    ansSelected,
-    currentQueNo,
-    leagueLevel,
-    playLevels.timer,
-    playLevels.rewards,
-    referralCount,
-    referralPoints,
-    specialTasksStatus,
-    leagueTasksStatus,
-    refTasksStatus,
-  ]);
+  }, [accountSC, ui, hookInit]);
 
   // Final Score = score + referral score
   const finalScore = useMemo(() => {
@@ -102,35 +94,53 @@ const useGameHook = (hookInit = false) => {
   }, [score, referralPoints]);
 
   // FUNCTION:: Handle select question
-  const _handleAnswerSelected = (inputOption) => {
-    //Update answers array
-    let tempAns = [...ansSelected];
-    tempAns[currentQueNo] = inputOption;
-    dispatch(updateAnsSelected(tempAns));
+  const _handleAnswerSelected = useCallback(
+    (inputOption) => {
+      if (ansSelected.length === currentQueNo + 1) {
+        console.log("already marked");
+        return;
+      }
 
-    if (ansSelected.length !== 0 && ansSelected.length % 5 === 0) {
-      let nextTimerValue = Date.now() + 21600000;
-      dispatch(updateTimerValue(nextTimerValue));
-    } else {
-      dispatch(updateNextButtonFlag(true));
-    }
-  };
+      if (!inputOption) {
+        return;
+      }
+
+      //Update answers array
+      let tempAns = [...ansSelected];
+      tempAns[currentQueNo] = inputOption;
+      dispatch(updateAnsSelected(tempAns));
+
+      if ((ansSelected.length + 1) % 5 === 0) {
+        let nextTimerValue = Date.now() + 60 * 1000; //21600000;
+        dispatch(updateTimerValue(nextTimerValue));
+      } else {
+        dispatch(updateNextButtonFlag(true));
+      }
+    },
+    [ansSelected, currentQueNo, dispatch]
+  );
 
   // FUNCTION:: Handle next button click
   const _handleNextButtonClick = () => {
     let rewardsOnCorrect = 100000 * playLevels.rewards;
     let rewardsOnWrong = 10000 * playLevels.rewards;
 
-    if (ansSelected.length === 0 || ansSelected.length % 5 !== 0) {
+    dispatch(updateCurrentQueNo(currentQueNo + 1));
+    dispatch(updateNextButtonFlag(false));
+
+    console.log({ ansSelected });
+    if (ansSelected.length !== 0) {
       let inputOption = ansSelected[ansSelected.length - 1];
       //Update user score
       if (QUIZ_DATA[currentQueNo].correct === inputOption) {
+        console.log("correct");
+        // update points on correct
         dispatch(updateScore(score + rewardsOnCorrect));
       } else {
+        console.log("wrong");
+        // update points on wrong
         dispatch(updateScore(score + rewardsOnWrong));
       }
-      dispatch(updateCurrentQueNo(currentQueNo + 1));
-      dispatch(updateNextButtonFlag(false));
     }
   };
 

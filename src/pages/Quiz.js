@@ -12,9 +12,13 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import ScoreComp from "../components/Score";
 import TimerComp from "../components/TimerComp";
-import { QUIZ_DATA } from "../utils/constants";
-import { updateCurrentQueNo } from "../reducers/UiReducers";
 import { Link } from "react-router-dom";
+import QUIZ_DATA from "../utils/questions.json";
+import {
+  updateCurrentQueNo,
+  updateCurrentSlotNo,
+} from "../reducers/UiReducers";
+import useSlotTimer from "../hooks/useSlotTimer";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -40,10 +44,17 @@ const QuizPage = () => {
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
 
   const { handleNextButtonClick, handleClaimPoints } = useGameHook();
+  const { isTimerRunning } = useSlotTimer();
 
   const questionData = useMemo(() => {
     return QUIZ_DATA[currentQueNo];
-  }, [currentQueNo, currentSlotNo]);
+  }, [currentQueNo]);
+
+  useEffect(() => {
+    if ((currentSlotNo + 1) % (currentSlotNo * 5) === 0) {
+      dispatch(updateCurrentQueNo(currentQueNo + 1));
+    }
+  }, [currentSlotNo, currentQueNo, dispatch]);
 
   const quizMessageStatus = React.useMemo(() => {
     if (ansSelected[currentQueNo] === undefined) {
@@ -51,6 +62,19 @@ const QuizPage = () => {
     }
     return ansSelected[currentQueNo] === questionData.correct;
   }, [currentQueNo, ansSelected, questionData]);
+
+  const isSelected = useMemo(() => {
+    return ansSelected.length === currentQueNo + 1;
+  }, [ansSelected, currentQueNo]);
+
+  // display current available questions based on slot
+  const displayQuestionNumber = useMemo(() => {
+    if (currentQueNo % 5 === 0) {
+      return 5;
+    }
+
+    return 5 - (currentQueNo % 5);
+  }, [currentQueNo]);
 
   return (
     <Box>
@@ -132,6 +156,7 @@ const QuizPage = () => {
             }}
           >
             <OptionCard
+              isSelected={isSelected}
               inputOption={1}
               title={questionData.option1}
               img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-a-letter-effect-text-9423674-7664624.png"
@@ -139,6 +164,7 @@ const QuizPage = () => {
               tick={quizMessageStatus && ansSelected[currentQueNo] === 1}
             />
             <OptionCard
+              isSelected={isSelected}
               inputOption={2}
               title={questionData.option2}
               img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-b-letter-effect-text-9423689-7664639.png"
@@ -163,7 +189,7 @@ const QuizPage = () => {
               !quizMessageStatus &&
               "Sorry! Try next time!"}
           </Typography>
-          {timerValue !== 0 && (
+          {isTimerRunning && (
             <Box pt={3}>
               <Typography
                 className={classes.description}
@@ -225,7 +251,7 @@ const QuizPage = () => {
                   color: "#ffffff",
                 }}
               >
-                {5 - currentQueNo}/5
+                {displayQuestionNumber}/5
               </Typography>
             </Box>
             <Link to="/boost">
