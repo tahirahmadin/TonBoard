@@ -12,7 +12,6 @@ import makeStyles from "@mui/styles/makeStyles";
 
 import ScoreComp from "../components/Score";
 import TimerComp from "../components/TimerComp";
-import { updateCurrentQueNo } from "../reducers/UiReducers";
 import { Link } from "react-router-dom";
 import QUIZ_DATA from "../utils/questions.json";
 import {
