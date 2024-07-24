@@ -83,28 +83,28 @@ export const TIMER_BOOST_DATA = [
   },
   {
     level: 1,
+    coins: 500000,
+    coinsText: "500K",
+  },
+  {
+    level: 2,
     coins: 1000000,
     coinsText: "1M",
   },
   {
-    level: 2,
+    level: 3,
+    coins: 2000000,
+    coinsText: "2M",
+  },
+  {
+    level: 4,
     coins: 5000000,
     coinsText: "5M",
   },
   {
-    level: 3,
+    level: 5,
     coins: 10000000,
     coinsText: "10M",
-  },
-  {
-    level: 4,
-    coins: 25000000,
-    coinsText: "25M",
-  },
-  {
-    level: 5,
-    coins: 100000000,
-    coinsText: "50M",
   },
 ];
 
@@ -117,28 +117,28 @@ export const REWARDS_BOOST_DATA = [
   },
   {
     level: 1,
+    coins: 500000,
+    coinsText: "500K",
+  },
+  {
+    level: 2,
     coins: 1000000,
     coinsText: "1M",
   },
   {
-    level: 2,
+    level: 3,
+    coins: 2000000,
+    coinsText: "2M",
+  },
+  {
+    level: 4,
     coins: 5000000,
     coinsText: "5M",
   },
   {
-    level: 3,
+    level: 5,
     coins: 10000000,
     coinsText: "10M",
-  },
-  {
-    level: 4,
-    coins: 25000000,
-    coinsText: "25M",
-  },
-  {
-    level: 5,
-    coins: 100000000,
-    coinsText: "50M",
   },
 ];
 

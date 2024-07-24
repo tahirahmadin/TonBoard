@@ -122,13 +122,12 @@ const useGameHook = (hookInit = false) => {
 
   // FUNCTION:: Handle next button click
   const _handleNextButtonClick = () => {
-    let rewardsOnCorrect = 100000 * playLevels.rewards;
-    let rewardsOnWrong = 10000 * playLevels.rewards;
+    let rewardsOnCorrect = _pointsOnCorrectAnswer;
+    let rewardsOnWrong = _pointsOnWrongAnswer;
 
     dispatch(updateCurrentQueNo(currentQueNo + 1));
     dispatch(updateNextButtonFlag(false));
 
-    console.log({ ansSelected });
     if (ansSelected.length !== 0) {
       let inputOption = ansSelected[ansSelected.length - 1];
       //Update user score
@@ -187,11 +186,37 @@ const useGameHook = (hookInit = false) => {
     dispatch(setSuccessPopup(true));
   };
 
+  const _pointsOnCorrectAnswer = useMemo(() => {
+    if (playLevels.rewards === 0) {
+      return 100000;
+    } else {
+      return 100000 * parseInt(playLevels.rewards);
+    }
+  }, [playLevels.rewards]);
+
+  const _pointsOnWrongAnswer = useMemo(() => {
+    if (playLevels.rewards === 0) {
+      return 25000;
+    } else {
+      return 25000 * playLevels.rewards;
+    }
+  }, [playLevels.rewards]);
+
+  const _timerDuration = useMemo(() => {
+    if (playLevels.timer === 0) {
+      return 360;
+    } else {
+      return 360 - playLevels.timer * 60;
+    }
+  }, [playLevels.rewards]);
+
   return {
     gameScore: finalScore,
+    pointsOnCorrectAnswer: _pointsOnCorrectAnswer,
+    pointsOnWrongAnswer: _pointsOnWrongAnswer,
+    timerDuration: _timerDuration,
     handleAnswerSelected: _handleAnswerSelected,
     handleNextButtonClick: _handleNextButtonClick,
-
     upgradeBoosterLevel: _upgradeBoosterLevel,
     claimTaskPoints: _claimTaskPoints,
     claimLeagueLevel: _claimLeague,

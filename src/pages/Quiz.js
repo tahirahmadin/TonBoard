@@ -45,7 +45,8 @@ const QuizPage = () => {
   const timerValue = useSelector((state) => state.ui.timerValue);
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
 
-  const { handleNextButtonClick, handleClaimPoints } = useGameHook();
+  const { handleNextButtonClick, pointsOnCorrectAnswer, pointsOnWrongAnswer } =
+    useGameHook();
   const { viberate } = useTelegramSDK();
   const { isTimerRunning } = useSlotTimer();
 
@@ -260,11 +261,11 @@ const QuizPage = () => {
             }}
           >
             {isTimerRunning && (
-              <Box>
+              <Box height={"10vh"}>
                 <Typography
-                  className={classes.description}
                   style={{
                     textAlign: "center",
+                    color: "#e5e5e5",
                   }}
                 >
                   Next slot in

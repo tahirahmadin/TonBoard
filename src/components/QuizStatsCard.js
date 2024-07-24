@@ -13,6 +13,8 @@ import React, { useEffect, useState } from "react";
 
 import makeStyles from "@mui/styles/makeStyles";
 import SmallProgressBar from "./SmallProgressBar";
+import useGameHook from "../hooks/useGameHook";
+import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -35,17 +37,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const QuizStatsCard = ({
-  correctPercent,
-  category,
-  img,
-  attemptedQuestions,
-  maxQuestions,
-}) => {
+const QuizStatsCard = ({ pointsOnCorrect }) => {
   const theme = useTheme();
   const classes = useStyles();
 
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const { pointsOnCorrectAnswer, pointsOnWrongAnswer, timerDuration } =
+    useGameHook();
 
   return (
     <>
@@ -91,7 +90,7 @@ const QuizStatsCard = ({
               paddingLeft: 5,
             }}
           >
-            1,500,000
+            {getNumbersInFormatOnlyMillions(pointsOnCorrectAnswer)}
           </Typography>
         </Box>
         <Box style={{ border: "1px solid #919191", height: 18 }}></Box>
@@ -123,7 +122,7 @@ const QuizStatsCard = ({
               paddingLeft: 5,
             }}
           >
-            2 Hrs
+            {parseFloat(timerDuration / 60)} Hrs
           </Typography>
         </Box>
         <Box style={{ border: "1px solid #919191", height: 18 }}></Box>
@@ -155,7 +154,7 @@ const QuizStatsCard = ({
               paddingLeft: 5,
             }}
           >
-            12
+            4
           </Typography>
         </Box>
       </Box>

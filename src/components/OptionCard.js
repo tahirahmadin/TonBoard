@@ -14,6 +14,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import useGameHook from "../hooks/useGameHook";
 import { useSelector } from "react-redux";
+import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -41,7 +42,8 @@ const OptionCard = ({
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const { handleAnswerSelected } = useGameHook();
+  const { handleAnswerSelected, pointsOnCorrectAnswer, pointsOnWrongAnswer } =
+    useGameHook();
 
   const nextButtonFlag = useSelector((state) => state.ui.nextButtonFlag);
 
@@ -188,7 +190,7 @@ const OptionCard = ({
                 </Typography>
               </Box>
 
-              {iconCondition === "RIGHT" && nextButtonFlag && (
+              {(iconCondition === "RIGHT" || iconCondition === "WRONG") && (
                 <Typography
                   style={{
                     textAlign: "center",
@@ -204,7 +206,10 @@ const OptionCard = ({
                     height={16}
                     width={16}
                   />
-                  +500,000
+                  +
+                  {iconCondition === "RIGHT"
+                    ? getNumbersInFormatOnlyMillions(pointsOnCorrectAnswer)
+                    : getNumbersInFormatOnlyMillions(pointsOnWrongAnswer)}
                 </Typography>
               )}
 
