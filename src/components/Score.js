@@ -5,6 +5,7 @@ import SmallProgressBar from "./SmallProgressBar";
 import useGameHook from "../hooks/useGameHook";
 import { useDispatch } from "react-redux";
 import { updateScore } from "../reducers/UiReducers";
+import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 
 const ScoreComp = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const ScoreComp = () => {
           color: "#ffffff",
         }}
       >
-        {gameScore.toLocaleString()}
+        {getNumbersInFormatOnlyMillions(gameScore)}
       </Typography>
     </Box>
   );

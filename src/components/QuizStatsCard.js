@@ -56,7 +56,7 @@ const QuizStatsCard = ({ pointsOnCorrect }) => {
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          padding: "10px 10px",
+          padding: "8px 8px",
           gap: "10px",
           background:
             "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
@@ -78,20 +78,35 @@ const QuizStatsCard = ({ pointsOnCorrect }) => {
             width={32}
             height={32}
           />
-          <Typography
-            style={{
-              width: "90%",
-              fontFamily: "Rubik",
-              fontWeight: 400,
-              fontSize: 12,
-              lineHeight: "110%",
-              textAlign: "left",
-              color: "#ffffff",
-              paddingLeft: 5,
-            }}
-          >
-            {getNumbersInFormatOnlyMillions(pointsOnCorrectAnswer)}
-          </Typography>
+
+          <Box>
+            <Typography
+              style={{
+                width: "100%",
+                fontFamily: "Rubik",
+                fontWeight: 600,
+                fontSize: 12,
+                lineHeight: "110%",
+                textAlign: "left",
+                color: "#ffffff",
+              }}
+            >
+              {getNumbersInFormatOnlyMillions(pointsOnCorrectAnswer)}
+            </Typography>
+            <Typography
+              style={{
+                width: "100%",
+                fontFamily: "Rubik",
+                fontWeight: 400,
+                fontSize: 8,
+                lineHeight: "110%",
+                textAlign: "left",
+                color: "#e5e5e5",
+              }}
+            >
+              Reward amount
+            </Typography>
+          </Box>
         </Box>
         <Box style={{ border: "1px solid #919191", height: 18 }}></Box>
         <Box
@@ -110,20 +125,35 @@ const QuizStatsCard = ({ pointsOnCorrect }) => {
             width={32}
             height={32}
           />
-          <Typography
-            style={{
-              width: "90%",
-              fontFamily: "Rubik",
-              fontWeight: 400,
-              fontSize: 12,
-              lineHeight: "110%",
-              textAlign: "left",
-              color: "#ffffff",
-              paddingLeft: 5,
-            }}
-          >
-            {parseFloat(timerDuration / 60)} Hrs
-          </Typography>
+
+          <Box>
+            <Typography
+              style={{
+                width: "90%",
+                fontFamily: "Rubik",
+                fontWeight: 600,
+                fontSize: 12,
+                lineHeight: "110%",
+                textAlign: "left",
+                color: "#ffffff",
+              }}
+            >
+              {parseFloat(timerDuration / 60)} Hrs
+            </Typography>
+            <Typography
+              style={{
+                width: "100%",
+                fontFamily: "Rubik",
+                fontWeight: 400,
+                fontSize: 8,
+                lineHeight: "110%",
+                textAlign: "left",
+                color: "#e5e5e5",
+              }}
+            >
+              Slot Timer
+            </Typography>
+          </Box>
         </Box>
         <Box style={{ border: "1px solid #919191", height: 18 }}></Box>
         <Box
@@ -136,26 +166,42 @@ const QuizStatsCard = ({ pointsOnCorrect }) => {
         >
           <img
             src={
-              "https://cdn3d.iconscout.com/3d/premium/thumb/renewable-energy-6551039-5386087.png"
+              "https://cdn3d.iconscout.com/3d/premium/thumb/flash-sale-11376940-9149533.png"
             }
             alt="TaskDao"
             width={24}
             height={24}
           />
-          <Typography
-            style={{
-              width: "90%",
-              fontFamily: "Rubik",
-              fontWeight: 400,
-              fontSize: 12,
-              lineHeight: "110%",
-              textAlign: "left",
-              color: "#ffffff",
-              paddingLeft: 5,
-            }}
-          >
-            4
-          </Typography>
+          <Box>
+            <Typography
+              style={{
+                width: "90%",
+                fontFamily: "Rubik",
+                fontWeight: 600,
+                fontSize: 12,
+                lineHeight: "110%",
+                textAlign: "left",
+                color: "#ffffff",
+                paddingLeft: 5,
+              }}
+            >
+              4
+            </Typography>
+            <Typography
+              style={{
+                width: "100%",
+                fontFamily: "Rubik",
+                fontWeight: 400,
+                fontSize: 8,
+                lineHeight: "110%",
+                textAlign: "left",
+                color: "#e5e5e5",
+                paddingLeft: 5,
+              }}
+            >
+              Daily Steak
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </>

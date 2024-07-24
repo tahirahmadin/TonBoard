@@ -56,10 +56,9 @@ const ActionButton = ({
     >
       <Typography
         style={{
-          minWidth: "100%",
+          width: "100%",
           height: 28,
           borderRadius: "4px",
-
           fontWeight: 700,
           fontSize: 12,
           color: "#000",
@@ -67,24 +66,13 @@ const ActionButton = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#64b5f6",
-          paddingLeft: "3px",
-          zIndex: 1,
-          ...fontStyle,
+          backgroundColor: "#ffca1b",
+          paddingLeft: 10,
+          paddingRight: 10,
         }}
       >
         {children}
       </Typography>
-      <Box
-        style={{
-          minWidth: 20,
-          height: 20,
-          borderRadius: "3px",
-          background: "#64b5f6",
-          transform: "rotate(45deg)",
-          marginLeft: -12,
-        }}
-      />
     </Button>
   );
 };
