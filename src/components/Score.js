@@ -3,8 +3,11 @@ import React from "react";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 import SmallProgressBar from "./SmallProgressBar";
 import useGameHook from "../hooks/useGameHook";
+import { useDispatch } from "react-redux";
+import { updateScore } from "../reducers/UiReducers";
 
 const ScoreComp = () => {
+  const dispatch = useDispatch();
   const { gameScore } = useGameHook();
 
   return (
@@ -32,6 +35,9 @@ const ScoreComp = () => {
         Current Points
       </Typography>
       <Typography
+        onClick={() => {
+          dispatch(updateScore(gameScore + 100000));
+        }}
         style={{
           width: "100%",
           fontFamily: "Rubik",
