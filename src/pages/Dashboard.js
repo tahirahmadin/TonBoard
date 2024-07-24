@@ -3,6 +3,7 @@ import Profile from "../components/Profile";
 import {
   Box,
   Button,
+  Grid,
   Typography,
   useMediaQuery,
   useTheme,
@@ -17,6 +18,7 @@ import { Wallet } from "@mui/icons-material";
 
 import makeStyles from "@mui/styles/makeStyles";
 import ScoreComp from "../components/Score";
+import ProgressCard from "../components/ProgressCard";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -116,7 +118,7 @@ const Dashboard = () => {
           Manager
         </Typography>
       </Box>
-
+      {/* 
       <Box
         display={"flex"}
         flexDirection="row"
@@ -197,8 +199,62 @@ const Dashboard = () => {
             Revenue
           </Typography>
         </Box>
-      </Box>
+      </Box> */}
+
       <Box
+        style={{ width: "100%" }}
+        display={"flex"}
+        justifyContent={"center"}
+        mt={2}
+      >
+        <Box style={{ width: "90%" }}>
+          <Typography
+            style={{
+              width: "100%",
+              fontFamily: "Rubik",
+              fontWeight: 500,
+              fontSize: 18,
+              textAlign: "left",
+              color: "#ffffff",
+              paddingBottom: 5,
+            }}
+          >
+            Your progress
+          </Typography>
+          <Box style={{ overflowX: "scroll" }}>
+            <Grid container spacing={1} mt={1}>
+              <Grid item xs={4} md={4}>
+                <ProgressCard
+                  correctPercent={70}
+                  category="Bitcoin"
+                  img="https://cdn3d.iconscout.com/3d/premium/thumb/bitcoin-5848614-4897747.png?f=webp"
+                  attemptedQuestions={20}
+                  maxQuestions={20}
+                />
+              </Grid>
+              <Grid item xs={4} md={4}>
+                <ProgressCard
+                  correctPercent={50}
+                  category="Ethereum"
+                  img="https://cdn3d.iconscout.com/3d/premium/thumb/ethereum-4059136-3364022.png?f=webp"
+                  attemptedQuestions={10}
+                  maxQuestions={20}
+                />
+              </Grid>
+              <Grid item xs={4} md={4}>
+                <ProgressCard
+                  correctPercent={0}
+                  category="DeFi"
+                  img="https://cdn3d.iconscout.com/3d/premium/thumb/decentralization-5796842-4863010.png"
+                  attemptedQuestions={0}
+                  maxQuestions={20}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Box>
+      {/* <Box
         display={"flex"}
         flexDirection="column"
         justifyContent={"center"}
@@ -233,7 +289,7 @@ const Dashboard = () => {
           wallet{" "}
           <span style={{ fontSize: 12, paddingLeft: 5 }}>(Coming soon)</span>
         </Button>
-      </Box>
+      </Box> */}
     </Box>
   );
 };

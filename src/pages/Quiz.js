@@ -20,6 +20,7 @@ import {
 } from "../reducers/UiReducers";
 import useSlotTimer from "../hooks/useSlotTimer";
 import ClaimQuizPopup from "../components/ClaimQuizPopup";
+import QuizStatsCard from "../components/QuizStatsCard";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -82,7 +83,15 @@ const QuizPage = () => {
   return (
     <Box>
       <Box
-        style={{ height: "15vh" }}
+        style={{ height: "8vh" }}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <QuizStatsCard />
+      </Box>
+      <Box
+        style={{ height: "10vh" }}
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}
@@ -98,10 +107,10 @@ const QuizPage = () => {
             width: "100%",
             position: "relative",
             zIndex: 0,
-            position: "relative",
+
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
+            justifyContent: "flex-start",
             alignItems: "center",
             backgroundSize: "cover",
             backgroundPosition: "center center",
@@ -111,7 +120,7 @@ const QuizPage = () => {
           <Box
             pt={2}
             style={{
-              height: "55vh",
+              height: "53vh",
               width: "90%",
               display: "flex",
               flexDirection: "column",
@@ -201,7 +210,7 @@ const QuizPage = () => {
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-around",
-                marginTop: 20,
+                marginTop: 14,
               }}
             >
               <OptionCard
@@ -264,7 +273,7 @@ const QuizPage = () => {
               </Box>
             )}
 
-            <Box>
+            <Box height={"10vh"}>
               {nextButtonFlag && (
                 <Typography
                   onClick={nextButtonFlag ? handleNextButtonClick : null}
@@ -311,7 +320,7 @@ const QuizPage = () => {
             </Box>
 
             <Box
-              pt={4}
+              pt={2}
               style={{
                 width: "90%",
                 display: "flex",

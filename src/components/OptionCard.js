@@ -84,9 +84,9 @@ const OptionCard = ({
         onClick={handleSelect}
         sx={{
           width: "100%",
-          maxWidth: 150,
+          maxWidth: 130,
           minWidth: 100,
-          height: 180,
+          height: 160,
           borderRadius: "22px",
           position: "relative",
           display: "flex",
@@ -169,7 +169,7 @@ const OptionCard = ({
                     width: "90%",
                     fontFamily: "'Rubik'",
                     fontWeight: 700,
-                    fontSize: 16,
+                    fontSize: 15,
                     lineHeight: "110%",
                     textAlign: "center",
                     color: "#FAFF00",
