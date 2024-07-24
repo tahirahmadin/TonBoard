@@ -65,7 +65,6 @@ const OptionCard = ({
   }, [isSelected, correctOption, selectedOption, inputOption]);
 
   const iconCondition = useMemo(() => {
-    console.log(isSelected, correctOption, selectedOption, inputOption);
     if (isSelected && (correctOption === selectedOption) === inputOption) {
       return "RIGHT";
     } else if (
@@ -191,7 +190,7 @@ const OptionCard = ({
               >
                 {description}+
               </Typography> */}
-              {console.log(iconCondition)}
+
               {iconCondition === "RIGHT" && (
                 <img
                   src="https://cdn3d.iconscout.com/3d/premium/thumb/successfully-done-5108472-4288033.png"
