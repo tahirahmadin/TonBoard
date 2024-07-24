@@ -47,7 +47,7 @@ const QuizPage = () => {
 
   const { handleNextButtonClick, pointsOnCorrectAnswer, pointsOnWrongAnswer } =
     useGameHook();
-  const { viberate } = useTelegramSDK();
+
   const { isTimerRunning } = useSlotTimer();
 
   const questionData = useMemo(() => {

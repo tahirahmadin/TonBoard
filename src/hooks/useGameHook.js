@@ -43,7 +43,7 @@ const useGameHook = (hookInit = false) => {
   const refTasksStatus = useSelector((state) => state.ui.refTasksStatus);
 
   const { accountSC, username } = useServerAuth();
-  const { telegramUsername, telegramPhotoUrl } = useTelegramSDK();
+  const { telegramUsername, telegramPhotoUrl, viberate } = useTelegramSDK();
 
   //1.  To Manage initial loading of the application
   useEffect(() => {
@@ -122,6 +122,7 @@ const useGameHook = (hookInit = false) => {
 
   // FUNCTION:: Handle next button click
   const _handleNextButtonClick = () => {
+    viberate("light");
     let rewardsOnCorrect = _pointsOnCorrectAnswer;
     let rewardsOnWrong = _pointsOnWrongAnswer;
 

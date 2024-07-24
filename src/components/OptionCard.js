@@ -15,6 +15,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import useGameHook from "../hooks/useGameHook";
 import { useSelector } from "react-redux";
 import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
+import useTelegramSDK from "../hooks/useTelegramSDK";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -45,9 +46,12 @@ const OptionCard = ({
   const { handleAnswerSelected, pointsOnCorrectAnswer, pointsOnWrongAnswer } =
     useGameHook();
 
+  const { viberate } = useTelegramSDK();
+
   const nextButtonFlag = useSelector((state) => state.ui.nextButtonFlag);
 
   const handleSelect = async () => {
+    viberate("light");
     handleAnswerSelected(inputOption);
   };
 
