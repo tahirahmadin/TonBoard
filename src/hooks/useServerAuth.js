@@ -54,7 +54,7 @@ export const useServerAuth = (hookInit = false) => {
     );
 
     if (authRes && !authRes.error) {
-      if (authRes.result.signUpFlag) {
+      if (authRes.result) {
         //Remove old states of localStorage
         await localStorage.clear();
         console.log("cleared");
