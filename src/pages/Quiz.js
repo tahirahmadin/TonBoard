@@ -275,26 +275,6 @@ const QuizPage = () => {
 
             <Box height={"10vh"}>
               {nextButtonFlag && (
-                <Typography
-                  onClick={nextButtonFlag ? handleNextButtonClick : null}
-                  style={{
-                    textAlign: "center",
-                    color: "#ffffff",
-                    fontWeight: 700,
-                  }}
-                >
-                  <img
-                    src={
-                      "https://cdn3d.iconscout.com/3d/premium/thumb/dollar-coin-2997232-2516270.png?f=webp"
-                    }
-                    height={22}
-                    width={22}
-                  />
-                  500,000
-                </Typography>
-              )}
-
-              {nextButtonFlag && (
                 <Button
                   onClick={nextButtonFlag ? handleNextButtonClick : null}
                   style={{
@@ -307,14 +287,20 @@ const QuizPage = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    width: 120,
+                    width: 160,
                     margin: "0 auto",
                     height: "38px",
-                    background: "#64FF99",
+                    // background: "#64FF99",
                     borderRadius: "12px",
+                    border: "1px solid #64FF99",
+                    color: "#64FF99",
                   }}
                 >
-                  Claim
+                  <img
+                    src="https://cdn3d.iconscout.com/3d/premium/thumb/dollar-sack-9250771-7582870.png?f=webp"
+                    style={{ width: 24, height: 24 }}
+                  />
+                  Claim Rewards
                 </Button>
               )}
             </Box>

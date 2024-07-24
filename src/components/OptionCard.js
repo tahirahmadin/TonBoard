@@ -13,6 +13,7 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import makeStyles from "@mui/styles/makeStyles";
 import useGameHook from "../hooks/useGameHook";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -42,6 +43,8 @@ const OptionCard = ({
 
   const { handleAnswerSelected } = useGameHook();
 
+  const nextButtonFlag = useSelector((state) => state.ui.nextButtonFlag);
+
   const handleSelect = async () => {
     handleAnswerSelected(inputOption);
   };
@@ -65,7 +68,12 @@ const OptionCard = ({
   }, [isSelected, correctOption, selectedOption, inputOption]);
 
   const iconCondition = useMemo(() => {
-    if (isSelected && (correctOption === selectedOption) === inputOption) {
+    console.log(isSelected, correctOption, selectedOption, inputOption);
+    if (
+      isSelected &&
+      correctOption === selectedOption &&
+      correctOption === inputOption
+    ) {
       return "RIGHT";
     } else if (
       isSelected &&
@@ -173,23 +181,32 @@ const OptionCard = ({
                     lineHeight: "110%",
                     textAlign: "center",
                     color: "#FAFF00",
-                    marginTop: "10px",
-                    minHeight: 40,
+                    minHeight: 35,
                   }}
                 >
                   {title}
                 </Typography>
               </Box>
-              {/* <Typography
-                className={classes.description}
-                style={{
-                  textAlign: "center",
-                  fontSize: 14,
-                  minHeight: 20,
-                }}
-              >
-                {description}+
-              </Typography> */}
+
+              {iconCondition === "RIGHT" && nextButtonFlag && (
+                <Typography
+                  style={{
+                    textAlign: "center",
+                    color: "#ffffff",
+                    fontWeight: 400,
+                    fontSize: 10,
+                  }}
+                >
+                  <img
+                    src={
+                      "https://cdn3d.iconscout.com/3d/premium/thumb/dollar-coin-2997232-2516270.png?f=webp"
+                    }
+                    height={16}
+                    width={16}
+                  />
+                  +500,000
+                </Typography>
+              )}
 
               {iconCondition === "RIGHT" && (
                 <img
