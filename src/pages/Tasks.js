@@ -442,13 +442,12 @@ const Tasks = () => {
               <Box
                 style={{
                   width: "100%",
-
                   background: "#161811",
                   borderRadius: "32px 32px 0px 0px",
                   display: "flex",
                   alignItems: "center",
                   flexDirection: "column",
-                  gap: "18px",
+                  gap: "10px",
                   padding: "25px 5%",
                   overflowY: "auto",
                 }}
@@ -475,7 +474,6 @@ const Tasks = () => {
             <Box
               style={{
                 width: "100%",
-                height: "100%",
                 borderRadius: "32px 32px 0px 0px",
                 padding: "1px 1px 0",
                 zIndex: 1,
@@ -489,10 +487,11 @@ const Tasks = () => {
                   display: "flex",
                   alignItems: "center",
                   flexDirection: "column",
-                  gap: "18px",
+                  gap: "10px",
                   padding: "25px 5%",
                   overflowY: "auto",
                   paddingBottom: 150,
+                  height: "300px",
                 }}
               >
                 {REFERRAL_TASKS_DATA.map((ele, i) => {

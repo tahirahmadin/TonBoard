@@ -14,6 +14,7 @@ import store from "./store";
 import { BackButton } from "@twa-dev/sdk/react";
 import Work from "./pages/Work";
 import QuizPage from "./pages/Quiz";
+import Leaderboard from "./pages/Leaderboard";
 
 function App() {
   const theme = useTheme();
@@ -50,7 +51,7 @@ function App() {
           <Route exact path="/tasks" element={<Tasks />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/work" element={<Work />} />
-          <Route exact path="/leader" element={<Boost />} />
+          <Route exact path="/leader" element={<Leaderboard />} />
         </Routes>
         <Navbar />
       </div>

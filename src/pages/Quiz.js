@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect, useState, useMemo } from "react";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import useGameHook from "../hooks/useGameHook";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 
@@ -19,6 +19,7 @@ import {
   updateCurrentSlotNo,
 } from "../reducers/UiReducers";
 import useSlotTimer from "../hooks/useSlotTimer";
+import ClaimQuizPopup from "../components/ClaimQuizPopup";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -44,6 +45,7 @@ const QuizPage = () => {
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
 
   const { handleNextButtonClick, handleClaimPoints } = useGameHook();
+  const { viberate } = useTelegramSDK();
   const { isTimerRunning } = useSlotTimer();
 
   const questionData = useMemo(() => {
@@ -78,8 +80,28 @@ const QuizPage = () => {
 
   return (
     <Box>
+      {/* <ClaimQuizPopup
+        title={"Correct Answer"}
+        description1={"You have received a reward"}
+        description2={""}
+        img={
+          "https://png.pngtree.com/png-clipart/20220612/original/pngtree-dollar-coin-icon-3d-png-image_7966148.png"
+        }
+        reward={100000}
+        openPopup={nextButtonFlag}
+        closePopup={() => {
+          viberate("light");
+          handleNextButtonClick();
+        }}
+        onClick={handleNextButtonClick}
+      /> */}
       {/* <Profile style={{ height: "10vh" }} /> */}
-      <Box style={{ height: "10vh" }}>
+      <Box
+        style={{ height: "15vh" }}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
         <ScoreComp />
       </Box>
 
@@ -122,28 +144,33 @@ const QuizPage = () => {
             >
               {questionData.title}
             </Typography>
-            <Typography
-              style={{
-                fontFamily: "Rubik",
-                fontWeight: 400,
-                fontSize: 12,
-                lineHeight: "120%",
-                textAlign: "center",
-                color: "#4286f4",
-                marginTop: 10,
-              }}
+            <a
+              href="https://www.youtube.com/@tahirahmad.crypto"
+              target="_blank"
             >
-              <img
-                src="https://cdn-icons-png.freepik.com/512/3845/3845829.png"
+              <Typography
                 style={{
-                  width: 14,
-                  height: 14,
-                  objectFit: "contain",
-                  marginRight: 3,
+                  fontFamily: "Rubik",
+                  fontWeight: 400,
+                  fontSize: 12,
+                  lineHeight: "120%",
+                  textAlign: "center",
+                  color: "#4286f4",
+                  marginTop: 10,
                 }}
-              />
-              Hint : Learn here
-            </Typography>
+              >
+                <img
+                  src="https://cdn-icons-png.freepik.com/512/3845/3845829.png"
+                  style={{
+                    width: 14,
+                    height: 14,
+                    objectFit: "contain",
+                    marginRight: 3,
+                  }}
+                />
+                Hint : Learn here
+              </Typography>
+            </a>
           </Box>
           <Box
             style={{
@@ -180,6 +207,7 @@ const QuizPage = () => {
               fontSize: 16,
               color: quizMessageStatus ? "#64FF99" : "red",
               textAlign: "center",
+              height: "5vh",
             }}
           >
             {quizMessageStatus !== null &&
@@ -203,18 +231,51 @@ const QuizPage = () => {
             </Box>
           )}
 
-          <Box pt={3}>
-            <Typography
-              onClick={nextButtonFlag ? handleNextButtonClick : null}
-              className={classes.description}
-              style={{
-                textAlign: "center",
-                color: "yellow",
-                fontWeight: 700,
-              }}
-            >
-              {nextButtonFlag && "Claim Points"}
-            </Typography>
+          {}
+          <Box pt={3} style={{ heght: "10vh" }}>
+            {nextButtonFlag && (
+              <Typography
+                onClick={nextButtonFlag ? handleNextButtonClick : null}
+                style={{
+                  textAlign: "center",
+                  color: "#ffffff",
+                  fontWeight: 700,
+                }}
+              >
+                <img
+                  src={
+                    "https://cdn3d.iconscout.com/3d/premium/thumb/dollar-coin-2997232-2516270.png?f=webp"
+                  }
+                  height={22}
+                  width={22}
+                />
+                500,000
+              </Typography>
+            )}
+
+            {nextButtonFlag && (
+              <Button
+                onClick={nextButtonFlag ? handleNextButtonClick : null}
+                style={{
+                  fontWeight: 700,
+                  fontSize: "14px",
+                  display: "flex",
+                  alignItems: "center",
+                  textAlign: "center",
+                  color: "#000000",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: 120,
+                  margin: "0 auto",
+                  height: "38px",
+                  background: "#64FF99",
+                  borderRadius: "12px",
+                }}
+              >
+                Claim
+              </Button>
+            )}
           </Box>
 
           <Box

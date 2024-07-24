@@ -53,7 +53,7 @@ const OptionCard = ({
           width: "100%",
           maxWidth: 150,
           minWidth: 100,
-          height: 185,
+          height: 180,
           borderRadius: "22px",
           position: "relative",
           display: "flex",
@@ -144,13 +144,13 @@ const OptionCard = ({
                     textAlign: "center",
                     color: "#FAFF00",
                     marginTop: "10px",
-                    minHeight: 36,
+                    minHeight: 40,
                   }}
                 >
                   {title}
                 </Typography>
               </Box>
-              <Typography
+              {/* <Typography
                 className={classes.description}
                 style={{
                   textAlign: "center",
@@ -159,13 +159,13 @@ const OptionCard = ({
                 }}
               >
                 {description}+
-              </Typography>
+              </Typography> */}
               {tick && (
                 <img
                   src="https://cdn3d.iconscout.com/3d/premium/thumb/successfully-done-5108472-4288033.png"
                   style={{
-                    width: 42,
-                    height: 42,
+                    width: 32,
+                    height: 32,
                     objectFit: "contain",
                   }}
                 />
@@ -175,8 +175,8 @@ const OptionCard = ({
                 <img
                   src="https://cdn3d.iconscout.com/3d/premium/thumb/wrong-9090242-7480311.png?f=webp"
                   style={{
-                    width: 42,
-                    height: 42,
+                    width: 32,
+                    height: 32,
                     objectFit: "contain",
                   }}
                 />

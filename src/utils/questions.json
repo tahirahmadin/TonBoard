@@ -1,150 +1,171 @@
 [
   {
     "id": 0,
-    "title": "Who invented Bitcoin?",
+    "title": "Who is the inventor of Bitcoin?",
     "option1": "Satoshi Nakamoto",
     "option2": "Vitalik Buterin",
-    "correct": 1
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 1,
-    "title": "When was Bitcoin created?",
+    "title": "In which year Bitcoin was created?",
     "option1": "2008",
     "option2": "2010",
-    "correct": 1
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 2,
     "title": "What is the maximum supply of Bitcoin?",
-    "option1": "21 million",
-    "option2": "100 million",
-    "correct": 1
+    "option1": "21 Millions",
+    "option2": "100 Million",
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 3,
-    "title": "What is Bitcoin's smallest unit called?",
+    "title": "What is the Bitcoin's smallest unit?",
     "option1": "Microbitcoin",
     "option2": "Satoshi",
-    "correct": 2
+    "correct": 2,
+    "category": "Bitcoin"
   },
   {
     "id": 4,
-    "title": "Which technology underpins Bitcoin?",
+    "title": "What is the name of technology used by Bitcoin?",
     "option1": "Blockchain",
     "option2": "Cloud computing",
-    "correct": 1
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 5,
-    "title": "What is the process of verifying Bitcoin transactions called?",
+    "title": "Process of verifying Bitcoin transactions is called as?",
     "option1": "Mining",
     "option2": "Harvesting",
-    "correct": 1
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 6,
     "title": "What is the reward for mining a new block in Bitcoin?",
     "option1": "50 BTC",
     "option2": "6.25 BTC",
-    "correct": 2
+    "correct": 2,
+    "category": "Bitcoin"
   },
   {
     "id": 7,
     "title": "Which of the following is a Bitcoin wallet?",
     "option1": "Electrum",
     "option2": "PayPal",
-    "correct": 1
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 8,
     "title": "What is the purpose of a Bitcoin address?",
     "option1": "To send and receive Bitcoins",
     "option2": "To store transaction history",
-    "correct": 1
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 9,
     "title": "What is a private key in Bitcoin?",
     "option1": "A public address for receiving Bitcoin",
     "option2": "A secret key to access Bitcoin funds",
-    "correct": 2
+    "correct": 2,
+    "category": "Bitcoin"
   },
   {
     "id": 10,
     "title": "What does 'HODL' stand for in the Bitcoin community?",
     "option1": "Hold On for Dear Life",
     "option2": "Hold Only During Lows",
-    "correct": 1
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 11,
     "title": "What is the halving event in Bitcoin?",
     "option1": "Reduction of transaction fees",
     "option2": "Halving of the block reward",
-    "correct": 2
+    "correct": 2,
+    "category": "Bitcoin"
   },
   {
     "id": 12,
     "title": "What is a Bitcoin fork?",
     "option1": "A split in the blockchain",
     "option2": "A method to secure Bitcoin",
-    "correct": 1
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 13,
     "title": "Which of these is a Bitcoin fork?",
     "option1": "Bitcoin Cash",
     "option2": "Ethereum",
-    "correct": 1
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 14,
     "title": "What is a Bitcoin exchange?",
     "option1": "A platform to buy and sell Bitcoin",
     "option2": "A place to store Bitcoin securely",
-    "correct": 1
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 15,
-    "title": "What does 'Satoshi' refer to?",
-    "option1": "The smallest unit of Bitcoin",
-    "option2": "A Bitcoin transaction fee",
-    "correct": 1
-  },
-  {
-    "id": 16,
     "title": "Which is the first Bitcoin transaction?",
     "option1": "Purchase of pizza",
     "option2": "Buying a car",
-    "correct": 1
+    "correct": 1,
+    "category": "Bitcoin"
+  },
+  {
+    "id": 16,
+    "title": "What is a Bitcoin node?",
+    "option1": "A computer in the Bitcoin network",
+    "option2": "A place to mine Bitcoin",
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 17,
-    "title": "What is a Bitcoin node?",
-    "option1": "A computer that participates in the Bitcoin network",
-    "option2": "A place to mine Bitcoin",
-    "correct": 1
-  },
-  {
-    "id": 18,
     "title": "What is the purpose of Bitcoin mining?",
     "option1": "To secure the network and process transactions",
     "option2": "To create new blockchain addresses",
-    "correct": 1
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
-    "id": 19,
+    "id": 18,
     "title": "Which organization manages Bitcoin?",
     "option1": "Bitcoin Foundation",
     "option2": "No central authority",
-    "correct": 2
+    "correct": 2,
+    "category": "Bitcoin"
+  },
+  {
+    "id": 19,
+    "title": "What is Bitcoin's market cap?",
+    "option1": "Total value of all Bitcoins in circulation",
+    "option2": "The highest price Bitcoin has reached",
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 20,
     "title": "What is Bitcoin's market cap?",
     "option1": "Total value of all Bitcoins in circulation",
     "option2": "The highest price Bitcoin has reached",
-    "correct": 1
+    "correct": 1,
+    "category": "Bitcoin"
   },
   {
     "id": 21,
