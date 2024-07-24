@@ -1,23 +1,18 @@
 import * as React from "react";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import useGameHook from "../hooks/useGameHook";
-import useTelegramSDK from "../hooks/useTelegramSDK";
 
 import { useDispatch, useSelector } from "react-redux";
 
 import OptionCard from "../components/OptionCard";
-import Profile from "../components/Profile";
 import makeStyles from "@mui/styles/makeStyles";
 
 import ScoreComp from "../components/Score";
 import TimerComp from "../components/TimerComp";
 import { Link } from "react-router-dom";
 import QUIZ_DATA from "../utils/questions.json";
-import {
-  updateCurrentQueNo,
-  updateCurrentSlotNo,
-} from "../reducers/UiReducers";
+import { updateCurrentQueNo } from "../reducers/UiReducers";
 import useSlotTimer from "../hooks/useSlotTimer";
 import ClaimQuizPopup from "../components/ClaimQuizPopup";
 import QuizStatsCard from "../components/QuizStatsCard";
@@ -36,18 +31,20 @@ const useStyles = makeStyles((theme) => ({
 const QuizPage = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const theme = useTheme();
 
   const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
   const currentQueNo = useSelector((state) => state.ui.currentQueNo);
   const ansSelected = useSelector((state) => state.ui.ansSelected);
-  const nextButtonFlag = useSelector((state) => state.ui.nextButtonFlag);
   const timerValue = useSelector((state) => state.ui.timerValue);
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
+  const isQuizPointsClaimed = useSelector(
+    (state) => state.ui.isQuizPointsClaimed
+  );
+  const isSlotWaitingForClaim = useSelector(
+    (state) => state.ui.isSlotWaitingForClaim
+  );
 
-  const { handleNextButtonClick, pointsOnCorrectAnswer, pointsOnWrongAnswer } =
-    useGameHook();
-
+  const { handleClaimButtonClick } = useGameHook();
   const { isTimerRunning } = useSlotTimer();
 
   const questionData = useMemo(() => {
@@ -80,6 +77,14 @@ const QuizPage = () => {
 
     return 5 - (currentQueNo % 5);
   }, [currentQueNo]);
+
+  const showClaimBtn = useMemo(() => {
+    if (ansSelected.length === 0 || ansSelected.length < currentQueNo + 1) {
+      return false;
+    }
+
+    return !isQuizPointsClaimed;
+  }, [ansSelected, currentQueNo, isQuizPointsClaimed]);
 
   return (
     <Box>
@@ -275,9 +280,9 @@ const QuizPage = () => {
             )}
 
             <Box height={"10vh"}>
-              {nextButtonFlag && (
+              {showClaimBtn && (
                 <Button
-                  onClick={nextButtonFlag ? handleNextButtonClick : null}
+                  onClick={showClaimBtn ? handleClaimButtonClick : null}
                   style={{
                     fontWeight: 700,
                     fontSize: "14px",

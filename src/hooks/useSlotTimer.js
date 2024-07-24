@@ -16,7 +16,6 @@ const useSlotTimer = () => {
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
   const handleTimerExpire = useCallback(() => {
-    console.log("timer expire event");
     setIsTimerRunning(false);
 
     // question and slot update needed
@@ -26,10 +25,13 @@ const useSlotTimer = () => {
     }
   }, [currentQueNo, currentSlotNo, dispatch]);
 
-  console.log({ isTimerRunning });
   useEffect(() => {
     if (!screenLoaded) return;
     if (!timerValue) return;
+
+    if (timerValue < Date.now()) {
+      return;
+    }
 
     const intervalId = setInterval(() => {
       const currentTime = Date.now();

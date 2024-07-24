@@ -12,15 +12,18 @@ import {
   updateScreenLoaded,
   updateAnsSelected,
   updateCurrentQueNo,
-  updateNextButtonFlag,
   updateTimerValue,
   updateCurrentSlotNo,
+  updateQuizPointClaimStatus,
 } from "../reducers/UiReducers";
 import {
   getUserLeaderboardData,
   updateLocalDataToBackendAPI,
 } from "../actions/serverActions";
 import useTelegramSDK from "./useTelegramSDK";
+
+// delay for next quiz slot
+const NEXT_SLOT_TIME = 60 * 1000; //21600000;
 
 const useGameHook = (hookInit = false) => {
   const dispatch = useDispatch();
@@ -35,6 +38,9 @@ const useGameHook = (hookInit = false) => {
   const referralPoints = useSelector((state) => state.ui.referralPoints);
   const timerValue = useSelector((state) => state.ui.timerValue);
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
+  const isSlotWaitingForClaim = useSelector(
+    (state) => state.ui.isSlotWaitingForClaim
+  );
 
   const specialTasksStatus = useSelector(
     (state) => state.ui.specialTasksStatus
@@ -110,25 +116,21 @@ const useGameHook = (hookInit = false) => {
       tempAns[currentQueNo] = inputOption;
       dispatch(updateAnsSelected(tempAns));
 
-      if ((ansSelected.length + 1) % 5 === 0) {
-        let nextTimerValue = Date.now() + 60 * 1000; //21600000;
-        dispatch(updateTimerValue(nextTimerValue));
-      } else {
-        dispatch(updateNextButtonFlag(true));
-      }
+      // if (tempAns.length % 5 === 0) {
+      //   let nextTimerValue = Date.now() + 60 * 1000; //21600000;
+      //   dispatch(updateTimerValue(nextTimerValue));
+      // }
+      // reset claim status on new ans selection
+      dispatch(updateQuizPointClaimStatus(false));
     },
     [ansSelected, currentQueNo, dispatch]
   );
 
-  // FUNCTION:: Handle next button click
-  const _handleNextButtonClick = () => {
-    viberate("light");
+  const _handleClaimButtonClick = () => {
     let rewardsOnCorrect = _pointsOnCorrectAnswer;
     let rewardsOnWrong = _pointsOnWrongAnswer;
 
-    dispatch(updateCurrentQueNo(currentQueNo + 1));
-    dispatch(updateNextButtonFlag(false));
-
+    // update score
     if (ansSelected.length !== 0) {
       let inputOption = ansSelected[ansSelected.length - 1];
       //Update user score
@@ -141,6 +143,17 @@ const useGameHook = (hookInit = false) => {
         // update points on wrong
         dispatch(updateScore(score + rewardsOnWrong));
       }
+
+      if (ansSelected.length % 5 === 0) {
+        let nextTimerValue = Date.now() + NEXT_SLOT_TIME;
+        dispatch(updateTimerValue(nextTimerValue));
+      }
+    }
+    dispatch(updateQuizPointClaimStatus(true));
+
+    // move to next question if current slot has more otherwise show timer for next slot
+    if (ansSelected.length % 5 > 0) {
+      dispatch(updateCurrentQueNo(currentQueNo + 1));
     }
   };
 
@@ -217,7 +230,7 @@ const useGameHook = (hookInit = false) => {
     pointsOnWrongAnswer: _pointsOnWrongAnswer,
     timerDuration: _timerDuration,
     handleAnswerSelected: _handleAnswerSelected,
-    handleNextButtonClick: _handleNextButtonClick,
+    handleClaimButtonClick: _handleClaimButtonClick,
     upgradeBoosterLevel: _upgradeBoosterLevel,
     claimTaskPoints: _claimTaskPoints,
     claimLeagueLevel: _claimLeague,
