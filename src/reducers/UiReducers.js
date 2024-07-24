@@ -9,7 +9,7 @@ const initialState = {
   currentSlotNo: 0,
   currentQueNo: 0,
   ansSelected: [],
-
+  isQuizPointsClaimed: false,
   playLevels: {
     timer: 1,
     rewards: 1,
@@ -84,6 +84,9 @@ const UiReducer = createSlice({
     updateAnsSelected(state, action) {
       state.ansSelected = action.payload;
     },
+    updateQuizPointClaimStatus(state, action) {
+      state.isQuizPointsClaimed = action.payload;
+    },
 
     updateReferralCount(state, action) {
       state.referralCount = action.payload;
@@ -149,6 +152,7 @@ const UiReducer = createSlice({
 
         state.screenLoaded = true;
         state.timerValue = response.timerValue;
+        state.isQuizPointsClaimed = response.isQuizPointsClaimed;
       }
     });
     builder.addCase(updateBackendToRedux.fulfilled, (state, action) => {
@@ -180,6 +184,7 @@ export const {
   updateCurrentSlotNo,
   updateCurrentQueNo,
   updateAnsSelected,
+  updateQuizPointClaimStatus,
   updateReferralPoints,
   updateReferralCount,
   updateScreenLoaded,
