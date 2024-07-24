@@ -60,9 +60,10 @@ const QuizPage = () => {
 
   const quizMessageStatus = React.useMemo(() => {
     if (ansSelected[currentQueNo] === undefined) {
-      return null;
+      return 0;
     }
-    return ansSelected[currentQueNo] === questionData.correct;
+
+    return ansSelected[currentQueNo] === questionData.correct ? 1 : 2;
   }, [currentQueNo, ansSelected, questionData]);
 
   const isSelected = useMemo(() => {
@@ -80,22 +81,6 @@ const QuizPage = () => {
 
   return (
     <Box>
-      {/* <ClaimQuizPopup
-        title={"Correct Answer"}
-        description1={"You have received a reward"}
-        description2={""}
-        img={
-          "https://png.pngtree.com/png-clipart/20220612/original/pngtree-dollar-coin-icon-3d-png-image_7966148.png"
-        }
-        reward={100000}
-        openPopup={nextButtonFlag}
-        closePopup={() => {
-          viberate("light");
-          handleNextButtonClick();
-        }}
-        onClick={handleNextButtonClick}
-      /> */}
-      {/* <Profile style={{ height: "10vh" }} /> */}
       <Box
         style={{ height: "15vh" }}
         display={"flex"}
@@ -109,7 +94,7 @@ const QuizPage = () => {
       {screenLoaded && (
         <Box
           style={{
-            height: "70vh",
+            height: "75vh",
             width: "100%",
             position: "relative",
             zIndex: 0,
@@ -118,20 +103,58 @@ const QuizPage = () => {
             flexDirection: "column",
             justifyContent: "space-between",
             alignItems: "center",
-            overflow: "hidden",
             backgroundSize: "cover",
             backgroundPosition: "center center",
           }}
         >
+          {/* Quiz Components */}
           <Box
+            pt={2}
             style={{
+              height: "55vh",
               width: "90%",
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
               flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "flex-start",
             }}
           >
+            <Box
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-center",
+                alignItems: "center",
+                backgroundColor: "#212121",
+                borderRadius: 7,
+                paddingRight: 12,
+                paddingLeft: 12,
+                paddingTop: 5,
+                paddingBottom: 5,
+              }}
+            >
+              <img
+                src={
+                  "https://cdn3d.iconscout.com/3d/premium/thumb/categoria-7844691-6244113.png?f=webp"
+                }
+                alt="TaskDao"
+                width={16}
+                height={16}
+              />
+              <Box
+                style={{
+                  width: "100%",
+                  fontFamily: "Rubik",
+                  fontWeight: 400,
+                  fontSize: 12,
+                  lineHeight: "100%",
+                  textAlign: "center",
+                  color: "#e5e5e5",
+                }}
+              >
+                {questionData.category}
+              </Box>
+            </Box>
             <Typography
               style={{
                 fontFamily: "Rubik",
@@ -155,7 +178,7 @@ const QuizPage = () => {
                   fontSize: 12,
                   lineHeight: "120%",
                   textAlign: "center",
-                  color: "#4286f4",
+                  color: "#64b5f6",
                   marginTop: 10,
                 }}
               >
@@ -171,151 +194,132 @@ const QuizPage = () => {
                 Hint : Learn here
               </Typography>
             </a>
-          </Box>
-          <Box
-            style={{
-              width: "90%",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-around",
-              marginTop: 20,
-            }}
-          >
-            <OptionCard
-              isSelected={isSelected}
-              inputOption={1}
-              title={questionData.option1}
-              img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-a-letter-effect-text-9423674-7664624.png"
-              description="32,430"
-              tick={quizMessageStatus && ansSelected[currentQueNo] === 1}
-            />
-            <OptionCard
-              isSelected={isSelected}
-              inputOption={2}
-              title={questionData.option2}
-              img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-b-letter-effect-text-9423689-7664639.png"
-              description="1,203"
-              tick={!quizMessageStatus && ansSelected[currentQueNo] === 2}
-            />
-          </Box>
-
-          <Typography
-            style={{
-              width: "100%",
-              fontWeight: 600,
-              fontSize: 16,
-              color: quizMessageStatus ? "#64FF99" : "red",
-              textAlign: "center",
-              height: "5vh",
-            }}
-          >
-            {quizMessageStatus !== null &&
-              quizMessageStatus &&
-              "Great! Right answer"}
-            {quizMessageStatus !== null &&
-              !quizMessageStatus &&
-              "Sorry! Try next time!"}
-          </Typography>
-          {isTimerRunning && (
-            <Box pt={3}>
-              <Typography
-                className={classes.description}
-                style={{
-                  textAlign: "center",
-                }}
-              >
-                Next slot in
-              </Typography>
-              <TimerComp endTime={timerValue} />
-            </Box>
-          )}
-
-          {}
-          <Box pt={3} style={{ heght: "10vh" }}>
-            {nextButtonFlag && (
-              <Typography
-                onClick={nextButtonFlag ? handleNextButtonClick : null}
-                style={{
-                  textAlign: "center",
-                  color: "#ffffff",
-                  fontWeight: 700,
-                }}
-              >
-                <img
-                  src={
-                    "https://cdn3d.iconscout.com/3d/premium/thumb/dollar-coin-2997232-2516270.png?f=webp"
-                  }
-                  height={22}
-                  width={22}
-                />
-                500,000
-              </Typography>
-            )}
-
-            {nextButtonFlag && (
-              <Button
-                onClick={nextButtonFlag ? handleNextButtonClick : null}
-                style={{
-                  fontWeight: 700,
-                  fontSize: "14px",
-                  display: "flex",
-                  alignItems: "center",
-                  textAlign: "center",
-                  color: "#000000",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: 120,
-                  margin: "0 auto",
-                  height: "38px",
-                  background: "#64FF99",
-                  borderRadius: "12px",
-                }}
-              >
-                Claim
-              </Button>
-            )}
-          </Box>
-
-          <Box
-            pt={4}
-            style={{
-              width: "90%",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
             <Box
               style={{
+                width: "100%",
                 display: "flex",
+                flexDirection: "row",
                 alignItems: "center",
-                justifyContent: "center",
+                justifyContent: "space-around",
+                marginTop: 20,
               }}
             >
-              <img
-                src="/images/energy.png"
-                style={{
-                  width: 20,
-                  height: 20,
-                  objectFit: "contain",
-                }}
+              <OptionCard
+                key={1}
+                isSelected={isSelected}
+                correctOption={questionData.correct}
+                selectedOption={ansSelected[currentQueNo]}
+                inputOption={1}
+                title={questionData.option1}
+                img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-a-letter-effect-text-9423674-7664624.png"
+                description="32,430"
               />
-
-              <Typography
-                style={{
-                  width: "100%",
-                  fontWeight: 600,
-                  fontSize: 16,
-                  color: "#ffffff",
-                }}
-              >
-                {displayQuestionNumber}/5
-              </Typography>
+              <OptionCard
+                key={2}
+                isSelected={isSelected}
+                correctOption={questionData.correct}
+                selectedOption={ansSelected[currentQueNo]}
+                inputOption={2}
+                title={questionData.option2}
+                img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-b-letter-effect-text-9423689-7664639.png"
+                description="1,203"
+              />
             </Box>
-            <Link to="/boost">
+            <Typography
+              pt={1}
+              style={{
+                width: "100%",
+                fontWeight: 600,
+                fontSize: 16,
+                color: quizMessageStatus === 1 ? "#64FF99" : "#ef5350",
+                textAlign: "center",
+              }}
+            >
+              {quizMessageStatus === 1 && "Great! Right answer"}
+              {quizMessageStatus === 2 && "Sorry! Try next time!"}
+            </Typography>
+          </Box>
+          {/* Timer, Claim and Boost Components */}
+          <Box
+            style={{
+              heght: "20vh",
+              width: "90%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            {isTimerRunning && (
+              <Box>
+                <Typography
+                  className={classes.description}
+                  style={{
+                    textAlign: "center",
+                  }}
+                >
+                  Next slot in
+                </Typography>
+                <TimerComp endTime={timerValue} />
+              </Box>
+            )}
+
+            <Box>
+              {nextButtonFlag && (
+                <Typography
+                  onClick={nextButtonFlag ? handleNextButtonClick : null}
+                  style={{
+                    textAlign: "center",
+                    color: "#ffffff",
+                    fontWeight: 700,
+                  }}
+                >
+                  <img
+                    src={
+                      "https://cdn3d.iconscout.com/3d/premium/thumb/dollar-coin-2997232-2516270.png?f=webp"
+                    }
+                    height={22}
+                    width={22}
+                  />
+                  500,000
+                </Typography>
+              )}
+
+              {nextButtonFlag && (
+                <Button
+                  onClick={nextButtonFlag ? handleNextButtonClick : null}
+                  style={{
+                    fontWeight: 700,
+                    fontSize: "14px",
+                    display: "flex",
+                    alignItems: "center",
+                    textAlign: "center",
+                    color: "#000000",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: 120,
+                    margin: "0 auto",
+                    height: "38px",
+                    background: "#64FF99",
+                    borderRadius: "12px",
+                  }}
+                >
+                  Claim
+                </Button>
+              )}
+            </Box>
+
+            <Box
+              pt={4}
+              style={{
+                width: "90%",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
               <Box
                 style={{
                   display: "flex",
@@ -324,10 +328,10 @@ const QuizPage = () => {
                 }}
               >
                 <img
-                  src="https://cdn3d.iconscout.com/3d/premium/thumb/go-green-11413832-9197004.png?f=webp"
+                  src="/images/energy.png"
                   style={{
-                    width: 22,
-                    height: 22,
+                    width: 20,
+                    height: 20,
                     objectFit: "contain",
                   }}
                 />
@@ -340,10 +344,39 @@ const QuizPage = () => {
                     color: "#ffffff",
                   }}
                 >
-                  Boost
+                  {displayQuestionNumber}/5
                 </Typography>
               </Box>
-            </Link>
+              <Link to="/boost">
+                <Box
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    src="https://cdn3d.iconscout.com/3d/premium/thumb/go-green-11413832-9197004.png?f=webp"
+                    style={{
+                      width: 22,
+                      height: 22,
+                      objectFit: "contain",
+                    }}
+                  />
+
+                  <Typography
+                    style={{
+                      width: "100%",
+                      fontWeight: 600,
+                      fontSize: 16,
+                      color: "#ffffff",
+                    }}
+                  >
+                    Boost
+                  </Typography>
+                </Box>
+              </Link>
+            </Box>
           </Box>
         </Box>
       )}

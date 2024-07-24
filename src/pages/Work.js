@@ -53,15 +53,15 @@ const Work = () => {
           style={{
             marginTop: 10,
             width: "90%",
-            height: 50,
+            height: 52,
             background: "#000",
             display: "flex",
             justifyContent: "space-around",
             alignItems: "center",
             backgroundColor: "#212121",
             borderRadius: 10,
-            paddingLeft: 5,
-            paddingRight: 5,
+            paddingLeft: 6,
+            paddingRight: 6,
           }}
         >
           {topTabs.map((ele, i) => (
@@ -88,7 +88,7 @@ const Work = () => {
                 textTransform={"Capitalize"}
                 style={{
                   fontWeight: tabValue === i ? 700 : 400,
-                  fontSize: 11,
+                  fontSize: 12,
                   color: tabValue === i ? "#64FF99" : "#FFFFFF",
                 }}
               >

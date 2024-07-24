@@ -102,7 +102,7 @@ const Navbar = () => {
           style={{
             position: "fixed",
             left: 0,
-            bottom: 10,
+            bottom: 7,
             right: 0,
             display: "flex",
             justifyContent: "center",

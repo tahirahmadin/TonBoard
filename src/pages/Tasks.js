@@ -48,6 +48,7 @@ const ActionButton = ({
         paddingRight: "6px",
         textTransform: "capitalize",
         opacity: !disabled ? 1 : 0.75,
+
         ...style,
       }}
       onClick={onClick}
@@ -66,7 +67,7 @@ const ActionButton = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#64FF99",
+          background: "#64b5f6",
           paddingLeft: "3px",
           zIndex: 1,
           ...fontStyle,
@@ -79,7 +80,7 @@ const ActionButton = ({
           minWidth: 20,
           height: 20,
           borderRadius: "3px",
-          background: "#64FF99",
+          background: "#64b5f6",
           transform: "rotate(45deg)",
           marginLeft: -12,
         }}
@@ -92,9 +93,7 @@ const SingleTask = ({
   taskId,
   name,
   url,
-
   points,
-
   inProgress,
   setInProgress,
 }) => {
@@ -153,7 +152,7 @@ const SingleTask = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "5px 15px",
+        padding: "8px 15px",
       }}
     >
       <Box>
@@ -260,7 +259,7 @@ const SingleNonSpecialTask = ({ taskId, name, points }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "5px 15px",
+        padding: "29px 15px",
       }}
     >
       <Box>
@@ -384,15 +383,15 @@ const Tasks = () => {
             <Box
               style={{
                 width: "90%",
-                height: 45,
+                height: 52,
                 background: "#000",
                 display: "flex",
                 justifyContent: "space-around",
                 alignItems: "center",
                 backgroundColor: "#212121",
                 borderRadius: 10,
-                paddingLeft: 5,
-                paddingRight: 5,
+                paddingLeft: 6,
+                paddingRight: 6,
               }}
             >
               {topTabs.map((ele, i) => (
@@ -419,7 +418,7 @@ const Tasks = () => {
                     textTransform={"Capitalize"}
                     style={{
                       fontWeight: tabValue === i ? 700 : 400,
-                      fontSize: 11,
+                      fontSize: 12,
                       color: tabValue === i ? "#64FF99" : "#FFFFFF",
                     }}
                   >

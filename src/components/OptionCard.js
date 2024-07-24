@@ -9,7 +9,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import makeStyles from "@mui/styles/makeStyles";
 import useGameHook from "../hooks/useGameHook";
@@ -31,9 +31,10 @@ const OptionCard = ({
   title,
   description,
   tick,
-  onClick,
-  inputOption,
   isSelected,
+  correctOption,
+  selectedOption,
+  inputOption,
 }) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -44,6 +45,39 @@ const OptionCard = ({
   const handleSelect = async () => {
     handleAnswerSelected(inputOption);
   };
+
+  const backgroundCardBorder = useMemo(() => {
+    if (
+      isSelected &&
+      correctOption === selectedOption &&
+      correctOption === inputOption
+    ) {
+      return `linear-gradient(180deg, #4886FF 0%, green 100%)`;
+    } else if (
+      isSelected &&
+      correctOption !== selectedOption &&
+      inputOption != correctOption
+    ) {
+      return `linear-gradient(180deg, #4886FF 0%, red 100%)`;
+    } else {
+      return "transparent";
+    }
+  }, [isSelected, correctOption, selectedOption, inputOption]);
+
+  const iconCondition = useMemo(() => {
+    console.log(isSelected, correctOption, selectedOption, inputOption);
+    if (isSelected && (correctOption === selectedOption) === inputOption) {
+      return "RIGHT";
+    } else if (
+      isSelected &&
+      correctOption !== selectedOption &&
+      inputOption != correctOption
+    ) {
+      return "WRONG";
+    } else {
+      return "OTHER";
+    }
+  }, [isSelected, correctOption, selectedOption, inputOption]);
 
   return (
     <>
@@ -61,10 +95,7 @@ const OptionCard = ({
           alignItems: "center",
           padding: "2px",
           inset: "0",
-
-          background: tick
-            ? `linear-gradient(180deg, #4886FF 0%, green 100%)`
-            : "transparent",
+          background: backgroundCardBorder,
         }}
       >
         <Box
@@ -160,7 +191,8 @@ const OptionCard = ({
               >
                 {description}+
               </Typography> */}
-              {tick && (
+              {console.log(iconCondition)}
+              {iconCondition === "RIGHT" && (
                 <img
                   src="https://cdn3d.iconscout.com/3d/premium/thumb/successfully-done-5108472-4288033.png"
                   style={{
@@ -171,7 +203,7 @@ const OptionCard = ({
                 />
               )}
 
-              {!tick && (
+              {iconCondition === "WRONG" && (
                 <img
                   src="https://cdn3d.iconscout.com/3d/premium/thumb/wrong-9090242-7480311.png?f=webp"
                   style={{
