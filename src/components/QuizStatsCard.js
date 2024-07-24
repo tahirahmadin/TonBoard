@@ -76,8 +76,8 @@ const QuizStatsCard = ({
               "https://cdn3d.iconscout.com/3d/premium/thumb/cash-bonus-on-online-shopping-11964562-9764218.png?f=webp"
             }
             alt="TaskDao"
-            width={36}
-            height={36}
+            width={32}
+            height={32}
           />
           <Typography
             style={{
@@ -108,8 +108,8 @@ const QuizStatsCard = ({
               "https://cdn3d.iconscout.com/3d/premium/thumb/stopwatch-6430267-5449295.png"
             }
             alt="TaskDao"
-            width={36}
-            height={36}
+            width={32}
+            height={32}
           />
           <Typography
             style={{
@@ -140,8 +140,8 @@ const QuizStatsCard = ({
               "https://cdn3d.iconscout.com/3d/premium/thumb/renewable-energy-6551039-5386087.png"
             }
             alt="TaskDao"
-            width={28}
-            height={28}
+            width={24}
+            height={24}
           />
           <Typography
             style={{
