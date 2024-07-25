@@ -227,7 +227,7 @@ const Dashboard = () => {
                 <ProgressCard
                   correctPercent={70}
                   category="Bitcoin"
-                  img="https://cdn3d.iconscout.com/3d/premium/thumb/bitcoin-5848614-4897747.png?f=webp"
+                  img="https://cdn3d.iconscout.com/3d/free/thumb/free-bitcoin-3443546-2879622.png?f=webp"
                   attemptedQuestions={20}
                   maxQuestions={20}
                 />
