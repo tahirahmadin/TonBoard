@@ -57,6 +57,7 @@ const useGameHook = (hookInit = false) => {
     async function asyncFn() {
       if (hookInit && accountSC) {
         // await localStorage.removeItem("ui");
+        console.log("loading state from cache");
         await dispatch(updateLocalDataToRedux());
         //1.  Load Backend
         // let backendData = await getUserLeaderboardData(accountSC);
@@ -104,7 +105,6 @@ const useGameHook = (hookInit = false) => {
   const _handleAnswerSelected = useCallback(
     (inputOption) => {
       if (ansSelected.length === currentQueNo + 1) {
-        console.log("already marked");
         return;
       }
 
@@ -117,10 +117,6 @@ const useGameHook = (hookInit = false) => {
       tempAns[currentQueNo] = inputOption;
       dispatch(updateAnsSelected(tempAns));
 
-      // if (tempAns.length % 5 === 0) {
-      //   let nextTimerValue = Date.now() + 60 * 1000; //21600000;
-      //   dispatch(updateTimerValue(nextTimerValue));
-      // }
       // reset claim status on new ans selection
       dispatch(updateQuizPointClaimStatus(false));
 
@@ -144,11 +140,9 @@ const useGameHook = (hookInit = false) => {
       let inputOption = ansSelected[ansSelected.length - 1];
       //Update user score
       if (QUIZ_DATA[currentQueNo].correct === inputOption) {
-        console.log("correct");
         // update points on correct
         dispatch(updateScore(score + rewardsOnCorrect));
       } else {
-        console.log("wrong");
         // update points on wrong
         dispatch(updateScore(score + rewardsOnWrong));
       }
