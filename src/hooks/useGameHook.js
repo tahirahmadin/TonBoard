@@ -15,6 +15,7 @@ import {
   updateTimerValue,
   updateCurrentSlotNo,
   updateQuizPointClaimStatus,
+  updateIsExploding,
 } from "../reducers/UiReducers";
 import {
   getUserLeaderboardData,
@@ -122,6 +123,14 @@ const useGameHook = (hookInit = false) => {
       // }
       // reset claim status on new ans selection
       dispatch(updateQuizPointClaimStatus(false));
+
+      // Confetti Animation
+      if (QUIZ_DATA[currentQueNo].correct === inputOption) {
+        dispatch(updateIsExploding(true));
+        setTimeout(() => {
+          dispatch(updateIsExploding(false));
+        }, 2000);
+      }
     },
     [ansSelected, currentQueNo, dispatch]
   );

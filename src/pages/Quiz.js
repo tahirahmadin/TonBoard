@@ -2,9 +2,7 @@ import * as React from "react";
 import { useEffect, useMemo } from "react";
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import useGameHook from "../hooks/useGameHook";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import OptionCard from "../components/OptionCard";
 import makeStyles from "@mui/styles/makeStyles";
 
@@ -12,10 +10,10 @@ import ScoreComp from "../components/Score";
 import TimerComp from "../components/TimerComp";
 import { Link } from "react-router-dom";
 import QUIZ_DATA from "../utils/questions.json";
-import { updateCurrentQueNo } from "../reducers/UiReducers";
+import { updateCurrentQueNo, updateIsExploding } from "../reducers/UiReducers";
 import useSlotTimer from "../hooks/useSlotTimer";
-import ClaimQuizPopup from "../components/ClaimQuizPopup";
 import QuizStatsCard from "../components/QuizStatsCard";
+import ConfettiExplosion from "react-confetti-explosion";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -43,6 +41,7 @@ const QuizPage = () => {
   const isSlotWaitingForClaim = useSelector(
     (state) => state.ui.isSlotWaitingForClaim
   );
+  const isExploding = useSelector((state) => state.ui.isExploding);
 
   const { handleClaimButtonClick } = useGameHook();
   const { isTimerRunning } = useSlotTimer();
@@ -122,11 +121,18 @@ const QuizPage = () => {
             backgroundPosition: "center center",
           }}
         >
+          {isExploding && (
+            <ConfettiExplosion
+              force={0.6}
+              duration={2000}
+              particleCount={150}
+            />
+          )}
           {/* Quiz Components */}
           <Box
             pt={2}
             style={{
-              height: "53vh",
+              height: "63vh",
               width: "90%",
               display: "flex",
               flexDirection: "column",
@@ -253,37 +259,27 @@ const QuizPage = () => {
               {quizMessageStatus === 1 && "Great! Right answer"}
               {quizMessageStatus === 2 && "Sorry! Try next time!"}
             </Typography>
-          </Box>
-          {/* Timer, Claim and Boost Components */}
-          <Box
-            style={{
-              heght: "20vh",
-              width: "90%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            {isTimerRunning && (
-              <Box height={"10vh"}>
-                <Typography
-                  style={{
-                    textAlign: "center",
-                    color: "#e5e5e5",
-                  }}
-                >
-                  Next slot in
-                </Typography>
-                <TimerComp endTime={timerValue} />
-              </Box>
-            )}
-
+            <Box>
+              {isTimerRunning && (
+                <Box height={"10vh"}>
+                  <Typography
+                    style={{
+                      textAlign: "center",
+                      color: "#e5e5e5",
+                    }}
+                  >
+                    Next slot in
+                  </Typography>
+                  <TimerComp endTime={timerValue} />
+                </Box>
+              )}
+            </Box>
             <Box height={"10vh"}>
               {showClaimBtn && (
                 <Button
                   onClick={showClaimBtn ? handleClaimButtonClick : null}
                   style={{
+                    marginTop: 20,
                     fontWeight: 700,
                     fontSize: "14px",
                     display: "flex",
@@ -310,7 +306,18 @@ const QuizPage = () => {
                 </Button>
               )}
             </Box>
-
+          </Box>
+          {/* Timer, Claim and Boost Components */}
+          <Box
+            style={{
+              heght: "20vh",
+              width: "90%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
             <Box
               pt={2}
               style={{

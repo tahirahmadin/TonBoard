@@ -5,12 +5,19 @@ import { useServerAuth } from "../hooks/useServerAuth";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 import { getReferralsData } from "../actions/serverActions";
 import SuccessSnackbar from "../components/SuccessSnackbar";
-import { setSuccessPopup } from "../reducers/UiReducers";
+import {
+  setSuccessPopup,
+  updateReferralCount,
+  updateReferralPoints,
+} from "../reducers/UiReducers";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import constants, { LEAGUE_LEVEL_DATA } from "../utils/constants";
+import { getNumbersInFormat } from "../actions/helperFn";
 
 const Referral = () => {
   const dispatch = useDispatch();
-  const { telegramUserId, WebAppSDK, viberate } = useTelegramSDK();
+  const { telegramUserId, WebAppSDK, viberate } = useTelegramSDK(true);
 
   const [allReferrals, setAllReferrals] = useState([]);
   const [pageLoaded, setPageLoaded] = useState(false);
@@ -24,6 +31,12 @@ const Referral = () => {
 
         if (res) {
           setAllReferrals(res);
+          await dispatch(updateReferralCount(res.length));
+
+          let pointsSum = res.reduce((a, b) => a + b.points, 0);
+
+          await dispatch(updateReferralCount(res.length));
+          await dispatch(updateReferralPoints(pointsSum));
         }
         setPageLoaded(true);
       }
@@ -34,7 +47,7 @@ const Referral = () => {
   const handleCopyToClipboard = () => {
     if (telegramUserId) {
       navigator.clipboard
-        .writeText(`https://t.me/taskdao/game?startapp=${telegramUserId}`)
+        .writeText(`${constants.botUrl}${telegramUserId}`)
         .then(
           function () {
             viberate("light");
@@ -52,7 +65,7 @@ const Referral = () => {
     <Box
       style={{
         width: "100%",
-        minHeight: "calc(100vh - 60px)",
+        minHeight: "calc(100vh - 0px)",
         position: "relative",
         background: "#161811",
         paddingTop: "25px",
@@ -60,26 +73,12 @@ const Referral = () => {
       }}
     >
       <SuccessSnackbar text="Invite link copied!" />
-      <img
-        src="/images/bg_grid.png"
-        alt="TaskDao"
-        className="portrait"
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          zIndex: -1,
-          top: 0,
-          left: 0,
-          objectFit: "cover",
-        }}
-      />
-      <Profile />
+
       <Box
         style={{
           width: "90%",
           height: "87px",
-          background: "linear-gradient(180deg, #FF97FF 0%, #CC37CC 100%)",
+          background: "linear-gradient(180deg, #64FF99 0%, #64FF99 100%)",
           borderRadius: "24px",
           padding: "1px",
           marginTop: "15px",
@@ -102,106 +101,92 @@ const Referral = () => {
           <Typography
             style={{ fontWeight: 400, fontSize: "16px", lineHeight: "19px" }}
           >
-            Your Referrals
+            Your Squad
           </Typography>
           <Typography
             style={{
+              fontFamily: "'Rubik'",
               fontWeight: 600,
               fontSize: "40px",
               lineHeight: "100%",
-              color: "#FF9CFF",
+              color: "#64FF99",
             }}
           >
             {allReferrals && allReferrals.length.toLocaleString()}
           </Typography>
         </Box>
       </Box>
-      <Box
-        style={{
-          width: "100%",
-          height: 121,
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "-20px",
-        }}
-      >
-        <img
-          src="https://png.pngtree.com/png-clipart/20220612/original/pngtree-dollar-coin-icon-3d-png-image_7966148.png"
-          style={{
-            width: 340,
-            height: 121,
-            objectFit: "contain",
-            zIndex: 1,
-          }}
-        />
-      </Box>
+
       <Box
         style={{
           width: "100%",
           height: "100%",
-          background: "linear-gradient(180deg, #4886FF 0%, #03429F 100%)",
+          minHeight: "calc(100vh - 222px)",
+
           borderRadius: "32px 32px 0px 0px",
-          padding: "1px 1px 0",
-          marginTop: "-7px",
-          zIndex: 1,
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          gap: "25px",
+          padding: "25px 5% 75px",
         }}
       >
         <Box
           style={{
             width: "100%",
-            height: "calc(100vh - 333px)",
-            background: "#2B2D25",
-            borderRadius: "32px 32px 0px 0px",
+            height: "84px",
+            gap: "5px",
+            background:
+              "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
+            border: "1px solid #414141",
+            borderRadius: "12px",
             display: "flex",
             alignItems: "center",
-            flexDirection: "column",
-            gap: "5px",
-            padding: "25px 5%",
+            justifyContent: "space-between",
+            padding: "8px 15px",
+            borderRadius: "12px",
           }}
         >
           <Box
             style={{
-              width: "100%",
-              height: "84px",
-              background: "linear-gradient(180deg, #7848FF 0%, #346DFF 100%)",
-              borderRadius: "12px",
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              gap: "15px",
-              padding: "15px",
+              fontWeight: 600,
+              fontSize: "15px",
+              lineHeight: "130%",
+              color: "#64FF99",
+              maxWidth: 200,
             }}
           >
-            <Box
+            Invite friends
+            <br />
+            <Typography
               style={{
-                fontWeight: 600,
-                fontSize: "16px",
-                lineHeight: "150%",
-                color: "#FAFF00",
-                maxWidth: 200,
+                fontWeight: 400,
+                fontSize: "12px",
+                lineHeight: "14px",
+                color: "#FFFFFF",
+                opacity: 0.8,
+                wordBreak: "break-all",
+                marginTop: "5px",
+                maxWidth: 175,
               }}
             >
-              My Referral Link
-              <br />
-              <Typography
-                style={{
-                  fontWeight: 400,
-                  fontSize: "14px",
-                  lineHeight: "16px",
-                  color: "#FFFFFF",
-                  opacity: 0.8,
-                  wordBreak: "break-all",
-                }}
-              >
-                {`https://t.me/TaskDao/game?startapp=${telegramUserId}`}
-              </Typography>
-            </Box>
+              {`${constants.botUrl}${telegramUserId}`}
+            </Typography>
+          </Box>
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              flexDirection: "column",
+              gap: "7px",
+            }}
+          >
             <Button
               onClick={handleCopyToClipboard}
               style={{
                 width: "82px",
                 height: "27px",
-                background: "#FAFF00",
+                background: "white",
                 borderRadius: "8px",
                 fontWeight: 600,
                 fontSize: "16px",
@@ -211,142 +196,165 @@ const Referral = () => {
                 color: "#000",
               }}
             >
-              COPY
+              Copy
             </Button>
+            <Link
+              to={`https://t.me/share/url?url=${constants.botUrl}${telegramUserId}`}
+            >
+              <Button
+                style={{
+                  width: "82px",
+                  height: "27px",
+                  background: "transparent",
+                  borderRadius: "8px",
+                  fontWeight: 600,
+                  fontSize: "16px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "white",
+                  border: "1px solid white",
+                }}
+              >
+                SHARE
+              </Button>
+            </Link>
           </Box>
+        </Box>
 
+        <Box
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+          }}
+        >
+          <Typography
+            style={{
+              fontWeight: 600,
+              fontSize: "16px",
+              lineHeight: "150%",
+              color: "#ffffff",
+            }}
+          >
+            My Referrals
+          </Typography>
           <Box
             style={{
               width: "100%",
               height: "100%",
-              maxHeight: 245,
-              background:
-                "linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(149, 149, 149, 0.3) 50%, rgba(227, 227, 227, 0.3) 100%)",
-              borderRadius: "12px",
-              marginTop: "5%",
-              padding: "1px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+              overflowY: "auto",
             }}
           >
-            <Box
-              style={{
-                width: "100%",
-                height: "100%",
-                background: "#2B2D25",
-                borderRadius: "12px",
-              }}
-            >
+            {allReferrals.map((ele, i) => (
               <Box
+                key={i}
                 style={{
                   width: "100%",
+                  minHeight: 55,
                   height: "100%",
                   background:
-                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                    "linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(149, 149, 149, 0.3) 50%, rgba(227, 227, 227, 0.3) 100%)",
                   borderRadius: "12px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "15px",
-                  padding: "15px",
-                  overflow: "hidden",
+                  padding: "1px",
                 }}
               >
-                <Typography
-                  style={{
-                    fontWeight: 600,
-                    fontSize: "16px",
-                    lineHeight: "150%",
-                    color: "#FAFF00",
-                  }}
-                >
-                  My Referrals
-                </Typography>
                 <Box
                   style={{
                     width: "100%",
-                    height: "100%",
-                    maxHeight: 175,
+                    minHeight: 53,
+                    background: "#2B2D25",
+                    borderRadius: "12px",
                     display: "flex",
-                    flexDirection: "column",
-                    gap: "10px",
-                    overflowY: "auto",
-                    padding: "5px 15px 5px 0",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "0 15px",
                   }}
                 >
-                  {allReferrals.map((ele, i) => (
-                    <Box
-                      key={i}
+                  <Box
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                    }}
+                  >
+                    <img
+                      src={
+                        "https://cdn3d.iconscout.com/3d/premium/thumb/man-6530464-5823043.png"
+                      }
                       style={{
-                        width: "100%",
+                        width: 40,
+                        height: 40,
+                        borderRadius: "20%",
+                        backgroundColor: "#212121",
+                        padding: 3,
+                      }}
+                    />
+                    <Box
+                      style={{
+                        fontFamily: "Rubik",
+                        fontStyle: "normal",
+                        fontWeight: 500,
+                        fontSize: "14px",
+                        lineHeight: "16px",
+                        color: "#FFFFFF",
+                        opacity: 1,
                         display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
+                        justifyContent: "center",
+                        flexDirection: "column",
+                        gap: "3px",
+                      }}
+                    >
+                      @{ele.username ? ele.username : "User"}
+                    </Box>
+                  </Box>
+                  {ele.points && (
+                    <Box
+                      style={{
+                        minWidth: "60px",
+                        width: "fit-content",
+                        height: "24px",
+                        borderRadius: "6px",
+                        padding: "1px",
                       }}
                     >
                       <Box
                         style={{
                           width: "100%",
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "10px",
-                        }}
-                      >
-                        <img
-                          src={ele.profilePic}
-                          style={{ width: 24, height: 24, borderRadius: "50%" }}
-                        />
-                        <Typography
-                          style={{
-                            fontWeight: 400,
-                            fontSize: "14px",
-                            lineHeight: "16px",
-                            color: "#FFFFFF",
-                            opacity: 0.8,
-                          }}
-                        >
-                          @{ele.username}
-                        </Typography>
-                      </Box>
-                      <Box
-                        style={{
-                          width: "80px",
-                          height: "22px",
-                          background:
-                            "linear-gradient(180deg, #089B89 0%, #036860 100%)",
+                          height: "100%",
+                          background: "#2B2D25",
                           borderRadius: "6px",
-                          padding: "1px",
                         }}
                       >
                         <Box
                           style={{
                             width: "100%",
                             height: "100%",
-                            background: "#2B2D25",
+                            background:
+                              "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
                             borderRadius: "6px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontSize: 14,
+                            fontWeight: 800,
+                            color: "#64FF99",
                           }}
                         >
-                          <Box
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              background:
-                                "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                              borderRadius: "6px",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              fontSize: 12,
-                              fontWeight: 800,
-                              color: "#64FF99",
-                            }}
-                          >
-                            +5K
-                          </Box>
+                          +{getNumbersInFormat(ele.points)}
                         </Box>
                       </Box>
                     </Box>
-                  ))}
+                  )}
                 </Box>
               </Box>
-            </Box>
+            ))}
           </Box>
         </Box>
       </Box>

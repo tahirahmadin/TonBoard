@@ -85,11 +85,11 @@ const ProgressCard = ({
             style={{
               width: "100%",
               fontFamily: "'Rubik'",
-              fontWeight: 500,
-              fontSize: 8,
+              fontWeight: 400,
+              fontSize: 8.5,
               lineHeight: "100%",
               textAlign: "center",
-              color: "#bdbdbd",
+              color: "#eeeeee",
               marginBottom: 3,
             }}
           >
@@ -120,7 +120,7 @@ const ProgressCard = ({
               fontSize: 10,
               lineHeight: "110%",
               textAlign: "center",
-              color: "#ffffff",
+              color: "#e5e5e5",
               marginBottom: 3,
             }}
           >

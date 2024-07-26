@@ -66,7 +66,7 @@ const ActionButton = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#ffca1b",
+          backgroundColor: "#64FF99",
           paddingLeft: 10,
           paddingRight: 10,
         }}
@@ -149,7 +149,7 @@ const SingleTask = ({
             fontWeight: 700,
             fontSize: "18px",
             lineHeight: "21px",
-            color: "#64FF99",
+            color: "#ffffff",
           }}
         >
           {name}
@@ -168,7 +168,7 @@ const SingleTask = ({
           )}
           <img
             src={
-              "https://cdn3d.iconscout.com/3d/premium/thumb/dollar-coin-2997232-2516270.png?f=webp"
+              "https://cdn3d.iconscout.com/3d/premium/thumb/cash-bonus-on-online-shopping-11964562-9764218.png?f=webp"
             }
             height={22}
             width={22}
@@ -256,7 +256,7 @@ const SingleNonSpecialTask = ({ taskId, name, points }) => {
             fontWeight: 700,
             fontSize: "18px",
             lineHeight: "21px",
-            color: "#64FF99",
+            color: "#ffffff",
           }}
         >
           {name}
@@ -275,7 +275,7 @@ const SingleNonSpecialTask = ({ taskId, name, points }) => {
           )}
           <img
             src={
-              "https://cdn3d.iconscout.com/3d/premium/thumb/dollar-coin-2997232-2516270.png?f=webp"
+              "https://cdn3d.iconscout.com/3d/premium/thumb/cash-bonus-on-online-shopping-11964562-9764218.png?f=webp"
             }
             height={22}
             width={22}

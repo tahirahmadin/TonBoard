@@ -3,6 +3,8 @@ let network_type = 1;
 
 let constants;
 constants = {
+  themeColor: "#40A8F8",
+  botUrl: "https://t.me/TaskDaoBot/app",
   api_url:
     network_type === 1
       ? "https://testapi.gobbl.io/api"

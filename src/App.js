@@ -52,6 +52,7 @@ function App() {
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/work" element={<Work />} />
           <Route exact path="/leader" element={<Leaderboard />} />
+          <Route exact path="/invite" element={<Referral />} />
         </Routes>
         <Navbar />
       </div>

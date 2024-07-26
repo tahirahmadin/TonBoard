@@ -19,6 +19,7 @@ import { Wallet } from "@mui/icons-material";
 import makeStyles from "@mui/styles/makeStyles";
 import ScoreComp from "../components/Score";
 import ProgressCard from "../components/ProgressCard";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -109,14 +110,47 @@ const Dashboard = () => {
           Tahir Ahmad
         </Typography>
 
-        <Typography
-          className={classes.description}
-          style={{
-            textAlign: "center",
-          }}
-        >
-          Manager
-        </Typography>
+        <Link to="/leader">
+          <Box
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-center",
+              alignItems: "center",
+              backgroundColor: "#212121",
+              borderRadius: 7,
+              paddingRight: 12,
+              paddingLeft: 12,
+              paddingTop: 5,
+              paddingBottom: 5,
+              width: "fit-content",
+              margin: "auto",
+            }}
+          >
+            <img
+              src={
+                "https://cdn3d.iconscout.com/3d/premium/thumb/silver-rank-badges-11275520-9023827.png?f=webp"
+              }
+              alt="EON App"
+              width={16}
+              height={16}
+            />
+            <Box
+              style={{
+                width: "100%",
+                fontFamily: "Rubik",
+                fontWeight: 400,
+                fontSize: 12,
+                lineHeight: "100%",
+                textAlign: "center",
+                color: "#e5e5e5",
+                paddingLeft: 5,
+              }}
+            >
+              Degen
+            </Box>
+          </Box>
+        </Link>
       </Box>
       {/* 
       <Box

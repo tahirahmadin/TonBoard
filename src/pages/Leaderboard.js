@@ -25,7 +25,10 @@ import {
   updateRefTaskStatusState,
 } from "../reducers/UiReducers";
 import ScoreComp from "../components/Score";
-import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
+import {
+  getNumbersInFormat,
+  getNumbersInFormatOnlyMillions,
+} from "../actions/helperFn";
 
 const ActionButton = ({
   children,
@@ -97,53 +100,99 @@ const SingleLeaderCard = ({}) => {
     <Box
       style={{
         width: "100%",
-        minHeight: "55.86px",
+        minHeight: 55,
+        height: "100%",
         background:
-          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
-        border: "1px solid #414141",
+          "linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(149, 149, 149, 0.3) 50%, rgba(227, 227, 227, 0.3) 100%)",
         borderRadius: "12px",
-        padding: "5px 15px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        padding: "1px",
       }}
     >
       <Box
         style={{
           width: "100%",
+          minHeight: 53,
+          background: "#2B2D25",
+          borderRadius: "12px",
           display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
           alignItems: "center",
+          justifyContent: "center",
+          padding: "0 15px",
         }}
       >
         <Box
           style={{
-            fontWeight: 700,
-            fontSize: "18px",
-            color: "#64FF99",
-            textAlign: "left",
-          }}
-        >
-          Vitalik Satoshi
-        </Box>
-
-        <Box
-          style={{
-            fontWeight: 500,
-            fontSize: "12px",
-            textAlign: "right",
-            color: "#ffffff",
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
           }}
         >
           <img
             src={
-              "https://cdn3d.iconscout.com/3d/premium/thumb/dollar-coin-2997232-2516270.png?f=webp"
+              "https://cdn3d.iconscout.com/3d/premium/thumb/man-6530464-5823043.png"
             }
-            height={22}
-            width={22}
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: "20%",
+              backgroundColor: "#212121",
+              padding: 3,
+            }}
           />
-          +1.46M
+          <Box
+            style={{
+              fontFamily: "Rubik",
+              fontStyle: "normal",
+              fontWeight: 500,
+              fontSize: "14px",
+              lineHeight: "16px",
+              color: "#FFFFFF",
+              opacity: 1,
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              gap: "3px",
+            }}
+          >
+            Tahir Ahmad
+          </Box>
+        </Box>
+        <Box
+          style={{
+            minWidth: "60px",
+            width: "fit-content",
+            height: "24px",
+            borderRadius: "6px",
+            padding: "1px",
+          }}
+        >
+          <Box
+            style={{
+              width: "100%",
+              height: "100%",
+              background: "#2B2D25",
+              borderRadius: "6px",
+            }}
+          >
+            <Box
+              style={{
+                width: "100%",
+                height: "100%",
+                background:
+                  "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                borderRadius: "6px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 14,
+                fontWeight: 800,
+                color: "#64FF99",
+              }}
+            >
+              +{getNumbersInFormatOnlyMillions(10000)}
+            </Box>
+          </Box>
         </Box>
       </Box>
     </Box>

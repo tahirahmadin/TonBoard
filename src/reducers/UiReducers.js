@@ -25,6 +25,7 @@ const initialState = {
   screenLoaded: false,
   nextButtonFlag: false,
   timerValue: 0,
+  isExploding: false,
 };
 
 // Function:: update localData to redux
@@ -61,7 +62,6 @@ const UiReducer = createSlice({
 
   reducers: {
     updateScore(state, action) {
-      console.log("updating score ", action.payload);
       state.score = action.payload;
     },
     updateNextButtonFlag(state, action) {
@@ -123,6 +123,9 @@ const UiReducer = createSlice({
     },
     setSuccessPopup(state, action) {
       state.successPopup = action.payload;
+    },
+    updateIsExploding(state, action) {
+      state.isExploding = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -195,6 +198,7 @@ export const {
   updateSpecialTaskStatusState,
   updateLeagueTaskStatusState,
   updateRefTaskStatusState,
+  updateIsExploding,
 } = actions;
 
 export default UiReducer;

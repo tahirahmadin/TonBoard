@@ -34,14 +34,14 @@ const Navbar = () => {
         />
       ),
 
-      name: "Work",
+      name: "Engage",
     },
     {
       url: "/tasks",
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/accept-date-10615968-8579878.png?f=webp"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/approve-9569058-7718783.png?f=webp"
           }
           height={24}
           width={24}
@@ -66,18 +66,18 @@ const Navbar = () => {
       name: "Quiz",
     },
     {
-      url: "/leader",
+      url: "/invite",
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/silver-rank-badges-11275520-9023827.png?f=webp"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/invitation-10985234-8883909.png?f=webp"
           }
           height={24}
           width={24}
         />
       ),
 
-      name: "Rankings",
+      name: "Invite",
     },
     {
       url: "/dashboard",

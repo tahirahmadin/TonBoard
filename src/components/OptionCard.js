@@ -13,9 +13,11 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import makeStyles from "@mui/styles/makeStyles";
 import useGameHook from "../hooks/useGameHook";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 import useTelegramSDK from "../hooks/useTelegramSDK";
+import { updateIsExploding } from "../reducers/UiReducers";
+import { QUIZ_DATA } from "../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -40,6 +42,7 @@ const OptionCard = ({
   inputOption,
 }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
 
