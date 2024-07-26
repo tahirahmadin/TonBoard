@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  quizzes: [],
+  isQuizLoading: false,
   score: 0,
   quizPoints: 0,
   refferalPoints: 0,
@@ -10,6 +12,7 @@ const initialState = {
   currentQueNo: 0,
   ansSelected: [],
   isQuizPointsClaimed: false,
+  isTimerRunning: false,
   playLevels: {
     timer: 1,
     rewards: 1,
@@ -87,6 +90,9 @@ const UiReducer = createSlice({
     updateQuizPointClaimStatus(state, action) {
       state.isQuizPointsClaimed = action.payload;
     },
+    updateTimerRunningStatus(state, action) {
+      state.isTimerRunning = action.payload;
+    },
 
     updateReferralCount(state, action) {
       state.referralCount = action.payload;
@@ -127,6 +133,12 @@ const UiReducer = createSlice({
     updateIsExploding(state, action) {
       state.isExploding = action.payload;
     },
+    updateQuizData(state, action) {
+      state.quizzes = action.payload;
+    },
+    updaQuizLoadingStatus(state, action) {
+      state.isQuizLoading = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(updateLocalDataToRedux.fulfilled, (state, action) => {
@@ -156,6 +168,9 @@ const UiReducer = createSlice({
         state.screenLoaded = true;
         state.timerValue = response.timerValue;
         state.isQuizPointsClaimed = response.isQuizPointsClaimed;
+        state.isTimerRunning = response.isTimerRunning;
+        state.quizzes = response.quizzes;
+        state.isQuizLoading = response.isQuizLoading;
       }
     });
     builder.addCase(updateBackendToRedux.fulfilled, (state, action) => {
@@ -165,7 +180,11 @@ const UiReducer = createSlice({
         state.nextButtonFlag = response.nextButtonFlag;
         state.ansSelected = response.ansSelected;
         state.currentQueNo = response.currentQueNo;
+        state.currentSlotNo = response.currentSlotNo;
         state.leagueLevel = response.leagueLevel;
+
+        state.leagueTasksStatus = response.leagueTasksStatus;
+
         state.queLeft = response.queLeft;
         state.playLevels = response.playLevels;
 
@@ -173,6 +192,15 @@ const UiReducer = createSlice({
         state.specialTasksStatus = response.specialTasksStatus;
         state.leagueTasksStatus = response.leagueTasksStatus;
         state.refTasksStatus = response.refTasksStatus;
+        state.referralCount = response.referralCount;
+        state.referralPoints = response.referralPoints;
+
+        state.specialTasksStatus = response.specialTasksStatus;
+
+        state.screenLoaded = true;
+        state.timerValue = response.timerValue;
+        state.isQuizPointsClaimed = response.isQuizPointsClaimed;
+        state.isTimerRunning = response.isTimerRunning;
       }
     });
   },
@@ -188,6 +216,7 @@ export const {
   updateCurrentQueNo,
   updateAnsSelected,
   updateQuizPointClaimStatus,
+  updateTimerRunningStatus,
   updateReferralPoints,
   updateReferralCount,
   updateScreenLoaded,
@@ -199,6 +228,8 @@ export const {
   updateLeagueTaskStatusState,
   updateRefTaskStatusState,
   updateIsExploding,
+  updateQuizData,
+  updaQuizLoadingStatus,
 } = actions;
 
 export default UiReducer;

@@ -16,8 +16,6 @@ import useGameHook from "../hooks/useGameHook";
 import { useDispatch, useSelector } from "react-redux";
 import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 import useTelegramSDK from "../hooks/useTelegramSDK";
-import { updateIsExploding } from "../reducers/UiReducers";
-import { QUIZ_DATA } from "../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   description: {

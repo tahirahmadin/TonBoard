@@ -13,6 +13,7 @@ import {
   TapAndPlay,
   TaskSharp,
 } from "@mui/icons-material";
+import useSlotTimer from "../hooks/useSlotTimer";
 
 const Navbar = () => {
   const { viberate } = useTelegramSDK();
@@ -20,6 +21,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   let { pathname } = useLocation();
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
+
+  const {} = useSlotTimer(true);
 
   const navLinks = [
     {
