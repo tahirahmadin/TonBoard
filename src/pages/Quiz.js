@@ -14,6 +14,7 @@ import { updateCurrentQueNo, updateIsExploding } from "../reducers/UiReducers";
 import useSlotTimer from "../hooks/useSlotTimer";
 import QuizStatsCard from "../components/QuizStatsCard";
 import ConfettiExplosion from "react-confetti-explosion";
+import useTelegramSDK from "../hooks/useTelegramSDK";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -44,6 +45,7 @@ const QuizPage = () => {
   const isExploding = useSelector((state) => state.ui.isExploding);
 
   const { handleClaimButtonClick } = useGameHook();
+
   const { isTimerRunning } = useSlotTimer();
 
   const questionData = useMemo(() => {

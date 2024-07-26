@@ -164,6 +164,7 @@ const useGameHook = (hookInit = false) => {
     if (ansSelected.length % 5 > 0) {
       dispatch(updateCurrentQueNo(currentQueNo + 1));
     }
+    viberate("medium");
   };
 
   // FUNCTION:: Handle upgrade booster
@@ -187,11 +188,13 @@ const useGameHook = (hookInit = false) => {
       );
       dispatch(setSuccessPopup(true));
     }
+    viberate("light");
   };
 
   // FUNCTION:: Claim Points
   const _claimTaskPoints = async (inputPoints) => {
     await dispatch(updateScore(score + inputPoints));
+    viberate("light");
     dispatch(setSuccessPopup(true));
   };
   // FUNCTION:: Claim League level

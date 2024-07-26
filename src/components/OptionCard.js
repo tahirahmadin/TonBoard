@@ -54,7 +54,7 @@ const OptionCard = ({
   const nextButtonFlag = useSelector((state) => state.ui.nextButtonFlag);
 
   const handleSelect = async () => {
-    viberate("light");
+    viberate("medium");
     handleAnswerSelected(inputOption);
   };
 
