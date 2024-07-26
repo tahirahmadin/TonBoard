@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useEffect, useMemo } from "react";
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import { useMemo } from "react";
+import { Box, Button, Typography } from "@mui/material";
 import useGameHook from "../hooks/useGameHook";
 import { useDispatch, useSelector } from "react-redux";
 import OptionCard from "../components/OptionCard";
@@ -9,12 +9,9 @@ import makeStyles from "@mui/styles/makeStyles";
 import ScoreComp from "../components/Score";
 import TimerComp from "../components/TimerComp";
 import { Link } from "react-router-dom";
-import QUIZ_DATA from "../utils/questions.json";
-import { updateCurrentQueNo, updateIsExploding } from "../reducers/UiReducers";
 import useSlotTimer from "../hooks/useSlotTimer";
 import QuizStatsCard from "../components/QuizStatsCard";
 import ConfettiExplosion from "react-confetti-explosion";
-import useTelegramSDK from "../hooks/useTelegramSDK";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -39,36 +36,38 @@ const QuizPage = () => {
   const isQuizPointsClaimed = useSelector(
     (state) => state.ui.isQuizPointsClaimed
   );
-  const isSlotWaitingForClaim = useSelector(
-    (state) => state.ui.isSlotWaitingForClaim
-  );
+  const quizzes = useSelector((state) => state.ui.quizzes);
   const isExploding = useSelector((state) => state.ui.isExploding);
 
   const { handleClaimButtonClick } = useGameHook();
 
-  const { isTimerRunning } = useSlotTimer();
+  const { isTimerRunning } = useSlotTimer(false);
 
   const questionData = useMemo(() => {
-    return QUIZ_DATA[currentQueNo];
-  }, [currentQueNo]);
-
-  useEffect(() => {
-    if ((currentSlotNo + 1) % (currentSlotNo * 5) === 0) {
-      dispatch(updateCurrentQueNo(currentQueNo + 1));
+    if (quizzes && quizzes.length === 0) {
+      return {};
     }
-  }, [currentSlotNo, currentQueNo, dispatch]);
+    return quizzes[currentQueNo];
+  }, [quizzes, currentQueNo]);
+
+  // useEffect(() => {
+  //   if ((currentSlotNo + 1) % (currentSlotNo * 5) === 0) {
+  //     dispatch(updateCurrentQueNo(currentQueNo + 1));
+  //   }
+  // }, [currentSlotNo, currentQueNo, dispatch]);
 
   const quizMessageStatus = React.useMemo(() => {
-    if (ansSelected[currentQueNo] === undefined) {
+    const currOptionIndex = 5 * currentSlotNo + currentQueNo;
+    if (ansSelected[currOptionIndex] === undefined) {
       return 0;
     }
 
-    return ansSelected[currentQueNo] === questionData.correct ? 1 : 2;
-  }, [currentQueNo, ansSelected, questionData]);
+    return ansSelected[currOptionIndex] === questionData.correct ? 1 : 2;
+  }, [currentQueNo, ansSelected, questionData, currentSlotNo]);
 
   const isSelected = useMemo(() => {
-    return ansSelected.length === currentQueNo + 1;
-  }, [ansSelected, currentQueNo]);
+    return ansSelected.length === currentSlotNo * 5 + currentQueNo + 1;
+  }, [ansSelected, currentQueNo, currentSlotNo]);
 
   // display current available questions based on slot
   const displayQuestionNumber = useMemo(() => {
@@ -231,7 +230,7 @@ const QuizPage = () => {
                 key={1}
                 isSelected={isSelected}
                 correctOption={questionData.correct}
-                selectedOption={ansSelected[currentQueNo]}
+                selectedOption={ansSelected[ansSelected.length - 1]}
                 inputOption={1}
                 title={questionData.option1}
                 img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-a-letter-effect-text-9423674-7664624.png"
@@ -241,7 +240,7 @@ const QuizPage = () => {
                 key={2}
                 isSelected={isSelected}
                 correctOption={questionData.correct}
-                selectedOption={ansSelected[currentQueNo]}
+                selectedOption={ansSelected[ansSelected.length - 1]}
                 inputOption={2}
                 title={questionData.option2}
                 img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-b-letter-effect-text-9423689-7664639.png"

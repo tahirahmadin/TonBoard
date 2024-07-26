@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useServerAuth } from "./useServerAuth";
 import { LEAGUE_TASKS_DATA } from "../utils/constants";
-import QUIZ_DATA from "../utils/questions.json";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateLocalDataToRedux,
@@ -16,12 +15,14 @@ import {
   updateCurrentSlotNo,
   updateQuizPointClaimStatus,
   updateIsExploding,
+  updaQuizLoadingStatus,
 } from "../reducers/UiReducers";
 import {
   getUserLeaderboardData,
   updateLocalDataToBackendAPI,
 } from "../actions/serverActions";
 import useTelegramSDK from "./useTelegramSDK";
+import axios from "axios";
 
 // delay for next quiz slot
 const NEXT_SLOT_TIME = 60 * 1000; //21600000;
@@ -48,6 +49,15 @@ const useGameHook = (hookInit = false) => {
   );
   const leagueTasksStatus = useSelector((state) => state.ui.leagueTasksStatus);
   const refTasksStatus = useSelector((state) => state.ui.refTasksStatus);
+
+  const quizzes = useSelector((state) => state.ui.quizzes);
+
+  const questionData = useMemo(() => {
+    if (quizzes && quizzes.length === 0) {
+      return {};
+    }
+    return quizzes[currentQueNo];
+  }, [quizzes, currentQueNo]);
 
   const { accountSC, username } = useServerAuth();
   const { telegramUsername, telegramPhotoUrl, viberate } = useTelegramSDK();
@@ -104,7 +114,7 @@ const useGameHook = (hookInit = false) => {
   // FUNCTION:: Handle select question
   const _handleAnswerSelected = useCallback(
     (inputOption) => {
-      if (ansSelected.length === currentQueNo + 1) {
+      if (ansSelected.length === currentSlotNo * 5 + currentQueNo + 1) {
         return;
       }
 
@@ -114,21 +124,21 @@ const useGameHook = (hookInit = false) => {
 
       //Update answers array
       let tempAns = [...ansSelected];
-      tempAns[currentQueNo] = inputOption;
+      tempAns.push(inputOption);
       dispatch(updateAnsSelected(tempAns));
 
       // reset claim status on new ans selection
       dispatch(updateQuizPointClaimStatus(false));
 
       // Confetti Animation
-      if (QUIZ_DATA[currentQueNo].correct === inputOption) {
+      if (quizzes[currentQueNo].correct === inputOption) {
         dispatch(updateIsExploding(true));
         setTimeout(() => {
           dispatch(updateIsExploding(false));
         }, 2000);
       }
     },
-    [ansSelected, currentQueNo, dispatch]
+    [ansSelected, currentQueNo, currentSlotNo, quizzes, dispatch]
   );
 
   const _handleClaimButtonClick = () => {
@@ -139,7 +149,7 @@ const useGameHook = (hookInit = false) => {
     if (ansSelected.length !== 0) {
       let inputOption = ansSelected[ansSelected.length - 1];
       //Update user score
-      if (QUIZ_DATA[currentQueNo].correct === inputOption) {
+      if (questionData.correct === inputOption) {
         // update points on correct
         dispatch(updateScore(score + rewardsOnCorrect));
       } else {
@@ -156,8 +166,9 @@ const useGameHook = (hookInit = false) => {
 
     // move to next question if current slot has more otherwise show timer for next slot
     if (ansSelected.length % 5 > 0) {
-      dispatch(updateCurrentQueNo(currentQueNo + 1));
+      dispatch(updateCurrentQueNo((currentQueNo + 1) % 5));
     }
+
     viberate("medium");
   };
 

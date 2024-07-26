@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  quizzes: [],
+  isQuizLoading: false,
   score: 0,
   quizPoints: 0,
   refferalPoints: 0,
@@ -131,6 +133,12 @@ const UiReducer = createSlice({
     updateIsExploding(state, action) {
       state.isExploding = action.payload;
     },
+    updateQuizData(state, action) {
+      state.quizzes = action.payload;
+    },
+    updaQuizLoadingStatus(state, action) {
+      state.isQuizLoading = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(updateLocalDataToRedux.fulfilled, (state, action) => {
@@ -161,6 +169,8 @@ const UiReducer = createSlice({
         state.timerValue = response.timerValue;
         state.isQuizPointsClaimed = response.isQuizPointsClaimed;
         state.isTimerRunning = response.isTimerRunning;
+        state.quizzes = response.quizzes;
+        state.isQuizLoading = response.isQuizLoading;
       }
     });
     builder.addCase(updateBackendToRedux.fulfilled, (state, action) => {
@@ -218,6 +228,8 @@ export const {
   updateLeagueTaskStatusState,
   updateRefTaskStatusState,
   updateIsExploding,
+  updateQuizData,
+  updaQuizLoadingStatus,
 } = actions;
 
 export default UiReducer;
