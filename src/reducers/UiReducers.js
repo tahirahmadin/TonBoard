@@ -30,7 +30,7 @@ const initialState = {
   timerValue: 0,
   isExploding: false,
   isBackendSynced: false,
-  isFirstLoad: true,
+  isBackendLoaded: false,
 };
 
 // Function:: update localData to redux
@@ -142,9 +142,6 @@ const UiReducer = createSlice({
     updateBackendSyncStatus(state, action) {
       state.isBackendSynced = action.payload;
     },
-    updateFirstLoadStatus(state, action) {
-      state.isFirstLoad = action.payload;
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(updateLocalDataToRedux.fulfilled, (state, action) => {
@@ -177,7 +174,7 @@ const UiReducer = createSlice({
         state.quizzes = response.quizzes;
         state.isQuizLoading = response.isQuizLoading;
         state.isBackendSynced = response.isBackendSynced;
-        state.isFirstLoad = response.isFirstLoad;
+        state.isBackendLoaded = response.isBackendLoaded;
       }
     });
     builder.addCase(updateBackendToRedux.fulfilled, (state, action) => {
@@ -209,6 +206,7 @@ const UiReducer = createSlice({
         state.isTimerRunning = response.isTimerRunning;
         state.quizzes = response.quizzes;
         state.isQuizLoading = response.isQuizLoading;
+        state.isBackendLoaded = response.isBackendLoaded;
       }
     });
   },
@@ -238,7 +236,6 @@ export const {
   updateQuizData,
   updaQuizLoadingStatus,
   updateBackendSyncStatus,
-  updateFirstLoadStatus,
 } = actions;
 
 export default UiReducer;

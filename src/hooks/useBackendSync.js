@@ -18,7 +18,6 @@ const BACKEND_SYNC_INTERVAL = 30 * 1000;
 
 const useBackendSync = (initHook) => {
   const isBackendSynced = useSelector((state) => state.ui.isBackendSynced);
-  const isFirstLoad = useSelector((state) => state.ui.isFirstLoad);
   const { accountSC } = useServerAuth();
   const ui = useSelector((state) => state.ui);
 
@@ -64,14 +63,20 @@ const useBackendSync = (initHook) => {
         console.log({ backendData });
         const quizData = await getQuizData(backendData.currentSlotNo);
         console.log({ quizData });
-        dispatch(updateBackendToRedux({ ...backendData, quizzes: quizData }));
+        dispatch(
+          updateBackendToRedux({
+            ...backendData,
+            quizzes: quizData,
+            isBackendLoaded: true,
+          })
+        );
 
         dispatch(updateScreenLoaded(true));
       }
     }
 
     asyncFn();
-  }, [accountSC, initHook, dispatch, isFirstLoad]);
+  }, [accountSC, initHook, dispatch]);
 
   //Sync redux state with localStorage
   useEffect(() => {

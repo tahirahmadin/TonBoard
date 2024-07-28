@@ -16,10 +16,16 @@ const useSlotTimer = (initHook) => {
   const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
   const isTimerRunning = useSelector((state) => state.ui.isTimerRunning);
+  const isBackendLoaded = useSelector((state) => state.ui.isBackendLoaded);
 
   const dispatch = useDispatch();
 
   const handleTimerExpire = useCallback(async () => {
+    if (!isBackendLoaded) {
+      console.log("skipping sync backend not loaded yet ");
+      return;
+    }
+
     dispatch(updateTimerRunningStatus(false));
 
     // question and slot update needed
@@ -29,7 +35,7 @@ const useSlotTimer = (initHook) => {
 
       await loadQuizData(currentSlotNo + 1);
     }
-  }, [currentQueNo, currentSlotNo, dispatch]);
+  }, [currentQueNo, currentSlotNo, dispatch, isBackendLoaded]);
 
   useEffect(() => {
     if (!initHook) {
