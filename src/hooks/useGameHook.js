@@ -1,54 +1,31 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useServerAuth } from "./useServerAuth";
+import { useCallback, useMemo } from "react";
+
 import { LEAGUE_TASKS_DATA } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  updateLocalDataToRedux,
   setSuccessPopup,
   updateLeagueLevel,
   updatePlayLevels,
   updateScore,
-  updateScreenLoaded,
   updateAnsSelected,
   updateCurrentQueNo,
   updateTimerValue,
-  updateCurrentSlotNo,
   updateQuizPointClaimStatus,
   updateIsExploding,
-  updaQuizLoadingStatus,
 } from "../reducers/UiReducers";
-import {
-  getUserLeaderboardData,
-  updateLocalDataToBackendAPI,
-} from "../actions/serverActions";
 import useTelegramSDK from "./useTelegramSDK";
-import axios from "axios";
 
 // delay for next quiz slot
 const NEXT_SLOT_TIME = 60 * 1000; //21600000;
 
 const useGameHook = (hookInit = false) => {
   const dispatch = useDispatch();
-  const ui = useSelector((state) => state.ui);
   const score = useSelector((state) => state.ui.score);
   const currentQueNo = useSelector((state) => state.ui.currentQueNo);
   const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
   const ansSelected = useSelector((state) => state.ui.ansSelected);
-  const leagueLevel = useSelector((state) => state.ui.leagueLevel);
   const playLevels = useSelector((state) => state.ui.playLevels);
-  const referralCount = useSelector((state) => state.ui.referralCount);
   const referralPoints = useSelector((state) => state.ui.referralPoints);
-  const timerValue = useSelector((state) => state.ui.timerValue);
-  const screenLoaded = useSelector((state) => state.ui.screenLoaded);
-  const isSlotWaitingForClaim = useSelector(
-    (state) => state.ui.isSlotWaitingForClaim
-  );
-
-  const specialTasksStatus = useSelector(
-    (state) => state.ui.specialTasksStatus
-  );
-  const leagueTasksStatus = useSelector((state) => state.ui.leagueTasksStatus);
-  const refTasksStatus = useSelector((state) => state.ui.refTasksStatus);
 
   const quizzes = useSelector((state) => state.ui.quizzes);
 
@@ -56,55 +33,10 @@ const useGameHook = (hookInit = false) => {
     if (quizzes && quizzes.length === 0) {
       return {};
     }
-    return quizzes[currentQueNo];
+    return quizzes?.[currentQueNo];
   }, [quizzes, currentQueNo]);
 
-  const { accountSC, username } = useServerAuth();
-  const { telegramUsername, telegramPhotoUrl, viberate } = useTelegramSDK();
-
-  //1.  To Manage initial loading of the application
-  useEffect(() => {
-    async function asyncFn() {
-      if (hookInit && accountSC) {
-        // await localStorage.removeItem("ui");
-        console.log("loading state from cache");
-        await dispatch(updateLocalDataToRedux());
-        //1.  Load Backend
-        // let backendData = await getUserLeaderboardData(accountSC);
-        // console.log(backendData);
-
-        // if (backendData.referralPoints) {
-        //   await dispatch(updateReferralCount(backendData.referralCount));
-        //   await dispatch(updateReferralPoints(backendData.referralPoints));
-        // }
-        // if (
-        //   (backendData && telegramUsername && backendData.username === "") ||
-        //   backendData.username !== telegramUsername
-        // ) {
-        //   // Update Local Data to Backend server
-        //   await updateUsernameToBackendAPI(
-        //     { username: telegramUsername },
-        //     accountSC
-        //   );
-        // }
-        // await dispatch(updateLocalDataToBackend(accountSC));
-        dispatch(updateScreenLoaded(true));
-      }
-    }
-
-    asyncFn();
-  }, [accountSC, hookInit, telegramUsername, dispatch]);
-
-  //2. Updating localStorage on every change
-  useEffect(() => {
-    async function asyncFn() {
-      if (accountSC && hookInit) {
-        await localStorage.setItem("ui", JSON.stringify(ui));
-      }
-    }
-
-    asyncFn();
-  }, [accountSC, ui, hookInit]);
+  const { viberate } = useTelegramSDK();
 
   // Final Score = score + referral score
   const finalScore = useMemo(() => {
@@ -239,7 +171,7 @@ const useGameHook = (hookInit = false) => {
     } else {
       return 360 - playLevels.timer * 60;
     }
-  }, [playLevels.rewards]);
+  }, [playLevels]);
 
   return {
     gameScore: finalScore,

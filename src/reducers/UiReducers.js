@@ -1,11 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  username: "",
+  userId: "",
+  profilePic: "",
+  score: 0,
   quizzes: [],
   isQuizLoading: false,
-  score: 0,
   quizPoints: 0,
-  refferalPoints: 0,
+  referralPoints: 0,
+  referralCount: 0,
   workPoints: 0,
   leagueLevel: 0,
   currentSlotNo: 0,
@@ -19,16 +23,14 @@ const initialState = {
   },
   refetch: 0,
   successPopup: false,
-  referralCount: 0,
-  referralPoints: 0,
-
   specialTasksStatus: [],
   leagueTasksStatus: [],
   refTasksStatus: [],
   screenLoaded: false,
-  nextButtonFlag: false,
   timerValue: 0,
   isExploding: false,
+  isBackendSynced: false,
+  isFirstLoad: true,
 };
 
 // Function:: update localData to redux
@@ -66,9 +68,7 @@ const UiReducer = createSlice({
   reducers: {
     updateScore(state, action) {
       state.score = action.payload;
-    },
-    updateNextButtonFlag(state, action) {
-      state.nextButtonFlag = action.payload;
+      state.isBackendSynced = false;
     },
     updateTimerValue(state, action) {
       state.timerValue = action.payload;
@@ -139,13 +139,51 @@ const UiReducer = createSlice({
     updaQuizLoadingStatus(state, action) {
       state.isQuizLoading = action.payload;
     },
+    updateBackendSyncStatus(state, action) {
+      state.isBackendSynced = action.payload;
+    },
+    updateFirstLoadStatus(state, action) {
+      state.isFirstLoad = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(updateLocalDataToRedux.fulfilled, (state, action) => {
       const response = action.payload;
       if (response) {
         state.score = response.score;
-        state.nextButtonFlag = response.nextButtonFlag;
+        state.ansSelected = response.ansSelected;
+        state.currentQueNo = response.currentQueNo;
+        state.currentSlotNo = response.currentSlotNo;
+        state.leagueLevel = response.leagueLevel;
+
+        state.leagueTasksStatus = response.leagueTasksStatus;
+
+        state.queLeft = response.queLeft;
+        state.playLevels = response.playLevels;
+
+        //Tasks states
+        state.specialTasksStatus = response.specialTasksStatus;
+        state.leagueTasksStatus = response.leagueTasksStatus;
+        state.refTasksStatus = response.refTasksStatus;
+        state.referralCount = response.referralCount;
+        state.referralPoints = response.referralPoints;
+
+        state.specialTasksStatus = response.specialTasksStatus;
+
+        state.screenLoaded = true;
+        state.timerValue = response.timerValue;
+        state.isQuizPointsClaimed = response.isQuizPointsClaimed;
+        state.isTimerRunning = response.isTimerRunning;
+        state.quizzes = response.quizzes;
+        state.isQuizLoading = response.isQuizLoading;
+        state.isBackendSynced = response.isBackendSynced;
+        state.isFirstLoad = response.isFirstLoad;
+      }
+    });
+    builder.addCase(updateBackendToRedux.fulfilled, (state, action) => {
+      const response = action.payload;
+      if (response) {
+        state.score = response.score;
         state.ansSelected = response.ansSelected;
         state.currentQueNo = response.currentQueNo;
         state.currentSlotNo = response.currentSlotNo;
@@ -173,36 +211,6 @@ const UiReducer = createSlice({
         state.isQuizLoading = response.isQuizLoading;
       }
     });
-    builder.addCase(updateBackendToRedux.fulfilled, (state, action) => {
-      const response = action.payload;
-      if (response) {
-        state.score = response.score;
-        state.nextButtonFlag = response.nextButtonFlag;
-        state.ansSelected = response.ansSelected;
-        state.currentQueNo = response.currentQueNo;
-        state.currentSlotNo = response.currentSlotNo;
-        state.leagueLevel = response.leagueLevel;
-
-        state.leagueTasksStatus = response.leagueTasksStatus;
-
-        state.queLeft = response.queLeft;
-        state.playLevels = response.playLevels;
-
-        //Tasks states
-        state.specialTasksStatus = response.specialTasksStatus;
-        state.leagueTasksStatus = response.leagueTasksStatus;
-        state.refTasksStatus = response.refTasksStatus;
-        state.referralCount = response.referralCount;
-        state.referralPoints = response.referralPoints;
-
-        state.specialTasksStatus = response.specialTasksStatus;
-
-        state.screenLoaded = true;
-        state.timerValue = response.timerValue;
-        state.isQuizPointsClaimed = response.isQuizPointsClaimed;
-        state.isTimerRunning = response.isTimerRunning;
-      }
-    });
   },
 });
 
@@ -210,7 +218,6 @@ const { actions } = UiReducer;
 
 export const {
   updateScore,
-  updateNextButtonFlag,
   updateTimerValue,
   updateCurrentSlotNo,
   updateCurrentQueNo,
@@ -230,6 +237,8 @@ export const {
   updateIsExploding,
   updateQuizData,
   updaQuizLoadingStatus,
+  updateBackendSyncStatus,
+  updateFirstLoadStatus,
 } = actions;
 
 export default UiReducer;

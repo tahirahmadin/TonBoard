@@ -127,11 +127,9 @@ export const updateTaskStatusAPI = async (userId, task, taskStatus) => {
 };
 
 //5. REFERRAL:: GET User referrals Data by address
-export const getReferralsData = async (telegramId) => {
+export const getReferralsData = async (userId) => {
   try {
-    let requestParams = `telegramId=${telegramId}`;
-
-    let url = `${apiUrl}/user/getReferredUsers?${requestParams}`;
+    let url = `${apiUrl}/user/getReferredUsers?userId=${userId}`;
 
     let response = await axios.get(url).then((res) => res.data);
 
@@ -147,10 +145,20 @@ export const getReferralsData = async (telegramId) => {
 };
 
 //6. USER:: Update Game Data to backend
-export const updateLocalDataToBackendAPI = async (dataObj, userId) => {
+export const updateLocalDataToBackendAPI = async (userId) => {
   let url = `${apiUrl}/user/updateUserData`;
-  console.log(dataObj);
-  let updateObj = { ...dataObj, userId: userId };
+
+  let tempLocalStorageData = localStorage.getItem("ui");
+  if (tempLocalStorageData) {
+    tempLocalStorageData = JSON.parse(tempLocalStorageData);
+  }
+
+  if (!tempLocalStorageData) {
+    console.log("local data not found skipped backend update");
+    return;
+  }
+
+  let updateObj = { ...tempLocalStorageData, userId: userId };
   //Encrypted data
   let encryptedData = getCipherText(updateObj);
 
@@ -172,9 +180,9 @@ export const updateLocalDataToBackendAPI = async (dataObj, userId) => {
 };
 
 //7. DASHBOARD:: GET All Users Data
-export const getDashboardData = async (telegramId) => {
+export const getDashboardData = async (userId) => {
   try {
-    let url = `${apiUrl}/user/getDashboardData`;
+    let url = `${apiUrl}/user/getDashboardData?userId=${userId}`;
 
     let response = await axios.get(url).then((res) => res.data);
     console.log("res", response);
@@ -186,5 +194,35 @@ export const getDashboardData = async (telegramId) => {
   } catch (err) {
     console.log(err);
     return null;
+  }
+};
+
+export const getUserData = async (userId) => {
+  try {
+    let url = `${apiUrl}/user/getUserData?userId=${userId}`;
+
+    let response = await axios.get(url).then((res) => res.data);
+
+    if (response) {
+      return response;
+    } else {
+      return null;
+    }
+  } catch (err) {
+    console.log("getUserData", err);
+    return null;
+  }
+};
+
+export const getQuizData = async (slotNumber) => {
+  try {
+    let url = `${apiUrl}/quiz/current/${slotNumber}`;
+
+    let result = await axios.get(url).then((res) => res.data);
+
+    return result.result;
+  } catch (err) {
+    console.log("getQuizData", err);
+    return [];
   }
 };

@@ -47,7 +47,7 @@ const QuizPage = () => {
     if (quizzes && quizzes.length === 0) {
       return {};
     }
-    return quizzes[currentQueNo];
+    return quizzes?.[currentQueNo];
   }, [quizzes, currentQueNo]);
 
   // useEffect(() => {
@@ -106,7 +106,7 @@ const QuizPage = () => {
       </Box>
 
       {/* Question */}
-      {screenLoaded && (
+      {screenLoaded && questionData && (
         <Box
           style={{
             height: "75vh",
@@ -174,7 +174,7 @@ const QuizPage = () => {
                   color: "#e5e5e5",
                 }}
               >
-                {questionData.category}
+                {questionData?.category}
               </Box>
             </Box>
             <Typography
@@ -187,7 +187,7 @@ const QuizPage = () => {
                 color: "#ffffff",
               }}
             >
-              {questionData.title}
+              {questionData?.title}
             </Typography>
             <a
               href="https://www.youtube.com/@tahirahmad.crypto"
@@ -229,7 +229,7 @@ const QuizPage = () => {
               <OptionCard
                 key={1}
                 isSelected={isSelected}
-                correctOption={questionData.correct}
+                correctOption={questionData?.correct}
                 selectedOption={ansSelected[ansSelected.length - 1]}
                 inputOption={1}
                 title={questionData.option1}
@@ -286,10 +286,7 @@ const QuizPage = () => {
                     display: "flex",
                     alignItems: "center",
                     textAlign: "center",
-                    color: "#000000",
-                    display: "flex",
                     justifyContent: "center",
-                    alignItems: "center",
                     width: 160,
                     margin: "0 auto",
                     height: "38px",
@@ -302,6 +299,7 @@ const QuizPage = () => {
                   <img
                     src="https://cdn3d.iconscout.com/3d/premium/thumb/dollar-sack-9250771-7582870.png?f=webp"
                     style={{ width: 24, height: 24 }}
+                    alt=""
                   />
                   Claim Rewards
                 </Button>

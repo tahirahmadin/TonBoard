@@ -1,4 +1,4 @@
-import { Box, Button, Grow, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useTelegramSDK from "../hooks/useTelegramSDK";
@@ -14,15 +14,17 @@ import {
   TaskSharp,
 } from "@mui/icons-material";
 import useSlotTimer from "../hooks/useSlotTimer";
+import useBackendSync from "../hooks/useBackendSync";
 
 const Navbar = () => {
   const { viberate } = useTelegramSDK();
-  const { gamePercentageLeft, updateOnTapAction } = useGameHook(true);
+  // load initial game states
+  const {} = useGameHook(true);
+  const {} = useSlotTimer(true);
+  const {} = useBackendSync(true);
   const navigate = useNavigate();
   let { pathname } = useLocation();
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
-
-  const {} = useSlotTimer(true);
 
   const navLinks = [
     {
