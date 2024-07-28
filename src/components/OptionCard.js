@@ -49,10 +49,10 @@ const OptionCard = ({
 
   const { viberate } = useTelegramSDK();
 
-  const nextButtonFlag = useSelector((state) => state.ui.nextButtonFlag);
-
+  console.log({ isSelected, selectedOption });
   const handleSelect = async () => {
     viberate("medium");
+    console.log("selected ", inputOption);
     handleAnswerSelected(inputOption);
   };
 

@@ -1,25 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Profile from "../components/Profile";
-import {
-  Box,
-  Button,
-  Grid,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+
+import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
-import { getDashboardData, getReferralsData } from "../actions/serverActions";
-import useTelegramSDK from "../hooks/useTelegramSDK";
-import Explainer from "../components/DashCard";
-import FancyCard from "../components/DashCard";
-import ProfileCard from "../components/ProfileCard";
-import { Wallet } from "@mui/icons-material";
+import { getDashboardData } from "../actions/serverActions";
 
 import makeStyles from "@mui/styles/makeStyles";
-import ScoreComp from "../components/Score";
+
 import ProgressCard from "../components/ProgressCard";
 import { Link } from "react-router-dom";
+import { useServerAuth } from "../hooks/useServerAuth";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -39,18 +28,23 @@ const Dashboard = () => {
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const score = useSelector((state) => state.ui.score);
 
-  const [dashboardData, setDashboardData] = useState({});
+  const [dashboardData, setDashboardData] = useState([]);
+  const { accountSC } = useServerAuth();
 
   // API call: to fetch tasks
-  // useEffect(() => {
-  //   async function asyncFn() {
-  //     let res = await getDashboardData();
-  //     if (res) {
-  //       setDashboardData(res);
-  //     }
-  //   }
-  //   asyncFn();
-  // }, []);
+  useEffect(() => {
+    if (!accountSC) return;
+
+    async function asyncFn() {
+      let res = await getDashboardData(accountSC);
+
+      console.log("progress data ", res);
+      if (res) {
+        setDashboardData(res);
+      }
+    }
+    asyncFn();
+  }, [accountSC]);
 
   return (
     <Box
@@ -257,33 +251,19 @@ const Dashboard = () => {
           </Typography>
           <Box style={{ overflowX: "scroll" }}>
             <Grid container spacing={1} mt={1}>
-              <Grid item xs={4} md={4}>
-                <ProgressCard
-                  correctPercent={70}
-                  category="Bitcoin"
-                  img="https://cdn3d.iconscout.com/3d/free/thumb/free-bitcoin-3443546-2879622.png?f=webp"
-                  attemptedQuestions={20}
-                  maxQuestions={20}
-                />
-              </Grid>
-              <Grid item xs={4} md={4}>
-                <ProgressCard
-                  correctPercent={50}
-                  category="Ethereum"
-                  img="https://cdn3d.iconscout.com/3d/premium/thumb/ethereum-4059136-3364022.png?f=webp"
-                  attemptedQuestions={10}
-                  maxQuestions={20}
-                />
-              </Grid>
-              <Grid item xs={4} md={4}>
-                <ProgressCard
-                  correctPercent={0}
-                  category="DeFi"
-                  img="https://cdn3d.iconscout.com/3d/premium/thumb/decentralization-5796842-4863010.png"
-                  attemptedQuestions={0}
-                  maxQuestions={20}
-                />
-              </Grid>
+              {dashboardData &&
+                dashboardData?.map((el) => (
+                  <Grid item xs={4} md={4}>
+                    <ProgressCard
+                      key={el?.category}
+                      correctPercent={70}
+                      category={el?.category}
+                      img="https://cdn3d.iconscout.com/3d/free/thumb/free-bitcoin-3443546-2879622.png?f=webp"
+                      attemptedQuestions={el?.completed}
+                      maxQuestions={el?.total}
+                    />
+                  </Grid>
+                ))}
             </Grid>
           </Box>
         </Box>

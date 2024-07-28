@@ -1,48 +1,41 @@
 import React, { useEffect, useState } from "react";
-import Profile from "../components/Profile";
 import { Box, Button, Typography } from "@mui/material";
 import { useServerAuth } from "../hooks/useServerAuth";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 import { getReferralsData } from "../actions/serverActions";
 import SuccessSnackbar from "../components/SuccessSnackbar";
-import {
-  setSuccessPopup,
-  updateReferralCount,
-  updateReferralPoints,
-} from "../reducers/UiReducers";
+import { setSuccessPopup, updateReferralCount } from "../reducers/UiReducers";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import constants, { LEAGUE_LEVEL_DATA } from "../utils/constants";
+import constants from "../utils/constants";
 import { getNumbersInFormat } from "../actions/helperFn";
 
 const Referral = () => {
   const dispatch = useDispatch();
-  const { telegramUserId, WebAppSDK, viberate } = useTelegramSDK(true);
+  const { telegramUserId, viberate } = useTelegramSDK(true);
 
   const [allReferrals, setAllReferrals] = useState([]);
   const [pageLoaded, setPageLoaded] = useState(false);
+  const { accountSC } = useServerAuth();
 
   // API call: to fetch tasks
   useEffect(() => {
+    if (!accountSC) return;
+
     async function asyncFn() {
-      if (telegramUserId) {
-        let res = await getReferralsData(telegramUserId);
-        console.log(res);
+      let res = await getReferralsData(accountSC);
+      console.log("referral data ", res);
 
-        if (res) {
-          setAllReferrals(res);
-          await dispatch(updateReferralCount(res.length));
+      if (res) {
+        setAllReferrals(res);
+        dispatch(updateReferralCount(res.length));
 
-          let pointsSum = res.reduce((a, b) => a + b.points, 0);
-
-          await dispatch(updateReferralCount(res.length));
-          await dispatch(updateReferralPoints(pointsSum));
-        }
-        setPageLoaded(true);
+        dispatch(updateReferralCount(res.length));
       }
+      setPageLoaded(true);
     }
     asyncFn();
-  }, [telegramUserId]);
+  }, [accountSC, dispatch]);
 
   const handleCopyToClipboard = () => {
     if (telegramUserId) {

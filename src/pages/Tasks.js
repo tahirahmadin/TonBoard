@@ -24,7 +24,6 @@ import {
   updateSpecialTaskStatusState,
   updateRefTaskStatusState,
 } from "../reducers/UiReducers";
-import ScoreComp from "../components/Score";
 import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 
 const ActionButton = ({
@@ -95,7 +94,7 @@ const SingleTask = ({
   );
 
   let currentTaskStatus = () => {
-    let tempValue = specialTasksStatus[taskId];
+    let tempValue = specialTasksStatus?.[taskId];
     if (tempValue === undefined) {
       return 0;
     } else {
@@ -206,7 +205,6 @@ const SingleNonSpecialTask = ({ taskId, name, points }) => {
   const dispatch = useDispatch();
 
   const { claimReferralLevel } = useGameHook();
-  const { accountSC } = useServerAuth();
 
   const leagueTasksStatus = useSelector((state) => state.ui.leagueTasksStatus);
   const refTasksStatus = useSelector((state) => state.ui.refTasksStatus);
@@ -214,7 +212,7 @@ const SingleNonSpecialTask = ({ taskId, name, points }) => {
 
   let currentTaskStatus = useMemo(() => {
     let tempValue = 0;
-    tempValue = refTasksStatus[taskId];
+    tempValue = refTasksStatus?.[taskId];
 
     if (tempValue === undefined) {
       return 0;

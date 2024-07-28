@@ -15,11 +15,11 @@ const useTelegramSDK = (hookInit = false) => {
         setReferParam(WebApp.initDataUnsafe?.start_param);
       }
 
+      // test
       setTimeout(() => {
         console.log("Loaded");
         setUserID(1118251880);
       }, 2000);
-      // WebApp.initParams({ tgWebVersion: "6.9" });
     }
   }, [WebApp, hookInit]);
 

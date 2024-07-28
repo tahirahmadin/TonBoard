@@ -1,5 +1,5 @@
 // 0 mainnet, 1 testnet
-let network_type = 1;
+let network_type = 2;
 
 let constants;
 constants = {
@@ -7,8 +7,8 @@ constants = {
   botUrl: "https://t.me/TaskDaoBot/app",
   api_url:
     network_type === 1
-      ? "https://testapi.gobbl.io/api"
-      : "https://v2.onerare.io/api",
+      ? "http://localhost:5001/api"
+      : "https://taskdao-backend-rho.vercel.app/api",
 };
 
 export const AUTH_TYPE_ENUM = {

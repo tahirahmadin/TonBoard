@@ -8,6 +8,7 @@ import {
   updateTimerRunningStatus,
 } from "../reducers/UiReducers";
 import axios from "axios";
+import { getQuizData } from "../actions/serverActions";
 
 const useSlotTimer = (initHook) => {
   const timerValue = useSelector((state) => state.ui.timerValue);
@@ -18,13 +19,15 @@ const useSlotTimer = (initHook) => {
 
   const dispatch = useDispatch();
 
-  const handleTimerExpire = useCallback(() => {
+  const handleTimerExpire = useCallback(async () => {
     dispatch(updateTimerRunningStatus(false));
 
     // question and slot update needed
     if ((currentQueNo + 1) % 5 === 0) {
       dispatch(updateCurrentSlotNo(currentSlotNo + 1));
       dispatch(updateCurrentQueNo((currentQueNo + 1) % 5));
+
+      await loadQuizData(currentSlotNo + 1);
     }
   }, [currentQueNo, currentSlotNo, dispatch]);
 
@@ -54,27 +57,22 @@ const useSlotTimer = (initHook) => {
   }, [timerValue, handleTimerExpire, screenLoaded, initHook]);
 
   const loadQuizData = async (_slotNumber) => {
-    console.log("loading quiz data");
     dispatch(updaQuizLoadingStatus(true));
-    const res = await axios.get(
-      `https://taskdao-backend-rho.vercel.app/api/quiz/current/${_slotNumber}`
-    );
-    const data = res.data;
-    console.log(data);
+
+    const quizData = await getQuizData(_slotNumber);
+
     dispatch(updaQuizLoadingStatus(false));
-    if (data.error) {
-      console.log("quiz loading error ", data);
-    }
-    dispatch(updateQuizData(data.result));
+
+    dispatch(updateQuizData(quizData));
   };
 
-  useEffect(() => {
-    if (!initHook) {
-      return;
-    }
+  // useEffect(() => {
+  //   if (!initHook, auth) {
+  //     return;
+  //   }
 
-    loadQuizData(currentSlotNo);
-  }, [currentSlotNo, initHook]);
+  //   loadQuizData(currentSlotNo);
+  // }, [currentSlotNo, initHook]);
 
   return { isTimerRunning };
 };
