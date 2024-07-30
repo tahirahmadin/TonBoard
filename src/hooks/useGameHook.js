@@ -62,6 +62,27 @@ const useGameHook = (hookInit = false) => {
       // reset claim status on new ans selection
       dispatch(updateQuizPointClaimStatus(false));
 
+      let rewardsOnCorrect = _pointsOnCorrectAnswer;
+      let rewardsOnWrong = _pointsOnWrongAnswer;
+
+      // update score
+      if (ansSelected.length !== 0) {
+        let inputOption = ansSelected[ansSelected.length - 1];
+        //Update user score
+        if (questionData.correct === inputOption) {
+          // update points on correct
+          dispatch(updateScore(score + rewardsOnCorrect));
+        } else {
+          // update points on wrong
+          dispatch(updateScore(score + rewardsOnWrong));
+        }
+
+        if (ansSelected.length % 5 === 0) {
+          let nextTimerValue = Date.now() + NEXT_SLOT_TIME;
+          dispatch(updateTimerValue(nextTimerValue));
+        }
+      }
+
       // Confetti Animation
       if (quizzes[currentQueNo].correct === inputOption) {
         dispatch(updateIsExploding(true));
@@ -74,28 +95,7 @@ const useGameHook = (hookInit = false) => {
   );
 
   const _handleClaimButtonClick = () => {
-    let rewardsOnCorrect = _pointsOnCorrectAnswer;
-    let rewardsOnWrong = _pointsOnWrongAnswer;
-
-    // update score
-    if (ansSelected.length !== 0) {
-      let inputOption = ansSelected[ansSelected.length - 1];
-      //Update user score
-      if (questionData.correct === inputOption) {
-        // update points on correct
-        dispatch(updateScore(score + rewardsOnCorrect));
-      } else {
-        // update points on wrong
-        dispatch(updateScore(score + rewardsOnWrong));
-      }
-
-      if (ansSelected.length % 5 === 0) {
-        let nextTimerValue = Date.now() + NEXT_SLOT_TIME;
-        dispatch(updateTimerValue(nextTimerValue));
-      }
-    }
     dispatch(updateQuizPointClaimStatus(true));
-
     // move to next question if current slot has more otherwise show timer for next slot
     if (ansSelected.length % 5 > 0) {
       dispatch(updateCurrentQueNo((currentQueNo + 1) % 5));

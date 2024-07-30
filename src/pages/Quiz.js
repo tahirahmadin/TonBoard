@@ -123,11 +123,7 @@ const QuizPage = () => {
           }}
         >
           {isExploding && (
-            <ConfettiExplosion
-              force={0.6}
-              duration={2000}
-              particleCount={150}
-            />
+            <ConfettiExplosion force={0.3} duration={2000} particleCount={80} />
           )}
           {/* Quiz Components */}
           <Box
@@ -275,12 +271,11 @@ const QuizPage = () => {
                 </Box>
               )}
             </Box>
-            <Box height={"10vh"}>
+            <Box height={"12vh"} mt={2}>
               {showClaimBtn && (
                 <Button
                   onClick={showClaimBtn ? handleClaimButtonClick : null}
                   style={{
-                    marginTop: 20,
                     fontWeight: 700,
                     fontSize: "14px",
                     display: "flex",
@@ -292,16 +287,11 @@ const QuizPage = () => {
                     height: "38px",
                     // background: "#64FF99",
                     borderRadius: "12px",
-                    border: "1px solid #64FF99",
+                    border: "1px solid #414141",
                     color: "#64FF99",
                   }}
                 >
-                  <img
-                    src="https://cdn3d.iconscout.com/3d/premium/thumb/dollar-sack-9250771-7582870.png?f=webp"
-                    style={{ width: 24, height: 24 }}
-                    alt=""
-                  />
-                  Claim Rewards
+                  Next {">>"}
                 </Button>
               )}
             </Box>
