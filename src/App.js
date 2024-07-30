@@ -4,7 +4,6 @@ import { Box, CircularProgress, useTheme } from "@mui/material";
 import Navbar from "./components/Navbar";
 import Referral from "./pages/Referral";
 import Dashboard from "./pages/Dashboard";
-import Tasks from "./pages/Tasks";
 import Boost from "./pages/Boost";
 import { useServerAuth } from "./hooks/useServerAuth";
 import League from "./pages/League";
@@ -15,6 +14,7 @@ import { BackButton } from "@twa-dev/sdk/react";
 import Work from "./pages/Work";
 import QuizPage from "./pages/Quiz";
 import Leaderboard from "./pages/Leaderboard";
+import SingleTaskPage from "./pages/SingleTaskPage";
 
 function App() {
   const theme = useTheme();
@@ -48,7 +48,7 @@ function App() {
           <Route exact path="/boost" element={<Boost />} />
           <Route exact path="/league" element={<League />} />
           <Route exact path="/referral" element={<Referral />} />
-          <Route exact path="/tasks" element={<Tasks />} />
+          <Route exact path="/tasks/:poolId" element={<SingleTaskPage />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/work" element={<Work />} />
           <Route exact path="/leader" element={<Leaderboard />} />

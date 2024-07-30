@@ -98,89 +98,91 @@ const Work = () => {
           ))}
         </Box>
       </Box>
-      <Box
-        style={{
-          position: "absolute",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          height: "80vh",
-          fontFamily: "Rubik",
-          fontWeight: 700,
-          lineHeight: "110%",
-          textAlign: "center",
-          color: "#FAFF00",
-          zIndex: 10,
-        }}
-      >
-        <Typography
+
+      {tabValue === 0 && (
+        <Box style={{ height: "80vh", overflowY: "hidden" }}>
+          <Grid container spacing={1} mt={1}>
+            <Grid item xs={6} md={6}>
+              <WorkCard2
+                poolId={0}
+                title={"EON TASKS"}
+                img="https://cdn3d.iconscout.com/3d/premium/thumb/cash-bonus-on-online-shopping-11964562-9764218.png?f=webp"
+                sub_heading1="200 $TON"
+                sub_heading2="Tokens Pool"
+                description="Complete social tasks & earn points."
+                color1="#4886FF"
+                color2="#03429F"
+                disabled={false}
+              />
+            </Grid>
+            <Grid item xs={6} md={6}>
+              <WorkCard2
+                title={"API3 TASKS"}
+                img="https://cryptologos.cc/logos/api3-api3-logo.png"
+                sub_heading1="1000 $API3"
+                sub_heading2="Tokens Pool"
+                description="Complete social tasks & earn points."
+                color1="#4886FF"
+                color2="#03429F"
+                disabled={true}
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={1} mt={1}>
+            <Grid item xs={6} md={6}>
+              <WorkCard2
+                title={"HAMSTER TASKS"}
+                img="https://iq.wiki/cdn-cgi/image/width=3840,format=auto,quality=95/https://ipfs.everipedia.org/ipfs/QmZA8NbN22UoT23jmS5kT6te71Y3xiAEqymDZFV9MTT81N"
+                sub_heading1="2000 $HMSTR"
+                sub_heading2="Tokens Pool"
+                description="Complete social tasks & earn points."
+                color1="#4886FF"
+                color2="#03429F"
+                disabled={true}
+              />
+            </Grid>
+            <Grid item xs={6} md={6}>
+              <WorkCard2
+                title={"IO TASKS"}
+                img="https://asset.brandfetch.io/id8qSsHGIA/id4L0DicYX.jpeg"
+                sub_heading1="1000 $IO"
+                sub_heading2="Tokens Pool"
+                description="Complete social tasks & earn points."
+                color1="#4886FF"
+                color2="#03429F"
+                disabled={true}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+      )}
+
+      {tabValue != 0 && (
+        <Box
           style={{
-            width: "90%",
-            fontFamily: "Rubik",
-            fontWeight: 700,
-            fontSize: 44,
-            lineHeight: "110%",
-            textAlign: "center",
-            color: "#ffffff",
-            zIndex: 10,
-            transform: "scale(0.8) rotate(-10deg)",
+            position: "absolute",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "10vh",
           }}
         >
-          Coming soon
-        </Typography>
-      </Box>
-
-      <Box style={{ opacity: 0.2, height: "80vh", overflowY: "hidden" }}>
-        <Grid container spacing={1} mt={1}>
-          <Grid item xs={6} md={6}>
-            <WorkCard2
-              title={"RONIN TASKS"}
-              img="https://cryptologos.cc/logos/ronin-ron-logo.png"
-              sub_heading1="10000 $RON"
-              sub_heading2="Tokens Pool"
-              description="Complete social tasks & earn points."
-              color1="#4886FF"
-              color2="#03429F"
-            />
-          </Grid>
-          <Grid item xs={6} md={6}>
-            <WorkCard2
-              title={"API3 TASKS"}
-              img="https://cryptologos.cc/logos/api3-api3-logo.png"
-              sub_heading1="1000 $API3"
-              sub_heading2="Tokens Pool"
-              description="Complete social tasks & earn points."
-              color1="#4886FF"
-              color2="#03429F"
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1} mt={1}>
-          <Grid item xs={6} md={6}>
-            <WorkCard2
-              title={"HAMSTER TASKS"}
-              img="https://iq.wiki/cdn-cgi/image/width=3840,format=auto,quality=95/https://ipfs.everipedia.org/ipfs/QmZA8NbN22UoT23jmS5kT6te71Y3xiAEqymDZFV9MTT81N"
-              sub_heading1="2000 $HMSTR"
-              sub_heading2="Tokens Pool"
-              description="Complete social tasks & earn points."
-              color1="#4886FF"
-              color2="#03429F"
-            />
-          </Grid>
-          <Grid item xs={6} md={6}>
-            <WorkCard2
-              title={"IO TASKS"}
-              img="https://asset.brandfetch.io/id8qSsHGIA/id4L0DicYX.jpeg"
-              sub_heading1="1000 $HMSTR"
-              sub_heading2="Tokens Pool"
-              description="Complete social tasks & earn points."
-              color1="#4886FF"
-              color2="#03429F"
-            />
-          </Grid>
-        </Grid>
-      </Box>
+          <Typography
+            style={{
+              width: "90%",
+              fontFamily: "Rubik",
+              fontWeight: 600,
+              fontSize: 18,
+              lineHeight: "110%",
+              textAlign: "center",
+              color: "#ffffff",
+            }}
+          >
+            Coming soon
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 };

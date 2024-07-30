@@ -252,7 +252,7 @@ const Dashboard = () => {
           <Box style={{ overflowX: "scroll" }}>
             <Grid container spacing={1} mt={1}>
               {dashboardData &&
-                dashboardData?.map((el) => (
+                dashboardData?.slice(0, 3).map((el) => (
                   <Grid item xs={4} md={4}>
                     <ProgressCard
                       key={el?.category}

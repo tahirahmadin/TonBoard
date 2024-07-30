@@ -152,8 +152,8 @@ export const SPECIAL_TASKS_DATA = [
   {
     id: 0,
     title: "Follow Tasker on X",
-    pointsText: "25K",
-    points: 25000,
+    pointsText: "100K",
+    points: 100000,
     taskNumber: 101,
     type: "SPECIAL",
     url: "https://x.com/tahirahmadin",
@@ -161,8 +161,8 @@ export const SPECIAL_TASKS_DATA = [
   {
     id: 1,
     title: "Like this Tweet",
-    pointsText: "25K",
-    points: 25000,
+    pointsText: "100K",
+    points: 100000,
     taskNumber: 102,
     type: "SPECIAL",
     url: "https://x.com/tahirahmadin",
@@ -170,8 +170,8 @@ export const SPECIAL_TASKS_DATA = [
   {
     id: 2,
     title: "Retweet this Tweet",
-    pointsText: "50K",
-    points: 50000,
+    pointsText: "200K",
+    points: 200000,
     taskNumber: 103,
     type: "SPECIAL",
     url: "https://x.com/tahirahmadin",

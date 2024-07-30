@@ -9,6 +9,7 @@ import {
   useMediaQuery,
   Zoom,
 } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { useTheme } from "@mui/styles";
 import { useServerAuth } from "../hooks/useServerAuth";
 import useTelegramSDK from "../hooks/useTelegramSDK";
@@ -25,6 +26,19 @@ import {
   updateRefTaskStatusState,
 } from "../reducers/UiReducers";
 import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
+import TaskRewardComp from "../components/TaskRewardComp";
+
+const useStyles = makeStyles((theme) => ({
+  description: {
+    width: "100%",
+    textAlign: "center",
+    fontSize: 14,
+    lineHeight: "130%",
+    color: "rgba(253, 255, 245, 0.8)",
+    position: "relative",
+    zIndex: 1,
+  },
+}));
 
 const ActionButton = ({
   children,
@@ -201,109 +215,14 @@ const SingleTask = ({
   );
 };
 
-const SingleNonSpecialTask = ({ taskId, name, points }) => {
-  const dispatch = useDispatch();
+const SingleTaskPage = () => {
+  const classes = useStyles();
 
-  const { claimReferralLevel } = useGameHook();
-
-  const leagueTasksStatus = useSelector((state) => state.ui.leagueTasksStatus);
-  const refTasksStatus = useSelector((state) => state.ui.refTasksStatus);
-  const referralCount = useSelector((state) => state.ui.referralCount);
-
-  let currentTaskStatus = useMemo(() => {
-    let tempValue = 0;
-    tempValue = refTasksStatus?.[taskId];
-
-    if (tempValue === undefined) {
-      return 0;
-    } else {
-      return tempValue;
-    }
-  }, [taskId, leagueTasksStatus, refTasksStatus]);
-
-  let isClaimableStatus = () => {
-    return referralCount >= REFERRAL_TASKS_DATA[taskId].referralRequired;
-  };
-
-  // Claim Rewards
-  const onClickClaim = async () => {
-    await claimReferralLevel(points);
-    var tempArray = [...refTasksStatus];
-    tempArray[taskId] = 2;
-    await dispatch(updateRefTaskStatusState(tempArray));
-  };
-
-  return (
-    <Box
-      style={{
-        width: "100%",
-        minHeight: "55.86px",
-        background:
-          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
-        border: "1px solid #414141",
-        borderRadius: "12px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "29px 15px",
-      }}
-    >
-      <Box>
-        <Typography
-          style={{
-            fontWeight: 700,
-            fontSize: "18px",
-            lineHeight: "21px",
-            color: "#ffffff",
-          }}
-        >
-          {name}
-        </Typography>
-        <Typography
-          style={{
-            borderRadius: "8px",
-            fontWeight: 500,
-            fontSize: "12px",
-            textAlign: "left",
-            color: currentTaskStatus === 2 ? "#FAFF00" : "#ffffff",
-          }}
-        >
-          {currentTaskStatus === 2 && (
-            <img src="/images/check.png" style={{ width: 16, height: 16 }} />
-          )}
-          <img
-            src={
-              "https://cdn3d.iconscout.com/3d/premium/thumb/cash-bonus-on-online-shopping-11964562-9764218.png?f=webp"
-            }
-            height={22}
-            width={22}
-          />{" "}
-          +{getNumbersInFormatOnlyMillions(points)}
-        </Typography>
-      </Box>
-
-      {currentTaskStatus === 2 && (
-        <ActionButton disabled={true}>Claimed</ActionButton>
-      )}
-      {currentTaskStatus != 2 && (
-        <ActionButton
-          onClick={!isClaimableStatus() ? null : onClickClaim}
-          disabled={!isClaimableStatus()}
-        >
-          Claim
-        </ActionButton>
-      )}
-    </Box>
-  );
-};
-const Tasks = () => {
   const topTabs = ["Social", "Referrals"];
 
   const { viberate } = useTelegramSDK();
   const { gameScore } = useGameHook();
   const score = useSelector((state) => state.ui.score);
-  const leagueLevel = useSelector((state) => state.ui.leagueLevel);
-  const leagueTasksStatus = useSelector((state) => state.ui.leagueTasksStatus);
 
   const [tabValue, setTabValue] = useState(0);
 
@@ -321,7 +240,7 @@ const Tasks = () => {
       }}
     >
       <Zoom direction="down" in={true}>
-        <Box>
+        <Box style={{ width: "90%", margin: "auto" }}>
           <SuccessSnackbar text="Reward claimed succesfully!" />
 
           <Box
@@ -336,14 +255,14 @@ const Tasks = () => {
           >
             <img
               src={
-                "https://static.vecteezy.com/system/resources/previews/008/854/703/original/dollar-coin-3d-illustration-png.png"
+                "https://cdn3d.iconscout.com/3d/premium/thumb/cash-bonus-on-online-shopping-11964562-9764218.png?f=webp"
               }
               height={"10%"}
               width={"40%"}
               style={{ filter: "drop-shadow(0 -6mm 14mm #BC831E)" }}
             />
             <Typography
-              mt={1}
+              mb={1}
               style={{
                 width: "100%",
                 fontFamily: "Rubik",
@@ -354,66 +273,21 @@ const Tasks = () => {
                 color: "#ffffff",
               }}
             >
-              Earn more points
+              EON Tasks
+            </Typography>
+            <TaskRewardComp />
+            <Typography
+              className={classes.description}
+              style={{
+                textAlign: "center",
+                minHeight: 50,
+              }}
+            >
+              Engage on Ton ($EON) is the first E2E platform. Complete tasks and
+              share rewards from 200 $TON Tokens.
             </Typography>
           </Box>
 
-          <Box
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              backgroundColor: "transparent",
-              marginTop: 14,
-            }}
-          >
-            <Box
-              style={{
-                width: "90%",
-                height: 52,
-                background: "#000",
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
-                backgroundColor: "#212121",
-                borderRadius: 10,
-                paddingLeft: 6,
-                paddingRight: 6,
-              }}
-            >
-              {topTabs.map((ele, i) => (
-                <Button
-                  key={i}
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexDirection: "column",
-                    position: "relative",
-                    backgroundColor: tabValue === i ? "black" : "transparent",
-                    borderRadius: 10,
-                    height: 40,
-                  }}
-                  onClick={() => {
-                    viberate("light");
-                    setTabValue(i);
-                  }}
-                >
-                  <Typography
-                    variant="body1"
-                    textTransform={"Capitalize"}
-                    style={{
-                      fontWeight: tabValue === i ? 700 : 400,
-                      fontSize: 12,
-                      color: tabValue === i ? "#64FF99" : "#FFFFFF",
-                    }}
-                  >
-                    {ele}
-                  </Typography>
-                </Button>
-              ))}
-            </Box>
-          </Box>
           {tabValue === 0 && (
             <Box
               style={{
@@ -433,7 +307,7 @@ const Tasks = () => {
                   alignItems: "center",
                   flexDirection: "column",
                   gap: "10px",
-                  padding: "25px 5%",
+                  padding: "25px 1%",
                   overflowY: "auto",
                 }}
               >
@@ -455,53 +329,10 @@ const Tasks = () => {
               </Box>
             </Box>
           )}
-          {tabValue === 1 && (
-            <Box
-              style={{
-                width: "100%",
-                borderRadius: "32px 32px 0px 0px",
-                padding: "1px 1px 0",
-                zIndex: 1,
-              }}
-            >
-              <Box
-                style={{
-                  width: "100%",
-                  background: "#161811",
-                  borderRadius: "32px 32px 0px 0px",
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  gap: "10px",
-                  padding: "25px 5%",
-                  overflowY: "auto",
-                  paddingBottom: 150,
-                  height: "300px",
-                }}
-              >
-                {REFERRAL_TASKS_DATA.map((ele, i) => {
-                  return (
-                    <SingleNonSpecialTask
-                      key={i}
-                      index={i}
-                      taskId={ele.id}
-                      taskNumber={ele.taskNumber}
-                      name={ele.title}
-                      points={ele.points}
-                    />
-                  );
-                })}
-
-                {REFERRAL_TASKS_DATA.length === 0 && (
-                  <Box style={{ textAlign: "center" }}>No tasks found</Box>
-                )}
-              </Box>
-            </Box>
-          )}
         </Box>
       </Zoom>
     </Box>
   );
 };
 
-export default Tasks;
+export default SingleTaskPage;

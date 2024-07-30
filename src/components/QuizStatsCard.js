@@ -15,6 +15,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import SmallProgressBar from "./SmallProgressBar";
 import useGameHook from "../hooks/useGameHook";
 import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -45,6 +46,8 @@ const QuizStatsCard = ({ pointsOnCorrect }) => {
 
   const { pointsOnCorrectAnswer, pointsOnWrongAnswer, timerDuration } =
     useGameHook();
+
+  const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
 
   return (
     <>
@@ -185,7 +188,7 @@ const QuizStatsCard = ({ pointsOnCorrect }) => {
                 paddingLeft: 5,
               }}
             >
-              4
+              {currentSlotNo}
             </Typography>
             <Typography
               style={{
@@ -199,7 +202,7 @@ const QuizStatsCard = ({ pointsOnCorrect }) => {
                 paddingLeft: 5,
               }}
             >
-              Daily Steak
+              Slot no
             </Typography>
           </Box>
         </Box>
