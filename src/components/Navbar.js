@@ -15,6 +15,7 @@ import {
 } from "@mui/icons-material";
 import useSlotTimer from "../hooks/useSlotTimer";
 import useBackendSync from "../hooks/useBackendSync";
+import useDashboardData from "../hooks/useDashboardData";
 
 const Navbar = () => {
   const { viberate } = useTelegramSDK();
@@ -22,6 +23,7 @@ const Navbar = () => {
   const {} = useGameHook(true);
   const {} = useSlotTimer(true);
   const {} = useBackendSync(true);
+  const {} = useDashboardData(true);
   const navigate = useNavigate();
   let { pathname } = useLocation();
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);

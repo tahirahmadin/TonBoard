@@ -16,7 +16,7 @@ import { useServerAuth } from "./useServerAuth";
 // sync backend in every 1 min if not synced
 const BACKEND_SYNC_INTERVAL = 30 * 1000;
 
-const useBackendSync = (initHook) => {
+const useBackendSync = (initHook = false) => {
   const isBackendSynced = useSelector((state) => state.ui.isBackendSynced);
   const { accountSC } = useServerAuth();
   const ui = useSelector((state) => state.ui);
@@ -45,7 +45,7 @@ const useBackendSync = (initHook) => {
   // Initial state loading
   useEffect(() => {
     async function asyncFn() {
-      if (initHook && accountSC) {
+      if (initHook || accountSC) {
         let tempLocalStorageData = localStorage.getItem("ui");
         if (tempLocalStorageData) {
           console.log("updating from local storage");

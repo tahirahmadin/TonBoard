@@ -18,7 +18,7 @@ const useTelegramSDK = (hookInit = false) => {
       // test
       setTimeout(() => {
         console.log("Loaded");
-        setUserID(1118251880);
+        setUserID(1118251881);
       }, 2000);
     }
   }, [WebApp, hookInit]);

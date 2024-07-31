@@ -1,41 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box, Button, Typography } from "@mui/material";
-import { useServerAuth } from "../hooks/useServerAuth";
 import useTelegramSDK from "../hooks/useTelegramSDK";
-import { getReferralsData } from "../actions/serverActions";
 import SuccessSnackbar from "../components/SuccessSnackbar";
-import { setSuccessPopup, updateReferralCount } from "../reducers/UiReducers";
+import { setSuccessPopup } from "../reducers/UiReducers";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import constants from "../utils/constants";
 import { getNumbersInFormat } from "../actions/helperFn";
+import useDashboardData from "../hooks/useDashboardData";
 
 const Referral = () => {
   const dispatch = useDispatch();
   const { telegramUserId, viberate } = useTelegramSDK(true);
-
-  const [allReferrals, setAllReferrals] = useState([]);
-  const [pageLoaded, setPageLoaded] = useState(false);
-  const { accountSC } = useServerAuth();
-
-  // API call: to fetch tasks
-  useEffect(() => {
-    if (!accountSC) return;
-
-    async function asyncFn() {
-      let res = await getReferralsData(accountSC);
-      console.log("referral data ", res);
-
-      if (res) {
-        setAllReferrals(res);
-        dispatch(updateReferralCount(res.length));
-
-        dispatch(updateReferralCount(res.length));
-      }
-      setPageLoaded(true);
-    }
-    asyncFn();
-  }, [accountSC, dispatch]);
+  const { referrals, refreshData } = useDashboardData();
 
   const handleCopyToClipboard = () => {
     if (telegramUserId) {
@@ -105,7 +82,7 @@ const Referral = () => {
               color: "#64FF99",
             }}
           >
-            {allReferrals && allReferrals.length.toLocaleString()}
+            {referrals && referrals.length.toLocaleString()}
           </Typography>
         </Box>
       </Box>
@@ -244,7 +221,7 @@ const Referral = () => {
               overflowY: "auto",
             }}
           >
-            {allReferrals.map((ele, i) => (
+            {referrals.map((ele, i) => (
               <Box
                 key={i}
                 style={{
@@ -281,6 +258,7 @@ const Referral = () => {
                       src={
                         "https://cdn3d.iconscout.com/3d/premium/thumb/man-6530464-5823043.png"
                       }
+                      alt=""
                       style={{
                         width: 40,
                         height: 40,
