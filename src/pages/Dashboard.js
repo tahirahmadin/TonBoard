@@ -9,6 +9,7 @@ import makeStyles from "@mui/styles/makeStyles";
 import ProgressCard from "../components/ProgressCard";
 import { Link } from "react-router-dom";
 import { useServerAuth } from "../hooks/useServerAuth";
+import useDashboardData from "../hooks/useDashboardData";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -27,24 +28,28 @@ const Dashboard = () => {
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const score = useSelector((state) => state.ui.score);
+  const username = useSelector((state) => state.ui.username);
+  const profilePic = useSelector((state) => state.ui.profilePic);
 
-  const [dashboardData, setDashboardData] = useState([]);
-  const { accountSC } = useServerAuth();
+  // const [dashboardData, setDashboardData] = useState([]);
+  // const { accountSC } = useServerAuth();
 
-  // API call: to fetch tasks
-  useEffect(() => {
-    if (!accountSC) return;
+  const { progressItems } = useDashboardData();
 
-    async function asyncFn() {
-      let res = await getDashboardData(accountSC);
+  // // API call: to fetch tasks
+  // useEffect(() => {
+  //   if (!accountSC) return;
 
-      console.log("progress data ", res);
-      if (res) {
-        setDashboardData(res);
-      }
-    }
-    asyncFn();
-  }, [accountSC]);
+  //   async function asyncFn() {
+  //     let res = await getDashboardData(accountSC);
+
+  //     console.log("progress data ", res);
+  //     if (res) {
+  //       setDashboardData(res);
+  //     }
+  //   }
+  //   asyncFn();
+  // }, [accountSC]);
 
   return (
     <Box
@@ -101,7 +106,7 @@ const Dashboard = () => {
             marginTop: "10px",
           }}
         >
-          Tahir Ahmad
+          {username}
         </Typography>
 
         <Link to="/leader">
@@ -251,8 +256,8 @@ const Dashboard = () => {
           </Typography>
           <Box style={{ overflowX: "scroll" }}>
             <Grid container spacing={1} mt={1}>
-              {dashboardData &&
-                dashboardData?.slice(0, 3).map((el) => (
+              {progressItems &&
+                progressItems?.slice(0, 3).map((el) => (
                   <Grid item xs={4} md={4}>
                     <ProgressCard
                       key={el?.category}

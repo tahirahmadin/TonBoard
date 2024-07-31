@@ -1,34 +1,15 @@
 import React, { useMemo, useState } from "react";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Grow,
-  Slide,
-  Typography,
-  useMediaQuery,
-  Zoom,
-} from "@mui/material";
+import { Box, Button, Typography, useMediaQuery, Zoom } from "@mui/material";
 import { useTheme } from "@mui/styles";
 import { useServerAuth } from "../hooks/useServerAuth";
 import useTelegramSDK from "../hooks/useTelegramSDK";
-import {
-  LEAGUE_TASKS_DATA,
-  REFERRAL_TASKS_DATA,
-  SPECIAL_TASKS_DATA,
-} from "../utils/constants";
+import { SPECIAL_TASKS_DATA } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import useGameHook from "../hooks/useGameHook";
 import SuccessSnackbar from "../components/SuccessSnackbar";
-import {
-  updateSpecialTaskStatusState,
-  updateRefTaskStatusState,
-} from "../reducers/UiReducers";
-import ScoreComp from "../components/Score";
-import {
-  getNumbersInFormat,
-  getNumbersInFormatOnlyMillions,
-} from "../actions/helperFn";
+
+import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
+import useDashboardData from "../hooks/useDashboardData";
 
 const ActionButton = ({
   children,
@@ -91,10 +72,10 @@ const ActionButton = ({
   );
 };
 
-const SingleLeaderCard = ({}) => {
-  const dispatch = useDispatch();
-  const { openTelegramUrl } = useTelegramSDK();
-  const { accountSC } = useServerAuth();
+const SingleLeaderCard = ({ name, points, profilePic, rank }) => {
+  // const dispatch = useDispatch();
+  // const { openTelegramUrl } = useTelegramSDK();
+  // const { accountSC } = useServerAuth();
 
   return (
     <Box
@@ -132,6 +113,7 @@ const SingleLeaderCard = ({}) => {
             src={
               "https://cdn3d.iconscout.com/3d/premium/thumb/man-6530464-5823043.png"
             }
+            alt=""
             style={{
               width: 40,
               height: 40,
@@ -155,7 +137,7 @@ const SingleLeaderCard = ({}) => {
               gap: "3px",
             }}
           >
-            Tahir Ahmad
+            {name}
           </Box>
         </Box>
         <Box
@@ -190,7 +172,7 @@ const SingleLeaderCard = ({}) => {
                 color: "#64FF99",
               }}
             >
-              +{getNumbersInFormatOnlyMillions(10000)}
+              {rank}
             </Box>
           </Box>
         </Box>
@@ -202,11 +184,14 @@ const SingleLeaderCard = ({}) => {
 const Leaderboard = () => {
   const topTabs = ["Social", "Referrals"];
 
-  const { viberate } = useTelegramSDK();
-  const { gameScore } = useGameHook();
+  // const { viberate } = useTelegramSDK();
+  // const { gameScore } = useGameHook();
+  // const leagueLevel = useSelector((state) => state.ui.leagueLevel);
+  // const leagueTasksStatus = useSelector((state) => state.ui.leagueTasksStatus);
+  const { rankings } = useDashboardData();
   const score = useSelector((state) => state.ui.score);
-  const leagueLevel = useSelector((state) => state.ui.leagueLevel);
-  const leagueTasksStatus = useSelector((state) => state.ui.leagueTasksStatus);
+  const username = useSelector((state) => state.ui.username);
+  const profilePic = useSelector((state) => state.ui.profilePic);
 
   const [tabValue, setTabValue] = useState(0);
 
@@ -272,7 +257,12 @@ const Leaderboard = () => {
                 overflowY: "auto",
               }}
             >
-              <SingleLeaderCard key={0} name={"You"} points={"10M"} />
+              <SingleLeaderCard
+                key={0}
+                name={username}
+                rank={rankings?.userRank}
+                points={score}
+              />
             </Box>
           </Box>
 
@@ -312,16 +302,17 @@ const Leaderboard = () => {
               >
                 Leaderboard
               </Typography>
-              {SPECIAL_TASKS_DATA.map((ele, i) => (
+              {rankings?.ranks?.map((ele, i) => (
                 <SingleLeaderCard
                   key={i}
-                  taskId={ele.id}
-                  taskNumber={ele.taskNumber}
-                  name={ele.title}
-                  url={ele.url}
-                  points={ele.points}
-                  inProgress={inProgress}
-                  setInProgress={setInProgress}
+                  // taskId={ele.id}
+                  // taskNumber={ele.taskNumber}
+                  name={ele.username}
+                  profilePic={ele.profilePic}
+                  points={ele.score}
+                  rank={ele.rank}
+                  // inProgress={inProgress}
+                  // setInProgress={setInProgress}
                 />
               ))}
               <Box style={{ textAlign: "center" }}>Will be available soon</Box>

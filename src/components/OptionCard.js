@@ -49,10 +49,8 @@ const OptionCard = ({
 
   const { viberate } = useTelegramSDK();
 
-  console.log({ isSelected, selectedOption });
   const handleSelect = async () => {
     viberate("medium");
-    console.log("selected ", inputOption);
     handleAnswerSelected(inputOption);
   };
 
@@ -75,7 +73,6 @@ const OptionCard = ({
   }, [isSelected, correctOption, selectedOption, inputOption]);
 
   const iconCondition = useMemo(() => {
-    console.log(isSelected, correctOption, selectedOption, inputOption);
     if (
       isSelected &&
       correctOption === selectedOption &&

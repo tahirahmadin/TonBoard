@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  username: "",
-  userId: "",
-  profilePic: "",
+  username: null,
+  userId: null,
+  profilePic: null,
   score: 0,
   quizzes: [],
   isQuizLoading: false,
@@ -31,6 +31,7 @@ const initialState = {
   isExploding: false,
   isBackendSynced: false,
   isBackendLoaded: false,
+  displayData: { progressItems: [], rankings: [], referrals: [] },
 };
 
 // Function:: update localData to redux
@@ -142,6 +143,9 @@ const UiReducer = createSlice({
     updateBackendSyncStatus(state, action) {
       state.isBackendSynced = action.payload;
     },
+    updateDisplayData(state, action) {
+      state.displayData = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(updateLocalDataToRedux.fulfilled, (state, action) => {
@@ -152,6 +156,8 @@ const UiReducer = createSlice({
         state.currentQueNo = response.currentQueNo;
         state.currentSlotNo = response.currentSlotNo;
         state.leagueLevel = response.leagueLevel;
+        state.username = response.username;
+        state.userId = response.userId;
 
         state.leagueTasksStatus = response.leagueTasksStatus;
 
@@ -185,6 +191,8 @@ const UiReducer = createSlice({
         state.currentQueNo = response.currentQueNo;
         state.currentSlotNo = response.currentSlotNo;
         state.leagueLevel = response.leagueLevel;
+        state.username = response.username;
+        state.userId = response._id;
 
         state.leagueTasksStatus = response.leagueTasksStatus;
 
@@ -236,6 +244,8 @@ export const {
   updateQuizData,
   updaQuizLoadingStatus,
   updateBackendSyncStatus,
+  updateDisplayData,
+  updateRefetch,
 } = actions;
 
 export default UiReducer;

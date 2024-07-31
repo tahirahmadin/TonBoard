@@ -46,6 +46,7 @@ const useSlotTimer = (initHook) => {
     if (!timerValue) return;
 
     if (timerValue < Date.now() && !isTimerRunning) {
+      console.log("timer has already expired");
       return;
     }
 
@@ -60,7 +61,14 @@ const useSlotTimer = (initHook) => {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [timerValue, handleTimerExpire, screenLoaded, initHook]);
+  }, [
+    timerValue,
+    handleTimerExpire,
+    screenLoaded,
+    initHook,
+    dispatch,
+    isTimerRunning,
+  ]);
 
   const loadQuizData = async (_slotNumber) => {
     dispatch(updaQuizLoadingStatus(true));

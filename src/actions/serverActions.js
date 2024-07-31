@@ -26,7 +26,7 @@ export const getUserLeaderboardData = async (userId) => {
   try {
     let requestParams = `userId=${userId}`;
 
-    let url = `${apiUrl}/user/getUserData?${requestParams}`;
+    let url = `${apiUrl}/user/getLeaderboard?${requestParams}`;
 
     let response = await axios.get(url).then((res) => res.data);
 
@@ -55,7 +55,6 @@ export const loginTelegramUserFromBackendServer = async (
     referId: referId,
   };
 
-  console.log("data", data);
   //Encrypted data
   let encryptedData = getCipherText(data);
 
@@ -185,7 +184,6 @@ export const getDashboardData = async (userId) => {
     let url = `${apiUrl}/user/getDashboardData?userId=${userId}`;
 
     let response = await axios.get(url).then((res) => res.data);
-    console.log("res", response);
     if (response && response.result) {
       return response.result;
     } else {
