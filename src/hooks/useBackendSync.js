@@ -45,7 +45,7 @@ const useBackendSync = (initHook = false) => {
   // Initial state loading
   useEffect(() => {
     async function asyncFn() {
-      if (initHook || accountSC) {
+      if (initHook && accountSC) {
         let tempLocalStorageData = localStorage.getItem("ui");
         if (tempLocalStorageData) {
           console.log("updating from local storage");
@@ -63,6 +63,17 @@ const useBackendSync = (initHook = false) => {
         console.log({ backendData });
         const quizData = await getQuizData(backendData.currentSlotNo);
         console.log({ quizData });
+
+        // if (
+        //   (username && telegramUsername && username === "") ||
+        //   username !== telegramUsername
+        // ) {
+        //   // Update Local Data to Backend server
+        //   await updateUsernameToBackendAPI(
+        //     { username: telegramUsername },
+        //     accountSC
+        //   );
+
         dispatch(
           updateBackendToRedux({
             ...backendData,
