@@ -8,18 +8,21 @@ const useTelegramSDK = (hookInit = false) => {
 
   useEffect(() => {
     if (hookInit) {
+      if (process.env.NODE_ENV === "development") {
+        setTimeout(() => {
+          console.log("loading test user");
+          setUserID(1118251881);
+        }, 2000);
+        return;
+      }
+      console.log("loading real user");
+
       if (WebApp.initDataUnsafe?.user?.id) {
         setUserID(WebApp.initDataUnsafe.user.id);
       }
       if (WebApp.initDataUnsafe?.start_param) {
         setReferParam(WebApp.initDataUnsafe?.start_param);
       }
-
-      // // test
-      // setTimeout(() => {
-      //   console.log("Loaded");
-      //   setUserID(1118251881);
-      // }, 2000);
     }
   }, [hookInit]);
 
@@ -30,7 +33,7 @@ const useTelegramSDK = (hookInit = false) => {
         JSON.stringify(WebApp.initDataUnsafe.user.photo_url)
       );
     }
-  }, [WebApp]);
+  }, []);
 
   const _username = ethersServiceProvider.tgUsername;
   const _photoUrl = ethersServiceProvider.photoUrl;

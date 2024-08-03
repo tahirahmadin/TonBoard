@@ -1,12 +1,12 @@
 // 0 mainnet, 1 testnet
-let network_type = 1;
+let network_type = 2;
 
 let constants;
 constants = {
   themeColor: "#40A8F8",
   botUrl: "https://t.me/TaskDaoBot/app",
   api_url:
-    network_type === 1
+    process.env.NODE_ENV === "development"
       ? "http://localhost:5001/api"
       : "https://taskdao-backend-rho.vercel.app/api",
 };

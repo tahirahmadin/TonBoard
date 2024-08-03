@@ -16,6 +16,7 @@ import {
 import useSlotTimer from "../hooks/useSlotTimer";
 import useBackendSync from "../hooks/useBackendSync";
 import useDashboardData from "../hooks/useDashboardData";
+import { useOnline } from "../hooks/useOnline";
 
 const Navbar = () => {
   const { viberate } = useTelegramSDK();
@@ -27,6 +28,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   let { pathname } = useLocation();
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
+  const isOnline = useOnline();
+
+  //: Tahir handle case when user internet is not working
+  console.log({ isOnline });
 
   const navLinks = [
     {
