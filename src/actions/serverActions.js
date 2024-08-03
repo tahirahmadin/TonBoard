@@ -225,8 +225,8 @@ export const getUserData = async (userId) => {
 
     let response = await axios.get(url).then((res) => res.data);
 
-    if (response) {
-      return response;
+    if (response && response.result) {
+      return response.result;
     } else {
       return null;
     }

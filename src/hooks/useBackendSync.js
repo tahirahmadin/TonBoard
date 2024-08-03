@@ -1,17 +1,10 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  updateBackendSyncStatus,
   updateBackendToRedux,
-  updateLocalDataToRedux,
   updateScreenLoaded,
 } from "../reducers/UiReducers";
-import {
-  getQuizData,
-  getUserData,
-  updateDataToBackendAPI,
-  updateLocalDataToBackendAPI,
-} from "../actions/serverActions";
+import { getUserData } from "../actions/serverActions";
 import { useServerAuth } from "./useServerAuth";
 
 // sync backend in every 1 min if not synced
@@ -48,33 +41,13 @@ const useBackendSync = (initHook = false) => {
   useEffect(() => {
     async function asyncFn() {
       if (initHook && accountSC) {
-        // let tempLocalStorageData = localStorage.getItem("ui");
-        // if (tempLocalStorageData) {
-        //   console.log("updating from local storage");
-        //   tempLocalStorageData = JSON.parse(tempLocalStorageData);
-
-        //   if (tempLocalStorageData?.quizzes?.length > 0) {
-        //     dispatch(updateLocalDataToRedux(tempLocalStorageData));
-        //     return;
-        //   }
-        // }
-
-        console.log("updating from backend");
-
         const userData = await getUserData(accountSC);
-        console.log({ userData });
-        // const quizData = await getQuizData(backendData.currentSlotNo);
-        // console.log({ quizData });
 
-        // if (
-        //   (username && telegramUsername && username === "") ||
-        //   username !== telegramUsername
-        // ) {
-        //   // Update Local Data to Backend server
-        //   await updateUsernameToBackendAPI(
-        //     { username: telegramUsername },
-        //     accountSC
-        //   );
+        if (!userData) {
+          alert("Failed to load user");
+          return;
+        }
+        console.log({ userData });
 
         dispatch(updateBackendToRedux({ ...userData, isBackendLoaded: true }));
 
