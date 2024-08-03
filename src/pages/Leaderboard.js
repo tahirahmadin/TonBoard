@@ -1,82 +1,74 @@
-import React, { useMemo, useState } from "react";
-import { Box, Button, Typography, useMediaQuery, Zoom } from "@mui/material";
-import { useTheme } from "@mui/styles";
-import { useServerAuth } from "../hooks/useServerAuth";
-import useTelegramSDK from "../hooks/useTelegramSDK";
-import { SPECIAL_TASKS_DATA } from "../utils/constants";
-import { useDispatch, useSelector } from "react-redux";
-import useGameHook from "../hooks/useGameHook";
+import React from "react";
+import { Box, Typography, Zoom } from "@mui/material";
+
+import { useSelector } from "react-redux";
 import SuccessSnackbar from "../components/SuccessSnackbar";
 
-import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 import useDashboardData from "../hooks/useDashboardData";
+import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 
-const ActionButton = ({
-  children,
-  onClick,
-  color,
-  style,
-  fontStyle,
-  disabled = false,
-}) => {
-  const theme = useTheme();
-  const md = useMediaQuery(theme.breakpoints.down("md"));
-  return (
-    <Button
-      style={{
-        minWidth: 70,
-        maxWidth: 70,
-        height: 28,
-        display: "flex",
-        alignItems: "center",
-        paddingRight: "6px",
-        textTransform: "capitalize",
-        opacity: !disabled ? 1 : 0.75,
-        ...style,
-      }}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      <Typography
-        style={{
-          minWidth: "100%",
-          height: 28,
-          borderRadius: "4px",
+// const ActionButton = ({
+//   children,
+//   onClick,
+//   color,
+//   style,
+//   fontStyle,
+//   disabled = false,
+// }) => {
+//   const theme = useTheme();
+//   const md = useMediaQuery(theme.breakpoints.down("md"));
+//   return (
+//     <Button
+//       style={{
+//         minWidth: 70,
+//         maxWidth: 70,
+//         height: 28,
+//         display: "flex",
+//         alignItems: "center",
+//         paddingRight: "6px",
+//         textTransform: "capitalize",
+//         opacity: !disabled ? 1 : 0.75,
+//         ...style,
+//       }}
+//       onClick={onClick}
+//       disabled={disabled}
+//     >
+//       <Typography
+//         style={{
+//           minWidth: "100%",
+//           height: 28,
+//           borderRadius: "4px",
 
-          fontWeight: 700,
-          fontSize: 12,
-          color: "#000",
-          whiteSpace: "nowrap",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#64FF99",
-          paddingLeft: "3px",
-          zIndex: 1,
-          ...fontStyle,
-        }}
-      >
-        {children}
-      </Typography>
-      <Box
-        style={{
-          minWidth: 20,
-          height: 20,
-          borderRadius: "3px",
-          background: "#64FF99",
-          transform: "rotate(45deg)",
-          marginLeft: -12,
-        }}
-      />
-    </Button>
-  );
-};
+//           fontWeight: 700,
+//           fontSize: 12,
+//           color: "#000",
+//           whiteSpace: "nowrap",
+//           display: "flex",
+//           alignItems: "center",
+//           justifyContent: "center",
+//           background: "#64FF99",
+//           paddingLeft: "3px",
+//           zIndex: 1,
+//           ...fontStyle,
+//         }}
+//       >
+//         {children}
+//       </Typography>
+//       <Box
+//         style={{
+//           minWidth: 20,
+//           height: 20,
+//           borderRadius: "3px",
+//           background: "#64FF99",
+//           transform: "rotate(45deg)",
+//           marginLeft: -12,
+//         }}
+//       />
+//     </Button>
+//   );
+// };
 
 const SingleLeaderCard = ({ name, points, profilePic, rank }) => {
-  // const dispatch = useDispatch();
-  // const { openTelegramUrl } = useTelegramSDK();
-  // const { accountSC } = useServerAuth();
-
   return (
     <Box
       style={{
@@ -172,7 +164,7 @@ const SingleLeaderCard = ({ name, points, profilePic, rank }) => {
                 color: "#64FF99",
               }}
             >
-              {rank}
+              {getNumbersInFormatOnlyMillions(points)}
             </Box>
           </Box>
         </Box>
@@ -182,21 +174,10 @@ const SingleLeaderCard = ({ name, points, profilePic, rank }) => {
 };
 
 const Leaderboard = () => {
-  const topTabs = ["Social", "Referrals"];
-
-  // const { viberate } = useTelegramSDK();
-  // const { gameScore } = useGameHook();
-  // const leagueLevel = useSelector((state) => state.ui.leagueLevel);
-  // const leagueTasksStatus = useSelector((state) => state.ui.leagueTasksStatus);
   const { rankings } = useDashboardData();
   const score = useSelector((state) => state.ui.score);
   const username = useSelector((state) => state.ui.username);
   const profilePic = useSelector((state) => state.ui.profilePic);
-
-  const [tabValue, setTabValue] = useState(0);
-
-  //Tasks states
-  const [inProgress, setInProgress] = useState(false);
 
   return (
     <Box
@@ -226,6 +207,7 @@ const Leaderboard = () => {
               src={
                 "https://cdn3d.iconscout.com/3d/premium/thumb/trophy-9211599-7568735.png"
               }
+              alt=""
               height={"10%"}
               width={"40%"}
               style={{ filter: "drop-shadow(0 -6mm 14mm #BC831E)" }}
@@ -305,14 +287,10 @@ const Leaderboard = () => {
               {rankings?.ranks?.map((ele, i) => (
                 <SingleLeaderCard
                   key={i}
-                  // taskId={ele.id}
-                  // taskNumber={ele.taskNumber}
                   name={ele.username}
                   profilePic={ele.profilePic}
                   points={ele.score}
                   rank={ele.rank}
-                  // inProgress={inProgress}
-                  // setInProgress={setInProgress}
                 />
               ))}
               <Box style={{ textAlign: "center" }}>Will be available soon</Box>

@@ -38,6 +38,7 @@ const QuizPage = () => {
   );
   const quizzes = useSelector((state) => state.ui.quizzes);
   const isExploding = useSelector((state) => state.ui.isExploding);
+  const isQuizLoading = useSelector((state) => state.ui.isQuizLoading);
 
   const { handleClaimButtonClick } = useGameHook();
 
@@ -188,6 +189,7 @@ const QuizPage = () => {
             <a
               href="https://www.youtube.com/@tahirahmad.crypto"
               target="_blank"
+              rel="noreferrer"
             >
               <Typography
                 style={{
@@ -224,6 +226,7 @@ const QuizPage = () => {
             >
               <OptionCard
                 key={1}
+                disable={isQuizLoading}
                 isSelected={isSelected}
                 correctOption={questionData?.correct}
                 selectedOption={ansSelected[ansSelected.length - 1]}
@@ -234,6 +237,7 @@ const QuizPage = () => {
               />
               <OptionCard
                 key={2}
+                disable={isQuizLoading}
                 isSelected={isSelected}
                 correctOption={questionData.correct}
                 selectedOption={ansSelected[ansSelected.length - 1]}
@@ -291,7 +295,7 @@ const QuizPage = () => {
                     color: "#64FF99",
                   }}
                 >
-                  Next {">>"}
+                  {isQuizLoading ? "Wait..." : "Next"} {">>"}
                 </Button>
               )}
             </Box>
@@ -326,6 +330,7 @@ const QuizPage = () => {
               >
                 <img
                   src="/images/energy.png"
+                  alt=""
                   style={{
                     width: 20,
                     height: 20,
@@ -353,6 +358,7 @@ const QuizPage = () => {
                   }}
                 >
                   <img
+                    alt=""
                     src="https://cdn3d.iconscout.com/3d/premium/thumb/go-green-11413832-9197004.png?f=webp"
                     style={{
                       width: 22,

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updaQuizLoadingStatus,
@@ -7,8 +7,7 @@ import {
   updateQuizData,
   updateTimerRunningStatus,
 } from "../reducers/UiReducers";
-import axios from "axios";
-import { getQuizData } from "../actions/serverActions";
+import { getQuizData, updateDataToBackendAPI } from "../actions/serverActions";
 
 const useSlotTimer = (initHook) => {
   const timerValue = useSelector((state) => state.ui.timerValue);
@@ -17,6 +16,7 @@ const useSlotTimer = (initHook) => {
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
   const isTimerRunning = useSelector((state) => state.ui.isTimerRunning);
   const isBackendLoaded = useSelector((state) => state.ui.isBackendLoaded);
+  const userId = useSelector((state) => state.ui.userId);
 
   const dispatch = useDispatch();
 
@@ -28,14 +28,32 @@ const useSlotTimer = (initHook) => {
 
     dispatch(updateTimerRunningStatus(false));
 
+    dispatch(updaQuizLoadingStatus(true));
     // question and slot update needed
     if ((currentQueNo + 1) % 5 === 0) {
-      dispatch(updateCurrentSlotNo(currentSlotNo + 1));
-      dispatch(updateCurrentQueNo((currentQueNo + 1) % 5));
+      const nextSlotNumber = currentSlotNo + 1;
+      const nextQuestionNumber = (currentQueNo + 1) % 5;
 
-      await loadQuizData(currentSlotNo + 1);
+      const res = await updateDataToBackendAPI({
+        userId,
+        currentSlotNo: nextSlotNumber,
+        currentQueNo: nextQuestionNumber,
+      });
+
+      if (!res) {
+        //:Tahir display error on UI failed to make api call
+        alert("Failed to load new quizzes please refresh");
+        return;
+      }
+
+      dispatch(updateCurrentSlotNo(nextSlotNumber));
+      dispatch(updateCurrentQueNo(nextQuestionNumber));
+
+      await loadQuizData(nextSlotNumber);
     }
-  }, [currentQueNo, currentSlotNo, dispatch, isBackendLoaded]);
+
+    dispatch(updaQuizLoadingStatus(false));
+  }, [currentQueNo, currentSlotNo, dispatch, isBackendLoaded, userId]);
 
   useEffect(() => {
     if (!initHook) {
@@ -71,23 +89,10 @@ const useSlotTimer = (initHook) => {
   ]);
 
   const loadQuizData = async (_slotNumber) => {
-    dispatch(updaQuizLoadingStatus(true));
-
     const quizData = await getQuizData(_slotNumber);
-
-    dispatch(updaQuizLoadingStatus(false));
 
     dispatch(updateQuizData(quizData));
   };
-
-  // useEffect(() => {
-  //   if (!initHook, auth) {
-  //     return;
-  //   }
-
-  //   loadQuizData(currentSlotNo);
-  // }, [currentSlotNo, initHook]);
-
   return { isTimerRunning };
 };
 
