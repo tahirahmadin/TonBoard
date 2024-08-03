@@ -15,13 +15,13 @@ const useTelegramSDK = (hookInit = false) => {
         setReferParam(WebApp.initDataUnsafe?.start_param);
       }
 
-      // test
-      setTimeout(() => {
-        console.log("Loaded");
-        setUserID(1118251881);
-      }, 2000);
+      // // test
+      // setTimeout(() => {
+      //   console.log("Loaded");
+      //   setUserID(1118251881);
+      // }, 2000);
     }
-  }, [WebApp, hookInit]);
+  }, [hookInit]);
 
   useEffect(() => {
     if (WebApp.initDataUnsafe?.user) {
