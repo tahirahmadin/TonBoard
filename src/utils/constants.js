@@ -1,14 +1,14 @@
 // 0 mainnet, 1 testnet
-let network_type = 1;
+
+export const testmode = true;
 
 let constants;
 constants = {
   themeColor: "#40A8F8",
   botUrl: "https://t.me/TaskDaoBot/app",
-  api_url:
-    network_type === 1
-      ? "http://localhost:5001/api"
-      : "https://taskdao-backend-rho.vercel.app/api",
+  api_url: testmode
+    ? "http://localhost:5001/api"
+    : "https://taskdao-backend-rho.vercel.app/api",
 };
 
 export const AUTH_TYPE_ENUM = {
