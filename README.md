@@ -1,4 +1,4 @@
-# EOT - Engage on Ton
+# EOT - Engage on Ton Changes
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
