@@ -28,6 +28,7 @@ const BoostDetailsPopup = ({
   onClick,
 }) => {
   const score = useSelector((state) => state.ui.score);
+  const isQuizLoading = useSelector((state) => state.ui.isQuizLoading);
 
   return (
     <Dialog
@@ -157,6 +158,7 @@ const BoostDetailsPopup = ({
                 >
                   <img
                     src={img}
+                    alt=""
                     style={{
                       width: 80,
                       height: 80,
@@ -208,6 +210,7 @@ const BoostDetailsPopup = ({
                   <img
                     src="https://png.pngtree.com/png-clipart/20220612/original/pngtree-dollar-coin-icon-3d-png-image_7966148.png"
                     style={{ width: 24, height: 24 }}
+                    alt=""
                   />
                   {price > 0 ? priceText : "FREE"}
                 </Typography>
@@ -236,7 +239,8 @@ const BoostDetailsPopup = ({
               </Box>
               <Button
                 onClick={onClick}
-                disabled={price ? score < price : false}
+                disable
+                disabled={isQuizLoading || price ? score < price : false}
                 style={{
                   fontWeight: 700,
                   fontSize: "16px",
@@ -244,9 +248,7 @@ const BoostDetailsPopup = ({
                   alignItems: "center",
                   textAlign: "center",
                   color: "#000000",
-                  display: "flex",
                   justifyContent: "center",
-                  alignItems: "center",
                   width: 250,
                   margin: "0 auto",
                   height: "51px",
@@ -254,7 +256,9 @@ const BoostDetailsPopup = ({
                   borderRadius: "12px",
                 }}
               >
-                {price
+                {isQuizLoading
+                  ? "Wait..."
+                  : price
                   ? score > price
                     ? "PURCHASE"
                     : "INSUFFICIENT"

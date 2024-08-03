@@ -1,5 +1,5 @@
 // 0 mainnet, 1 testnet
-let network_type = 2;
+let network_type = 1;
 
 let constants;
 constants = {

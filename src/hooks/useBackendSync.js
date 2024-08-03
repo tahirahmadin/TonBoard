@@ -9,6 +9,7 @@ import {
 import {
   getQuizData,
   getUserData,
+  updateDataToBackendAPI,
   updateLocalDataToBackendAPI,
 } from "../actions/serverActions";
 import { useServerAuth } from "./useServerAuth";
@@ -18,51 +19,52 @@ const BACKEND_SYNC_INTERVAL = 30 * 1000;
 
 const useBackendSync = (initHook = false) => {
   const isBackendSynced = useSelector((state) => state.ui.isBackendSynced);
+  const userData = useSelector((state) => state.ui);
   const { accountSC } = useServerAuth();
   const ui = useSelector((state) => state.ui);
 
   const dispatch = useDispatch();
 
-  const handleSync = useCallback(async () => {
-    console.log("syncing backend");
+  // const handleSync = useCallback(async () => {
+  //   console.log("syncing backend");
 
-    updateLocalDataToBackendAPI(accountSC);
+  //   updateDataToBackendAPI(userData);
 
-    dispatch(updateBackendSyncStatus(true));
-  }, [dispatch, accountSC]);
+  //   dispatch(updateBackendSyncStatus(true));
+  // }, [dispatch, userData]);
 
-  useEffect(() => {
-    if (!initHook) return;
-    if (isBackendSynced) return;
+  // useEffect(() => {
+  //   if (!initHook) return;
+  //   if (isBackendSynced) return;
 
-    const intervalId = setInterval(() => {
-      handleSync();
-    }, BACKEND_SYNC_INTERVAL);
+  //   const intervalId = setInterval(() => {
+  //     handleSync();
+  //   }, BACKEND_SYNC_INTERVAL);
 
-    return () => clearInterval(intervalId);
-  }, [initHook, isBackendSynced, handleSync]);
+  //   return () => clearInterval(intervalId);
+  // }, [initHook, isBackendSynced, handleSync]);
 
   // Initial state loading
   useEffect(() => {
     async function asyncFn() {
       if (initHook && accountSC) {
-        let tempLocalStorageData = localStorage.getItem("ui");
-        if (tempLocalStorageData) {
-          console.log("updating from local storage");
-          tempLocalStorageData = JSON.parse(tempLocalStorageData);
+        // let tempLocalStorageData = localStorage.getItem("ui");
+        // if (tempLocalStorageData) {
+        //   console.log("updating from local storage");
+        //   tempLocalStorageData = JSON.parse(tempLocalStorageData);
 
-          if (tempLocalStorageData?.quizzes?.length > 0) {
-            dispatch(updateLocalDataToRedux(tempLocalStorageData));
-            return;
-          }
-        }
+        //   if (tempLocalStorageData?.quizzes?.length > 0) {
+        //     dispatch(updateLocalDataToRedux(tempLocalStorageData));
+        //     return;
+        //   }
+        // }
 
         console.log("updating from backend");
 
-        let backendData = await getUserData(accountSC);
-        console.log({ backendData });
-        const quizData = await getQuizData(backendData.currentSlotNo);
-        console.log({ quizData });
+        const userData = await getUserData(accountSC);
+        console.log({ userData });
+        // const quizData = await getQuizData(backendData.currentSlotNo);
+        // console.log({ quizData });
 
         // if (
         //   (username && telegramUsername && username === "") ||
@@ -74,13 +76,7 @@ const useBackendSync = (initHook = false) => {
         //     accountSC
         //   );
 
-        dispatch(
-          updateBackendToRedux({
-            ...backendData,
-            quizzes: quizData,
-            isBackendLoaded: true,
-          })
-        );
+        dispatch(updateBackendToRedux({ ...userData, isBackendLoaded: true }));
 
         dispatch(updateScreenLoaded(true));
       }

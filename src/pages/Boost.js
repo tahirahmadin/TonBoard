@@ -8,7 +8,7 @@ import { REWARDS_BOOST_DATA, TIMER_BOOST_DATA } from "../utils/constants";
 import useGameHook from "../hooks/useGameHook";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ScoreComp from "../components/Score";
 
 const BoosterCard = ({
@@ -23,7 +23,6 @@ const BoosterCard = ({
   isFull,
 }) => {
   const { viberate } = useTelegramSDK();
-  const score = useSelector((state) => state.ui.score);
   const { upgradeBoosterLevel } = useGameHook();
 
   const [open, setOpen] = useState(false);

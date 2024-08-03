@@ -178,6 +178,30 @@ export const updateLocalDataToBackendAPI = async (userId) => {
   }
 };
 
+//6. USER:: Update Game Data to backend
+export const updateDataToBackendAPI = async (userData) => {
+  let url = `${apiUrl}/user/updateUserData`;
+
+  //Encrypted data
+  let encryptedData = getCipherText(userData);
+
+  let response = await axios
+    .post(url, encryptedData)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+
+  if (response && !response.error) {
+    return true;
+  } else {
+    console.log("error", response);
+    return false;
+  }
+};
+
 //7. DASHBOARD:: GET All Users Data
 export const getDashboardData = async (userId) => {
   try {

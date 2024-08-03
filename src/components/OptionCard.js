@@ -38,6 +38,7 @@ const OptionCard = ({
   correctOption,
   selectedOption,
   inputOption,
+  disable,
 }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -50,6 +51,9 @@ const OptionCard = ({
   const { viberate } = useTelegramSDK();
 
   const handleSelect = async () => {
+    if (disable) {
+      return;
+    }
     viberate("medium");
     handleAnswerSelected(inputOption);
   };

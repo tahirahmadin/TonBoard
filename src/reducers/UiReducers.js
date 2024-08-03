@@ -72,23 +72,35 @@ const UiReducer = createSlice({
       state.isBackendSynced = false;
     },
     updateTimerValue(state, action) {
+      if (!action.payload) {
+        return;
+      }
+
       state.timerValue = action.payload;
     },
     updateCurrentSlotNo(state, action) {
-      console.log("updating slot number", {
-        old: state.currentSlotNo,
-        new: action.payload,
-      });
+      if (action.payload === undefined) {
+        return;
+      }
+
       state.currentSlotNo = action.payload;
     },
 
     updateCurrentQueNo(state, action) {
+      if (action.payload === undefined) {
+        return;
+      }
+
       state.currentQueNo = action.payload;
     },
     updateAnsSelected(state, action) {
       state.ansSelected = action.payload;
     },
     updateQuizPointClaimStatus(state, action) {
+      if (action.payload === undefined) {
+        return;
+      }
+
       state.isQuizPointsClaimed = action.payload;
     },
     updateTimerRunningStatus(state, action) {
@@ -213,7 +225,6 @@ const UiReducer = createSlice({
         state.isQuizPointsClaimed = response.isQuizPointsClaimed;
         state.isTimerRunning = response.isTimerRunning;
         state.quizzes = response.quizzes;
-        state.isQuizLoading = response.isQuizLoading;
         state.isBackendLoaded = response.isBackendLoaded;
       }
     });
