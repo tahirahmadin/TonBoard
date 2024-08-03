@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import WebApp from "@twa-dev/sdk";
 import ethersServiceProvider from "../services/ethersServicesProvider";
+import { testmode } from "../utils/constants";
 
 const useTelegramSDK = (hookInit = false) => {
   const [userId, setUserID] = useState(null);
@@ -8,7 +9,7 @@ const useTelegramSDK = (hookInit = false) => {
 
   useEffect(() => {
     if (hookInit) {
-      if (process.env.NODE_ENV === "development") {
+      if (testmode) {
         setTimeout(() => {
           console.log("loading test user");
           setUserID(1118251881);
