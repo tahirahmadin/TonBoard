@@ -130,7 +130,7 @@ const Dashboard = () => {
               src={
                 "https://cdn3d.iconscout.com/3d/premium/thumb/silver-rank-badges-11275520-9023827.png?f=webp"
               }
-              alt="EON App"
+              alt="EOT App"
               width={16}
               height={16}
             />

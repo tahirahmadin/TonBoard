@@ -273,7 +273,7 @@ const SingleTaskPage = () => {
                 color: "#ffffff",
               }}
             >
-              EON Tasks
+              EOT Tasks
             </Typography>
             <TaskRewardComp />
             <Typography

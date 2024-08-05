@@ -105,7 +105,7 @@ const Work = () => {
             <Grid item xs={6} md={6}>
               <WorkCard2
                 poolId={0}
-                title={"EON TASKS"}
+                title={"EOT TASKS"}
                 img="https://cdn3d.iconscout.com/3d/premium/thumb/cash-bonus-on-online-shopping-11964562-9764218.png?f=webp"
                 sub_heading1="200 $TON"
                 sub_heading2="Tokens Pool"
