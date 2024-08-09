@@ -30,7 +30,7 @@ const ScoreComp = () => {
           fontSize: 14,
           lineHeight: "100%",
           textAlign: "center",
-          color: "#64FF99",
+          color: "#0088cc",
         }}
       >
         Current Points

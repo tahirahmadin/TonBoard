@@ -48,7 +48,7 @@ const Referral = () => {
         style={{
           width: "90%",
           height: "87px",
-          background: "linear-gradient(180deg, #64FF99 0%, #64FF99 100%)",
+          background: "linear-gradient(180deg, #48A6CD 0%, #48A6CD 100%)",
           borderRadius: "24px",
           padding: "1px",
           marginTop: "15px",
@@ -69,7 +69,12 @@ const Referral = () => {
           }}
         >
           <Typography
-            style={{ fontWeight: 400, fontSize: "16px", lineHeight: "19px" }}
+            style={{
+              fontWeight: 400,
+              fontSize: "16px",
+              lineHeight: "19px",
+              color: "#0088cc",
+            }}
           >
             Your Squad
           </Typography>
@@ -79,7 +84,7 @@ const Referral = () => {
               fontWeight: 600,
               fontSize: "40px",
               lineHeight: "100%",
-              color: "#64FF99",
+              color: "#ffffff",
             }}
           >
             {referrals && referrals.length.toLocaleString()}
@@ -92,7 +97,6 @@ const Referral = () => {
           width: "100%",
           height: "100%",
           minHeight: "calc(100vh - 222px)",
-
           borderRadius: "32px 32px 0px 0px",
           display: "flex",
           alignItems: "center",
@@ -122,7 +126,7 @@ const Referral = () => {
               fontWeight: 600,
               fontSize: "15px",
               lineHeight: "130%",
-              color: "#64FF99",
+              color: "#0088cc",
               maxWidth: 200,
             }}
           >

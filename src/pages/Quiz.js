@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import useSlotTimer from "../hooks/useSlotTimer";
 import QuizStatsCard from "../components/QuizStatsCard";
 import ConfettiExplosion from "react-confetti-explosion";
+import LoadingScreen from "../components/LoadingScreen";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -51,12 +52,6 @@ const QuizPage = () => {
     return quizzes?.[currentQueNo];
   }, [quizzes, currentQueNo]);
 
-  // useEffect(() => {
-  //   if ((currentSlotNo + 1) % (currentSlotNo * 5) === 0) {
-  //     dispatch(updateCurrentQueNo(currentQueNo + 1));
-  //   }
-  // }, [currentSlotNo, currentQueNo, dispatch]);
-
   const quizMessageStatus = React.useMemo(() => {
     const currOptionIndex = 5 * currentSlotNo + currentQueNo;
     if (ansSelected[currOptionIndex] === undefined) {
@@ -89,315 +84,308 @@ const QuizPage = () => {
 
   return (
     <Box>
-      <Box
-        style={{ height: "8vh" }}
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"center"}
-      >
-        <QuizStatsCard />
-      </Box>
-      <Box
-        style={{ height: "10vh" }}
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"center"}
-      >
-        <ScoreComp />
-      </Box>
-
-      {/* Question */}
-      {screenLoaded && questionData && (
-        <Box
-          style={{
-            height: "75vh",
-            width: "100%",
-            position: "relative",
-            zIndex: 0,
-
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-          }}
-        >
-          {isExploding && (
-            <ConfettiExplosion force={0.3} duration={2000} particleCount={80} />
-          )}
-          {/* Quiz Components */}
+      {screenLoaded && (
+        <Box>
           <Box
-            pt={2}
-            style={{
-              height: "63vh",
-              width: "90%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
+            style={{ height: "8vh" }}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
           >
+            <QuizStatsCard />
+          </Box>
+          <Box
+            style={{ height: "10vh" }}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <ScoreComp />
+          </Box>
+          {questionData && (
             <Box
               style={{
+                height: "75vh",
+                width: "100%",
+                position: "relative",
+                zIndex: 0,
+
                 display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-center",
+                flexDirection: "column",
+                justifyContent: "flex-start",
                 alignItems: "center",
-                backgroundColor: "#212121",
-                borderRadius: 7,
-                paddingRight: 12,
-                paddingLeft: 12,
-                paddingTop: 5,
-                paddingBottom: 5,
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
               }}
             >
-              <img
-                src={
-                  "https://cdn3d.iconscout.com/3d/premium/thumb/categoria-7844691-6244113.png?f=webp"
-                }
-                alt="TaskDao"
-                width={16}
-                height={16}
-              />
-              <Box
-                style={{
-                  width: "100%",
-                  fontFamily: "Rubik",
-                  fontWeight: 400,
-                  fontSize: 12,
-                  lineHeight: "100%",
-                  textAlign: "center",
-                  color: "#e5e5e5",
-                }}
-              >
-                {questionData?.category}
-              </Box>
-            </Box>
-            <Typography
-              style={{
-                fontFamily: "Rubik",
-                fontWeight: 600,
-                fontSize: 22,
-                lineHeight: "120%",
-                textAlign: "center",
-                color: "#ffffff",
-              }}
-            >
-              {questionData?.title}
-            </Typography>
-            <a
-              href="https://www.youtube.com/@tahirahmad.crypto"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Typography
-                style={{
-                  fontFamily: "Rubik",
-                  fontWeight: 400,
-                  fontSize: 12,
-                  lineHeight: "120%",
-                  textAlign: "center",
-                  color: "#64b5f6",
-                  marginTop: 10,
-                }}
-              >
-                <img
-                  src="https://cdn-icons-png.freepik.com/512/3845/3845829.png"
-                  style={{
-                    width: 14,
-                    height: 14,
-                    objectFit: "contain",
-                    marginRight: 3,
-                  }}
+              {isExploding && (
+                <ConfettiExplosion
+                  force={0.3}
+                  duration={2000}
+                  particleCount={80}
                 />
-                Hint : Learn here
-              </Typography>
-            </a>
-            <Box
-              style={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-around",
-                marginTop: 14,
-              }}
-            >
-              <OptionCard
-                key={1}
-                disable={isQuizLoading}
-                isSelected={isSelected}
-                correctOption={questionData?.correct}
-                selectedOption={ansSelected[ansSelected.length - 1]}
-                inputOption={1}
-                title={questionData.option1}
-                img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-a-letter-effect-text-9423674-7664624.png"
-                description="32,430"
-              />
-              <OptionCard
-                key={2}
-                disable={isQuizLoading}
-                isSelected={isSelected}
-                correctOption={questionData.correct}
-                selectedOption={ansSelected[ansSelected.length - 1]}
-                inputOption={2}
-                title={questionData.option2}
-                img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-b-letter-effect-text-9423689-7664639.png"
-                description="1,203"
-              />
-            </Box>
-            <Typography
-              pt={1}
-              style={{
-                width: "100%",
-                fontWeight: 600,
-                fontSize: 16,
-                color: quizMessageStatus === 1 ? "#64FF99" : "#ef5350",
-                textAlign: "center",
-              }}
-            >
-              {quizMessageStatus === 1 && "Great! Right answer"}
-              {quizMessageStatus === 2 && "Sorry! Try next time!"}
-            </Typography>
-            <Box>
-              {isTimerRunning && (
-                <Box height={"10vh"}>
-                  <Typography
+              )}
+              {/* Quiz Components */}
+              <Box
+                pt={2}
+                style={{
+                  height: "63vh",
+                  width: "90%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                }}
+              >
+                <Box
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-center",
+                    alignItems: "center",
+                    backgroundColor: "#212121",
+                    borderRadius: 7,
+                    paddingRight: 12,
+                    paddingLeft: 12,
+                    paddingTop: 5,
+                    paddingBottom: 5,
+                  }}
+                >
+                  <img
+                    src={
+                      "https://cdn3d.iconscout.com/3d/premium/thumb/categoria-7844691-6244113.png?f=webp"
+                    }
+                    alt="TaskDao"
+                    width={16}
+                    height={16}
+                  />
+                  <Box
                     style={{
+                      width: "100%",
+                      fontFamily: "Rubik",
+                      fontWeight: 400,
+                      fontSize: 12,
+                      lineHeight: "100%",
                       textAlign: "center",
                       color: "#e5e5e5",
                     }}
                   >
-                    Next slot in
-                  </Typography>
-                  <TimerComp endTime={timerValue} />
+                    {questionData?.category}
+                  </Box>
                 </Box>
-              )}
-            </Box>
-            <Box height={"12vh"} mt={2}>
-              {showClaimBtn && (
-                <Button
-                  onClick={showClaimBtn ? handleClaimButtonClick : null}
+                <Typography
                   style={{
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    display: "flex",
-                    alignItems: "center",
+                    fontFamily: "Rubik",
+                    fontWeight: 600,
+                    fontSize: 22,
+                    lineHeight: "120%",
                     textAlign: "center",
-                    justifyContent: "center",
-                    width: 160,
-                    margin: "0 auto",
-                    height: "38px",
-                    // background: "#64FF99",
-                    borderRadius: "12px",
-                    border: "1px solid #414141",
-                    color: "#64FF99",
+                    color: "#ffffff",
                   }}
                 >
-                  {isQuizLoading ? "Wait..." : "Next"} {">>"}
-                </Button>
-              )}
-            </Box>
-          </Box>
-          {/* Timer, Claim and Boost Components */}
-          <Box
-            style={{
-              heght: "20vh",
-              width: "90%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Box
-              pt={2}
-              style={{
-                width: "90%",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <Box
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <img
-                  src="/images/energy.png"
-                  alt=""
+                  {questionData?.title}
+                </Typography>
+                {/* <a
+                  href="https://www.youtube.com/@tahirahmad.crypto"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Typography
+                    style={{
+                      fontFamily: "Rubik",
+                      fontWeight: 400,
+                      fontSize: 12,
+                      lineHeight: "120%",
+                      textAlign: "center",
+                      color: "#64b5f6",
+                      marginTop: 10,
+                    }}
+                  >
+                    <img
+                      src="https://cdn-icons-png.freepik.com/512/3845/3845829.png"
+                      style={{
+                        width: 14,
+                        height: 14,
+                        objectFit: "contain",
+                        marginRight: 3,
+                      }}
+                    />
+                    Hint : Learn here
+                  </Typography>
+                </a> */}
+                <Box
                   style={{
-                    width: 20,
-                    height: 20,
-                    objectFit: "contain",
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-around",
+                    marginTop: 14,
                   }}
-                />
-
+                >
+                  <OptionCard
+                    key={1}
+                    disable={isQuizLoading}
+                    isSelected={isSelected}
+                    correctOption={questionData?.correct}
+                    selectedOption={ansSelected[ansSelected.length - 1]}
+                    inputOption={1}
+                    title={questionData.option1}
+                    img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-a-letter-effect-text-9423674-7664624.png"
+                    description="32,430"
+                  />
+                  <OptionCard
+                    key={2}
+                    disable={isQuizLoading}
+                    isSelected={isSelected}
+                    correctOption={questionData.correct}
+                    selectedOption={ansSelected[ansSelected.length - 1]}
+                    inputOption={2}
+                    title={questionData.option2}
+                    img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-b-letter-effect-text-9423689-7664639.png"
+                    description="1,203"
+                  />
+                </Box>
                 <Typography
+                  pt={1}
                   style={{
                     width: "100%",
                     fontWeight: 600,
                     fontSize: 16,
-                    color: "#ffffff",
+                    color: quizMessageStatus === 1 ? "#64FF99" : "#ef5350",
+                    textAlign: "center",
                   }}
                 >
-                  {displayQuestionNumber}/5
+                  {quizMessageStatus === 1 && "Great! Right answer"}
+                  {quizMessageStatus === 2 && "Sorry! Try next time!"}
                 </Typography>
+                <Box>
+                  {isTimerRunning && (
+                    <Box height={"10vh"}>
+                      <Typography
+                        style={{
+                          textAlign: "center",
+                          color: "#e5e5e5",
+                        }}
+                      >
+                        Next slot in
+                      </Typography>
+                      <TimerComp endTime={timerValue} />
+                    </Box>
+                  )}
+                </Box>
+                <Box height={"12vh"} mt={2}>
+                  {showClaimBtn && (
+                    <Button
+                      onClick={showClaimBtn ? handleClaimButtonClick : null}
+                      style={{
+                        fontWeight: 700,
+                        fontSize: "14px",
+                        display: "flex",
+                        alignItems: "center",
+                        textAlign: "center",
+                        justifyContent: "center",
+                        width: 160,
+                        margin: "0 auto",
+                        height: "38px",
+                        // background: "#64FF99",
+                        borderRadius: "12px",
+                        border: "1px solid #414141",
+                        color: "#64FF99",
+                      }}
+                    >
+                      {isQuizLoading ? "Wait..." : "Next"} {">>"}
+                    </Button>
+                  )}
+                </Box>
               </Box>
-              <Link to="/boost">
+              {/* Timer, Claim and Boost Components */}
+              <Box
+                style={{
+                  heght: "20vh",
+                  width: "90%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 <Box
+                  pt={2}
                   style={{
+                    width: "90%",
                     display: "flex",
+                    flexDirection: "row",
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent: "space-between",
                   }}
                 >
-                  <img
-                    alt=""
-                    src="https://cdn3d.iconscout.com/3d/premium/thumb/go-green-11413832-9197004.png?f=webp"
+                  <Box
                     style={{
-                      width: 22,
-                      height: 22,
-                      objectFit: "contain",
-                    }}
-                  />
-
-                  <Typography
-                    style={{
-                      width: "100%",
-                      fontWeight: 600,
-                      fontSize: 16,
-                      color: "#ffffff",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
-                    Boost
-                  </Typography>
+                    <img
+                      src="/images/energy.png"
+                      alt=""
+                      style={{
+                        width: 20,
+                        height: 20,
+                        objectFit: "contain",
+                      }}
+                    />
+
+                    <Typography
+                      style={{
+                        width: "100%",
+                        fontWeight: 600,
+                        fontSize: 16,
+                        color: "#ffffff",
+                      }}
+                    >
+                      {displayQuestionNumber}/5
+                    </Typography>
+                  </Box>
+                  <Link to="/boost">
+                    <Box
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <img
+                        alt=""
+                        src="https://cdn3d.iconscout.com/3d/premium/thumb/go-green-11413832-9197004.png?f=webp"
+                        style={{
+                          width: 22,
+                          height: 22,
+                          objectFit: "contain",
+                        }}
+                      />
+
+                      <Typography
+                        style={{
+                          width: "100%",
+                          fontWeight: 600,
+                          fontSize: 16,
+                          color: "#ffffff",
+                        }}
+                      >
+                        Boost
+                      </Typography>
+                    </Box>
+                  </Link>
                 </Box>
-              </Link>
+              </Box>
             </Box>
-          </Box>
+          )}
         </Box>
       )}
 
-      {!screenLoaded && (
-        <Box
-          display="flex"
-          justifyContent={"center"}
-          alignItems={"center"}
-          style={{ height: "80vh" }}
-        >
-          <img
-            type="image/svg+xml"
-            src="https://cdn3d.iconscout.com/3d/premium/thumb/businesswoman-satisfied-after-investment-growth-6219694-5106203.png"
-            height={"200px"}
-          />
-        </Box>
-      )}
+      {!screenLoaded && <LoadingScreen text={"Onboarding the World to TON"} />}
     </Box>
   );
 };

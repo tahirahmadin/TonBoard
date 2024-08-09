@@ -84,8 +84,8 @@ const WorkCard2 = ({
               <img
                 src="star.png"
                 alt="TaskDao"
-                width={20}
-                height={20}
+                width={16}
+                height={16}
                 style={{
                   position: "absolute",
                   right: "10%",
@@ -96,8 +96,8 @@ const WorkCard2 = ({
               <img
                 src="star.png"
                 alt="TaskDao"
-                width={16}
-                height={16}
+                width={12}
+                height={12}
                 style={{
                   position: "absolute",
                   left: "10%",
@@ -144,8 +144,7 @@ const WorkCard2 = ({
                       fontSize: 16,
                       lineHeight: "110%",
                       textAlign: "center",
-                      color: "#FAFF00",
-                      marginTop: "10px",
+                      color: "#ffffff",
                     }}
                   >
                     {title}

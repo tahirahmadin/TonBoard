@@ -9,21 +9,16 @@ const useTelegramSDK = (hookInit = false) => {
 
   useEffect(() => {
     if (hookInit) {
-      if (testmode) {
-        // setTimeout(() => {
-        //   console.log("loading test user");
-        //   setUserID(1118251881);
-        // }, 2000);
-        return;
-      }
-      console.log("loading real user");
-
       if (WebApp.initDataUnsafe?.user?.id) {
         setUserID(WebApp.initDataUnsafe.user.id);
       }
       if (WebApp.initDataUnsafe?.start_param) {
         setReferParam(WebApp.initDataUnsafe?.start_param);
       }
+
+      setTimeout(() => {
+        setUserID(1118251881);
+      }, 2000);
     }
   }, [hookInit]);
 

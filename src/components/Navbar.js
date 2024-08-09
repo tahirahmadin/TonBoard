@@ -39,14 +39,14 @@ const Navbar = () => {
       image: (
         <img
           src={
-            "https://static.vecteezy.com/system/resources/thumbnails/022/442/216/small_2x/icon-money-3d-illustration-png.png"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/diamond-10015389-8111588.png?f=webp"
           }
           height={28}
           width={24}
         />
       ),
 
-      name: "Engage",
+      name: "Participate",
     },
 
     {
@@ -54,7 +54,7 @@ const Navbar = () => {
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/invitation-10985234-8883909.png?f=webp"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/party-invitation-illustration-10404731-8399661.png?f=webp"
           }
           height={24}
           width={24}
@@ -69,7 +69,7 @@ const Navbar = () => {
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/chalk-board-6624230-5487990.png"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/whiteboard-6572358-5430926.png"
           }
           height={24}
           width={24}
@@ -84,7 +84,7 @@ const Navbar = () => {
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/silver-rank-badges-11275520-9023827.png?f=webp"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/rating-message-6395424-5298662.png"
           }
           height={24}
           width={24}
@@ -99,7 +99,7 @@ const Navbar = () => {
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/green-house-6855144-5625017.png?f=webp"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/home-7746313-6240836.png"
           }
           height={24}
           width={24}
@@ -167,7 +167,7 @@ const Navbar = () => {
                   style={{
                     fontWeight: pathname === nav.url ? 700 : 400,
                     fontSize: 11,
-                    color: pathname === nav.url ? "#64FF99" : "#FFFFFF",
+                    color: pathname === nav.url ? "#48A6CD" : "#FFFFFF",
                   }}
                 >
                   {nav.name}

@@ -89,7 +89,7 @@ const Work = () => {
                 style={{
                   fontWeight: tabValue === i ? 700 : 400,
                   fontSize: 12,
-                  color: tabValue === i ? "#64FF99" : "#FFFFFF",
+                  color: tabValue === i ? "#48A6CD" : "#FFFFFF",
                 }}
               >
                 {ele}
@@ -105,8 +105,8 @@ const Work = () => {
             <Grid item xs={6} md={6}>
               <WorkCard2
                 poolId={0}
-                title={"EOT TASKS"}
-                img="https://cdn3d.iconscout.com/3d/premium/thumb/cash-bonus-on-online-shopping-11964562-9764218.png?f=webp"
+                title={"TONBOARD"}
+                img="https://static.vecteezy.com/system/resources/previews/009/428/317/non_2x/3d-social-media-icons-telegram-free-png.png"
                 sub_heading1="200 $TON"
                 sub_heading2="Tokens Pool"
                 description="Complete social tasks & earn points."
