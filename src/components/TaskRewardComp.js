@@ -80,7 +80,7 @@ const TaskRewardComp = () => {
         >
           <img
             src={
-              "https://static.vecteezy.com/system/resources/previews/024/673/191/original/gift-box-present-with-gold-coin-symbol-for-profit-interest-financial-reward-concept-3d-icon-illustration-design-png.png"
+              "https://cdn3d.iconscout.com/3d/premium/thumb/gift-3102354-2582668@0.png"
             }
             alt="TaskDao"
             width={32}
@@ -91,26 +91,14 @@ const TaskRewardComp = () => {
             <Typography
               style={{
                 fontFamily: "Rubik",
-                fontWeight: 600,
+                fontWeight: 400,
                 fontSize: 13,
                 lineHeight: "110%",
                 textAlign: "left",
                 color: "#ffffff",
               }}
             >
-              200 TON
-            </Typography>
-            <Typography
-              style={{
-                fontFamily: "Rubik",
-                fontWeight: 400,
-                fontSize: 10,
-                lineHeight: "110%",
-                textAlign: "left",
-                color: "#e5e5e5",
-              }}
-            >
-              Pool Reward
+              Pool Reward of <strong>200 TON</strong>
             </Typography>
           </Box>
         </Box>

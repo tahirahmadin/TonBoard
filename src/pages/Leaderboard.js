@@ -75,8 +75,6 @@ const SingleLeaderCard = ({ name, points, profilePic, rank }) => {
         width: "100%",
         minHeight: 55,
         height: "100%",
-        background:
-          "linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(149, 149, 149, 0.3) 50%, rgba(227, 227, 227, 0.3) 100%)",
         borderRadius: "12px",
         padding: "1px",
       }}
@@ -103,7 +101,7 @@ const SingleLeaderCard = ({ name, points, profilePic, rank }) => {
         >
           <img
             src={
-              "https://cdn3d.iconscout.com/3d/premium/thumb/man-6530464-5823043.png"
+              "https://cdn3d.iconscout.com/3d/premium/thumb/diamond-10015389-8111588.png?f=webp"
             }
             alt=""
             style={{
@@ -161,7 +159,7 @@ const SingleLeaderCard = ({ name, points, profilePic, rank }) => {
                 justifyContent: "center",
                 fontSize: 14,
                 fontWeight: 800,
-                color: "#64FF99",
+                color: "#0088cc",
               }}
             >
               {getNumbersInFormatOnlyMillions(points)}
@@ -217,35 +215,15 @@ const Leaderboard = () => {
               style={{
                 width: "100%",
                 fontFamily: "Rubik",
-                fontWeight: 700,
+                fontWeight: 600,
                 fontSize: 28,
                 lineHeight: "110%",
                 textAlign: "center",
                 color: "#ffffff",
               }}
             >
-              Wall of Fame
+              Leaderboard
             </Typography>
-            <Box
-              style={{
-                width: "100%",
-                background: "#161811",
-                borderRadius: "32px 32px 0px 0px",
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "column",
-                gap: "5px",
-                padding: "10px 5%",
-                overflowY: "auto",
-              }}
-            >
-              <SingleLeaderCard
-                key={0}
-                name={username}
-                rank={rankings?.userRank}
-                points={score}
-              />
-            </Box>
           </Box>
 
           <Box
@@ -260,7 +238,6 @@ const Leaderboard = () => {
             <Box
               style={{
                 width: "100%",
-
                 background: "#161811",
                 borderRadius: "32px 32px 0px 0px",
                 display: "flex",
@@ -271,19 +248,6 @@ const Leaderboard = () => {
                 overflowY: "auto",
               }}
             >
-              <Typography
-                style={{
-                  width: "100%",
-                  fontFamily: "Rubik",
-                  fontWeight: 500,
-                  fontSize: 18,
-                  textAlign: "left",
-                  color: "#ffffff",
-                  paddingBottom: 5,
-                }}
-              >
-                Leaderboard
-              </Typography>
               {rankings?.ranks?.map((ele, i) => (
                 <SingleLeaderCard
                   key={i}
@@ -293,7 +257,16 @@ const Leaderboard = () => {
                   rank={ele.rank}
                 />
               ))}
-              <Box style={{ textAlign: "center" }}>Will be available soon</Box>
+              {rankings?.ranks?.map((ele, i) => (
+                <SingleLeaderCard
+                  key={i}
+                  name={ele.username}
+                  profilePic={ele.profilePic}
+                  points={ele.score}
+                  rank={ele.rank}
+                />
+              ))}
+              {/* <Box style={{ textAlign: "center" }}>Will be available soon</Box> */}
             </Box>
           </Box>
         </Box>

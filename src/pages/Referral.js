@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import constants from "../utils/constants";
 import { getNumbersInFormat } from "../actions/helperFn";
 import useDashboardData from "../hooks/useDashboardData";
+import { CopyAll, Person } from "@mui/icons-material";
 
 const Referral = () => {
   const dispatch = useDispatch();
@@ -43,54 +44,29 @@ const Referral = () => {
       }}
     >
       <SuccessSnackbar text="Invite link copied!" />
-
-      <Box
+      <Typography
+        mb={1}
         style={{
-          width: "90%",
-          height: "87px",
-          background: "linear-gradient(180deg, #48A6CD 0%, #48A6CD 100%)",
-          borderRadius: "24px",
-          padding: "1px",
-          marginTop: "15px",
-          marginLeft: "5%",
+          width: "100%",
+          fontFamily: "Rubik",
+          fontWeight: 600,
+          fontSize: 28,
+          lineHeight: "110%",
+          textAlign: "center",
+          color: "#ffffff",
         }}
       >
-        <Box
-          style={{
-            width: "100%",
-            height: "100%",
-            background: "#2B2D25",
-            borderRadius: "24px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            gap: "5px",
-          }}
-        >
-          <Typography
-            style={{
-              fontWeight: 400,
-              fontSize: "16px",
-              lineHeight: "19px",
-              color: "#0088cc",
-            }}
-          >
-            Your Squad
-          </Typography>
-          <Typography
-            style={{
-              fontFamily: "'Rubik'",
-              fontWeight: 600,
-              fontSize: "40px",
-              lineHeight: "100%",
-              color: "#ffffff",
-            }}
-          >
-            {referrals && referrals.length.toLocaleString()}
-          </Typography>
-        </Box>
-      </Box>
+        Invite friends!
+      </Typography>
+
+      <Typography
+        style={{
+          textAlign: "center",
+          marginBottom: 10,
+        }}
+      >
+        You and your friend will recieve bonuses
+      </Typography>
 
       <Box
         style={{
@@ -108,91 +84,77 @@ const Referral = () => {
         <Box
           style={{
             width: "100%",
-            height: "84px",
+
             gap: "5px",
-            background:
-              "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
-            border: "1px solid #414141",
+            background: "rgba(253, 255, 245, 0.08)",
             borderRadius: "12px",
             display: "flex",
             alignItems: "center",
+            flexDirection: "column",
             justifyContent: "space-between",
-            padding: "8px 15px",
+            padding: "12px 15px",
             borderRadius: "12px",
           }}
         >
           <Box
             style={{
               fontWeight: 600,
-              fontSize: "15px",
+              fontSize: 18,
               lineHeight: "130%",
-              color: "#0088cc",
+              color: "#ffffff",
               maxWidth: 200,
             }}
           >
             Invite friends
-            <br />
-            <Typography
-              style={{
-                fontWeight: 400,
-                fontSize: "12px",
-                lineHeight: "14px",
-                color: "#FFFFFF",
-                opacity: 0.8,
-                wordBreak: "break-all",
-                marginTop: "5px",
-                maxWidth: 175,
-              }}
-            >
-              {`${constants.botUrl}${telegramUserId}`}
-            </Typography>
           </Box>
           <Box
             style={{
               display: "flex",
               alignItems: "flex-end",
-              flexDirection: "column",
+              flexDirection: "row",
               gap: "7px",
             }}
           >
-            <Button
-              onClick={handleCopyToClipboard}
-              style={{
-                width: "82px",
-                height: "27px",
-                background: "white",
-                borderRadius: "8px",
-                fontWeight: 600,
-                fontSize: "16px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#000",
-              }}
-            >
-              Copy
-            </Button>
             <Link
               to={`https://t.me/share/url?url=${constants.botUrl}${telegramUserId}`}
             >
               <Button
                 style={{
-                  width: "82px",
-                  height: "27px",
-                  background: "transparent",
-                  borderRadius: "8px",
+                  height: "40px",
+                  background: "#0088cc",
+                  borderRadius: "12px",
                   fontWeight: 600,
                   fontSize: "16px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   color: "white",
-                  border: "1px solid white",
+                  textTransform: "none",
+                  paddingLeft: 20,
+                  paddingRight: 20,
                 }}
               >
-                SHARE
+                Invite a friend <Person />
               </Button>
             </Link>
+            <Button
+              onClick={handleCopyToClipboard}
+              style={{
+                height: "40px",
+                background: "#0088cc",
+                borderRadius: "12px",
+                fontWeight: 600,
+                fontSize: "16px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#ffffff",
+                paddingLeft: 20,
+                paddingRight: 20,
+              }}
+            >
+              Copy
+            </Button>
           </Box>
         </Box>
 
@@ -213,7 +175,7 @@ const Referral = () => {
               color: "#ffffff",
             }}
           >
-            My Referrals
+            My friends list ({referrals && referrals.length.toLocaleString()})
           </Typography>
           <Box
             style={{

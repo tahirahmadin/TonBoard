@@ -71,15 +71,15 @@ const ActionButton = ({
         style={{
           width: "100%",
           height: 28,
-          borderRadius: "4px",
+          borderRadius: "8px",
           fontWeight: 700,
           fontSize: 12,
-          color: "#000",
+          color: "#ffffff",
           whiteSpace: "nowrap",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#64FF99",
+          backgroundColor: "#0088cc",
           paddingLeft: 10,
           paddingRight: 10,
         }}
@@ -255,7 +255,7 @@ const SingleTaskPage = () => {
           >
             <img
               src={
-                "https://cdn3d.iconscout.com/3d/premium/thumb/cash-bonus-on-online-shopping-11964562-9764218.png?f=webp"
+                "https://static.vecteezy.com/system/resources/previews/009/428/317/non_2x/3d-social-media-icons-telegram-free-png.png"
               }
               height={"10%"}
               width={"40%"}
@@ -273,62 +273,62 @@ const SingleTaskPage = () => {
                 color: "#ffffff",
               }}
             >
-              EOT Tasks
+              TonBoard
             </Typography>
-            <TaskRewardComp />
+
             <Typography
               className={classes.description}
               style={{
                 textAlign: "center",
                 minHeight: 50,
+                marginBottom: 10,
               }}
             >
-              Engage on Ton ($EON) is the first E2E platform. Complete tasks and
-              share rewards from 200 $TON Tokens.
+              TonBoard ($TBD) is the first user onboarding platform on TON.
+              Complete tasks and share rewards from 200 $TON Tokens.
             </Typography>
+            <TaskRewardComp />
           </Box>
 
-          {tabValue === 0 && (
+          <Box
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "32px 32px 0px 0px",
+              padding: "1px 1px 0",
+              zIndex: 1,
+            }}
+          >
             <Box
               style={{
                 width: "100%",
-                height: "100%",
+                background: "#161811",
                 borderRadius: "32px 32px 0px 0px",
-                padding: "1px 1px 0",
-                zIndex: 1,
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+                gap: "10px",
+                padding: "25px 1%",
+                overflowY: "auto",
               }}
             >
-              <Box
-                style={{
-                  width: "100%",
-                  background: "#161811",
-                  borderRadius: "32px 32px 0px 0px",
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  gap: "10px",
-                  padding: "25px 1%",
-                  overflowY: "auto",
-                }}
-              >
-                {SPECIAL_TASKS_DATA.map((ele, i) => (
-                  <SingleTask
-                    key={i}
-                    taskId={ele.id}
-                    taskNumber={ele.taskNumber}
-                    name={ele.title}
-                    url={ele.url}
-                    points={ele.points}
-                    inProgress={inProgress}
-                    setInProgress={setInProgress}
-                  />
-                ))}
-                {SPECIAL_TASKS_DATA.length === 0 && (
-                  <Box style={{ textAlign: "center" }}>No tasks found</Box>
-                )}
-              </Box>
+              {SPECIAL_TASKS_DATA.map((ele, i) => (
+                <SingleTask
+                  key={i}
+                  taskId={ele.id}
+                  taskNumber={ele.taskNumber}
+                  name={ele.title}
+                  url={ele.url}
+                  points={ele.points}
+                  inProgress={inProgress}
+                  setInProgress={setInProgress}
+                />
+              ))}
+              {SPECIAL_TASKS_DATA.length === 0 && (
+                <Box style={{ textAlign: "center" }}>No tasks found</Box>
+              )}
             </Box>
-          )}
+          </Box>
         </Box>
       </Zoom>
     </Box>

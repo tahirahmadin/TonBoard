@@ -66,7 +66,7 @@ const Dashboard = () => {
           position: "relative",
           height: 200,
           backgroundImage:
-            "url(https://plus.unsplash.com/premium_photo-1685114647471-46f2fc552bd9?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+            "url(https://img.freepik.com/free-vector/gradient-dynamic-blue-lines-background_23-2148995756.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
@@ -130,7 +130,7 @@ const Dashboard = () => {
               src={
                 "https://cdn3d.iconscout.com/3d/premium/thumb/silver-rank-badges-11275520-9023827.png?f=webp"
               }
-              alt="EOT App"
+              alt="TonBoard App"
               width={16}
               height={16}
             />
