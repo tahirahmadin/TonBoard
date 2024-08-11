@@ -126,9 +126,9 @@ export const updateTaskStatusAPI = async (userId, task, taskStatus) => {
 };
 
 //5. REFERRAL:: GET User referrals Data by address
-export const getReferralsData = async (userId) => {
+export const getReferralsData = async (telegramId) => {
   try {
-    let url = `${apiUrl}/user/getReferredUsers?userId=${userId}`;
+    let url = `${apiUrl}/user/getReferredUsers?telegramId=${telegramId}`;
 
     let response = await axios.get(url).then((res) => res.data);
 

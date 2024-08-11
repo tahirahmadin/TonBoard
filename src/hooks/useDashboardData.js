@@ -7,10 +7,12 @@ import {
   getUserLeaderboardData,
 } from "../actions/serverActions";
 import { useServerAuth } from "./useServerAuth";
+import useTelegramSDK from "./useTelegramSDK";
 
 // Hook to load and manage display data for referrals, Dashboard and Rankings
 const useDashboardData = (initHook = false) => {
   const { accountSC } = useServerAuth();
+  const { telegramUserId } = useTelegramSDK();
   const displayData = useSelector((state) => state.ui.displayData);
   const refetch = useSelector((state) => state.ui.refetch);
 
@@ -24,7 +26,7 @@ const useDashboardData = (initHook = false) => {
 
   //Sync redux state with localStorage
   useEffect(() => {
-    if (!accountSC || !initHook) {
+    if (!accountSC || (!initHook && !telegramUserId)) {
       return;
     }
 
@@ -36,7 +38,7 @@ const useDashboardData = (initHook = false) => {
       const [progressItems, rankings, referrals] = await Promise.all([
         getDashboardData(accountSC),
         getUserLeaderboardData(accountSC),
-        getReferralsData(accountSC),
+        getReferralsData(telegramUserId),
       ]);
 
       console.log("display data loaded");
@@ -44,7 +46,7 @@ const useDashboardData = (initHook = false) => {
       setLoading(false);
     }
     loadData();
-  }, [accountSC, initHook, refetch, dispatch]);
+  }, [accountSC, initHook, refetch, dispatch, telegramUserId]);
 
   const { progressItems, rankings, referrals } = displayData;
   return { progressItems, referrals, rankings, loading, refreshData };
