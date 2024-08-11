@@ -1,4 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  getUserBackendData,
+  updateDataToBackendAPI,
+  upgradeBoosterToBackend,
+} from "../actions/serverActions";
 
 const initialState = {
   username: null,
@@ -34,28 +39,73 @@ const initialState = {
   displayData: { progressItems: [], rankings: [], referrals: [] },
 };
 
-// Function:: update localData to redux
-export const updateLocalDataToRedux = createAsyncThunk(
-  "updateLocalDataToRedux",
-  async () => {
+// Function:: get backend data and update redux
+export const getBackendDataToRedux = createAsyncThunk(
+  "getBackendDataToRedux",
+  async (userId) => {
     try {
-      let tempLocalStorageData = localStorage.getItem("ui");
-      if (tempLocalStorageData) {
-        return JSON.parse(tempLocalStorageData);
+      let response = await getUserBackendData(userId);
+
+      if (response) {
+        return response;
       }
-      return tempLocalStorageData;
+      return null;
     } catch (error) {
       console.log(error);
     }
   }
 );
 
-/// Function:: update backendData to local
-export const updateBackendToRedux = createAsyncThunk(
-  "updateBackendToRedux",
-  async (backendDataObj) => {
+// Function: To upgrade booster
+export const upgradeBoosterRedux = createAsyncThunk(
+  "upgradeBoosterRedux",
+  async (dataObj) => {
     try {
-      return backendDataObj;
+      console.log("dataObj");
+      console.log(dataObj);
+      let response = await upgradeBoosterToBackend(dataObj);
+      console.log("response");
+      console.log(response);
+
+      if (response.error === false) {
+        return {
+          type: dataObj.type,
+          points: response.msg,
+        };
+      }
+      return null;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// Function: To mark answer to backend
+export const updateSelectedAnswerRedux = createAsyncThunk(
+  "updateSelectedAnswerRedux",
+  async (dataObj) => {
+    try {
+      console.log("dataObj");
+      console.log(dataObj);
+
+      //Update answers array
+
+      const response = await updateDataToBackendAPI({
+        userId: dataObj.userId,
+        inputOption: dataObj.inputOption,
+      });
+
+      console.log("response");
+      console.log(response);
+
+      if (response.error === false) {
+        return {
+          inputOption: dataObj.inputOption,
+          points: response.result.points,
+          correctOption: response.result.correctOption,
+        };
+      }
+      return null;
     } catch (error) {
       console.log(error);
     }
@@ -67,10 +117,6 @@ const UiReducer = createSlice({
   initialState,
 
   reducers: {
-    updateScore(state, action) {
-      state.score = action.payload;
-      state.isBackendSynced = false;
-    },
     updateTimerValue(state, action) {
       if (!action.payload) {
         return;
@@ -82,7 +128,6 @@ const UiReducer = createSlice({
       if (action.payload === undefined) {
         return;
       }
-
       state.currentSlotNo = action.payload;
     },
 
@@ -90,7 +135,6 @@ const UiReducer = createSlice({
       if (action.payload === undefined) {
         return;
       }
-
       state.currentQueNo = action.payload;
     },
     updateAnsSelected(state, action) {
@@ -100,7 +144,6 @@ const UiReducer = createSlice({
       if (action.payload === undefined) {
         return;
       }
-
       state.isQuizPointsClaimed = action.payload;
     },
     updateTimerRunningStatus(state, action) {
@@ -116,25 +159,6 @@ const UiReducer = createSlice({
 
     updateScreenLoaded(state, action) {
       state.screenLoaded = action.payload;
-    },
-
-    updateSpecialTaskStatusState(state, action) {
-      state.specialTasksStatus = action.payload;
-    },
-    updateLeagueTaskStatusState(state, action) {
-      state.leagueTasksStatus = action.payload;
-    },
-    updateRefTaskStatusState(state, action) {
-      state.refTasksStatus = action.payload;
-    },
-    updateLeagueLevel(state, action) {
-      state.leagueLevel = action.payload;
-    },
-    updateEnergyLeft(state, action) {
-      state.queLeft = action.payload;
-    },
-    updatePlayLevels(state, action) {
-      state.playLevels = action.payload;
     },
 
     updateRefetch(state, action) {
@@ -160,8 +184,9 @@ const UiReducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(updateLocalDataToRedux.fulfilled, (state, action) => {
+    builder.addCase(getBackendDataToRedux.fulfilled, (state, action) => {
       const response = action.payload;
+      console.log(response);
       if (response) {
         state.score = response.score;
         state.ansSelected = response.ansSelected;
@@ -169,63 +194,49 @@ const UiReducer = createSlice({
         state.currentSlotNo = response.currentSlotNo;
         state.leagueLevel = response.leagueLevel;
         state.username = response.username;
-        state.userId = response.userId;
-
-        state.leagueTasksStatus = response.leagueTasksStatus;
-
-        state.queLeft = response.queLeft;
         state.playLevels = response.playLevels;
 
         //Tasks states
-        state.specialTasksStatus = response.specialTasksStatus;
-        state.leagueTasksStatus = response.leagueTasksStatus;
-        state.refTasksStatus = response.refTasksStatus;
         state.referralCount = response.referralCount;
         state.referralPoints = response.referralPoints;
 
-        state.specialTasksStatus = response.specialTasksStatus;
+        state.timerValue = response.timerValue;
+        state.quizzes = response.quizzes;
 
         state.screenLoaded = true;
-        state.timerValue = response.timerValue;
-        state.isQuizPointsClaimed = response.isQuizPointsClaimed;
-        state.isTimerRunning = response.isTimerRunning;
-        state.quizzes = response.quizzes;
-        state.isQuizLoading = response.isQuizLoading;
-        state.isBackendSynced = response.isBackendSynced;
-        state.isBackendLoaded = response.isBackendLoaded;
       }
     });
-    builder.addCase(updateBackendToRedux.fulfilled, (state, action) => {
+
+    builder.addCase(upgradeBoosterRedux.fulfilled, (state, action) => {
       const response = action.payload;
-      if (response) {
-        state.score = response.score;
-        state.ansSelected = response.ansSelected;
-        state.currentQueNo = response.currentQueNo;
-        state.currentSlotNo = response.currentSlotNo;
-        state.leagueLevel = response.leagueLevel;
-        state.username = response.username;
-        state.userId = response._id;
+      if (response?.type === "rewards") {
+        state.score = state.score - response.points;
+        state.playLevels = {
+          ...state.playLevels,
+          rewards: state.playLevels.rewards + 1,
+        };
+      }
+      if (response?.type === "timer") {
+        state.score = state.score - response.points;
+        state.playLevels = {
+          ...state.playLevels,
+          timer: state.playLevels.timer + 1,
+        };
+      }
+    });
+    builder.addCase(updateSelectedAnswerRedux.fulfilled, (state, action) => {
+      const response = action.payload;
+      if (response.points) {
+        state.score = state.score + response.points;
 
-        state.leagueTasksStatus = response.leagueTasksStatus;
-
-        state.queLeft = response.queLeft;
-        state.playLevels = response.playLevels;
-
-        //Tasks states
-        state.specialTasksStatus = response.specialTasksStatus;
-        state.leagueTasksStatus = response.leagueTasksStatus;
-        state.refTasksStatus = response.refTasksStatus;
-        state.referralCount = response.referralCount;
-        state.referralPoints = response.referralPoints;
-
-        state.specialTasksStatus = response.specialTasksStatus;
-
-        state.screenLoaded = true;
-        state.timerValue = response.timerValue;
-        state.isQuizPointsClaimed = response.isQuizPointsClaimed;
-        state.isTimerRunning = response.isTimerRunning;
-        state.quizzes = response.quizzes;
-        state.isBackendLoaded = response.isBackendLoaded;
+        if (
+          state.quizzes[state.currentQueNo].correct === response.inputOption
+        ) {
+          state.isExploding = true;
+          setTimeout(() => {
+            state.isExploding = false;
+          }, 2000);
+        }
       }
     });
   },

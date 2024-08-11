@@ -7,13 +7,13 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import constants from "../utils/constants";
 import { getNumbersInFormat } from "../actions/helperFn";
-import useDashboardData from "../hooks/useDashboardData";
-import { CopyAll, Person } from "@mui/icons-material";
+
+import { Person } from "@mui/icons-material";
 
 const Referral = () => {
   const dispatch = useDispatch();
   const { telegramUserId, viberate } = useTelegramSDK(true);
-  const { referrals, refreshData } = useDashboardData();
+  const referrals = [];
 
   const handleCopyToClipboard = () => {
     if (telegramUserId) {

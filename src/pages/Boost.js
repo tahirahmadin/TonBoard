@@ -10,6 +10,8 @@ import useTelegramSDK from "../hooks/useTelegramSDK";
 
 import { useNavigate } from "react-router-dom";
 import ScoreComp from "../components/Score";
+import { upgradeBoosterRedux } from "../reducers/UiReducers";
+import { useServerAuth } from "../hooks/useServerAuth";
 
 const BoosterCard = ({
   title,
@@ -22,14 +24,24 @@ const BoosterCard = ({
   description2,
   isFull,
 }) => {
+  const dispatch = useDispatch();
   const { viberate } = useTelegramSDK();
-  const { upgradeBoosterLevel } = useGameHook();
+  const { accountSC } = useServerAuth();
 
   const [open, setOpen] = useState(false);
 
   const handlePurchaseButton = async () => {
-    await upgradeBoosterLevel(type, price);
-    setOpen(false);
+    // Upgrade booster by type to backendAPI
+    let dataObj = {
+      userId: accountSC,
+      type: type,
+      taskId: level,
+    };
+    let res = await dispatch(upgradeBoosterRedux(dataObj));
+
+    if (res) {
+      setOpen(false);
+    }
   };
 
   return (

@@ -144,41 +144,6 @@ export const getReferralsData = async (telegramId) => {
 };
 
 //6. USER:: Update Game Data to backend
-export const updateLocalDataToBackendAPI = async (userId) => {
-  let url = `${apiUrl}/user/updateUserData`;
-
-  let tempLocalStorageData = localStorage.getItem("ui");
-  if (tempLocalStorageData) {
-    tempLocalStorageData = JSON.parse(tempLocalStorageData);
-  }
-
-  if (!tempLocalStorageData) {
-    console.log("local data not found skipped backend update");
-    return;
-  }
-
-  let updateObj = { ...tempLocalStorageData, userId: userId };
-  //Encrypted data
-  let encryptedData = getCipherText(updateObj);
-
-  let response = await axios
-    .post(url, encryptedData)
-    .then((res) => {
-      return res.data;
-    })
-    .catch((err) => {
-      return err.response.data;
-    });
-
-  if (response && !response.error) {
-    return true;
-  } else {
-    console.log("error", response);
-    return false;
-  }
-};
-
-//6. USER:: Update Game Data to backend
 export const updateDataToBackendAPI = async (userData) => {
   let url = `${apiUrl}/user/updateUserData`;
 
@@ -219,7 +184,8 @@ export const getDashboardData = async (userId) => {
   }
 };
 
-export const getUserData = async (userId) => {
+// 8. Get current user all data
+export const getUserBackendData = async (userId) => {
   try {
     let url = `${apiUrl}/user/getUserData?userId=${userId}`;
 
@@ -233,6 +199,30 @@ export const getUserData = async (userId) => {
   } catch (err) {
     console.log("getUserData", err);
     return null;
+  }
+};
+
+//9. Boosters API
+export const upgradeBoosterToBackend = async (dataObj) => {
+  let url = `${apiUrl}/user/upgradeUserLevels`;
+  console.log(dataObj);
+
+  //Encrypted data
+  let encryptedData = getCipherText(dataObj);
+
+  let response = await axios
+    .post(url, encryptedData)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+
+  if (response && !response.error) {
+    return { error: false, msg: response.result };
+  } else {
+    return { error: true, msg: 0 };
   }
 };
 

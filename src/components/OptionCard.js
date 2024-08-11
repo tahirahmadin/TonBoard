@@ -1,21 +1,13 @@
-import {
-  Box,
-  Button,
-  Fade,
-  Grow,
-  Theme,
-  Typography,
-  Zoom,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import React, { useEffect, useMemo, useState } from "react";
+import { Box, Typography, useTheme } from "@mui/material";
+import React, { useMemo } from "react";
 
 import makeStyles from "@mui/styles/makeStyles";
 import useGameHook from "../hooks/useGameHook";
 import { useDispatch, useSelector } from "react-redux";
 import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 import useTelegramSDK from "../hooks/useTelegramSDK";
+import { updateSelectedAnswerRedux } from "../reducers/UiReducers";
+import { useServerAuth } from "../hooks/useServerAuth";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -43,19 +35,23 @@ const OptionCard = ({
   const classes = useStyles();
   const dispatch = useDispatch();
   const theme = useTheme();
-  const sm = useMediaQuery(theme.breakpoints.down("sm"));
-
-  const { handleAnswerSelected, pointsOnCorrectAnswer, pointsOnWrongAnswer } =
-    useGameHook();
-
+  const { pointsOnCorrectAnswer, pointsOnWrongAnswer } = useGameHook();
   const { viberate } = useTelegramSDK();
+  const { accountSC } = useServerAuth();
+
+  const ansSelected = useSelector((state) => state.ui.ansSelected);
 
   const handleSelect = async () => {
     if (disable) {
       return;
     }
     viberate("medium");
-    handleAnswerSelected(inputOption);
+    let dataObj = {
+      userId: accountSC,
+      ansArr: ansSelected,
+      inputOption: inputOption,
+    };
+    dispatch(updateSelectedAnswerRedux(dataObj));
   };
 
   const backgroundCardBorder = useMemo(() => {

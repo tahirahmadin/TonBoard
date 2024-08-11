@@ -4,34 +4,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 import useGameHook from "../hooks/useGameHook";
 import { useSelector } from "react-redux";
-import {
-  Analytics,
-  Balance,
-  Dashboard,
-  Group,
-  Money,
-  TapAndPlay,
-  TaskSharp,
-} from "@mui/icons-material";
-import useSlotTimer from "../hooks/useSlotTimer";
-import useBackendSync from "../hooks/useBackendSync";
-import useDashboardData from "../hooks/useDashboardData";
 import { useOnline } from "../hooks/useOnline";
 
 const Navbar = () => {
   const { viberate } = useTelegramSDK();
   // load initial game states
   const {} = useGameHook(true);
-  const {} = useSlotTimer(true);
-  const {} = useBackendSync(true);
-  const {} = useDashboardData(true);
+
   const navigate = useNavigate();
   let { pathname } = useLocation();
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
   const isOnline = useOnline();
-
-  //: Tahir handle case when user internet is not working
-  console.log({ isOnline });
 
   const navLinks = [
     {

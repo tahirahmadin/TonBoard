@@ -1,10 +1,7 @@
 import React from "react";
 import { Box, Typography, Zoom } from "@mui/material";
-
 import { useSelector } from "react-redux";
 import SuccessSnackbar from "../components/SuccessSnackbar";
-
-import useDashboardData from "../hooks/useDashboardData";
 import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 
 // const ActionButton = ({
@@ -172,7 +169,7 @@ const SingleLeaderCard = ({ name, points, profilePic, rank }) => {
 };
 
 const Leaderboard = () => {
-  const { rankings } = useDashboardData();
+  const rankings = [];
   const score = useSelector((state) => state.ui.score);
   const username = useSelector((state) => state.ui.username);
   const profilePic = useSelector((state) => state.ui.profilePic);
