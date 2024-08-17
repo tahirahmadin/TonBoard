@@ -149,17 +149,17 @@ const useGameHook = (hookInit = false) => {
 
   const _pointsOnCorrectAnswer = useMemo(() => {
     if (playLevels.rewards === 0) {
-      return 100000;
+      return 1000;
     } else {
-      return 100000 * parseInt(playLevels.rewards);
+      return 1000 * parseInt(playLevels.rewards);
     }
   }, [playLevels.rewards]);
 
   const _pointsOnWrongAnswer = useMemo(() => {
     if (playLevels.rewards === 0) {
-      return 25000;
+      return 250;
     } else {
-      return 25000 * playLevels.rewards;
+      return 250 * playLevels.rewards;
     }
   }, [playLevels.rewards]);
 

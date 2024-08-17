@@ -98,7 +98,7 @@ const OptionCard = ({
           width: "100%",
           maxWidth: 130,
           minWidth: 100,
-          height: 160,
+          height: 170,
           borderRadius: "22px",
           position: "relative",
           display: "flex",
@@ -113,7 +113,7 @@ const OptionCard = ({
           style={{
             width: "100%",
             height: "100%",
-            background: "#161811",
+            background: "#101516",
             borderRadius: "22px",
           }}
         >
@@ -179,7 +179,7 @@ const OptionCard = ({
                 <Typography
                   style={{
                     width: "90%",
-                    fontFamily: "'Rubik'",
+                    fontFamily: "Rubik",
                     fontWeight: 700,
                     fontSize: 15,
                     lineHeight: "110%",
@@ -203,7 +203,7 @@ const OptionCard = ({
                 >
                   <img
                     src={
-                      "https://cdn3d.iconscout.com/3d/premium/thumb/dollar-coin-2997232-2516270.png?f=webp"
+                      "https://cdn3d.iconscout.com/3d/premium/thumb/diamond-10637031-8796483.png"
                     }
                     height={16}
                     width={16}

@@ -127,32 +127,6 @@ const ProgressCard = ({
             {attemptedQuestions}/{maxQuestions}
           </Typography>
           <SmallProgressBar value={(attemptedQuestions * 100) / maxQuestions} />
-
-          {/* <Box
-            style={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "row",
-              paddingTop: 10,
-              paddingBottom: 10,
-            }}
-          >
-            <SmallProgressBar value={60} />
-            <Typography
-              style={{
-                width: "100%",
-                fontFamily: "'Rubik'",
-                fontWeight: 500,
-                fontSize: 8,
-                lineHeight: "110%",
-                textAlign: "center",
-                color: "#ffffff",
-              }}
-            >
-              20/20
-            </Typography>
-          </Box> */}
         </Box>
       </Box>
     </>

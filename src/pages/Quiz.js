@@ -14,6 +14,7 @@ import QuizStatsCard from "../components/QuizStatsCard";
 import ConfettiExplosion from "react-confetti-explosion";
 import LoadingScreen from "../components/LoadingScreen";
 import SmallProgressBar from "../components/SmallProgressBar";
+import ProgressBar from "../components/ProgressBar";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -282,7 +283,7 @@ const QuizPage = () => {
                       margin: "0 auto",
                       height: "38px",
                       borderRadius: "12px",
-                      color: "#64FF99",
+                      color: "#93ddff",
                     }}
                   >
                     {isQuizLoading ? "Wait..." : "Next Question >>"}
@@ -315,7 +316,7 @@ const QuizPage = () => {
                   >
                     Quiz Progress ({5 - displayQuestionNumber}/5)
                   </Typography>
-                  <SmallProgressBar
+                  <ProgressBar
                     value={((5 - displayQuestionNumber) * 100) / 5}
                   />
                 </Box>
