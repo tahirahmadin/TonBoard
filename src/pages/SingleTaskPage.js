@@ -235,7 +235,10 @@ const SingleTaskPage = () => {
                 src={projectDetails.about.logo}
                 width={108}
                 height={108}
-                style={{ filter: "drop-shadow(0 -6mm 14mm #757575)" }}
+                style={{
+                  filter: "drop-shadow(0 -6mm 14mm #757575)",
+                  borderRadius: "50%",
+                }}
               />
               <Typography
                 mb={1}

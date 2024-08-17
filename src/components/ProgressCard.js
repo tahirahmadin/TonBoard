@@ -52,7 +52,7 @@ const ProgressCard = ({
       <Box
         sx={{
           width: "100%",
-          maxWidth: 140,
+          width: 110,
           maxHeight: 300,
           borderRadius: "12px",
           position: "relative",

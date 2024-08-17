@@ -83,7 +83,13 @@ const SingleProjectCard = ({
           />
 
           <Box width={"30%"} p={1}>
-            <img src={img} alt="Project Logo" width={84} height={84} />
+            <img
+              src={img}
+              alt="Project Logo"
+              width={84}
+              height={84}
+              style={{ borderRadius: "50%" }}
+            />
             {/* <Typography
               style={{
                 width: "130.03px",

@@ -277,22 +277,27 @@ const Dashboard = () => {
             Your progress
           </Typography>
 
-          <Box style={{ overflowX: "scroll" }}>
-            <Grid container spacing={1} mt={1}>
-              {dashboardData &&
-                dashboardData?.slice(0, 3).map((el) => (
-                  <Grid item xs={4} md={4}>
-                    <ProgressCard
-                      key={el?.category}
-                      correctPercent={70}
-                      category={el?.category}
-                      img="https://cdn3d.iconscout.com/3d/free/thumb/free-bitcoin-3443546-2879622.png?f=webp"
-                      attemptedQuestions={el?.completed}
-                      maxQuestions={el?.total}
-                    />
-                  </Grid>
-                ))}
-            </Grid>
+          <Box
+            style={{
+              overflowX: "scroll",
+              display: "flex",
+              justifyContent: "flex-start",
+              gap: "10px",
+            }}
+          >
+            {dashboardData &&
+              dashboardData?.slice(0, 5).map((el) => (
+                <Box>
+                  <ProgressCard
+                    key={el?.category}
+                    correctPercent={70}
+                    category={el?.category}
+                    img="https://cdn3d.iconscout.com/3d/free/thumb/free-bitcoin-3443546-2879622.png?f=webp"
+                    attemptedQuestions={el?.completed}
+                    maxQuestions={el?.total}
+                  />
+                </Box>
+              ))}
           </Box>
         </Box>
       </Box>

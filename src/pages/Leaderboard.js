@@ -193,6 +193,7 @@ const Leaderboard = () => {
                     flexDirection: "column",
                     position: "relative",
                     backgroundColor: tabValue === i ? "black" : "transparent",
+
                     borderRadius: 10,
                     height: 36,
                   }}
@@ -207,7 +208,7 @@ const Leaderboard = () => {
                     style={{
                       fontWeight: tabValue === i ? 700 : 400,
                       fontSize: 12,
-                      color: tabValue === i ? "#48A6CD" : "#FFFFFF",
+                      color: tabValue === i ? "#ffffff" : "#FFFFFF",
                     }}
                   >
                     {ele}
@@ -231,14 +232,26 @@ const Leaderboard = () => {
               key={0}
               name={"Tahir Ahmad"}
               profilePic={null}
-              points={4323}
+              points={433223}
               rank={1}
             />
             <SingleLeaderCard
               key={0}
-              name={"Tahir Ahmad"}
-              points={312}
+              name={"Aamir Alam"}
+              points={31242}
               rank={2}
+            />
+            <SingleLeaderCard
+              key={0}
+              name={"Anthony Singh"}
+              points={31242}
+              rank={3}
+            />
+            <SingleLeaderCard
+              key={0}
+              name={"Anthony Singh"}
+              points={31242}
+              rank={3}
             />
             {rankings?.ranks?.map((ele, i) => (
               <SingleLeaderCard

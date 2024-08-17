@@ -58,7 +58,9 @@ const Work = () => {
       </Typography>
 
       <Grow direction="down" in={true}>
-        <Box style={{ height: "80vh", overflowY: "hidden" }}>
+        <Box
+          style={{ height: "80vh", overflowY: "auto", paddingBottom: "100px" }}
+        >
           {PROJECTS_DATA.map((ele) => (
             <SingleProjectCard
               projectId={ele.id}

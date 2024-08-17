@@ -177,7 +177,21 @@ let project1 = [
     url: "https://x.com/tahirahmadin",
   },
 ];
-export const TASKS_DATA_BY_PROJECT = [project0, project1];
+let project2 = [
+  {
+    id: 0,
+    title: "Join SEED App",
+    url: "https://x.com/tahirahmadin",
+  },
+];
+let project3 = [
+  {
+    id: 0,
+    title: "Join Here Wallet App",
+    url: "https://x.com/tahirahmadin",
+  },
+];
+export const TASKS_DATA_BY_PROJECT = [project0, project1, project2, project3];
 
 // League Tasks Data
 export const LEAGUE_TASKS_DATA = [
@@ -383,6 +397,17 @@ export const PROJECTS_DATA = [
     prizeAmount: 10000,
     prizeType: "SEED",
     logo: "https://pbs.twimg.com/profile_images/1783713758055194624/m6vmuyWB_400x400.jpg",
+  },
+  {
+    id: 3,
+    projectName: "HERE Wallet",
+    description: "Plant and Earn SEED Token on Telegram",
+    descriptionLong:
+      "$HERE is the first near wallet on telegram. Complete tasks and share rewards from 200 $TON Tokens.",
+    category: "Ecosystem",
+    prizeAmount: 10000,
+    prizeType: "HOT",
+    logo: "https://pbs.twimg.com/profile_images/1754817120242630656/HqQcSyK8_400x400.jpg",
   },
 ];
 
