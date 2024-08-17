@@ -89,12 +89,7 @@ const Dashboard = () => {
       <Box
         style={{
           position: "relative",
-          height: 50,
-          backgroundImage:
-            "url(https://img.freepik.com/free-vector/gradient-dynamic-blue-lines-background_23-2148995756.jpg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-          backgroundRepeat: "no-repeat",
+          height: 100,
         }}
       >
         <Box
@@ -102,17 +97,17 @@ const Dashboard = () => {
             position: "absolute",
             bottom: -30,
             left: "40%",
-            backgroundColor: "white",
+            // backgroundColor: "white",
             borderRadius: "50%",
           }}
         >
           <img
             src={
-              "https://cdn3d.iconscout.com/3d/premium/thumb/jewish-man-avatar-10971658-8779370.png?f=webp"
+              "https://cdn3d.iconscout.com/3d/premium/thumb/businessman-doing-meditation-10087255-8179740.png"
             }
             alt="TaskDao"
-            width={70}
-            height={70}
+            width={90}
+            height={90}
           />
         </Box>
       </Box>
