@@ -21,25 +21,6 @@ const ScoreComp = () => {
     >
       <Typography
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          fontFamily: "Rubik",
-          fontWeight: 500,
-          fontSize: 14,
-          lineHeight: "100%",
-          textAlign: "center",
-          color: "#0088cc",
-        }}
-      >
-        Current Points
-      </Typography>
-      <Typography
-        onClick={() => {
-          dispatch(updateScore(gameScore + 100000));
-        }}
-        style={{
           width: "100%",
           fontFamily: "Rubik",
           fontWeight: 700,
@@ -50,6 +31,23 @@ const ScoreComp = () => {
         }}
       >
         {getNumbersInFormatOnlyMillions(gameScore)}
+      </Typography>
+      <Typography
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          fontFamily: "Rubik",
+          fontSize: 14,
+          lineHeight: "130%",
+          color: "rgba(253, 255, 245, 0.8)",
+          lineHeight: "100%",
+          textAlign: "center",
+          color: "yellow",
+        }}
+      >
+        Current Points
       </Typography>
     </Box>
   );

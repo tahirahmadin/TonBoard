@@ -15,6 +15,7 @@ import Work from "./pages/Work";
 import QuizPage from "./pages/Quiz";
 import Leaderboard from "./pages/Leaderboard";
 import SingleTaskPage from "./pages/SingleTaskPage";
+import { TonConnectUIProvider } from "@tonconnect/ui-react";
 
 function App() {
   const theme = useTheme();
@@ -33,30 +34,36 @@ function App() {
   }, [accountSC, authLoaded]);
 
   return (
-    <Provider store={store}>
-      <div
-        style={{
-          width: "100%",
-          paddingBottom: 60,
-          height: "100vh",
-          background: "linear-gradient(135deg, #000000, #212121)",
-        }}
-      >
-        {pathname !== "/" && <BackButton />}
-        <Routes>
-          <Route exact path="/" element={<QuizPage />} />
-          <Route exact path="/boost" element={<Boost />} />
-          <Route exact path="/league" element={<League />} />
-          <Route exact path="/referral" element={<Referral />} />
-          <Route exact path="/tasks/:poolId" element={<SingleTaskPage />} />
-          <Route exact path="/dashboard" element={<Dashboard />} />
-          <Route exact path="/work" element={<Work />} />
-          <Route exact path="/leader" element={<Leaderboard />} />
-          <Route exact path="/invite" element={<Referral />} />
-        </Routes>
-        <Navbar />
-      </div>
-    </Provider>
+    <TonConnectUIProvider manifestUrl="https://gobbltest.vercel.app/tonconnect-manifest.json">
+      <Provider store={store}>
+        <div
+          style={{
+            width: "100%",
+            paddingBottom: 60,
+            height: "100vh",
+            background: "linear-gradient(135deg, #000000, #212121)",
+          }}
+        >
+          {pathname !== "/" && <BackButton />}
+          <Routes>
+            <Route exact path="/" element={<QuizPage />} />
+            <Route exact path="/boost" element={<Boost />} />
+            <Route exact path="/league" element={<League />} />
+            <Route exact path="/referral" element={<Referral />} />
+            <Route
+              exact
+              path="/tasks/:projectId"
+              element={<SingleTaskPage />}
+            />
+            <Route exact path="/dashboard" element={<Dashboard />} />
+            <Route exact path="/work" element={<Work />} />
+            <Route exact path="/leader" element={<Leaderboard />} />
+            <Route exact path="/invite" element={<Referral />} />
+          </Routes>
+          <Navbar />
+        </div>
+      </Provider>
+    </TonConnectUIProvider>
   );
 }
 

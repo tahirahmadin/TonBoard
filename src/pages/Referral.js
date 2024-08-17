@@ -36,11 +36,16 @@ const Referral = () => {
     <Box
       style={{
         width: "100%",
-        minHeight: "calc(100vh - 0px)",
+        height: "90vh",
         position: "relative",
-        background: "#161811",
-        paddingTop: "25px",
+        background: "#000000",
+        paddingBottom: "100px",
+        paddingLeft: "4%",
+        paddingRight: "4%",
+        paddingTop: "5%",
         zIndex: 0,
+        overflowX: "hidden",
+        overflowY: "hidden",
       }}
     >
       <SuccessSnackbar text="Invite link copied!" />

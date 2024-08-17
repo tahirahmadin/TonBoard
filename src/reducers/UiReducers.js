@@ -112,6 +112,38 @@ export const updateSelectedAnswerRedux = createAsyncThunk(
   }
 );
 
+// Function: To mark task completed
+export const updateTaskCompleteStatus = createAsyncThunk(
+  "updateTaskCompleteStatus",
+  async (dataObj) => {
+    try {
+      console.log("dataObj");
+      console.log(dataObj);
+
+      //Update answers array
+
+      // const response = await updateDataToBackendAPI({
+      //   userId: dataObj.userId,
+      //   inputOption: dataObj.inputOption,
+      // });
+
+      // console.log("response");
+      // console.log(response);
+
+      // if (response.error === false) {
+      //   return {
+      //     inputOption: dataObj.inputOption,
+      //     points: response.result.points,
+      //     correctOption: response.result.correctOption,
+      //   };
+      // }
+      return null;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const UiReducer = createSlice({
   name: "ui",
   initialState,

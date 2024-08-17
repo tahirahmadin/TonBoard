@@ -29,7 +29,7 @@ const Navbar = () => {
         />
       ),
 
-      name: "Participate",
+      name: "Airdrops",
     },
 
     {
@@ -37,14 +37,14 @@ const Navbar = () => {
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/party-invitation-illustration-10404731-8399661.png?f=webp"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/add-friend-8627490-6856189.png?f=webp"
           }
           height={24}
           width={24}
         />
       ),
 
-      name: "Invite",
+      name: "Friends",
     },
 
     {
@@ -52,7 +52,7 @@ const Navbar = () => {
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/whiteboard-6572358-5430926.png"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/question-problem-3d-icon-download-in-png-blend-fbx-gltf-file-formats--ask-help-answer-bubble-chat-conversation-pack-network-communication-icons-4916116.png?f=webp"
           }
           height={24}
           width={24}
@@ -67,14 +67,14 @@ const Navbar = () => {
       image: (
         <img
           src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/rating-message-6395424-5298662.png"
+            "https://cdn3d.iconscout.com/3d/premium/thumb/star-11158872-8943500.png"
           }
           height={24}
           width={24}
         />
       ),
 
-      name: "Rankings",
+      name: "Leaderboard",
     },
 
     {
@@ -148,7 +148,7 @@ const Navbar = () => {
                   variant="body1"
                   textTransform={"Capitalize"}
                   style={{
-                    fontWeight: pathname === nav.url ? 700 : 400,
+                    fontWeight: pathname === nav.url ? 600 : 400,
                     fontSize: 11,
                     color: pathname === nav.url ? "#48A6CD" : "#FFFFFF",
                   }}

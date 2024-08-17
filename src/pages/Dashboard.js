@@ -7,6 +7,12 @@ import makeStyles from "@mui/styles/makeStyles";
 import ProgressCard from "../components/ProgressCard";
 import { Link } from "react-router-dom";
 import { useServerAuth } from "../hooks/useServerAuth";
+import {
+  TonConnectButton,
+  useTonAddress,
+  useTonWallet,
+} from "@tonconnect/ui-react";
+import ScoreComp from "../components/Score";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -29,6 +35,11 @@ const Dashboard = () => {
 
   const [dashboardData, setDashboardData] = useState([]);
   const { accountSC } = useServerAuth();
+  const userFriendlyAddress = useTonAddress();
+  const wallet = useTonWallet();
+
+  const userAddress = useSelector((state) => state.ui.userAddress);
+  const screenLoaded = useSelector((state) => state.ui.screenLoaded);
 
   // // API call: to fetch tasks
   useEffect(() => {
@@ -45,6 +56,26 @@ const Dashboard = () => {
     asyncFn();
   }, [accountSC]);
 
+  useEffect(() => {
+    async function asyncFn() {
+      if (
+        screenLoaded &&
+        userFriendlyAddress &&
+        userAddress != userFriendlyAddress.toLowerCase() &&
+        accountSC
+      ) {
+        // await updateUserWalletAddressAPI(
+        //   userFriendlyAddress,
+        //   wallet.name,
+        //   accountSC
+        // );
+        // dispatch(updateUserWalletAddress(userFriendlyAddress));
+      }
+    }
+
+    asyncFn();
+  }, [screenLoaded, accountSC, userFriendlyAddress, userAddress, wallet?.name]);
+
   return (
     <Box
       style={{
@@ -58,14 +89,12 @@ const Dashboard = () => {
       <Box
         style={{
           position: "relative",
-          height: 200,
+          height: 50,
           backgroundImage:
             "url(https://img.freepik.com/free-vector/gradient-dynamic-blue-lines-background_23-2148995756.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
-          borderBottomLeftRadius: "60%",
-          borderBottomRightRadius: "60%",
         }}
       >
         <Box
@@ -87,7 +116,7 @@ const Dashboard = () => {
           />
         </Box>
       </Box>
-      <Box pt={5}>
+      <Box pt={4}>
         <Typography
           style={{
             width: "100%",
@@ -102,131 +131,65 @@ const Dashboard = () => {
         >
           {username}
         </Typography>
-
-        <Link to="/leader">
-          <Box
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-center",
-              alignItems: "center",
-              backgroundColor: "#212121",
-              borderRadius: 7,
-              paddingRight: 12,
-              paddingLeft: 12,
-              paddingTop: 5,
-              paddingBottom: 5,
-              width: "fit-content",
-              margin: "auto",
-            }}
-          >
-            <img
-              src={
-                "https://cdn3d.iconscout.com/3d/premium/thumb/silver-rank-badges-11275520-9023827.png?f=webp"
-              }
-              alt="TonBoard App"
-              width={16}
-              height={16}
-            />
-            <Box
-              style={{
-                width: "100%",
-                fontFamily: "Rubik",
-                fontWeight: 400,
-                fontSize: 12,
-                lineHeight: "100%",
-                textAlign: "center",
-                color: "#e5e5e5",
-                paddingLeft: 5,
-              }}
-            >
-              Degen
-            </Box>
-          </Box>
-        </Link>
       </Box>
-      {/* 
+
       <Box
+        style={{ height: "12vh" }}
         display={"flex"}
-        flexDirection="row"
-        justifyContent={"space-around"}
-        alignItems={"center"}
+        justifyContent={"center"}
+        alignItems={"flex-start"}
+      >
+        <ScoreComp />
+      </Box>
+
+      <Box
         style={{
-          borderRadius: "22px",
-          paddingTop: 30,
-          paddingBottom: 10,
+          width: "90%",
+          height: "100%",
+          maxHeight: 70,
+          background: "transparent",
+          borderRadius: "24px",
+          marginTop: "10px",
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          gap: "10px",
+          // padding: "15px",
+          marginLeft: "5%",
         }}
       >
         <Box
-          display={"flex"}
-          flexDirection="column"
-          justifyContent={"center"}
-          alignItems={"center"}
+          style={{
+            width: "100%",
+            minHeight: 70,
+            background:
+              "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
+            borderRadius: "12px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "0 15px",
+          }}
         >
           <Typography
             style={{
-              width: "100%",
-              fontFamily: "Rubik",
-              fontWeight: 700,
-              fontSize: 21,
-              lineHeight: "110%",
-              textAlign: "center",
-              color: "#ffffff",
-              marginTop: "4px",
-            }}
-          >
-            0
-          </Typography>
-          <Typography
-            style={{
-              width: "100%",
               fontFamily: "Rubik",
               fontWeight: 400,
-              fontSize: 14,
-              lineHeight: "110%",
-              textAlign: "center",
-              color: "#64FF99",
+              fontSize: "12px",
+              lineHeight: "14px",
+              color: "#FFFFFF",
             }}
           >
-            Tasks
+            {userFriendlyAddress
+              ? "Your TON wallet"
+              : "Wallet address not found"}
           </Typography>
+          <TonConnectButton />
         </Box>
-        <Box
-          display={"flex"}
-          flexDirection="column"
-          justifyContent={"center"}
-          alignItems={"center"}
-        >
-          <Typography
-            style={{
-              width: "100%",
-              fontFamily: "Rubik",
-              fontWeight: 700,
-              fontSize: 21,
-              lineHeight: "110%",
-              textAlign: "center",
-              color: "#ffffff",
-              marginTop: "10px",
-            }}
-          >
-            $0
-          </Typography>
-          <Typography
-            style={{
-              width: "100%",
-              fontFamily: "Rubik",
-              fontWeight: 400,
-              fontSize: 14,
-              lineHeight: "110%",
-              textAlign: "center",
-              color: "#64FF99",
-              marginTop: "4px",
-            }}
-          >
-            Revenue
-          </Typography>
-        </Box>
-      </Box> */}
+      </Box>
 
       <Box
         style={{ width: "100%" }}
@@ -236,18 +199,20 @@ const Dashboard = () => {
       >
         <Box style={{ width: "90%" }}>
           <Typography
+            mb={1}
             style={{
               width: "100%",
               fontFamily: "Rubik",
-              fontWeight: 500,
-              fontSize: 18,
+              fontWeight: 700,
+              fontSize: 16,
+              lineHeight: "110%",
               textAlign: "left",
               color: "#ffffff",
-              paddingBottom: 5,
             }}
           >
             Your progress
           </Typography>
+
           <Box style={{ overflowX: "scroll" }}>
             <Grid container spacing={1} mt={1}>
               {dashboardData &&
