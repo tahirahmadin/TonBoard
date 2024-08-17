@@ -13,6 +13,7 @@ import useSlotTimer from "../hooks/useSlotTimer";
 import QuizStatsCard from "../components/QuizStatsCard";
 import ConfettiExplosion from "react-confetti-explosion";
 import LoadingScreen from "../components/LoadingScreen";
+import SmallProgressBar from "../components/SmallProgressBar";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -41,7 +42,7 @@ const QuizPage = () => {
   const isExploding = useSelector((state) => state.ui.isExploding);
   const isQuizLoading = useSelector((state) => state.ui.isQuizLoading);
 
-  const { handleClaimButtonClick } = useGameHook();
+  const { handleNextButtonClick } = useGameHook();
 
   const { isTimerRunning } = useSlotTimer(false);
 
@@ -74,7 +75,7 @@ const QuizPage = () => {
     return 5 - (currentQueNo % 5);
   }, [currentQueNo]);
 
-  const showClaimBtn = useMemo(() => {
+  const showNextBtn = useMemo(() => {
     if (ansSelected.length === 0 || ansSelected.length < currentQueNo + 1) {
       return false;
     }
@@ -83,19 +84,11 @@ const QuizPage = () => {
   }, [ansSelected, currentQueNo, isQuizPointsClaimed]);
 
   return (
-    <Box>
+    <Box style={{ backgroundColor: "black" }}>
       {screenLoaded && (
         <Box>
           <Box
-            style={{ height: "8vh" }}
-            display={"flex"}
-            justifyContent={"center"}
-            alignItems={"center"}
-          >
-            <QuizStatsCard />
-          </Box>
-          <Box
-            style={{ height: "10vh" }}
+            style={{ height: "14vh" }}
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
@@ -105,14 +98,13 @@ const QuizPage = () => {
           {questionData && (
             <Box
               style={{
-                height: "75vh",
+                height: "85vh",
                 width: "100%",
                 position: "relative",
                 zIndex: 0,
-
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "flex-start",
+                justifyContent: "space-around",
                 alignItems: "center",
                 backgroundSize: "cover",
                 backgroundPosition: "center center",
@@ -127,9 +119,8 @@ const QuizPage = () => {
               )}
               {/* Quiz Components */}
               <Box
-                pt={2}
                 style={{
-                  height: "63vh",
+                  height: "60vh",
                   width: "90%",
                   display: "flex",
                   flexDirection: "column",
@@ -256,12 +247,12 @@ const QuizPage = () => {
                     textAlign: "center",
                   }}
                 >
-                  {quizMessageStatus === 1 && "Great! Right answer"}
+                  {quizMessageStatus === 1 && "Great! Right answer."}
                   {quizMessageStatus === 2 && "Sorry! Try next time!"}
                 </Typography>
                 <Box>
                   {isTimerRunning && (
-                    <Box height={"10vh"}>
+                    <Box height={"12vh"}>
                       <Typography
                         style={{
                           textAlign: "center",
@@ -274,110 +265,59 @@ const QuizPage = () => {
                     </Box>
                   )}
                 </Box>
-                <Box height={"12vh"} mt={2}>
-                  {showClaimBtn && (
-                    <Button
-                      onClick={showClaimBtn ? handleClaimButtonClick : null}
-                      style={{
-                        fontWeight: 700,
-                        fontSize: "14px",
-                        display: "flex",
-                        alignItems: "center",
-                        textAlign: "center",
-                        justifyContent: "center",
-                        width: 160,
-                        margin: "0 auto",
-                        height: "38px",
-                        // background: "#64FF99",
-                        borderRadius: "12px",
-                        border: "1px solid #414141",
-                        color: "#64FF99",
-                      }}
-                    >
-                      {isQuizLoading ? "Wait..." : "Next"} {">>"}
-                    </Button>
-                  )}
-                </Box>
               </Box>
               {/* Timer, Claim and Boost Components */}
-              <Box
-                style={{
-                  heght: "20vh",
-                  width: "90%",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Box
-                  pt={2}
-                  style={{
-                    width: "90%",
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Box
+              <Box height={"25vh"} width="80%">
+                {showNextBtn && (
+                  <Button
+                    onClick={showNextBtn ? handleNextButtonClick : null}
                     style={{
+                      fontWeight: 700,
+                      fontSize: "14px",
                       display: "flex",
                       alignItems: "center",
+                      textAlign: "center",
                       justifyContent: "center",
+                      width: 160,
+                      margin: "0 auto",
+                      height: "38px",
+                      borderRadius: "12px",
+                      color: "#64FF99",
                     }}
                   >
-                    <img
-                      src="/images/energy.png"
-                      alt=""
-                      style={{
-                        width: 20,
-                        height: 20,
-                        objectFit: "contain",
-                      }}
-                    />
+                    {isQuizLoading ? "Wait..." : "Next Question >>"}
+                  </Button>
+                )}
 
-                    <Typography
-                      style={{
-                        width: "100%",
-                        fontWeight: 600,
-                        fontSize: 16,
-                        color: "#ffffff",
-                      }}
-                    >
-                      {displayQuestionNumber}/5
-                    </Typography>
-                  </Box>
-                  <Link to="/boost">
-                    <Box
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <img
-                        alt=""
-                        src="https://cdn3d.iconscout.com/3d/premium/thumb/go-green-11413832-9197004.png?f=webp"
-                        style={{
-                          width: 22,
-                          height: 22,
-                          objectFit: "contain",
-                        }}
-                      />
-
-                      <Typography
-                        style={{
-                          width: "100%",
-                          fontWeight: 600,
-                          fontSize: 16,
-                          color: "#ffffff",
-                        }}
-                      >
-                        Boost
-                      </Typography>
-                    </Box>
-                  </Link>
+                <Box
+                  mt={2}
+                  style={{
+                    width: "100%",
+                    minHeight: "50.86px",
+                    borderRadius: "12px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "8px 15px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      width: "100%",
+                      fontFamily: "Rubik",
+                      fontWeight: 400,
+                      fontSize: 14,
+                      lineHeight: "150%",
+                      textAlign: "center",
+                      color: "#ffffff",
+                    }}
+                  >
+                    Quiz Progress ({5 - displayQuestionNumber}/5)
+                  </Typography>
+                  <SmallProgressBar
+                    value={((5 - displayQuestionNumber) * 100) / 5}
+                  />
                 </Box>
               </Box>
             </Box>

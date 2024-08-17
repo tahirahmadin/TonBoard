@@ -121,6 +121,7 @@ const Leaderboard = () => {
               alignItems: "center",
             }}
           >
+            {/* https://cdn3d.iconscout.com/3d/premium/thumb/exclusive-6410046-5272919.png */}
             <img
               src={
                 "https://cdn3d.iconscout.com/3d/premium/thumb/trophy-9211599-7568735.png"
@@ -193,7 +194,7 @@ const Leaderboard = () => {
                     position: "relative",
                     backgroundColor: tabValue === i ? "black" : "transparent",
                     borderRadius: 10,
-                    height: 40,
+                    height: 36,
                   }}
                   onClick={() => {
                     viberate("light");

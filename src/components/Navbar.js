@@ -74,7 +74,7 @@ const Navbar = () => {
         />
       ),
 
-      name: "Leaderboard",
+      name: "Board",
     },
 
     {

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 
 import { LEAGUE_TASKS_DATA } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,11 +6,9 @@ import {
   setSuccessPopup,
   updateLeagueLevel,
   updateScore,
-  updateAnsSelected,
   updateCurrentQueNo,
   updateTimerValue,
   updateQuizPointClaimStatus,
-  updateIsExploding,
   updaQuizLoadingStatus,
   getBackendDataToRedux,
 } from "../reducers/UiReducers";
@@ -62,7 +60,7 @@ const useGameHook = (hookInit = false) => {
     return quizzes?.[currentQueNo];
   }, [quizzes, currentQueNo]);
 
-  const _handleClaimButtonClick = async () => {
+  const _handleNextButtonClick = async () => {
     let rewardsOnCorrect = _pointsOnCorrectAnswer;
     let rewardsOnWrong = _pointsOnWrongAnswer;
 
@@ -179,7 +177,7 @@ const useGameHook = (hookInit = false) => {
     pointsOnWrongAnswer: _pointsOnWrongAnswer,
     timerDuration: _timerDuration,
 
-    handleClaimButtonClick: _handleClaimButtonClick,
+    handleNextButtonClick: _handleNextButtonClick,
     claimTaskPoints: _claimTaskPoints,
     claimLeagueLevel: _claimLeague,
     claimReferralLevel: _claimReferralLevel,

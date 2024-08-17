@@ -80,52 +80,122 @@ const Dashboard = () => {
     <Box
       style={{
         width: "100%",
-        minHeight: "calc(100vh - 60px)",
+        height: "90vh",
         position: "relative",
-        background: "#161811",
+        background: "#000000",
+        paddingBottom: "100px",
+        paddingLeft: "4%",
+        paddingRight: "4%",
+        paddingTop: "5%",
         zIndex: 0,
+        overflowX: "hidden",
+        overflowY: "hidden",
       }}
     >
       <Box
-        style={{
+        mt={1}
+        sx={{
+          border: "1px solid #313131",
+          width: "100%",
+          borderRadius: "22px",
           position: "relative",
-          height: 100,
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          padding: "2px",
+          background:
+            "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0.01) 100%)",
         }}
       >
-        <Box
+        {/* Start Images */}
+        <img
+          src="star.png"
+          alt="TaskDao"
+          width={16}
+          height={16}
           style={{
             position: "absolute",
-            bottom: -30,
-            left: "40%",
-            // backgroundColor: "white",
-            borderRadius: "50%",
+            right: "10%",
+            top: "8%",
+            zIndex: 1,
           }}
-        >
+        />
+        <img
+          src="star.png"
+          alt="TaskDao"
+          width={12}
+          height={12}
+          style={{
+            position: "absolute",
+            left: "10%",
+            top: "10%",
+            bottom: "",
+            zIndex: 1,
+          }}
+        />
+
+        <Box width={"40%"} p={1}>
           <img
             src={
               "https://cdn3d.iconscout.com/3d/premium/thumb/businessman-doing-meditation-10087255-8179740.png"
             }
-            alt="TaskDao"
-            width={90}
-            height={90}
+            alt="Project Logo"
+            width={64}
+            height={64}
           />
         </Box>
-      </Box>
-      <Box pt={4}>
-        <Typography
-          style={{
+        <Box
+          sx={{
             width: "100%",
-            fontFamily: "'Rubik'",
-            fontWeight: 700,
-            fontSize: 21,
-            lineHeight: "110%",
-            textAlign: "center",
-            color: "#ffffff",
-            marginTop: "10px",
+            height: "100%",
+            borderRadius: "22px",
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "20px 20px",
+            gap: "10px",
           }}
         >
-          {username}
-        </Typography>
+          <Box
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              justifyContent: "center",
+              gap: "7px",
+            }}
+          >
+            <Typography
+              style={{
+                width: "100%",
+                fontFamily: "Rubik",
+                fontWeight: 700,
+                fontSize: 16,
+                lineHeight: "110%",
+                textAlign: "left",
+                color: "#ffffff",
+              }}
+            >
+              {username}
+            </Typography>
+
+            <Typography
+              style={{
+                width: "100%",
+                fontSize: 14,
+                lineHeight: "130%",
+                color: "rgba(253, 255, 245, 0.8)",
+                position: "relative",
+                zIndex: 1,
+                textAlign: "left",
+              }}
+            >
+              Onboarded: 3 days ago
+            </Typography>
+          </Box>
+        </Box>
       </Box>
 
       <Box
@@ -151,7 +221,6 @@ const Dashboard = () => {
           justifyContent: "center",
           flexDirection: "column",
           gap: "10px",
-          // padding: "15px",
           marginLeft: "5%",
         }}
       >
@@ -192,7 +261,7 @@ const Dashboard = () => {
         justifyContent={"center"}
         mt={2}
       >
-        <Box style={{ width: "90%" }}>
+        <Box style={{ width: "100%" }}>
           <Typography
             mb={1}
             style={{
@@ -227,42 +296,6 @@ const Dashboard = () => {
           </Box>
         </Box>
       </Box>
-      {/* <Box
-        display={"flex"}
-        flexDirection="column"
-        justifyContent={"center"}
-        alignItems={"center"}
-        mt={5}
-      >
-        <Button
-          style={{
-            width: "80%",
-            fontFamily: "Rubik",
-            fontWeight: 500,
-            fontSize: 16,
-            lineHeight: "110%",
-            textAlign: "center",
-            color: "#ffffff",
-            backgroundColor: "green",
-            height: 52,
-            borderRadius: "22px",
-          }}
-        >
-          <img
-            src={
-              "https://cdn3d.iconscout.com/3d/premium/thumb/wallet-6541481-5407859.png?f=webp"
-            }
-            style={{
-              width: 30,
-              height: 30,
-              objectFit: "contain",
-              marginRight: 10,
-            }}
-          />{" "}
-          wallet{" "}
-          <span style={{ fontSize: 12, paddingLeft: 5 }}>(Coming soon)</span>
-        </Button>
-      </Box> */}
     </Box>
   );
 };

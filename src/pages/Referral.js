@@ -49,29 +49,52 @@ const Referral = () => {
       }}
     >
       <SuccessSnackbar text="Invite link copied!" />
-      <Typography
-        mb={1}
+      <Box
         style={{
           width: "100%",
-          fontFamily: "Rubik",
-          fontWeight: 600,
-          fontSize: 28,
-          lineHeight: "110%",
-          textAlign: "center",
-          color: "#ffffff",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        Invite friends!
-      </Typography>
-
-      <Typography
-        style={{
-          textAlign: "center",
-          marginBottom: 10,
-        }}
-      >
-        You and your friend will recieve bonuses
-      </Typography>
+        <img
+          src={
+            "https://cdn3d.iconscout.com/3d/premium/thumb/diamond-10168568-8249311.png"
+          }
+          alt=""
+          width={108}
+          height={108}
+          style={{ filter: "drop-shadow(0 -6mm 14mm #757575)" }}
+        />
+        <Typography
+          mb={1}
+          style={{
+            width: "100%",
+            fontFamily: "Rubik",
+            fontWeight: 600,
+            fontSize: 20,
+            lineHeight: "110%",
+            textAlign: "center",
+            color: "#ffffff",
+          }}
+        >
+          Invite friends!
+        </Typography>
+        <Typography
+          style={{
+            width: "95%",
+            textAlign: "center",
+            fontSize: 14,
+            lineHeight: "130%",
+            color: "rgba(253, 255, 245, 0.8)",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          Refer friends and earn rewards.
+        </Typography>
+      </Box>
 
       <Box
         style={{
