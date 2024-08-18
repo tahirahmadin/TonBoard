@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { Box, CircularProgress, useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
 import Navbar from "./components/Navbar";
 import Referral from "./pages/Referral";
 import Dashboard from "./pages/Dashboard";
-import Boost from "./pages/Boost";
 import { useServerAuth } from "./hooks/useServerAuth";
 import League from "./pages/League";
 import useTelegramSDK from "./hooks/useTelegramSDK";
@@ -27,6 +26,8 @@ function App() {
   useEffect(() => {
     if (authLoaded && accountSC) {
       WebAppSDK.expand();
+      WebAppSDK.ready();
+      // WebAppSDK.disableVerticalSwipes();
       WebAppSDK.enableClosingConfirmation();
       WebAppSDK.setHeaderColor("#000000");
       WebAppSDK.setBackgroundColor("#000000");
@@ -47,7 +48,6 @@ function App() {
           {pathname !== "/" && <BackButton />}
           <Routes>
             <Route exact path="/" element={<QuizPage />} />
-            <Route exact path="/boost" element={<Boost />} />
             <Route exact path="/league" element={<League />} />
             <Route exact path="/referral" element={<Referral />} />
             <Route

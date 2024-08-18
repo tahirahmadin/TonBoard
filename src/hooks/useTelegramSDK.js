@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import WebApp from "@twa-dev/sdk";
+// import WebApp from "@twa-dev/sdk";
 import ethersServiceProvider from "../services/ethersServicesProvider";
 import { testmode } from "../utils/constants";
 
 const useTelegramSDK = (hookInit = false) => {
   const [userId, setUserID] = useState(null);
   const [referParam, setReferParam] = useState(0);
+  const WebApp = window.Telegram.WebApp;
 
   useEffect(() => {
     if (hookInit) {
@@ -17,7 +18,7 @@ const useTelegramSDK = (hookInit = false) => {
       }
 
       setTimeout(() => {
-        setUserID(1118251880);
+        setUserID(1118251881);
       }, 2000);
     }
   }, [hookInit]);

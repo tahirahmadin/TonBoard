@@ -1,15 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { KeyboardArrowRight } from "@mui/icons-material";
-import ProgressBar from "../components/ProgressBar";
-import useGameHook from "../hooks/useGameHook";
-import { LEAGUE_LEVEL_DATA, TAP_DATA } from "../utils/constants";
-import useTelegramSDK from "../hooks/useTelegramSDK";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { updateScore, updateTapScore } from "../reducers/UiReducers";
-import SuccessSnackbar from "../components/SuccessSnackbar";
-import { getNumbersInFormat, numberWithCommas } from "../actions/helperFn";
 
 const LoadingScreen = ({ text }) => {
   const theme = useTheme();

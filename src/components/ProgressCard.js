@@ -1,15 +1,5 @@
-import {
-  Box,
-  Button,
-  Fade,
-  Grow,
-  Theme,
-  Typography,
-  Zoom,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
+import React from "react";
 
 import makeStyles from "@mui/styles/makeStyles";
 import SmallProgressBar from "./SmallProgressBar";
@@ -51,15 +41,10 @@ const ProgressCard = ({
     <>
       <Box
         sx={{
-          width: "100%",
           width: 110,
           maxHeight: 300,
           borderRadius: "12px",
           position: "relative",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: "4px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",

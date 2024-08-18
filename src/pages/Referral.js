@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 import SuccessSnackbar from "../components/SuccessSnackbar";
@@ -9,11 +9,23 @@ import constants from "../utils/constants";
 import { getNumbersInFormat } from "../actions/helperFn";
 
 import { Person } from "@mui/icons-material";
+import { getReferralsData } from "../actions/serverActions";
 
 const Referral = () => {
   const dispatch = useDispatch();
   const { telegramUserId, viberate } = useTelegramSDK(true);
-  const referrals = [];
+
+  const [referralData, setReferralData] = useState(null);
+
+  useEffect(() => {
+    async function asyncFn() {
+      if (telegramUserId) {
+        let res = await getReferralsData(telegramUserId);
+        setReferralData(res);
+      }
+    }
+    asyncFn();
+  }, [telegramUserId]);
 
   const handleCopyToClipboard = () => {
     if (telegramUserId) {
@@ -192,7 +204,6 @@ const Referral = () => {
             height: "100%",
             display: "flex",
             flexDirection: "column",
-            gap: "15px",
           }}
         >
           <Typography
@@ -203,41 +214,33 @@ const Referral = () => {
               color: "#ffffff",
             }}
           >
-            My friends list ({referrals && referrals.length.toLocaleString()})
+            My friends list (
+            {referralData && referralData.length.toLocaleString()})
           </Typography>
           <Box
+            mt={1}
             style={{
               width: "100%",
-              height: "100%",
               display: "flex",
+              alignItems: "center",
               flexDirection: "column",
-              gap: "10px",
+              gap: "5px",
               overflowY: "auto",
             }}
           >
-            {referrals.map((ele, i) => (
-              <Box
-                key={i}
-                style={{
-                  width: "100%",
-                  minHeight: 55,
-                  height: "100%",
-                  background:
-                    "linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(149, 149, 149, 0.3) 50%, rgba(227, 227, 227, 0.3) 100%)",
-                  borderRadius: "12px",
-                  padding: "1px",
-                }}
-              >
+            {referralData &&
+              referralData.map((ele, i) => (
                 <Box
+                  key={i}
                   style={{
                     width: "100%",
                     minHeight: 53,
-                    background: "#2B2D25",
+                    background:
+                      "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
                     borderRadius: "12px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    padding: "0 15px",
                   }}
                 >
                   <Box
@@ -250,15 +253,14 @@ const Referral = () => {
                   >
                     <img
                       src={
-                        "https://cdn3d.iconscout.com/3d/premium/thumb/man-6530464-5823043.png"
+                        "https://cdn3d.iconscout.com/3d/premium/thumb/star-11158872-8943500.png"
                       }
                       alt=""
                       style={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: "20%",
+                        width: 36,
+                        height: 35,
+                        borderRadius: "22%",
                         backgroundColor: "#212121",
-                        padding: 3,
                       }}
                     />
                     <Box
@@ -276,50 +278,40 @@ const Referral = () => {
                         gap: "3px",
                       }}
                     >
-                      @{ele.username ? ele.username : "User"}
+                      {ele.username}
                     </Box>
                   </Box>
-                  {ele.points && (
+                  <Box
+                    style={{
+                      minWidth: "60px",
+                      width: "fit-content",
+                      height: "24px",
+                      borderRadius: "6px",
+                      padding: "1px",
+                    }}
+                  >
                     <Box
                       style={{
-                        minWidth: "60px",
-                        width: "fit-content",
-                        height: "24px",
+                        width: "100%",
+                        height: "100%",
                         borderRadius: "6px",
-                        padding: "1px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: 14,
+                        fontWeight: 700,
+                        color: "#0088cc",
                       }}
                     >
-                      <Box
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          background: "#2B2D25",
-                          borderRadius: "6px",
-                        }}
-                      >
-                        <Box
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            background:
-                              "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                            borderRadius: "6px",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            fontSize: 14,
-                            fontWeight: 800,
-                            color: "#64FF99",
-                          }}
-                        >
-                          +{getNumbersInFormat(ele.points)}
-                        </Box>
-                      </Box>
+                      32
                     </Box>
-                  )}
+                  </Box>
                 </Box>
-              </Box>
-            ))}
+              ))}
+
+            {referralData && referralData.length === 0 && (
+              <Box textAlign={"center"}>No data found</Box>
+            )}
           </Box>
         </Box>
       </Box>

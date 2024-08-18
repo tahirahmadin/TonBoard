@@ -30,19 +30,12 @@ export const useServerAuth = (hookInit = false) => {
 
   const _account = useMemo(() => {
     let addressData = ethersServiceProvider.currentUserId;
+    console.log(addressData);
     if (!addressData) {
       return null;
     }
     return addressData;
   }, [ethersServiceProvider.currentUserId, walletStatus]);
-
-  const _username = useMemo(() => {
-    let addressData = ethersServiceProvider.tgUsername;
-    if (!addressData) {
-      return null;
-    }
-    return addressData;
-  }, [ethersServiceProvider.tgUsername, walletStatus]);
 
   //FUNCTION:: LOGIN with Telegram
   const _loginWithTelegram = async () => {
@@ -54,10 +47,6 @@ export const useServerAuth = (hookInit = false) => {
     );
 
     if (authRes && !authRes.error) {
-      if (authRes.result) {
-        //Remove old states of localStorage
-        // await localStorage.clear();
-      }
       return await updateEtherServicesClassData(authRes.result.userId);
     } else {
       return false;
@@ -87,7 +76,6 @@ export const useServerAuth = (hookInit = false) => {
   return {
     authLoaded: _loaded,
     accountSC: _account,
-    username: _username,
     loginWithTelegram: _loginWithTelegram,
     logoutUserUniversal: _logoutUserUniversal,
     walletStatus: walletStatus,

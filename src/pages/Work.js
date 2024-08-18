@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from "react";
-import Profile from "../components/Profile";
 import { Box, Button, Grid, Grow, Typography, Zoom } from "@mui/material";
-import { getDashboardData } from "../actions/serverActions";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 
 import SingleProjectCard from "../components/SingleProjectCard";
-import { PROJECTS_DATA } from "../utils/constants";
+
+import { getProjectsDataToRedux } from "../reducers/UiReducers";
+import { useDispatch, useSelector } from "react-redux";
 
 const Work = () => {
+  const dispatch = useDispatch();
+  const projects = useSelector((state) => state.ui.projects);
+
   const { viberate } = useTelegramSDK();
 
-  const [dashboardData, setDashboardData] = useState({});
-  const [tabValue, setTabValue] = useState(0);
-
-  const topTabs = ["Social", "Airdrop", "Testnet"];
-
-  // API call: to fetch tasks
-  // useEffect(() => {
-  //   async function asyncFn() {
-  //     let res = await getDashboardData();
-  //     if (res) {
-  //       setDashboardData(res);
-  //     }
-  //   }
-  //   asyncFn();
-  // }, []);
+  useEffect(() => {
+    async function asyncFn() {
+      await dispatch(getProjectsDataToRedux());
+    }
+    asyncFn();
+  }, []);
 
   return (
     <Box
@@ -61,15 +55,18 @@ const Work = () => {
         <Box
           style={{ height: "80vh", overflowY: "auto", paddingBottom: "100px" }}
         >
-          {PROJECTS_DATA.map((ele) => (
-            <SingleProjectCard
-              projectId={ele.id}
-              title={ele.projectName}
-              description={ele.description}
-              category={ele.category}
-              img={ele.logo}
-            />
-          ))}
+          {projects &&
+            projects.map((ele) => (
+              <Box onClick={() => viberate("light")}>
+                <SingleProjectCard
+                  projectId={ele.id}
+                  title={ele.projectName}
+                  description={ele.description}
+                  category={ele.category}
+                  img={ele.logo}
+                />
+              </Box>
+            ))}
         </Box>
       </Grow>
     </Box>

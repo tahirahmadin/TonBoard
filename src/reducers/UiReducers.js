@@ -1,31 +1,27 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  getAllProjects,
   getUserBackendData,
   updateDataToBackendAPI,
-  upgradeBoosterToBackend,
+  updateTasksStatusToBackend,
 } from "../actions/serverActions";
 
 const initialState = {
-  username: null,
-  userId: null,
-  profilePic: null,
   score: 0,
   quizzes: [],
+  projects: [],
+  workCompleted: [],
+
+  username: null,
   isQuizLoading: false,
   quizPoints: 0,
   referralPoints: 0,
-  referralCount: 0,
   workPoints: 0,
-  leagueLevel: 0,
   currentSlotNo: 0,
   currentQueNo: 0,
   ansSelected: [],
   isQuizPointsClaimed: false,
   isTimerRunning: false,
-  playLevels: {
-    timer: 1,
-    rewards: 1,
-  },
   refetch: 0,
   successPopup: false,
   specialTasksStatus: [],
@@ -56,22 +52,14 @@ export const getBackendDataToRedux = createAsyncThunk(
   }
 );
 
-// Function: To upgrade booster
-export const upgradeBoosterRedux = createAsyncThunk(
-  "upgradeBoosterRedux",
-  async (dataObj) => {
+// Function:: get Projects Data
+export const getProjectsDataToRedux = createAsyncThunk(
+  "getProjectsDataToRedux",
+  async () => {
     try {
-      console.log("dataObj");
-      console.log(dataObj);
-      let response = await upgradeBoosterToBackend(dataObj);
-      console.log("response");
-      console.log(response);
-
-      if (response.error === false) {
-        return {
-          type: dataObj.type,
-          points: response.msg,
-        };
+      let response = await getAllProjects();
+      if (response) {
+        return response;
       }
       return null;
     } catch (error) {
@@ -117,26 +105,20 @@ export const updateTaskCompleteStatus = createAsyncThunk(
   "updateTaskCompleteStatus",
   async (dataObj) => {
     try {
-      console.log("dataObj");
-      console.log(dataObj);
+      // Update answers array
 
-      //Update answers array
+      const response = await updateTasksStatusToBackend(dataObj);
 
-      // const response = await updateDataToBackendAPI({
-      //   userId: dataObj.userId,
-      //   inputOption: dataObj.inputOption,
-      // });
+      console.log("response");
+      console.log(response);
 
-      // console.log("response");
-      // console.log(response);
-
-      // if (response.error === false) {
-      //   return {
-      //     inputOption: dataObj.inputOption,
-      //     points: response.result.points,
-      //     correctOption: response.result.correctOption,
-      //   };
-      // }
+      if (response.error === false) {
+        return {
+          inputOption: dataObj.inputOption,
+          points: response.result.points,
+          correctOption: response.result.correctOption,
+        };
+      }
       return null;
     } catch (error) {
       console.log(error);
@@ -221,6 +203,8 @@ const UiReducer = createSlice({
       console.log(response);
       if (response) {
         state.score = response.score;
+        state.workCompleted = response.workCompleted;
+
         state.ansSelected = response.ansSelected;
         state.currentQueNo = response.currentQueNo;
         state.currentSlotNo = response.currentSlotNo;
@@ -238,24 +222,14 @@ const UiReducer = createSlice({
         state.screenLoaded = true;
       }
     });
-
-    builder.addCase(upgradeBoosterRedux.fulfilled, (state, action) => {
+    builder.addCase(getProjectsDataToRedux.fulfilled, (state, action) => {
       const response = action.payload;
-      if (response?.type === "rewards") {
-        state.score = state.score - response.points;
-        state.playLevels = {
-          ...state.playLevels,
-          rewards: state.playLevels.rewards + 1,
-        };
-      }
-      if (response?.type === "timer") {
-        state.score = state.score - response.points;
-        state.playLevels = {
-          ...state.playLevels,
-          timer: state.playLevels.timer + 1,
-        };
+
+      if (response) {
+        state.projects = response;
       }
     });
+
     builder.addCase(updateSelectedAnswerRedux.fulfilled, (state, action) => {
       const response = action.payload;
       if (response.points) {

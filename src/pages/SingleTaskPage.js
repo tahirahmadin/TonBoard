@@ -11,20 +11,14 @@ import makeStyles from "@mui/styles/makeStyles";
 import { useTheme } from "@mui/styles";
 import { useServerAuth } from "../hooks/useServerAuth";
 import useTelegramSDK from "../hooks/useTelegramSDK";
-import { PROJECTS_DATA, TASKS_DATA_BY_PROJECT } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import useGameHook from "../hooks/useGameHook";
 import SuccessSnackbar from "../components/SuccessSnackbar";
 import {
-  updateSpecialTaskStatusState,
+  getProjectsDataToRedux,
   updateTaskCompleteStatus,
 } from "../reducers/UiReducers";
 import { useParams } from "react-router-dom";
-import {
-  getNumbersInFormat,
-  getNumbersInFormatOnlyMillions,
-} from "../actions/helperFn";
-import ProgressBar from "../components/ProgressBar";
+import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 import SmallProgressBar from "../components/SmallProgressBar";
 
 const useStyles = makeStyles((theme) => ({
@@ -89,33 +83,31 @@ const ActionButton = ({
   );
 };
 
-const SingleTask = ({ taskId, name, url, inProgress, setInProgress }) => {
+const SingleTask = ({
+  taskId,
+  workId,
+  name,
+  url,
+  isCompleted,
+  inProgress,
+  setInProgress,
+}) => {
   const dispatch = useDispatch();
   const { openTelegramUrl } = useTelegramSDK();
   const { accountSC } = useServerAuth();
 
-  const specialTasksStatus = useSelector(
-    (state) => state.ui.specialTasksStatus
-  );
-
-  let currentTaskStatus = () => {
-    let tempValue = specialTasksStatus?.[taskId];
-    if (tempValue === undefined) {
-      return 0;
-    } else {
-      return tempValue;
-    }
-  };
-
   // OPEN URL - STATUS= Completed
-  const onClickAction = async (inputTaskId) => {
-    if (currentTaskStatus() === 0 && !inProgress) {
+  const onClickAction = async () => {
+    if (!isCompleted && !inProgress) {
       setInProgress(true);
       await openTelegramUrl(url);
       // Update status to progress
-      let tempArray = [...specialTasksStatus];
-      tempArray[inputTaskId] = 2;
-      dispatch(updateTaskCompleteStatus(tempArray));
+      let dataObj = {
+        userId: accountSC,
+        workId: workId,
+        taskId: taskId,
+      };
+      await dispatch(updateTaskCompleteStatus(dataObj));
       setTimeout(() => {
         setInProgress(false);
       }, 20000);
@@ -150,17 +142,17 @@ const SingleTask = ({ taskId, name, url, inProgress, setInProgress }) => {
         </Typography>
       </Box>
 
-      {currentTaskStatus() === 0 && (
+      {!isCompleted && !inProgress && (
         <ActionButton onClick={() => onClickAction(taskId)}>Start</ActionButton>
       )}
 
-      {currentTaskStatus() != 0 && inProgress && (
+      {!isCompleted && inProgress && (
         <Box display={"flex"} justifyContent={"flex-start"}>
           <CircularProgress size={20} thickness={5} />
         </Box>
       )}
 
-      {currentTaskStatus() === 2 && (
+      {isCompleted && (
         <img
           src="https://cdn3d.iconscout.com/3d/premium/thumb/successfully-done-5108472-4288033.png"
           style={{
@@ -176,31 +168,46 @@ const SingleTask = ({ taskId, name, url, inProgress, setInProgress }) => {
 
 const SingleTaskPage = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { viberate } = useTelegramSDK();
-
   const { projectId } = useParams();
 
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
+  const projects = useSelector((state) => state.ui.projects);
+  const workCompleted = useSelector((state) => state.ui.workCompleted);
 
   //Tasks states
   const [inProgress, setInProgress] = useState(false);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [projectDetails, setProjectDetails] = useState(null);
+  const [allTasks, setAllTasks] = useState([]);
+  const [allTasksStatus, setAllTasksStatus] = useState([]);
 
   useEffect(() => {
-    if (
-      screenLoaded &&
-      projectId &&
-      TASKS_DATA_BY_PROJECT.length > parseInt(projectId)
-    ) {
-      let tempProject = {
-        about: PROJECTS_DATA[projectId],
-        tasks: TASKS_DATA_BY_PROJECT[projectId],
-      };
-      setProjectDetails(tempProject);
+    if (screenLoaded && projectId && projects.length > 0) {
+      setProjectDetails(projects[projectId]);
+      setAllTasks(projects[projectId].tasks);
+
       setPageLoaded(true);
     }
-  }, [projectId, screenLoaded]);
+    if (screenLoaded && projectId && workCompleted.length > 0) {
+      setAllTasksStatus(workCompleted[projectId]);
+    }
+    if (screenLoaded && projectId && projects.length === 0) {
+      async function asyncFn() {
+        await dispatch(getProjectsDataToRedux());
+      }
+      asyncFn();
+    }
+  }, [projectId, screenLoaded, projects]);
+
+  const completedTasks = useMemo(() => {
+    return allTasksStatus.reduce((a, b) => (a === 2 ? a + 1 : 0), 0);
+  }, [allTasksStatus]);
+
+  const completedTasksPercentage = useMemo(() => {
+    return (100 * completedTasks) / allTasks.length;
+  }, [allTasks, completedTasks]);
 
   return (
     <Box
@@ -232,7 +239,7 @@ const SingleTaskPage = () => {
               }}
             >
               <img
-                src={projectDetails.about.logo}
+                src={projectDetails.logo}
                 width={108}
                 height={108}
                 style={{
@@ -252,7 +259,7 @@ const SingleTaskPage = () => {
                   color: "#ffffff",
                 }}
               >
-                {projectDetails.about.projectName}
+                {projectDetails.projectName}
               </Typography>
               <Typography
                 style={{
@@ -266,7 +273,7 @@ const SingleTaskPage = () => {
                   minHeight: 60,
                 }}
               >
-                {projectDetails.about.descriptionLong}
+                {projectDetails.descriptionLong}
               </Typography>
               <Typography
                 style={{
@@ -294,10 +301,8 @@ const SingleTaskPage = () => {
                 />
                 <strong style={{ color: "black" }}>
                   Airdrop prize:{" "}
-                  {getNumbersInFormatOnlyMillions(
-                    projectDetails.about.prizeAmount
-                  )}{" "}
-                  ${projectDetails.about.prizeType}
+                  {getNumbersInFormatOnlyMillions(projectDetails.prizeAmount)} $
+                  {projectDetails.prizeType}
                 </strong>{" "}
               </Typography>
             </Box>
@@ -328,9 +333,9 @@ const SingleTaskPage = () => {
                   color: "#ffffff",
                 }}
               >
-                Airdrop Progress (1/3)
+                Airdrop Progress ({completedTasks}/{allTasks.length})
               </Typography>
-              <SmallProgressBar value={30} />
+              <SmallProgressBar value={completedTasksPercentage} />
             </Box>
             <Box
               style={{
@@ -365,12 +370,14 @@ const SingleTaskPage = () => {
                 >
                   Tasks
                 </Typography>
-                {TASKS_DATA_BY_PROJECT[projectId].map((ele, i) => (
+                {allTasks.map((ele, i) => (
                   <SingleTask
                     key={i}
+                    workId={parseInt(projectId)}
                     taskId={ele.id}
                     name={ele.title}
-                    url={ele.url}
+                    url={ele.taskUrl}
+                    isCompleted={allTasksStatus[ele.id]}
                     inProgress={inProgress}
                     setInProgress={setInProgress}
                   />
@@ -380,7 +387,7 @@ const SingleTaskPage = () => {
           </Box>
         </Grow>
       )}
-      {!projectDetails && (
+      {screenLoaded && !projectDetails && (
         <Typography
           style={{
             width: "100%",

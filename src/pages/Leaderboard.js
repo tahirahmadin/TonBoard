@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Box, Button, Typography, Zoom } from "@mui/material";
 import SuccessSnackbar from "../components/SuccessSnackbar";
 import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 import useTelegramSDK from "../hooks/useTelegramSDK";
+import { getLeaderboardData } from "../actions/serverActions";
+import { useServerAuth } from "../hooks/useServerAuth";
 
 const SingleLeaderCard = ({ name, points, rank }) => {
   return (
@@ -88,9 +90,30 @@ const SingleLeaderCard = ({ name, points, rank }) => {
 
 const Leaderboard = () => {
   const { viberate } = useTelegramSDK();
+  const { accountSC } = useServerAuth();
   const [tabValue, setTabValue] = useState(0);
 
-  const rankings = [];
+  const [rankingData, setRankingData] = useState(null);
+
+  useEffect(() => {
+    async function asyncFn() {
+      if (accountSC) {
+        let res = await getLeaderboardData(accountSC);
+        setRankingData(res);
+      }
+    }
+    asyncFn();
+  }, [accountSC]);
+
+  const leaderboardData = useMemo(() => {
+    if (tabValue === 0 && rankingData) {
+      return rankingData.points.leaderboard;
+    } else if (tabValue === 1 && rankingData) {
+      return rankingData.referrals.leaderboard;
+    } else {
+      return [];
+    }
+  }, [rankingData, tabValue]);
 
   return (
     <Box
@@ -99,13 +122,11 @@ const Leaderboard = () => {
         height: "90vh",
         position: "relative",
         background: "#000000",
-        paddingBottom: "100px",
         paddingLeft: "4%",
         paddingRight: "4%",
         paddingTop: "5%",
         zIndex: 0,
         overflowX: "hidden",
-        overflowY: "hidden",
       }}
     >
       <Zoom direction="down" in={true}>
@@ -220,6 +241,7 @@ const Leaderboard = () => {
           <Box
             mt={1}
             style={{
+              height: "45vh",
               width: "100%",
               display: "flex",
               alignItems: "center",
@@ -228,41 +250,14 @@ const Leaderboard = () => {
               overflowY: "auto",
             }}
           >
-            <SingleLeaderCard
-              key={0}
-              name={"Tahir Ahmad"}
-              profilePic={null}
-              points={433223}
-              rank={1}
-            />
-            <SingleLeaderCard
-              key={0}
-              name={"Aamir Alam"}
-              points={31242}
-              rank={2}
-            />
-            <SingleLeaderCard
-              key={0}
-              name={"Anthony Singh"}
-              points={31242}
-              rank={3}
-            />
-            <SingleLeaderCard
-              key={0}
-              name={"Anthony Singh"}
-              points={31242}
-              rank={3}
-            />
-            {rankings?.ranks?.map((ele, i) => (
+            {leaderboardData.map((ele, i) => (
               <SingleLeaderCard
                 key={i}
-                name={ele.username}
+                name={ele.username === "" ? "User" : ele.username}
                 points={ele.score}
                 rank={ele.rank}
               />
             ))}
-
-            {/* <Box style={{ textAlign: "center" }}>Will be available soon</Box> */}
           </Box>
         </Box>
       </Zoom>

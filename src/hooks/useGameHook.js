@@ -26,6 +26,7 @@ const useGameHook = (hookInit = false) => {
   const { viberate } = useTelegramSDK();
 
   const score = useSelector((state) => state.ui.score);
+
   const currentQueNo = useSelector((state) => state.ui.currentQueNo);
   const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
   const ansSelected = useSelector((state) => state.ui.ansSelected);
@@ -147,36 +148,17 @@ const useGameHook = (hookInit = false) => {
     dispatch(setSuccessPopup(true));
   };
 
-  const _pointsOnCorrectAnswer = useMemo(() => {
-    if (playLevels.rewards === 0) {
-      return 1000;
-    } else {
-      return 1000 * parseInt(playLevels.rewards);
-    }
-  }, [playLevels.rewards]);
+  const _pointsOnCorrectAnswer = 1000;
 
-  const _pointsOnWrongAnswer = useMemo(() => {
-    if (playLevels.rewards === 0) {
-      return 250;
-    } else {
-      return 250 * playLevels.rewards;
-    }
-  }, [playLevels.rewards]);
+  const _pointsOnWrongAnswer = 250;
 
-  const _timerDuration = useMemo(() => {
-    if (playLevels.timer === 0) {
-      return 360;
-    } else {
-      return 360 - playLevels.timer * 60;
-    }
-  }, [playLevels]);
+  const _timerDuration = 60;
 
   return {
     gameScore: finalScore,
     pointsOnCorrectAnswer: _pointsOnCorrectAnswer,
     pointsOnWrongAnswer: _pointsOnWrongAnswer,
     timerDuration: _timerDuration,
-
     handleNextButtonClick: _handleNextButtonClick,
     claimTaskPoints: _claimTaskPoints,
     claimLeagueLevel: _claimLeague,
