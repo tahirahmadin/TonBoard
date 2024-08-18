@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   getAllProjects,
   getUserBackendData,
-  updateDataToBackendAPI,
+  updateAnswerToBackend,
   updateTasksStatusToBackend,
 } from "../actions/serverActions";
 
@@ -11,27 +11,23 @@ const initialState = {
   quizzes: [],
   projects: [],
   workCompleted: [],
-
+  nextQueNo: 0,
+  isExploding: false,
+  isNextButtonEnabled: false,
   username: null,
+
   isQuizLoading: false,
   quizPoints: 0,
   referralPoints: 0,
   workPoints: 0,
   currentSlotNo: 0,
-  currentQueNo: 0,
+
   ansSelected: [],
-  isQuizPointsClaimed: false,
   isTimerRunning: false,
+  timerValue: 0,
   refetch: 0,
   successPopup: false,
-  specialTasksStatus: [],
-  leagueTasksStatus: [],
-  refTasksStatus: [],
   screenLoaded: false,
-  timerValue: 0,
-  isExploding: false,
-  isBackendSynced: false,
-  isBackendLoaded: false,
   displayData: { progressItems: [], rankings: [], referrals: [] },
 };
 
@@ -76,22 +72,13 @@ export const updateSelectedAnswerRedux = createAsyncThunk(
       console.log("dataObj");
       console.log(dataObj);
 
-      //Update answers array
-
-      const response = await updateDataToBackendAPI({
-        userId: dataObj.userId,
-        inputOption: dataObj.inputOption,
-      });
+      const response = await updateAnswerToBackend(dataObj);
 
       console.log("response");
       console.log(response);
 
-      if (response.error === false) {
-        return {
-          inputOption: dataObj.inputOption,
-          points: response.result.points,
-          correctOption: response.result.correctOption,
-        };
+      if (response) {
+        return response;
       }
       return null;
     } catch (error) {
@@ -131,6 +118,11 @@ const UiReducer = createSlice({
   initialState,
 
   reducers: {
+    updateNextQueNo(state, action) {
+      state.currentQueNo = state.nextQueNo;
+      state.isNextButtonEnabled = false;
+      state.isExploding = false;
+    },
     updateTimerValue(state, action) {
       if (!action.payload) {
         return;
@@ -151,22 +143,11 @@ const UiReducer = createSlice({
       }
       state.currentQueNo = action.payload;
     },
-    updateAnsSelected(state, action) {
-      state.ansSelected = action.payload;
-    },
-    updateQuizPointClaimStatus(state, action) {
-      if (action.payload === undefined) {
-        return;
-      }
-      state.isQuizPointsClaimed = action.payload;
-    },
+
     updateTimerRunningStatus(state, action) {
       state.isTimerRunning = action.payload;
     },
 
-    updateReferralCount(state, action) {
-      state.referralCount = action.payload;
-    },
     updateReferralPoints(state, action) {
       state.referralPoints = action.payload;
     },
@@ -181,43 +162,34 @@ const UiReducer = createSlice({
     setSuccessPopup(state, action) {
       state.successPopup = action.payload;
     },
-    updateIsExploding(state, action) {
-      state.isExploding = action.payload;
-    },
-    updateQuizData(state, action) {
-      state.quizzes = action.payload;
-    },
-    updaQuizLoadingStatus(state, action) {
+
+    updateQuizLoadingStatus(state, action) {
       state.isQuizLoading = action.payload;
-    },
-    updateBackendSyncStatus(state, action) {
-      state.isBackendSynced = action.payload;
-    },
-    updateDisplayData(state, action) {
-      state.displayData = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getBackendDataToRedux.fulfilled, (state, action) => {
       const response = action.payload;
-      console.log(response);
+
       if (response) {
         state.score = response.score;
         state.workCompleted = response.workCompleted;
+        state.quizzes = response.quizzes;
+        state.currentSlotNo = response.currentSlotNo;
+        state.currentQueNo = response.currentQueNo;
+        state.nextQueNo = response.currentQueNo;
 
         state.ansSelected = response.ansSelected;
-        state.currentQueNo = response.currentQueNo;
-        state.currentSlotNo = response.currentSlotNo;
+
         state.leagueLevel = response.leagueLevel;
         state.username = response.username;
         state.playLevels = response.playLevels;
 
         //Tasks states
-        state.referralCount = response.referralCount;
+
         state.referralPoints = response.referralPoints;
 
         state.timerValue = response.timerValue;
-        state.quizzes = response.quizzes;
 
         state.screenLoaded = true;
       }
@@ -232,17 +204,14 @@ const UiReducer = createSlice({
 
     builder.addCase(updateSelectedAnswerRedux.fulfilled, (state, action) => {
       const response = action.payload;
-      if (response.points) {
-        state.score = state.score + response.points;
-
-        if (
-          state.quizzes[state.currentQueNo].correct === response.inputOption
-        ) {
-          state.isExploding = true;
-          setTimeout(() => {
-            state.isExploding = false;
-          }, 2000);
-        }
+      if (response.user) {
+        let userObj = response.user;
+        state.score = userObj.score;
+        state.ansSelected = userObj.ansSelected;
+        state.nextQueNo = userObj.currentQueNo;
+        state.currentSlotNo = userObj.currentSlotNo;
+        state.isExploding = response.isCorrect;
+        state.isNextButtonEnabled = true;
       }
     });
   },
@@ -251,29 +220,17 @@ const UiReducer = createSlice({
 const { actions } = UiReducer;
 
 export const {
+  updateNextQueNo,
   updateScore,
   updateTimerValue,
   updateCurrentSlotNo,
   updateCurrentQueNo,
-  updateAnsSelected,
-  updateQuizPointClaimStatus,
   updateTimerRunningStatus,
   updateReferralPoints,
-  updateReferralCount,
   updateScreenLoaded,
-  updateLeagueLevel,
-  updateEnergyLeft,
-  updatePlayLevels,
   setSuccessPopup,
-  updateSpecialTaskStatusState,
-  updateLeagueTaskStatusState,
-  updateRefTaskStatusState,
-  updateIsExploding,
-  updateQuizData,
-  updaQuizLoadingStatus,
-  updateBackendSyncStatus,
-  updateDisplayData,
   updateRefetch,
+  updateQuizLoadingStatus,
 } = actions;
 
 export default UiReducer;

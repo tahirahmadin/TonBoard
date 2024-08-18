@@ -1,10 +1,9 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  updaQuizLoadingStatus,
+  updateQuizLoadingStatus,
   updateCurrentQueNo,
   updateCurrentSlotNo,
-  updateQuizData,
   updateTimerRunningStatus,
 } from "../reducers/UiReducers";
 import { getQuizData, updateDataToBackendAPI } from "../actions/serverActions";
@@ -28,7 +27,7 @@ const useSlotTimer = (initHook) => {
 
     dispatch(updateTimerRunningStatus(false));
 
-    dispatch(updaQuizLoadingStatus(true));
+    dispatch(updateQuizLoadingStatus(true));
     // question and slot update needed
     if ((currentQueNo + 1) % 5 === 0) {
       const nextSlotNumber = currentSlotNo + 1;
@@ -52,7 +51,7 @@ const useSlotTimer = (initHook) => {
       await loadQuizData(nextSlotNumber);
     }
 
-    dispatch(updaQuizLoadingStatus(false));
+    dispatch(updateQuizLoadingStatus(false));
   }, [currentQueNo, currentSlotNo, dispatch, isBackendLoaded, userId]);
 
   useEffect(() => {
@@ -90,8 +89,6 @@ const useSlotTimer = (initHook) => {
 
   const loadQuizData = async (_slotNumber) => {
     const quizData = await getQuizData(_slotNumber);
-
-    dispatch(updateQuizData(quizData));
   };
   return { isTimerRunning };
 };

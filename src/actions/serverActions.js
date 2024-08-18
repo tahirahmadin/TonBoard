@@ -204,6 +204,31 @@ export const updateTasksStatusToBackend = async (dataObj) => {
   }
 };
 
+//6. USER:: Update Answer to backend
+export const updateAnswerToBackend = async (dataObj) => {
+  let url = `${apiUrl}/quiz/markAnswer`;
+  console.log("dataObj");
+  console.log(dataObj);
+  //Encrypted data
+  let encryptedData = getCipherText(dataObj);
+
+  let response = await axios
+    .post(url, encryptedData)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+
+  if (response && !response.error) {
+    return response.result;
+  } else {
+    console.log("error", response);
+    return false;
+  }
+};
+
 //6. USER:: Update Game Data to backend
 export const updateDataToBackendAPI = async (userData) => {
   let url = `${apiUrl}/user/updateUserData`;

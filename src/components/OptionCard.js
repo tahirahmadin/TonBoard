@@ -21,43 +21,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const OptionCard = ({
-  img,
-  title,
-  description,
-  tick,
-  isSelected,
-  correctOption,
-  selectedOption,
-  inputOption,
-  disable,
-}) => {
+const OptionCard = ({ inputOption, isSelected, img, title, disable }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const theme = useTheme();
-  const { pointsOnCorrectAnswer, pointsOnWrongAnswer } = useGameHook();
+  const { pointsOnCorrectAnswer, pointsOnWrongAnswer, questionData } =
+    useGameHook();
   const { viberate } = useTelegramSDK();
   const { accountSC } = useServerAuth();
 
+  const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
+  const currentQueNo = useSelector((state) => state.ui.currentQueNo);
   const ansSelected = useSelector((state) => state.ui.ansSelected);
 
-  const handleSelect = async () => {
+  const handleSelectAnswer = async () => {
     if (disable) {
       return;
     }
     viberate("medium");
     let dataObj = {
       userId: accountSC,
-      ansArr: ansSelected,
-      inputOption: inputOption,
+      slotNo: currentSlotNo,
+      questionNo: currentQueNo,
+      selectedOption: inputOption,
     };
     dispatch(updateSelectedAnswerRedux(dataObj));
   };
 
   const backgroundCardBorder = useMemo(() => {
+    let correctOption = questionData.correct;
+    let selectedOption = ansSelected[ansSelected.length - 1];
     if (
       isSelected &&
-      correctOption === selectedOption &&
+      questionData.correct === selectedOption &&
       correctOption === inputOption
     ) {
       return `linear-gradient(180deg, #4886FF 0%, green 100%)`;
@@ -70,9 +66,11 @@ const OptionCard = ({
     } else {
       return "transparent";
     }
-  }, [isSelected, correctOption, selectedOption, inputOption]);
+  }, [isSelected, ansSelected, questionData, inputOption]);
 
   const iconCondition = useMemo(() => {
+    let correctOption = questionData.correct;
+    let selectedOption = ansSelected[ansSelected.length - 1];
     if (
       isSelected &&
       correctOption === selectedOption &&
@@ -88,12 +86,12 @@ const OptionCard = ({
     } else {
       return "OTHER";
     }
-  }, [isSelected, correctOption, selectedOption, inputOption]);
+  }, [isSelected, ansSelected, questionData, inputOption]);
 
   return (
     <>
       <Box
-        onClick={handleSelect}
+        onClick={handleSelectAnswer}
         sx={{
           width: "100%",
           maxWidth: 130,

@@ -104,7 +104,7 @@ const Referral = () => {
             zIndex: 1,
           }}
         >
-          Refer friends and earn rewards.
+          Refer friends and earn +100 diamonds/friend.
         </Typography>
       </Box>
 
@@ -303,7 +303,7 @@ const Referral = () => {
                         color: "#0088cc",
                       }}
                     >
-                      32
+                      +100
                     </Box>
                   </Box>
                 </Box>
