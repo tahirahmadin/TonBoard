@@ -44,6 +44,7 @@ const OptionCard = ({ inputOption, isSelected, img, title, disable }) => {
       slotNo: currentSlotNo,
       questionNo: currentQueNo,
       selectedOption: inputOption,
+      currentTimestamp: new Date.now(),
     };
     dispatch(updateSelectedAnswerRedux(dataObj));
   };
