@@ -197,10 +197,10 @@ export const updateTasksStatusToBackend = async (dataObj) => {
     });
 
   if (response && !response.error) {
-    return true;
+    return response.data;
   } else {
     console.log("error", response);
-    return false;
+    return null;
   }
 };
 
@@ -218,7 +218,7 @@ export const updateAnswerToBackend = async (dataObj) => {
       return res.data;
     })
     .catch((err) => {
-      return err.response.data;
+      return null;
     });
 
   if (response && !response.error) {

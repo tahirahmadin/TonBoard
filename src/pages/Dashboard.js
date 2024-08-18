@@ -178,7 +178,7 @@ const Dashboard = () => {
                 color: "#ffffff",
               }}
             >
-              {username}
+              {username ? username : "Telegram user"}
             </Typography>
 
             <Typography

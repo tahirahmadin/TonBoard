@@ -86,9 +86,9 @@ const ActionButton = ({
 const SingleTask = ({
   taskId,
   workId,
+  allTasksStatus,
   name,
   url,
-  isCompleted,
   inProgress,
   setInProgress,
 }) => {
@@ -114,6 +114,20 @@ const SingleTask = ({
     }
   };
 
+  const isCompleted = useMemo(() => {
+    if (allTasksStatus) {
+      let tempIndex = allTasksStatus.findIndex((ele) => ele === taskId);
+
+      if (tempIndex < 0) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }, [allTasksStatus]);
+
   return (
     <Box
       style={{
@@ -129,6 +143,8 @@ const SingleTask = ({
         padding: "8px 15px",
       }}
     >
+      {console.log("isCompleted")}
+      {console.log(isCompleted)}
       <Box>
         <Typography
           style={{
@@ -201,13 +217,9 @@ const SingleTaskPage = () => {
     }
   }, [projectId, screenLoaded, projects]);
 
-  const completedTasks = useMemo(() => {
-    return allTasksStatus.reduce((a, b) => (a === 2 ? a + 1 : 0), 0);
-  }, [allTasksStatus]);
-
   const completedTasksPercentage = useMemo(() => {
-    return (100 * completedTasks) / allTasks.length;
-  }, [allTasks, completedTasks]);
+    return (100 * allTasksStatus.length) / allTasks.length;
+  }, [allTasks, allTasksStatus]);
 
   return (
     <Box
@@ -313,7 +325,6 @@ const SingleTaskPage = () => {
                 minHeight: "50.86px",
                 background:
                   "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
-
                 borderRadius: "12px",
                 display: "flex",
                 flexDirection: "column",
@@ -333,7 +344,7 @@ const SingleTaskPage = () => {
                   color: "#ffffff",
                 }}
               >
-                Airdrop Progress ({completedTasks}/{allTasks.length})
+                Airdrop Progress ({allTasksStatus.length}/{allTasks.length})
               </Typography>
               <SmallProgressBar value={completedTasksPercentage} />
             </Box>
@@ -374,10 +385,10 @@ const SingleTaskPage = () => {
                   <SingleTask
                     key={i}
                     workId={parseInt(projectId)}
+                    allTasksStatus={allTasksStatus}
                     taskId={ele.id}
                     name={ele.title}
                     url={ele.taskUrl}
-                    isCompleted={allTasksStatus[ele.id]}
                     inProgress={inProgress}
                     setInProgress={setInProgress}
                   />

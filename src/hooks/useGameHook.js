@@ -9,9 +9,6 @@ import {
 import useTelegramSDK from "./useTelegramSDK";
 import { useServerAuth } from "./useServerAuth";
 
-// delay for next quiz slot
-const NEXT_SLOT_TIME = 60 * 1000; //21600000;
-
 const useGameHook = (hookInit = false) => {
   const dispatch = useDispatch();
 
@@ -21,12 +18,9 @@ const useGameHook = (hookInit = false) => {
   const score = useSelector((state) => state.ui.score);
 
   const currentQueNo = useSelector((state) => state.ui.currentQueNo);
-  const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
-  const ansSelected = useSelector((state) => state.ui.ansSelected);
   const referralPoints = useSelector((state) => state.ui.referralPoints);
-  const userId = useSelector((state) => state.ui.userId);
-  const timerValue = useSelector((state) => state.ui.timerValue);
   const quizzes = useSelector((state) => state.ui.quizzes);
+  const timerValue = useSelector((state) => state.ui.timerValue);
 
   //1.  To Manage initial loading of the application
   useEffect(() => {

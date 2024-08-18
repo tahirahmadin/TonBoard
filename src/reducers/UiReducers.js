@@ -14,6 +14,7 @@ const initialState = {
   nextQueNo: 0,
   isExploding: false,
   isNextButtonEnabled: false,
+  timerValue: 0,
   username: null,
 
   isQuizLoading: false,
@@ -24,7 +25,7 @@ const initialState = {
 
   ansSelected: [],
   isTimerRunning: false,
-  timerValue: 0,
+
   refetch: 0,
   successPopup: false,
   screenLoaded: false,
@@ -99,12 +100,8 @@ export const updateTaskCompleteStatus = createAsyncThunk(
       console.log("response");
       console.log(response);
 
-      if (response.error === false) {
-        return {
-          inputOption: dataObj.inputOption,
-          points: response.result.points,
-          correctOption: response.result.correctOption,
-        };
+      if (response) {
+        return response;
       }
       return null;
     } catch (error) {
@@ -211,7 +208,15 @@ const UiReducer = createSlice({
         state.nextQueNo = userObj.currentQueNo;
         state.currentSlotNo = userObj.currentSlotNo;
         state.isExploding = response.isCorrect;
+        state.timerValue = response.timerValue;
         state.isNextButtonEnabled = true;
+      }
+    });
+    builder.addCase(updateTaskCompleteStatus.fulfilled, (state, action) => {
+      const response = action.payload;
+      console.log(response);
+      if (response) {
+        state.workCompleted = response.workCompleted;
       }
     });
   },

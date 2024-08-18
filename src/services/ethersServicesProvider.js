@@ -1,7 +1,7 @@
 class EthersServiceProvider {
   provider;
   currentUserId;
-  tgUsername = "tahirahmadin";
+  tgUsername = "User";
   photoUrl =
     "https://cdn3d.iconscout.com/3d/premium/thumb/manager-10946991-8770014.png";
   authLoadedStatus = false;

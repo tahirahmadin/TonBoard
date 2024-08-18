@@ -265,20 +265,39 @@ const Referral = () => {
                     />
                     <Box
                       style={{
-                        fontFamily: "Rubik",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        fontSize: "14px",
-                        lineHeight: "16px",
-                        color: "#FFFFFF",
-                        opacity: 1,
                         display: "flex",
                         justifyContent: "center",
                         flexDirection: "column",
                         gap: "3px",
                       }}
                     >
-                      {ele.username}
+                      <Typography
+                        style={{
+                          width: "100%",
+                          fontFamily: "Rubik",
+                          fontWeight: 700,
+                          fontSize: 16,
+                          lineHeight: "110%",
+                          textAlign: "left",
+                          color: "#ffffff",
+                        }}
+                      >
+                        {ele.username}
+                      </Typography>
+                      <Typography
+                        style={{
+                          width: "100%",
+                          textAlign: "center",
+                          fontSize: 12,
+                          lineHeight: "130%",
+                          color: "rgba(253, 255, 245, 0.8)",
+                          position: "relative",
+                          zIndex: 1,
+                          textAlign: "left",
+                        }}
+                      >
+                        {getNumbersInFormat(ele.score)}
+                      </Typography>
                     </Box>
                   </Box>
                   <Box
