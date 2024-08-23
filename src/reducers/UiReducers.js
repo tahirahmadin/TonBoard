@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  getAllProjects,
   getQuizData,
   getUserBackendData,
   markQuizAnswer,
   updateDataToBackendAPI,
+  updateTasksStatusToBackend,
   upgradeBoosterToBackend,
 } from "../actions/serverActions";
 
@@ -59,22 +61,6 @@ export const updateCurrentQuestion = createAsyncThunk(
   }
 );
 
-// Function: To upgrade booster
-export const upgradeBoosterRedux = createAsyncThunk(
-  "upgradeBoosterRedux",
-  async (dataObj) => {
-    try {
-      let response = await getAllProjects();
-      if (response) {
-        return response;
-      }
-      return null;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
 // // Function: To mark answer to backend
 // export const updateSelectedAnswerRedux = createAsyncThunk(
 //   "updateSelectedAnswerRedux",
@@ -111,6 +97,22 @@ export const upgradeBoosterRedux = createAsyncThunk(
 //     }
 //   }
 // );
+
+// Function:: get Projects Data
+export const getProjectsDataToRedux = createAsyncThunk(
+  "getProjectsDataToRedux",
+  async () => {
+    try {
+      let response = await getAllProjects();
+      if (response) {
+        return response;
+      }
+      return null;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 // Function: To mark task completed
 export const updateTaskCompleteStatus = createAsyncThunk(
@@ -267,14 +269,14 @@ const UiReducer = createSlice({
 
       state.questionData = response.result;
     });
-
-    builder.addCase(upgradeBoosterRedux.fulfilled, (state, action) => {
+    builder.addCase(getProjectsDataToRedux.fulfilled, (state, action) => {
       const response = action.payload;
 
       if (response) {
         state.projects = response;
       }
     });
+
     // builder.addCase(updateSelectedAnswerRedux.fulfilled, (state, action) => {
     //   const response = action.payload;
 

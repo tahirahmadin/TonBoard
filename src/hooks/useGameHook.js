@@ -56,8 +56,6 @@ const useGameHook = (hookInit = false) => {
 
   return {
     gameScore: finalScore,
-    questionData: questionData,
-    pointsOnCorrectAnswer: _pointsOnCorrectAnswer,
     pointsOnWrongAnswer: _pointsOnWrongAnswer,
     timerDuration: _timerDuration,
     handleNextButtonClick: _handleNextButtonClick,
