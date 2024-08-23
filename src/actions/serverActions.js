@@ -1,5 +1,5 @@
 import axios from "axios";
-import constants from "../utils/constants";
+import constants, { testmode } from "../utils/constants";
 import CryptoJS from "crypto-js";
 
 let apiUrl = constants.api_url;
@@ -288,15 +288,68 @@ export const getUserBackendData = async (userId) => {
   }
 };
 
-export const getQuizData = async (slotNumber) => {
+//9. Boosters API
+export const upgradeBoosterToBackend = async (dataObj) => {
+  let url = `${apiUrl}/user/upgradeUserLevels`;
+  console.log(dataObj);
+
+  //Encrypted data
+  let encryptedData = getCipherText(dataObj);
+
+  let response = await axios
+    .post(url, encryptedData)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+
+  if (response && !response.error) {
+    return { error: false, msg: response.result };
+  } else {
+    return { error: true, msg: 0 };
+  }
+};
+
+export const getQuizData = async (userId) => {
   try {
-    let url = `${apiUrl}/quiz/current/${slotNumber}`;
+    const timestamp = Date.now();
+    let url = `${apiUrl}/quiz/currentQuestion?userId=${userId}&&timestamp=${timestamp}`;
 
-    let result = await axios.get(url).then((res) => res.data);
+    let result = await axios
+      .get(url)
+      .then((res) => res.data)
+      .catch((err) => err.response.data);
 
-    return result.result;
+    return result;
   } catch (err) {
     console.log("getQuizData", err);
-    return [];
+    return err;
+  }
+};
+
+export const markQuizAnswer = async (userData) => {
+  let url = `${apiUrl}/quiz/markAnswer`;
+
+  //Encrypted data
+  let encryptedData = testmode ? { data: userData } : getCipherText(userData);
+
+  let response = await axios
+    .post(url, encryptedData)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+
+  console.log("question server response ", response);
+
+  if (response && !response.error) {
+    return response;
+  } else {
+    console.log("error", response);
+    return response;
   }
 };

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useMemo } from "react";
 import { Box, Button, Typography } from "@mui/material";
-import useGameHook from "../hooks/useGameHook";
 import { useDispatch, useSelector } from "react-redux";
 import OptionCard from "../components/OptionCard";
 import makeStyles from "@mui/styles/makeStyles";
@@ -10,8 +9,10 @@ import TimerComp from "../components/TimerComp";
 import useSlotTimer from "../hooks/useSlotTimer";
 import ConfettiExplosion from "react-confetti-explosion";
 import LoadingScreen from "../components/LoadingScreen";
-
 import ProgressBar from "../components/ProgressBar";
+import { useServerAuth } from "../hooks/useServerAuth";
+import { getQuizData, markQuizAnswer } from "../actions/serverActions";
+import { updateOnQuizResult, updateQuestion } from "../reducers/UiReducers";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -31,57 +32,99 @@ const QuizPage = () => {
   const quizzes = useSelector((state) => state.ui.quizzes);
   const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
   const currentQueNo = useSelector((state) => state.ui.currentQueNo);
-  const ansSelected = useSelector((state) => state.ui.ansSelected);
 
   const timerValue = useSelector((state) => state.ui.timerValue);
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
 
-  const isExploding = useSelector((state) => state.ui.isExploding);
-  const isNextButtonEnabled = useSelector(
-    (state) => state.ui.isNextButtonEnabled
-  );
+  const questionData = useSelector((state) => state.ui.questionData);
   const isQuizLoading = useSelector((state) => state.ui.isQuizLoading);
 
-  const { handleNextButtonClick } = useGameHook();
+  const { accountSC } = useServerAuth();
 
-  const { isTimerRunning } = useSlotTimer(false);
+  const { isTimerRunning } = useSlotTimer(true);
 
-  const questionData = useMemo(() => {
-    if (quizzes && quizzes.length === 0) {
+  console.log("question test ", { isTimerRunning });
+
+  const question = useMemo(() => {
+    if (!questionData.question) {
       return {};
     }
-    return quizzes?.[currentQueNo];
-  }, [quizzes, currentQueNo]);
+    return questionData.question;
+  }, [questionData]);
 
-  const quizMessageStatus = React.useMemo(() => {
-    const currOptionIndex = 5 * currentSlotNo + currentQueNo;
-    if (ansSelected[currOptionIndex] === undefined) {
-      return 0;
-    }
+  const [selectedOption, setSelectedOption] = React.useState(null);
 
-    return ansSelected[currOptionIndex] === questionData.correct ? 1 : 2;
-  }, [currentQueNo, ansSelected, questionData, currentSlotNo]);
+  const [loadingResult, setLoadingResult] = React.useState(false);
+  const [loadingNext, setLoadingNext] = React.useState(false);
+  const [isExploding, setIsExploding] = React.useState(false);
+  const [reward, setReward] = React.useState(0);
 
-  const isSelected = useMemo(() => {
-    return ansSelected.length === currentSlotNo * 5 + currentQueNo + 1;
-  }, [ansSelected, currentQueNo, currentSlotNo]);
+  const handleOptionSelect = React.useCallback(
+    async (option) => {
+      if (selectedOption !== null || isTimerRunning) {
+        return;
+      }
 
-  // display current available questions based on slot
-  const displayQuestionNumber = useMemo(() => {
-    if (currentQueNo % 5 === 0) {
-      return 5;
-    }
+      let dataObj = {
+        userId: accountSC,
+        slotNo: currentSlotNo,
+        questionNo: currentQueNo,
+        selectedOption: option,
+        currentTimestamp: Date.now(),
+      };
+      setLoadingResult(true);
+      const response = await markQuizAnswer(dataObj);
 
-    return 5 - (currentQueNo % 5);
-  }, [currentQueNo]);
+      if (!response.error) {
+        setReward(response.result?.reward);
+      }
+      setLoadingResult(false);
 
-  const showNextBtn = useMemo(() => {
-    if (ansSelected.length === 0 || ansSelected.length < currentQueNo + 1) {
+      dispatch(updateOnQuizResult(response));
+
+      setSelectedOption(option);
+    },
+    [
+      selectedOption,
+      accountSC,
+      currentSlotNo,
+      currentQueNo,
+      dispatch,
+      isTimerRunning,
+    ]
+  );
+
+  const isCorrect = useMemo(() => {
+    if (!question.correct) {
       return false;
     }
 
-    return true;
-  }, [ansSelected, currentQueNo]);
+    return question.correct === selectedOption;
+  }, [question, selectedOption]);
+
+  React.useEffect(() => {
+    if (selectedOption && isCorrect) {
+      setIsExploding(true);
+
+      setTimeout(() => {
+        setIsExploding(false);
+      }, 2000);
+    }
+  }, [isCorrect, selectedOption]);
+
+  const handleNext = React.useCallback(async () => {
+    // check if timer is running
+
+    setLoadingNext(true);
+    setSelectedOption(null);
+    let response = await getQuizData(accountSC);
+    setLoadingNext(false);
+
+    dispatch(updateQuestion(response));
+
+    // setSelectedOption(null);
+    // handleNextButtonClick();
+  }, [accountSC, dispatch]);
 
   return (
     <Box style={{ backgroundColor: "black" }}>
@@ -95,7 +138,7 @@ const QuizPage = () => {
           >
             <ScoreComp />
           </Box>
-          {questionData && (
+          {question && (
             <Box
               style={{
                 height: "85vh",
@@ -161,7 +204,7 @@ const QuizPage = () => {
                       color: "#e5e5e5",
                     }}
                   >
-                    {questionData?.category}
+                    {question?.category}
                   </Box>
                 </Box>
                 <Typography
@@ -174,7 +217,7 @@ const QuizPage = () => {
                     color: "#ffffff",
                   }}
                 >
-                  {questionData?.title}
+                  {question?.title}
                 </Typography>
                 {/* <a
                   href="https://www.youtube.com/@tahirahmad.crypto"
@@ -216,19 +259,25 @@ const QuizPage = () => {
                 >
                   <OptionCard
                     key={1}
+                    disable={isQuizLoading || selectedOption > 0}
+                    isSelected={selectedOption === 1}
+                    rewardPoints={reward}
                     inputOption={1}
-                    disable={isQuizLoading}
-                    isSelected={isSelected}
-                    title={questionData.option1}
+                    title={question.option1}
                     img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-a-letter-effect-text-9423674-7664624.png"
                     description="32,430"
+                    handleSelect={handleOptionSelect}
+                    isCorrect={isCorrect}
                   />
                   <OptionCard
                     key={2}
+                    disable={isQuizLoading || selectedOption > 0}
+                    isSelected={selectedOption === 2}
+                    isCorrect={isCorrect}
+                    rewardPoints={reward}
                     inputOption={2}
-                    disable={isQuizLoading}
-                    isSelected={isSelected}
-                    title={questionData.option2}
+                    handleSelect={handleOptionSelect}
+                    title={question.option2}
                     img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-b-letter-effect-text-9423689-7664639.png"
                     description="1,203"
                   />
@@ -239,12 +288,12 @@ const QuizPage = () => {
                     width: "100%",
                     fontWeight: 600,
                     fontSize: 16,
-                    color: quizMessageStatus === 1 ? "#64FF99" : "#ef5350",
+                    color: isCorrect ? "#64FF99" : "#ef5350",
                     textAlign: "center",
                   }}
                 >
-                  {quizMessageStatus === 1 && "Great! Right answer."}
-                  {quizMessageStatus === 2 && "Sorry! Try next time!"}
+                  {selectedOption && isCorrect && "Great! Right answer."}
+                  {selectedOption && !isCorrect && "Sorry! Try next time!"}
                 </Typography>
                 <Box>
                   {isTimerRunning && (
@@ -263,37 +312,27 @@ const QuizPage = () => {
                 </Box>
               </Box>
               {/* Timer, Claim and Boost Components */}
-              <Box
-                height={"25vh"}
-                width="80%"
-                display={"flex"}
-                flexDirection={"column"}
-                justifyContent={"flex-start"}
-              >
-                <Box minHeight={"6vh"}>
-                  {isNextButtonEnabled && (
-                    <Button
-                      onClick={
-                        isNextButtonEnabled ? handleNextButtonClick : null
-                      }
-                      style={{
-                        fontWeight: 700,
-                        fontSize: "14px",
-                        display: "flex",
-                        alignItems: "center",
-                        textAlign: "center",
-                        justifyContent: "center",
-                        width: 160,
-                        margin: "0 auto",
-                        height: "38px",
-                        borderRadius: "12px",
-                        color: "#93ddff",
-                      }}
-                    >
-                      {isQuizLoading ? "Wait..." : "Next Question >>"}
-                    </Button>
-                  )}
-                </Box>
+              <Box height={"25vh"} width="80%">
+                {selectedOption && (
+                  <Button
+                    onClick={handleNext}
+                    style={{
+                      fontWeight: 700,
+                      fontSize: "14px",
+                      display: "flex",
+                      alignItems: "center",
+                      textAlign: "center",
+                      justifyContent: "center",
+                      width: 160,
+                      margin: "0 auto",
+                      height: "38px",
+                      borderRadius: "12px",
+                      color: "#93ddff",
+                    }}
+                  >
+                    Next Question
+                  </Button>
+                )}
 
                 <Box
                   mt={2}
@@ -319,10 +358,10 @@ const QuizPage = () => {
                       color: "#ffffff",
                     }}
                   >
-                    Quiz Progress ({5 - displayQuestionNumber}/5)
+                    Quiz Progress ({questionData?.summary?.attempted}/5)
                   </Typography>
                   <ProgressBar
-                    value={((5 - displayQuestionNumber) * 100) / 5}
+                    value={(questionData?.summary?.attempted * 100) / 5}
                   />
                 </Box>
               </Box>

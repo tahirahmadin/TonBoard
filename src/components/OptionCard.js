@@ -1,13 +1,7 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useMemo } from "react";
-
 import makeStyles from "@mui/styles/makeStyles";
-import useGameHook from "../hooks/useGameHook";
-import { useDispatch, useSelector } from "react-redux";
 import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
-import useTelegramSDK from "../hooks/useTelegramSDK";
-import { updateSelectedAnswerRedux } from "../reducers/UiReducers";
-import { useServerAuth } from "../hooks/useServerAuth";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -21,78 +15,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const OptionCard = ({ inputOption, isSelected, img, title, disable }) => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const theme = useTheme();
-  const { pointsOnCorrectAnswer, pointsOnWrongAnswer, questionData } =
-    useGameHook();
-  const { viberate } = useTelegramSDK();
-  const { accountSC } = useServerAuth();
-
-  const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
-  const currentQueNo = useSelector((state) => state.ui.currentQueNo);
-  const ansSelected = useSelector((state) => state.ui.ansSelected);
-
-  const handleSelectAnswer = async () => {
-    if (disable) {
-      return;
-    }
-    viberate("medium");
-    let dataObj = {
-      userId: accountSC,
-      slotNo: currentSlotNo,
-      questionNo: currentQueNo,
-      selectedOption: inputOption,
-      currentTimestamp: Date.now(),
-    };
-    dispatch(updateSelectedAnswerRedux(dataObj));
-  };
-
+const OptionCard = ({
+  img,
+  title,
+  description,
+  tick,
+  isSelected,
+  inputOption,
+  isCorrect,
+  handleSelect,
+  rewardPoints,
+  disable,
+}) => {
   const backgroundCardBorder = useMemo(() => {
-    let correctOption = questionData.correct;
-    let selectedOption = ansSelected[ansSelected.length - 1];
-    if (
-      isSelected &&
-      questionData.correct === selectedOption &&
-      correctOption === inputOption
-    ) {
+    if (isSelected && isCorrect) {
       return `linear-gradient(180deg, #4886FF 0%, green 100%)`;
-    } else if (
-      isSelected &&
-      correctOption !== selectedOption &&
-      inputOption != correctOption
-    ) {
+    } else if (isSelected && !isCorrect) {
       return `linear-gradient(180deg, #4886FF 0%, red 100%)`;
     } else {
       return "transparent";
     }
-  }, [isSelected, ansSelected, questionData, inputOption]);
-
-  const iconCondition = useMemo(() => {
-    let correctOption = questionData.correct;
-    let selectedOption = ansSelected[ansSelected.length - 1];
-    if (
-      isSelected &&
-      correctOption === selectedOption &&
-      correctOption === inputOption
-    ) {
-      return "RIGHT";
-    } else if (
-      isSelected &&
-      correctOption !== selectedOption &&
-      inputOption != correctOption
-    ) {
-      return "WRONG";
-    } else {
-      return "OTHER";
-    }
-  }, [isSelected, ansSelected, questionData, inputOption]);
+  }, [isSelected, isCorrect]);
 
   return (
     <>
       <Box
-        onClick={handleSelectAnswer}
+        onClick={() => handleSelect(inputOption)}
         sx={{
           width: "100%",
           maxWidth: 130,
@@ -191,7 +139,7 @@ const OptionCard = ({ inputOption, isSelected, img, title, disable }) => {
                 </Typography>
               </Box>
 
-              {(iconCondition === "RIGHT" || iconCondition === "WRONG") && (
+              {isSelected && (
                 <Typography
                   style={{
                     textAlign: "center",
@@ -208,13 +156,13 @@ const OptionCard = ({ inputOption, isSelected, img, title, disable }) => {
                     width={16}
                   />
                   +
-                  {iconCondition === "RIGHT"
-                    ? getNumbersInFormatOnlyMillions(pointsOnCorrectAnswer)
-                    : getNumbersInFormatOnlyMillions(pointsOnWrongAnswer)}
+                  {isCorrect
+                    ? getNumbersInFormatOnlyMillions(rewardPoints)
+                    : getNumbersInFormatOnlyMillions(rewardPoints)}
                 </Typography>
               )}
 
-              {iconCondition === "RIGHT" && (
+              {isCorrect && isSelected && (
                 <img
                   src="https://cdn3d.iconscout.com/3d/premium/thumb/successfully-done-5108472-4288033.png"
                   style={{
@@ -225,7 +173,7 @@ const OptionCard = ({ inputOption, isSelected, img, title, disable }) => {
                 />
               )}
 
-              {iconCondition === "WRONG" && (
+              {!isCorrect && isSelected && (
                 <img
                   src="https://cdn3d.iconscout.com/3d/premium/thumb/wrong-9090242-7480311.png?f=webp"
                   style={{

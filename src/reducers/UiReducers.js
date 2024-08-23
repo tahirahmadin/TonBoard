@@ -1,22 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
-  getAllProjects,
+  getQuizData,
   getUserBackendData,
-  updateAnswerToBackend,
-  updateTasksStatusToBackend,
+  markQuizAnswer,
+  updateDataToBackendAPI,
+  upgradeBoosterToBackend,
 } from "../actions/serverActions";
 
 const initialState = {
   score: 0,
-  quizzes: [],
-  projects: [],
-  workCompleted: [],
-  nextQueNo: 0,
-  isExploding: false,
-  isNextButtonEnabled: false,
-  timerValue: 0,
-  username: null,
-
+  questionData: {},
   isQuizLoading: false,
   quizPoints: 0,
   referralPoints: 0,
@@ -49,10 +42,27 @@ export const getBackendDataToRedux = createAsyncThunk(
   }
 );
 
-// Function:: get Projects Data
-export const getProjectsDataToRedux = createAsyncThunk(
-  "getProjectsDataToRedux",
-  async () => {
+export const updateCurrentQuestion = createAsyncThunk(
+  "updateCurrentQuestion",
+  async (userId) => {
+    try {
+      let response = await getQuizData(userId);
+
+      if (response) {
+        return response;
+      }
+      return null;
+    } catch (error) {
+      console.log("updateCurrentQuestion", error);
+      return {};
+    }
+  }
+);
+
+// Function: To upgrade booster
+export const upgradeBoosterRedux = createAsyncThunk(
+  "upgradeBoosterRedux",
+  async (dataObj) => {
     try {
       let response = await getAllProjects();
       if (response) {
@@ -65,28 +75,42 @@ export const getProjectsDataToRedux = createAsyncThunk(
   }
 );
 
-// Function: To mark answer to backend
-export const updateSelectedAnswerRedux = createAsyncThunk(
-  "updateSelectedAnswerRedux",
-  async (dataObj) => {
-    try {
-      console.log("dataObj");
-      console.log(dataObj);
+// // Function: To mark answer to backend
+// export const updateSelectedAnswerRedux = createAsyncThunk(
+//   "updateSelectedAnswerRedux",
+//   async (reqBody) => {
+//     try {
+//       // console.log("dataObj");
+//       // console.log(dataObj);
 
-      const response = await updateAnswerToBackend(dataObj);
+//       // //Update answers array
 
-      console.log("response");
-      console.log(response);
+//       // const response = await updateDataToBackendAPI({
+//       //   userId: dataObj.userId,
+//       //   inputOption: dataObj.inputOption,
+//       // });
 
-      if (response) {
-        return response;
-      }
-      return null;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
+//       // console.log("response");
+//       // console.log(response);
+
+//       // if (response.error === false) {
+//       //   return {
+//       //     inputOption: dataObj.inputOption,
+//       //     points: response.result.points,
+//       //     correctOption: response.result.correctOption,
+//       //   };
+//       // }
+//       const response = await markQuizAnswer(reqBody);
+//       if (response) {
+//         return response;
+//       }
+//       return {};
+//     } catch (error) {
+//       console.log(error);
+//       return {};
+//     }
+//   }
+// );
 
 // Function: To mark task completed
 export const updateTaskCompleteStatus = createAsyncThunk(
@@ -163,6 +187,46 @@ const UiReducer = createSlice({
     updateQuizLoadingStatus(state, action) {
       state.isQuizLoading = action.payload;
     },
+    updateBackendSyncStatus(state, action) {
+      state.isBackendSynced = action.payload;
+    },
+    updateDisplayData(state, action) {
+      state.displayData = action.payload;
+    },
+    updateOnQuizResult(state, action) {
+      const response = action.payload;
+
+      console.log("question answer response ", response);
+      // handle error state if anything goes wrong
+      if (response.error || !response.result) {
+        return;
+      }
+
+      state.score = state.score + response.result.reward;
+      state.ansSelected = response?.result?.user?.ansSelected;
+      state.currentQueNo = response?.result?.user?.currentQueNo;
+      state.currentSlotNo = response.result.user.currentSlotNo;
+
+      state.questionData = {
+        ...state.questionData,
+        question: {
+          ...state.questionData.question,
+          correct: response.result.correct,
+        },
+      };
+    },
+    updateQuestion(state, action) {
+      const response = action.payload;
+      console.log("updateCurrentQuestion response ", response);
+      // handle error state if anything goes wrong
+      if (response.error) {
+        state.questionData = {};
+        return;
+      }
+
+      state.questionData = response.result;
+      state.timerValue = response.result.timerValue;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getBackendDataToRedux.fulfilled, (state, action) => {
@@ -191,34 +255,55 @@ const UiReducer = createSlice({
         state.screenLoaded = true;
       }
     });
-    builder.addCase(getProjectsDataToRedux.fulfilled, (state, action) => {
+
+    builder.addCase(updateCurrentQuestion.fulfilled, (state, action) => {
+      const response = action.payload;
+      console.log("updateCurrentQuestion response ", response);
+      // handle error state if anything goes wrong
+      if (response.error) {
+        state.questionData = {};
+        return;
+      }
+
+      state.questionData = response.result;
+    });
+
+    builder.addCase(upgradeBoosterRedux.fulfilled, (state, action) => {
       const response = action.payload;
 
       if (response) {
         state.projects = response;
       }
     });
+    // builder.addCase(updateSelectedAnswerRedux.fulfilled, (state, action) => {
+    //   const response = action.payload;
 
-    builder.addCase(updateSelectedAnswerRedux.fulfilled, (state, action) => {
-      const response = action.payload;
-      if (response.user) {
-        let userObj = response.user;
-        state.score = userObj.score;
-        state.ansSelected = userObj.ansSelected;
-        state.nextQueNo = userObj.currentQueNo;
-        state.currentSlotNo = userObj.currentSlotNo;
-        state.isExploding = response.isCorrect;
-        state.timerValue = response.timerValue;
-        state.isNextButtonEnabled = true;
-      }
-    });
-    builder.addCase(updateTaskCompleteStatus.fulfilled, (state, action) => {
-      const response = action.payload;
-      console.log(response);
-      if (response) {
-        state.workCompleted = response.workCompleted;
-      }
-    });
+    //   console.log("question answer response ", response);
+    //   // handle error state if anything goes wrong
+    //   if (response.error || !response.result) {
+    //     return;
+    //   }
+
+    //   state.score = state.score + response.result.reward;
+    //   state.ansSelected = response?.result?.user?.ansSelected;
+    //   state.currentQueNo = response?.result?.user?.currentQueNo;
+    //   state.currentSlotNo = response.result.user.currentSlotNo;
+
+    //   state.questionData = {
+    //     ...state.questionData,
+    //     question: {
+    //       ...state.questionData.question,
+    //       correct: response.result.correct,
+    //     },
+    //   };
+
+    //   // if (response?.result?.isCorrect) {
+    //   //   state.isExploding = true;
+    //   //   setTimeout(() => {
+    //   //     state.isExploding = false;
+    //   //   }, 2000);
+    //   // }
+    // });
   },
 });
 
@@ -235,7 +320,8 @@ export const {
   updateScreenLoaded,
   setSuccessPopup,
   updateRefetch,
-  updateQuizLoadingStatus,
+  updateOnQuizResult,
+  updateQuestion,
 } = actions;
 
 export default UiReducer;

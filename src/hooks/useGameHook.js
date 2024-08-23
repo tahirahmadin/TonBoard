@@ -4,7 +4,7 @@ import {
   setSuccessPopup,
   updateScore,
   getBackendDataToRedux,
-  updateNextQueNo,
+  updateCurrentQuestion,
 } from "../reducers/UiReducers";
 import useTelegramSDK from "./useTelegramSDK";
 import { useServerAuth } from "./useServerAuth";
@@ -16,39 +16,30 @@ const useGameHook = (hookInit = false) => {
   const { viberate } = useTelegramSDK();
 
   const score = useSelector((state) => state.ui.score);
-
-  const currentQueNo = useSelector((state) => state.ui.currentQueNo);
+  const playLevels = useSelector((state) => state.ui.playLevels);
   const referralPoints = useSelector((state) => state.ui.referralPoints);
-  const quizzes = useSelector((state) => state.ui.quizzes);
-  const timerValue = useSelector((state) => state.ui.timerValue);
 
   //1.  To Manage initial loading of the application
   useEffect(() => {
     async function asyncFn() {
       if (hookInit && accountSC) {
         // //1.  Load Backend
-        await dispatch(getBackendDataToRedux(accountSC));
+        dispatch(getBackendDataToRedux(accountSC));
+        dispatch(updateCurrentQuestion(accountSC));
       }
     }
 
     asyncFn();
-  }, [accountSC, hookInit]);
+  }, [accountSC, hookInit, dispatch]);
 
   // 2. Final Score = score + referral score
   const finalScore = useMemo(() => {
     return score + referralPoints;
   }, [score, referralPoints]);
 
-  // 3. Get Current Question data
-  const questionData = useMemo(() => {
-    if (quizzes && quizzes.length === 0) {
-      return {};
-    }
-    return quizzes?.[currentQueNo];
-  }, [quizzes, currentQueNo]);
-
   const _handleNextButtonClick = async () => {
-    await dispatch(updateNextQueNo());
+    dispatch(updateCurrentQuestion(accountSC));
+
     viberate("medium");
   };
 
@@ -58,8 +49,6 @@ const useGameHook = (hookInit = false) => {
     viberate("light");
     dispatch(setSuccessPopup(true));
   };
-
-  const _pointsOnCorrectAnswer = 1000;
 
   const _pointsOnWrongAnswer = 250;
 
