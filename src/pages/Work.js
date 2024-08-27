@@ -13,13 +13,6 @@ const Work = () => {
 
   const { viberate } = useTelegramSDK();
 
-  useEffect(() => {
-    async function asyncFn() {
-      await dispatch(getProjectsDataToRedux());
-    }
-    asyncFn();
-  }, []);
-
   return (
     <Box
       style={{

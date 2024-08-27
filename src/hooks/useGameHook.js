@@ -5,6 +5,7 @@ import {
   updateScore,
   getBackendDataToRedux,
   updateCurrentQuestion,
+  getProjectsDataToRedux,
 } from "../reducers/UiReducers";
 import useTelegramSDK from "./useTelegramSDK";
 import { useServerAuth } from "./useServerAuth";
@@ -25,6 +26,7 @@ const useGameHook = (hookInit = false) => {
       if (hookInit && accountSC) {
         // //1.  Load Backend
         dispatch(getBackendDataToRedux(accountSC));
+        await dispatch(getProjectsDataToRedux());
         dispatch(updateCurrentQuestion(accountSC));
       }
     }
