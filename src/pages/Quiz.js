@@ -186,9 +186,7 @@ const QuizPage = () => {
                   }}
                 >
                   <img
-                    src={
-                      "https://cdn3d.iconscout.com/3d/premium/thumb/categoria-7844691-6244113.png?f=webp"
-                    }
+                    src={"category.webp"}
                     alt="TaskDao"
                     width={16}
                     height={16}
@@ -264,7 +262,7 @@ const QuizPage = () => {
                     rewardPoints={reward}
                     inputOption={1}
                     title={question.option1}
-                    img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-a-letter-effect-text-9423674-7664624.png"
+                    img="a.webp"
                     description="32,430"
                     handleSelect={handleOptionSelect}
                     isCorrect={isCorrect}
@@ -278,7 +276,7 @@ const QuizPage = () => {
                     inputOption={2}
                     handleSelect={handleOptionSelect}
                     title={question.option2}
-                    img="https://cdn3d.iconscout.com/3d/premium/thumb/capital-b-letter-effect-text-9423689-7664639.png"
+                    img="b.webp"
                     description="1,203"
                   />
                 </Box>

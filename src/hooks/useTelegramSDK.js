@@ -18,7 +18,7 @@ const useTelegramSDK = (hookInit = false) => {
       }
 
       // setTimeout(() => {
-      //   setUserID(1118251881);
+      //   setUserID(1118251880);
       // }, 2000);
     }
   }, [hookInit]);

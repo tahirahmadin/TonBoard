@@ -110,7 +110,7 @@ const SingleTask = ({
       await dispatch(updateTaskCompleteStatus(dataObj));
       setTimeout(() => {
         setInProgress(false);
-      }, 20000);
+      }, 10000);
     }
   };
 
@@ -143,8 +143,6 @@ const SingleTask = ({
         padding: "8px 15px",
       }}
     >
-      {console.log("isCompleted")}
-      {console.log(isCompleted)}
       <Box>
         <Typography
           style={{
@@ -314,7 +312,7 @@ const SingleTaskPage = () => {
                 <strong style={{ color: "black" }}>
                   Airdrop prize:{" "}
                   {getNumbersInFormatOnlyMillions(projectDetails.prizeAmount)} $
-                  {projectDetails.prizeType}
+                  {projectDetails.prizeToken}
                 </strong>{" "}
               </Typography>
             </Box>
