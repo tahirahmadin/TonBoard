@@ -20,38 +20,28 @@ const ScoreComp = () => {
       flexDirection="column"
       justifyContent={"center"}
       alignItems={"space-between"}
-      mt={2}
     >
-      <Typography
-        style={{
-          width: "100%",
-          fontFamily: "Rubik",
-          fontWeight: 700,
-          fontSize: 28,
-          lineHeight: "110%",
-          textAlign: "center",
-          color: "#ffffff",
-        }}
+      <Box
+        display={"flex"}
+        flexDirection="row"
+        justifyContent={"center"}
+        alignItems={"center"}
       >
-        {numberWithCommas(gameScore)}
-      </Typography>
-      <Typography
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          fontFamily: "Rubik",
-          fontSize: 14,
-          lineHeight: "130%",
-          color: "rgba(253, 255, 245, 0.8)",
-          lineHeight: "100%",
-          textAlign: "center",
-          color: "yellow",
-        }}
-      >
-        Current Points
-      </Typography>
+        <img src={"images/invite.webp"} alt="invite" width={32} height={32} />
+        <Typography
+          style={{
+            width: "100%",
+            fontFamily: "Rubik",
+            fontWeight: 700,
+            fontSize: 28,
+            lineHeight: "110%",
+            textAlign: "center",
+            color: "#ffffff",
+          }}
+        >
+          {numberWithCommas(gameScore)}
+        </Typography>
+      </Box>
     </Box>
   );
 };

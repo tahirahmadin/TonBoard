@@ -14,7 +14,7 @@ import useTelegramSDK from "../hooks/useTelegramSDK";
 import { useDispatch, useSelector } from "react-redux";
 import SuccessSnackbar from "../components/SuccessSnackbar";
 import {
-  getProjectsDataToRedux,
+  getBackendDataToRedux,
   updateTaskCompleteStatus,
 } from "../reducers/UiReducers";
 import { useParams } from "react-router-dom";
@@ -98,8 +98,8 @@ const SingleTask = ({
 
   // OPEN URL - STATUS= Completed
   const onClickAction = async () => {
-    if (!isCompleted && !inProgress) {
-      setInProgress(true);
+    if (!isCompleted && inProgress === -1) {
+      setInProgress(taskId);
       await openTelegramUrl(url);
       // Update status to progress
       let dataObj = {
@@ -109,7 +109,10 @@ const SingleTask = ({
       };
       await dispatch(updateTaskCompleteStatus(dataObj));
       setTimeout(() => {
-        setInProgress(false);
+        dispatch(getBackendDataToRedux(accountSC));
+      }, 9000);
+      setTimeout(() => {
+        setInProgress(-1);
       }, 10000);
     }
   };
@@ -156,11 +159,11 @@ const SingleTask = ({
         </Typography>
       </Box>
 
-      {!isCompleted && !inProgress && (
+      {!isCompleted && inProgress !== taskId && (
         <ActionButton onClick={() => onClickAction(taskId)}>Start</ActionButton>
       )}
 
-      {!isCompleted && inProgress && (
+      {!isCompleted && inProgress === taskId && (
         <Box display={"flex"} justifyContent={"flex-start"}>
           <CircularProgress size={20} thickness={5} />
         </Box>
@@ -191,33 +194,33 @@ const SingleTaskPage = () => {
   const workCompleted = useSelector((state) => state.ui.workCompleted);
 
   //Tasks states
-  const [inProgress, setInProgress] = useState(false);
+  const [inProgress, setInProgress] = useState(-1);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [projectDetails, setProjectDetails] = useState(null);
   const [allTasks, setAllTasks] = useState([]);
   const [allTasksStatus, setAllTasksStatus] = useState([]);
 
   useEffect(() => {
-    if (screenLoaded && projectId && projects.length > 0) {
+    if (screenLoaded && projectId && projects?.length > projectId) {
       setProjectDetails(projects[projectId]);
       setAllTasks(projects[projectId].tasks);
-
       setPageLoaded(true);
     }
-    if (screenLoaded && projectId && workCompleted.length > 0) {
+  }, [projectId, screenLoaded, workCompleted, projects]);
+
+  useEffect(() => {
+    if (screenLoaded && projectId && workCompleted?.length > projectId) {
       setAllTasksStatus(workCompleted[projectId]);
     }
-    if (screenLoaded && projectId && projects.length === 0) {
-      async function asyncFn() {
-        await dispatch(getProjectsDataToRedux());
-      }
-      asyncFn();
-    }
-  }, [projectId, screenLoaded, projects]);
+  }, [projectId, screenLoaded, workCompleted]);
 
   const completedTasksPercentage = useMemo(() => {
-    return (100 * allTasksStatus.length) / allTasks.length;
-  }, [allTasks, allTasksStatus]);
+    if (projects.length > 0 && allTasksStatus && allTasks.length > 0) {
+      return (100 * allTasksStatus.length) / allTasks.length;
+    } else {
+      return 0;
+    }
+  }, [allTasks, allTasksStatus, projects]);
 
   return (
     <Box
@@ -235,6 +238,7 @@ const SingleTaskPage = () => {
         overflowY: "hidden",
       }}
     >
+      {console.log(allTasksStatus)}
       {pageLoaded && (
         <Grow direction="down" in={true}>
           <Box style={{ width: "100%", margin: "auto" }}>

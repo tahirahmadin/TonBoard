@@ -142,11 +142,8 @@ const Leaderboard = () => {
               alignItems: "center",
             }}
           >
-            {/* https://cdn3d.iconscout.com/3d/premium/thumb/exclusive-6410046-5272919.png */}
             <img
-              src={
-                "https://cdn3d.iconscout.com/3d/premium/thumb/trophy-9211599-7568735.png"
-              }
+              src={"images/ranking.webp"}
               alt=""
               width={108}
               height={108}
@@ -178,7 +175,8 @@ const Leaderboard = () => {
                 minHeight: 60,
               }}
             >
-              Refer friends and share rewards from <br />a pool of 1000 TON.
+              Refer friends and share rewards <br />
+              from 1000 TON
             </Typography>
           </Box>
 

@@ -25,6 +25,8 @@ const initialState = {
   successPopup: false,
   screenLoaded: false,
   displayData: { progressItems: [], rankings: [], referrals: [] },
+  projects: [],
+  createdDate: 0,
 };
 
 // Function:: get backend data and update redux
@@ -255,6 +257,7 @@ const UiReducer = createSlice({
         state.timerValue = response.timerValue;
 
         state.screenLoaded = true;
+        state.createdDate = response.createdDate;
       }
     });
 

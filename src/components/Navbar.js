@@ -79,15 +79,7 @@ const Navbar = () => {
 
     {
       url: "/dashboard",
-      image: (
-        <img
-          src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/home-7746313-6240836.png"
-          }
-          height={24}
-          width={24}
-        />
-      ),
+      image: <img src={"images/dashboard.webp"} height={24} width={24} />,
 
       name: "Dashboard",
     },

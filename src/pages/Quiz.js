@@ -13,6 +13,7 @@ import ProgressBar from "../components/ProgressBar";
 import { useServerAuth } from "../hooks/useServerAuth";
 import { getQuizData, markQuizAnswer } from "../actions/serverActions";
 import { updateOnQuizResult, updateQuestion } from "../reducers/UiReducers";
+import useTelegramSDK from "../hooks/useTelegramSDK";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -40,6 +41,7 @@ const QuizPage = () => {
   const isQuizLoading = useSelector((state) => state.ui.isQuizLoading);
 
   const { accountSC } = useServerAuth();
+  const { viberate } = useTelegramSDK();
 
   const { isTimerRunning } = useSlotTimer(true);
 
@@ -61,6 +63,7 @@ const QuizPage = () => {
 
   const handleOptionSelect = React.useCallback(
     async (option) => {
+      viberate("light");
       if (selectedOption !== null || isTimerRunning) {
         return;
       }
@@ -76,12 +79,15 @@ const QuizPage = () => {
       const response = await markQuizAnswer(dataObj);
 
       if (!response.error) {
+        if (response.isCorrect) {
+          viberate("heavy");
+        } else {
+          viberate("light");
+        }
         setReward(response.result?.reward);
       }
       setLoadingResult(false);
-
       dispatch(updateOnQuizResult(response));
-
       setSelectedOption(option);
     },
     [
@@ -332,36 +338,38 @@ const QuizPage = () => {
                   </Button>
                 )}
 
-                <Box
-                  mt={2}
-                  style={{
-                    width: "100%",
-                    minHeight: "50.86px",
-                    borderRadius: "12px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "8px 15px",
-                  }}
-                >
-                  <Typography
+                {!isTimerRunning && (
+                  <Box
+                    mt={2}
                     style={{
                       width: "100%",
-                      fontFamily: "Rubik",
-                      fontWeight: 400,
-                      fontSize: 14,
-                      lineHeight: "150%",
-                      textAlign: "center",
-                      color: "#ffffff",
+                      minHeight: "50.86px",
+                      borderRadius: "12px",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "8px 15px",
                     }}
                   >
-                    Quiz Progress ({questionData?.summary?.attempted}/5)
-                  </Typography>
-                  <ProgressBar
-                    value={(questionData?.summary?.attempted * 100) / 5}
-                  />
-                </Box>
+                    <Typography
+                      style={{
+                        width: "100%",
+                        fontFamily: "Rubik",
+                        fontWeight: 400,
+                        fontSize: 14,
+                        lineHeight: "150%",
+                        textAlign: "center",
+                        color: "#ffffff",
+                      }}
+                    >
+                      Quiz Progress ({questionData?.summary?.attempted}/5)
+                    </Typography>
+                    <ProgressBar
+                      value={(questionData?.summary?.attempted * 100) / 5}
+                    />
+                  </Box>
+                )}
               </Box>
             </Box>
           )}

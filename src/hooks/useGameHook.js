@@ -26,7 +26,7 @@ const useGameHook = (hookInit = false) => {
       if (hookInit && accountSC) {
         // //1.  Load Backend
         dispatch(getBackendDataToRedux(accountSC));
-        await dispatch(getProjectsDataToRedux());
+        dispatch(getProjectsDataToRedux());
         dispatch(updateCurrentQuestion(accountSC));
       }
     }

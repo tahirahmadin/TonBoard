@@ -13,6 +13,7 @@ import {
   useTonWallet,
 } from "@tonconnect/ui-react";
 import ScoreComp from "../components/Score";
+import TimeAgo from "react-timeago";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -39,6 +40,7 @@ const Dashboard = () => {
   const wallet = useTonWallet();
 
   const userAddress = useSelector((state) => state.ui.userAddress);
+  const createdDate = useSelector((state) => state.ui.createdDate);
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
 
   // // API call: to fetch tasks
@@ -93,9 +95,53 @@ const Dashboard = () => {
       }}
     >
       <Box
-        mt={1}
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <img
+          src={"images/dashboard.webp"}
+          alt="dashboard"
+          width={108}
+          height={108}
+          style={{ filter: "drop-shadow(0 -6mm 14mm #757575)" }}
+        />
+        <Typography
+          mb={1}
+          style={{
+            width: "100%",
+            fontFamily: "Rubik",
+            fontWeight: 600,
+            fontSize: 20,
+            lineHeight: "110%",
+            textAlign: "center",
+            color: "#ffffff",
+          }}
+        >
+          Dashboard
+        </Typography>
+        <Typography
+          style={{
+            width: "95%",
+            textAlign: "center",
+            fontSize: 14,
+            lineHeight: "130%",
+            color: "rgba(253, 255, 245, 0.8)",
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          Track your progress and earn reward on TON
+        </Typography>
+      </Box>
+      <Box
+        mt={2}
         sx={{
-          border: "1px solid #313131",
+          // border: "1px solid #313131",
           width: "100%",
           borderRadius: "22px",
           position: "relative",
@@ -104,7 +150,7 @@ const Dashboard = () => {
           alignItems: "center",
           padding: "2px",
           background:
-            "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0.01) 100%)",
+            "linear-gradient(241.27deg, rgba(253, 255, 245, 0.12) -5.59%, rgba(253, 255, 245, 0.01) 100%)",
         }}
       >
         {/* Start Images */}
@@ -167,6 +213,7 @@ const Dashboard = () => {
               gap: "7px",
             }}
           >
+            <ScoreComp />
             <Typography
               style={{
                 width: "100%",
@@ -192,24 +239,14 @@ const Dashboard = () => {
                 textAlign: "left",
               }}
             >
-              Onboarded: 3 days ago
+              Onboarded: <TimeAgo date={createdDate} />
             </Typography>
           </Box>
         </Box>
       </Box>
-
-      <Box
-        style={{ height: "12vh" }}
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"flex-start"}
-      >
-        <ScoreComp />
-      </Box>
-
       <Box
         style={{
-          width: "90%",
+          width: "100%",
           height: "100%",
           maxHeight: 70,
           background: "transparent",
@@ -221,7 +258,6 @@ const Dashboard = () => {
           justifyContent: "center",
           flexDirection: "column",
           gap: "10px",
-          marginLeft: "5%",
         }}
       >
         <Box
@@ -229,7 +265,7 @@ const Dashboard = () => {
             width: "100%",
             minHeight: 70,
             background:
-              "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
+              "linear-gradient(241.27deg, rgba(253, 255, 245, 0.12) -5.59%, rgba(253, 255, 245, 0) 100%)",
             borderRadius: "12px",
             display: "flex",
             flexDirection: "column",
@@ -254,7 +290,6 @@ const Dashboard = () => {
           <TonConnectButton />
         </Box>
       </Box>
-
       <Box
         style={{ width: "100%" }}
         display={"flex"}

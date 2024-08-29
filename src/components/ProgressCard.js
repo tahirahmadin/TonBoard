@@ -50,9 +50,9 @@ const ProgressCard = ({
           alignItems: "center",
           padding: sm ? "10px 15px" : "20px 20px",
           gap: "10px",
-          backgroundColor: "rgba(253, 255, 245, 0.08)",
-          // background:
-          //   "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
+          // backgroundColor: "rgba(253, 255, 245, 0.08)",
+          background:
+            "linear-gradient(241.27deg, rgba(253, 255, 245, 0.12) -5.59%, rgba(253, 255, 245, 0) 100%)",
         }}
       >
         <Box

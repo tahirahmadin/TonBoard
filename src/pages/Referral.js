@@ -71,10 +71,8 @@ const Referral = () => {
         }}
       >
         <img
-          src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/diamond-10168568-8249311.png"
-          }
-          alt=""
+          src={"images/invite.webp"}
+          alt="invite"
           width={108}
           height={108}
           style={{ filter: "drop-shadow(0 -6mm 14mm #757575)" }}
@@ -104,7 +102,7 @@ const Referral = () => {
             zIndex: 1,
           }}
         >
-          Refer friends and earn +100 diamonds/friend.
+          Refer friends and earn +100 diamonds/friend
         </Typography>
       </Box>
 
