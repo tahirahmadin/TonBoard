@@ -160,7 +160,7 @@ const SingleTask = ({
       </Box>
 
       {!isCompleted && inProgress !== taskId && (
-        <ActionButton onClick={() => onClickAction(taskId)}>Start</ActionButton>
+        <ActionButton onClick={() => onClickAction(taskId)}>Open</ActionButton>
       )}
 
       {!isCompleted && inProgress === taskId && (

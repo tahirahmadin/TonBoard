@@ -17,9 +17,9 @@ const useTelegramSDK = (hookInit = false) => {
         setReferParam(WebApp.initDataUnsafe?.start_param);
       }
 
-      setTimeout(() => {
-        setUserID(1118251880);
-      }, 2000);
+      // setTimeout(() => {
+      //   setUserID(1118251880);
+      // }, 2000);
     }
   }, [hookInit]);
 
