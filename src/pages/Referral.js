@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import constants from "../utils/constants";
 import { getNumbersInFormat } from "../actions/helperFn";
 
-import { Person } from "@mui/icons-material";
+import { ContentCopy, CopyAll, FileCopy, Person } from "@mui/icons-material";
 import { getReferralsData } from "../actions/serverActions";
 
 const Referral = () => {
@@ -95,11 +95,12 @@ const Referral = () => {
           style={{
             width: "95%",
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 15,
             lineHeight: "130%",
             color: "rgba(253, 255, 245, 0.8)",
             position: "relative",
             zIndex: 1,
+            fontWeight: 400,
           }}
         >
           Refer friends and earn +100 diamonds/friend
@@ -179,7 +180,7 @@ const Referral = () => {
               onClick={handleCopyToClipboard}
               style={{
                 height: "40px",
-                background: "#0088cc",
+                background: "rgba(0, 136, 204,0.7)",
                 borderRadius: "12px",
                 fontWeight: 600,
                 fontSize: "16px",
@@ -191,7 +192,7 @@ const Referral = () => {
                 paddingRight: 20,
               }}
             >
-              Copy
+              <FileCopy />
             </Button>
           </Box>
         </Box>

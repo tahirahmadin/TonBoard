@@ -75,8 +75,11 @@ const OptionCard = ({
               alignItems: "center",
               padding: "5px 5px",
               gap: "5px",
+              border: "1px solid #313131",
+              // background:
+              //   "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
               background:
-                "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                "linear-gradient(241.27deg, rgba(253, 255, 245, 0.12) -5.59%, rgba(253, 255, 245, 0) 100%)",
             }}
           >
             <img

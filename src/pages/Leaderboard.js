@@ -167,16 +167,17 @@ const Leaderboard = () => {
               style={{
                 width: "95%",
                 textAlign: "center",
-                fontSize: 14,
+                fontSize: 15,
                 lineHeight: "130%",
                 color: "rgba(253, 255, 245, 0.8)",
                 position: "relative",
                 zIndex: 1,
+                fontWeight: 400,
                 minHeight: 60,
               }}
             >
               Refer friends and share rewards <br />
-              from 1000 TON
+              from pool of 1000 TON
             </Typography>
           </Box>
 
@@ -189,7 +190,7 @@ const Leaderboard = () => {
           >
             <Box
               style={{
-                width: "70%",
+                width: "80%",
                 height: 44,
                 background: "#000",
                 display: "flex",

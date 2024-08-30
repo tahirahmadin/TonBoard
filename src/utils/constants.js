@@ -1,6 +1,6 @@
 // 0 mainnet, 1 testnet
 
-export const testmode = false;
+export const testmode = true;
 
 let constants;
 constants = {

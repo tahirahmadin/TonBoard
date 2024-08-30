@@ -43,7 +43,7 @@ const SingleProjectCard = ({
         <Box
           mt={1}
           sx={{
-            border: "1px solid #313131",
+            border: "1px solid #212121",
             width: "100%",
             borderRadius: "22px",
             position: "relative",
@@ -52,7 +52,7 @@ const SingleProjectCard = ({
             alignItems: "center",
             padding: "2px",
             background:
-              "linear-gradient(241.27deg, rgba(253, 255, 245, 0.08) -5.59%, rgba(253, 255, 245, 0.01) 100%)",
+              "linear-gradient(241.27deg, rgba(253, 255, 245, 0.12) -5.59%, rgba(253, 255, 245, 0) 100%)",
           }}
         >
           {/* Start Images */}

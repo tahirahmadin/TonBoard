@@ -128,11 +128,12 @@ const Dashboard = () => {
           style={{
             width: "95%",
             textAlign: "center",
-            fontSize: 14,
+            fontSize: 15,
             lineHeight: "130%",
             color: "rgba(253, 255, 245, 0.8)",
             position: "relative",
             zIndex: 1,
+            fontWeight: 400,
           }}
         >
           Track your progress and earn reward on TON
@@ -248,7 +249,7 @@ const Dashboard = () => {
         style={{
           width: "100%",
           height: "100%",
-          maxHeight: 70,
+          maxHeight: 90,
           background: "transparent",
           borderRadius: "24px",
           marginTop: "10px",
@@ -263,7 +264,7 @@ const Dashboard = () => {
         <Box
           style={{
             width: "100%",
-            minHeight: 70,
+            minHeight: 80,
             background:
               "linear-gradient(241.27deg, rgba(253, 255, 245, 0.12) -5.59%, rgba(253, 255, 245, 0) 100%)",
             borderRadius: "12px",
@@ -281,6 +282,7 @@ const Dashboard = () => {
               fontSize: "12px",
               lineHeight: "14px",
               color: "#FFFFFF",
+              paddingBottom: 7,
             }}
           >
             {userFriendlyAddress
