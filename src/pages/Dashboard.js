@@ -328,7 +328,9 @@ const Dashboard = () => {
                     key={el?.category}
                     correctPercent={70}
                     category={el?.category}
-                    img="https://cdn3d.iconscout.com/3d/free/thumb/free-bitcoin-3443546-2879622.png?f=webp"
+                    img={
+                      "https://cdn3d.iconscout.com/3d/premium/thumb/nft-stock-with-graph-4608814-3811517.png?f=webp"
+                    }
                     attemptedQuestions={el?.completed}
                     maxQuestions={el?.total}
                   />
