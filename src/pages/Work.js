@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Grid, Grow, Typography, Zoom } from "@mui/material";
+import { Box, Grow, Typography } from "@mui/material";
 import useTelegramSDK from "../hooks/useTelegramSDK";
 
 import SingleProjectCard from "../components/SingleProjectCard";
 
-import { getProjectsDataToRedux } from "../reducers/UiReducers";
-import { useDispatch, useSelector } from "react-redux";
 import { PROJECTS_DATA } from "../utils/constants";
 
 const Work = () => {
-  const dispatch = useDispatch();
-  const projects = useSelector((state) => state.ui.projects);
-
   const { viberate } = useTelegramSDK();
 
   return (
@@ -51,7 +46,7 @@ const Work = () => {
         >
           {PROJECTS_DATA &&
             PROJECTS_DATA.map((ele, index) => (
-              <Box onClick={() => viberate("light")}>
+              <Box onClick={() => viberate("medium")}>
                 <SingleProjectCard key={index} projectData={ele} />
               </Box>
             ))}

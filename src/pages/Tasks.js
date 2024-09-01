@@ -21,6 +21,7 @@ import { useParams } from "react-router-dom";
 import { getNumbersInFormatOnlyMillions } from "../actions/helperFn";
 import SmallProgressBar from "../components/SmallProgressBar";
 import { TASKS_DATA } from "../utils/constants";
+import { getTasksData } from "../actions/serverActions";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -86,7 +87,6 @@ const ActionButton = ({
 
 const SingleTask = ({
   taskId,
-  workId,
   allTasksStatus,
   name,
   url,
@@ -94,24 +94,21 @@ const SingleTask = ({
   setInProgress,
 }) => {
   const dispatch = useDispatch();
-  const { openTelegramUrl } = useTelegramSDK();
+  const { openTelegramUrl, viberate } = useTelegramSDK();
   const { accountSC } = useServerAuth();
 
   // OPEN URL - STATUS= Completed
   const onClickAction = async () => {
     if (!isCompleted && inProgress === -1) {
       setInProgress(taskId);
+      viberate("medium");
       await openTelegramUrl(url);
       // Update status to progress
       let dataObj = {
         userId: accountSC,
-        workId: workId,
         taskId: taskId,
       };
       await dispatch(updateTaskCompleteStatus(dataObj));
-      setTimeout(() => {
-        dispatch(getBackendDataToRedux(accountSC));
-      }, 9000);
       setTimeout(() => {
         setInProgress(-1);
       }, 10000);
@@ -187,41 +184,36 @@ const SingleTask = ({
 const Tasks = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { viberate } = useTelegramSDK();
   const { projectId } = useParams();
 
-  const screenLoaded = useSelector((state) => state.ui.screenLoaded);
-  const projects = useSelector((state) => state.ui.projects);
-  const workCompleted = useSelector((state) => state.ui.workCompleted);
+  const taskCompleted = useSelector((state) => state.ui.taskCompleted);
 
   //Tasks states
   const [inProgress, setInProgress] = useState(-1);
   const [pageLoaded, setPageLoaded] = useState(false);
-  const [projectDetails, setProjectDetails] = useState(null);
   const [allTasks, setAllTasks] = useState([]);
-  const [allTasksStatus, setAllTasksStatus] = useState([]);
 
+  // FETCH :: Tasks from Backend
   useEffect(() => {
-    if (screenLoaded && projectId && projects?.length > projectId) {
-      setProjectDetails(projects[projectId]);
-      setAllTasks(projects[projectId].tasks);
-      setPageLoaded(true);
-    }
-  }, [projectId, screenLoaded, workCompleted, projects]);
+    async function asynFn() {
+      let res = await getTasksData();
 
-  useEffect(() => {
-    if (screenLoaded && projectId && workCompleted?.length > projectId) {
-      setAllTasksStatus(workCompleted[projectId]);
+      if (res) {
+        setAllTasks(res);
+        setPageLoaded(true);
+      }
     }
-  }, [projectId, screenLoaded, workCompleted]);
+    asynFn();
+  }, []);
 
+  // Progress of tasks
   const completedTasksPercentage = useMemo(() => {
-    if (projects.length > 0 && allTasksStatus && allTasks.length > 0) {
-      return (100 * allTasksStatus.length) / allTasks.length;
+    if (taskCompleted && allTasks.length > 0) {
+      return (100 * taskCompleted.length) / allTasks.length;
     } else {
       return 0;
     }
-  }, [allTasks, allTasksStatus, projects]);
+  }, [allTasks, taskCompleted]);
 
   return (
     <Box
@@ -239,7 +231,6 @@ const Tasks = () => {
         overflowY: "hidden",
       }}
     >
-      {console.log(allTasksStatus)}
       <Grow direction="down" in={true}>
         <Box style={{ width: "100%", margin: "auto" }}>
           <SuccessSnackbar text="Reward claimed succesfully!" />
@@ -317,7 +308,7 @@ const Tasks = () => {
                 color: "#ffffff",
               }}
             >
-              Airdrop Progress ({allTasksStatus.length}/{allTasks.length})
+              Airdrop Progress ({taskCompleted.length}/{allTasks.length})
             </Typography>
             <SmallProgressBar value={completedTasksPercentage} />
           </Box>
@@ -354,18 +345,18 @@ const Tasks = () => {
               >
                 Tasks
               </Typography>
-              {TASKS_DATA.map((ele, i) => (
-                <SingleTask
-                  key={i}
-                  workId={parseInt(projectId)}
-                  allTasksStatus={allTasksStatus}
-                  taskId={ele.id}
-                  name={ele.title}
-                  url={ele.taskUrl}
-                  inProgress={inProgress}
-                  setInProgress={setInProgress}
-                />
-              ))}
+              {allTasks &&
+                allTasks.map((ele, i) => (
+                  <SingleTask
+                    key={i}
+                    allTasksStatus={taskCompleted}
+                    taskId={ele.id}
+                    name={ele.title}
+                    url={ele.taskUrl}
+                    inProgress={inProgress}
+                    setInProgress={setInProgress}
+                  />
+                ))}
             </Box>
           </Box>
         </Box>

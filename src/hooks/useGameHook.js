@@ -17,7 +17,6 @@ const useGameHook = (hookInit = false) => {
   const { viberate } = useTelegramSDK();
 
   const score = useSelector((state) => state.ui.score);
-  const playLevels = useSelector((state) => state.ui.playLevels);
   const referralPoints = useSelector((state) => state.ui.referralPoints);
 
   //1.  To Manage initial loading of the application
@@ -26,7 +25,7 @@ const useGameHook = (hookInit = false) => {
       if (hookInit && accountSC) {
         // //1.  Load Backend
         dispatch(getBackendDataToRedux(accountSC));
-        dispatch(getProjectsDataToRedux());
+        // dispatch(getProjectsDataToRedux());
         dispatch(updateCurrentQuestion(accountSC));
       }
     }

@@ -76,11 +76,9 @@ export const loginTelegramUserFromBackendServer = async (
 };
 
 //3. TASKS:: GET User tasks Data by address
-export const getTasksData = async (userId) => {
+export const getTasksData = async () => {
   try {
-    let requestParams = `userId=${userId}`;
-
-    let url = `${apiUrl}/user/getAllTasks?${requestParams}`;
+    let url = `${apiUrl}/task/allTasks`;
 
     let response = await axios.get(url).then((res) => res.data);
 
@@ -95,18 +93,12 @@ export const getTasksData = async (userId) => {
   }
 };
 
-//4. USER:: SignUp and Login POST Login user using telegram
-export const updateTaskStatusAPI = async (userId, task, taskStatus) => {
-  let url = `${apiUrl}/user/setTaskCompleted`;
-  let taskObject = {
-    userId: userId,
-    task: task,
-    status: taskStatus,
-    lastUpdatedAt: Date.now(),
-  };
+//4. USER:: Update Task status
+export const updateTaskStatusToBackend = async (dataObj) => {
+  let url = `${apiUrl}/task/updateTask`;
 
   //Encrypted data
-  let encryptedData = getCipherText(taskObject);
+  let encryptedData = getCipherText(dataObj);
 
   let response = await axios
     .post(url, encryptedData)
@@ -118,7 +110,7 @@ export const updateTaskStatusAPI = async (userId, task, taskStatus) => {
     });
 
   if (response && !response.error) {
-    return true;
+    return response.result;
   } else {
     console.log("error", response);
     return false;
@@ -164,7 +156,7 @@ export const getLeaderboardData = async (userId) => {
 //5. Projects:: GET projects data
 export const getAllProjects = async () => {
   try {
-    let url = `${apiUrl}/task/allProjects`;
+    let url = `${apiUrl}/work/allWorks`;
 
     let response = await axios.get(url).then((res) => res.data);
 
@@ -179,11 +171,10 @@ export const getAllProjects = async () => {
   }
 };
 
-//6. USER:: Update Game Data to backend
-export const updateTasksStatusToBackend = async (dataObj) => {
-  let url = `${apiUrl}/task/updateTask`;
-  console.log("dataObj");
-  console.log(dataObj);
+//6. USER:: Update Work  Id
+export const updateWorkStatusToBackend = async (dataObj) => {
+  let url = `${apiUrl}/work/updateWork`;
+
   //Encrypted data
   let encryptedData = getCipherText(dataObj);
 
@@ -197,7 +188,7 @@ export const updateTasksStatusToBackend = async (dataObj) => {
     });
 
   if (response && !response.error) {
-    return response.data;
+    return response.result;
   } else {
     console.log("error", response);
     return null;

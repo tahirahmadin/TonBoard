@@ -31,20 +31,10 @@ const Navbar = () => {
 
       name: "Airdrops",
     },
-
     {
-      url: "/invite",
-      image: (
-        <img
-          src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/add-friend-8627490-6856189.png?f=webp"
-          }
-          height={24}
-          width={24}
-        />
-      ),
-
-      name: "Friends",
+      url: "/tasks",
+      image: <img src={"images/navbar/tasks.webp"} height={24} width={24} />,
+      name: "Tasks",
     },
 
     {
@@ -63,9 +53,18 @@ const Navbar = () => {
     },
 
     {
-      url: "/tasks",
-      image: <img src={"images/navbar/tasks.webp"} height={24} width={24} />,
-      name: "Tasks",
+      url: "/invite",
+      image: (
+        <img
+          src={
+            "https://cdn3d.iconscout.com/3d/premium/thumb/add-friend-8627490-6856189.png?f=webp"
+          }
+          height={24}
+          width={24}
+        />
+      ),
+
+      name: "Friends",
     },
 
     {

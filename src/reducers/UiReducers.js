@@ -3,10 +3,9 @@ import {
   getAllProjects,
   getQuizData,
   getUserBackendData,
-  markQuizAnswer,
-  updateDataToBackendAPI,
   updateTasksStatusToBackend,
-  upgradeBoosterToBackend,
+  updateTaskStatusToBackend,
+  updateWorkStatusToBackend,
 } from "../actions/serverActions";
 
 const initialState = {
@@ -17,7 +16,8 @@ const initialState = {
   referralPoints: 0,
   workPoints: 0,
   currentSlotNo: 0,
-
+  workCompleted: [],
+  taskCompleted: [],
   ansSelected: [],
   isTimerRunning: false,
 
@@ -63,49 +63,34 @@ export const updateCurrentQuestion = createAsyncThunk(
   }
 );
 
-// // Function: To mark answer to backend
-// export const updateSelectedAnswerRedux = createAsyncThunk(
-//   "updateSelectedAnswerRedux",
-//   async (reqBody) => {
-//     try {
-//       // console.log("dataObj");
-//       // console.log(dataObj);
-
-//       // //Update answers array
-
-//       // const response = await updateDataToBackendAPI({
-//       //   userId: dataObj.userId,
-//       //   inputOption: dataObj.inputOption,
-//       // });
-
-//       // console.log("response");
-//       // console.log(response);
-
-//       // if (response.error === false) {
-//       //   return {
-//       //     inputOption: dataObj.inputOption,
-//       //     points: response.result.points,
-//       //     correctOption: response.result.correctOption,
-//       //   };
-//       // }
-//       const response = await markQuizAnswer(reqBody);
-//       if (response) {
-//         return response;
-//       }
-//       return {};
-//     } catch (error) {
-//       console.log(error);
-//       return {};
-//     }
-//   }
-// );
-
 // Function:: get Projects Data
 export const getProjectsDataToRedux = createAsyncThunk(
   "getProjectsDataToRedux",
   async () => {
     try {
       let response = await getAllProjects();
+      if (response) {
+        return response;
+      }
+      return null;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// Function: To mark work completed
+export const updateWorkCompleteStatus = createAsyncThunk(
+  "updateWorkCompleteStatus",
+  async (dataObj) => {
+    try {
+      // Update work
+
+      const response = await updateWorkStatusToBackend(dataObj);
+
+      console.log("response in reducer");
+      console.log(response);
+
       if (response) {
         return response;
       }
@@ -123,7 +108,9 @@ export const updateTaskCompleteStatus = createAsyncThunk(
     try {
       // Update answers array
 
-      const response = await updateTasksStatusToBackend(dataObj);
+      console.log("dataObj");
+      console.log(dataObj);
+      const response = await updateTaskStatusToBackend(dataObj);
 
       console.log("response");
       console.log(response);
@@ -239,6 +226,8 @@ const UiReducer = createSlice({
       if (response) {
         state.score = response.score;
         state.workCompleted = response.workCompleted;
+        state.taskCompleted = response.taskCompleted;
+
         state.quizzes = response.quizzes;
         state.currentSlotNo = response.currentSlotNo;
         state.currentQueNo = response.currentQueNo;
@@ -280,35 +269,20 @@ const UiReducer = createSlice({
       }
     });
 
-    // builder.addCase(updateSelectedAnswerRedux.fulfilled, (state, action) => {
-    //   const response = action.payload;
+    builder.addCase(updateWorkCompleteStatus.fulfilled, (state, action) => {
+      const response = action.payload;
 
-    //   console.log("question answer response ", response);
-    //   // handle error state if anything goes wrong
-    //   if (response.error || !response.result) {
-    //     return;
-    //   }
+      if (response) {
+        state.workCompleted = response.workCompleted;
+      }
+    });
+    builder.addCase(updateTaskCompleteStatus.fulfilled, (state, action) => {
+      const response = action.payload;
 
-    //   state.score = state.score + response.result.reward;
-    //   state.ansSelected = response?.result?.user?.ansSelected;
-    //   state.currentQueNo = response?.result?.user?.currentQueNo;
-    //   state.currentSlotNo = response.result.user.currentSlotNo;
-
-    //   state.questionData = {
-    //     ...state.questionData,
-    //     question: {
-    //       ...state.questionData.question,
-    //       correct: response.result.correct,
-    //     },
-    //   };
-
-    //   // if (response?.result?.isCorrect) {
-    //   //   state.isExploding = true;
-    //   //   setTimeout(() => {
-    //   //     state.isExploding = false;
-    //   //   }, 2000);
-    //   // }
-    // });
+      if (response) {
+        state.taskCompleted = response.taskCompleted;
+      }
+    });
   },
 });
 

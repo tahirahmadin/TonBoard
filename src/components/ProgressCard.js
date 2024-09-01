@@ -1,5 +1,5 @@
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
-import React from "react";
+import React, { useMemo } from "react";
 
 import makeStyles from "@mui/styles/makeStyles";
 import SmallProgressBar from "./SmallProgressBar";
@@ -37,6 +37,9 @@ const ProgressCard = ({
 
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
 
+  let progressPercent = useMemo(() => {
+    return parseInt((100 * attemptedQuestions) / maxQuestions);
+  }, [attemptedQuestions, maxQuestions]);
   return (
     <>
       <Box
@@ -78,7 +81,7 @@ const ProgressCard = ({
               marginBottom: 3,
             }}
           >
-            {correctPercent}% were correct
+            {progressPercent}% attempted
           </Typography>
           <img src={img} alt="TaskDao" width={36} height={36} />
 
