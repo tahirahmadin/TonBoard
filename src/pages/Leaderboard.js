@@ -143,7 +143,7 @@ const Leaderboard = () => {
             }}
           >
             <img
-              src={"images/ranking.webp"}
+              src={"images/navbar/ranking.webp"}
               alt=""
               width={108}
               height={108}

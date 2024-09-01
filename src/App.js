@@ -13,7 +13,7 @@ import { BackButton } from "@twa-dev/sdk/react";
 import Work from "./pages/Work";
 import QuizPage from "./pages/Quiz";
 import Leaderboard from "./pages/Leaderboard";
-import SingleTaskPage from "./pages/SingleTaskPage";
+import Tasks from "./pages/Tasks";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 
 function App() {
@@ -50,11 +50,7 @@ function App() {
             <Route exact path="/" element={<QuizPage />} />
             <Route exact path="/league" element={<League />} />
             <Route exact path="/referral" element={<Referral />} />
-            <Route
-              exact
-              path="/tasks/:projectId"
-              element={<SingleTaskPage />}
-            />
+            <Route exact path="/tasks" element={<Tasks />} />
             <Route exact path="/dashboard" element={<Dashboard />} />
             <Route exact path="/work" element={<Work />} />
             <Route exact path="/leader" element={<Leaderboard />} />

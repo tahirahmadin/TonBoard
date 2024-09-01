@@ -147,51 +147,72 @@ export const REWARDS_BOOST_DATA = [
 // League levels
 export const REFERRAL_COUNT_DATA = [1, 3, 10, 25, 50, 100];
 
-// Project Tasks Data
-let project0 = [
+export const TASKS_DATA = [
   {
     id: 0,
     title: "Follow TonBoard on X",
-    url: "https://x.com/tahirahmadin",
+    taskUrl: "https://x.com/tonboard_app",
+    type: "SPECIAL",
+    rewardPoints: 100,
   },
   {
+    id: 0,
+    title: "Join TonBoard channel",
+    taskUrl: "https://x.com/tonboard_app",
+    type: "SPECIAL",
+    rewardPoints: 100,
+  },
+  {
+    id: 0,
+    title: "Like TonBoard tweet",
+    taskUrl: "https://x.com/tonboard_app",
+    type: "SPECIAL",
+    rewardPoints: 100,
+  },
+];
+export const PROJECTS_DATA = [
+  {
+    id: 0,
+    projectName: "GobblUP",
+    description: "Gaming ecosystem on Gobbl chain",
+    descriptionLong:
+      "GobblUP is the gaming platform of Gobbl chain to give play to earn experience on TON. Complete tasks and share rewards from 200 $TON Tokens.",
+    category: "Gaming",
+    logo: "images/airdrops/gobbl_up.svg",
+    refLink: "https://t.me/GobblUpBot/game?startapp=1118251880",
+  },
+
+  {
     id: 1,
-    title: "Like this Tweet",
-    url: "https://x.com/tahirahmadin",
+    projectName: "SEED DAO",
+    description: "Plant and Earn SEED Token on Telegram",
+    descriptionLong:
+      "$SEED is the first user plant to earn platform to bring awareness around the environment issues. Complete tasks and share rewards from 200 $TON Tokens.",
+    category: "Marketplace",
+    logo: "images/airdrops/seed.jpg",
+    refLink: "https://t.me/seed_coin_bot/app?startapp=1118251880",
   },
   {
     id: 2,
-    title: "Retweet this Tweet",
-    url: "https://x.com/tahirahmadin",
-  },
-];
-let project1 = [
-  {
-    id: 0,
-    title: "Join GobblUp Game",
-    url: "https://x.com/tahirahmadin",
+    projectName: "Major of Telegram",
+    description: "Become a Major of Telegram",
+    descriptionLong:
+      "Major is labeling the users based on activities. Complete tasks and share rewards.",
+    category: "Ecosystem",
+    logo: "images/airdrops/major.jpeg",
+    refLink: "https://t.me/major/start?startapp=1118251880",
   },
   {
-    id: 1,
-    title: "Follow GobblChain on X",
-    url: "https://x.com/tahirahmadin",
+    id: 3,
+    projectName: "Lost Dogs: The Way",
+    description: "Find an average card and win rewards",
+    descriptionLong:
+      "Major is labeling the users based on activities. Complete tasks and share rewards.",
+    category: "Ecosystem",
+    logo: "images/airdrops/lost_dogs.webp",
+    refLink: "https://t.me/lost_dogs_bot/lodoapp?startapp=ref-u_1118251880",
   },
 ];
-let project2 = [
-  {
-    id: 0,
-    title: "Join SEED App",
-    url: "https://x.com/tahirahmadin",
-  },
-];
-let project3 = [
-  {
-    id: 0,
-    title: "Join Here Wallet App",
-    url: "https://x.com/tahirahmadin",
-  },
-];
-export const TASKS_DATA_BY_PROJECT = [project0, project1, project2, project3];
 
 // League Tasks Data
 export const LEAGUE_TASKS_DATA = [
@@ -361,53 +382,6 @@ export const QUIZ_DATA = [
     option1: "GPU/DePin",
     option2: "Oracle",
     correct: 2,
-  },
-];
-
-export const PROJECTS_DATA = [
-  {
-    id: 0,
-    projectName: "TonBoard",
-    description: "First users onboarding platform on Telegram",
-    descriptionLong:
-      "TonBoard ($TBD) is the first user onboarding platform on TON. Complete tasks and share rewards from 200 $TON Tokens.",
-    category: "Ecosystem",
-    prizeAmount: 100000,
-    prizeType: "TBD",
-    logo: "https://static.vecteezy.com/system/resources/previews/009/428/317/non_2x/3d-social-media-icons-telegram-free-png.png",
-  },
-  {
-    id: 1,
-    projectName: "GobblUP",
-    description: "Gaming ecosystem on Gobbl chain",
-    descriptionLong:
-      "GobblUP is the gaming platform of Gobbl chain to give play to earn experience on TON. Complete tasks and share rewards from 200 $TON Tokens.",
-    category: "Gaming",
-    prizeAmount: 10000000,
-    prizeType: "GOBBL",
-    logo: "https://www.gobbl.io/assets/nav_icons/gobbl_up.svg",
-  },
-  {
-    id: 2,
-    projectName: "SEED DAO",
-    description: "Plant and Earn SEED Token on Telegram",
-    descriptionLong:
-      "$SEED is the first user plant to earn platform to bring awareness around the environment issues. Complete tasks and share rewards from 200 $TON Tokens.",
-    category: "Marketplace",
-    prizeAmount: 10000,
-    prizeType: "SEED",
-    logo: "https://pbs.twimg.com/profile_images/1783713758055194624/m6vmuyWB_400x400.jpg",
-  },
-  {
-    id: 3,
-    projectName: "HERE Wallet",
-    description: "Plant and Earn SEED Token on Telegram",
-    descriptionLong:
-      "$HERE is the first near wallet on telegram. Complete tasks and share rewards from 200 $TON Tokens.",
-    category: "Ecosystem",
-    prizeAmount: 10000,
-    prizeType: "HOT",
-    logo: "https://pbs.twimg.com/profile_images/1754817120242630656/HqQcSyK8_400x400.jpg",
   },
 ];
 

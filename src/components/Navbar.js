@@ -63,23 +63,16 @@ const Navbar = () => {
     },
 
     {
-      url: "/leader",
-      image: (
-        <img
-          src={
-            "https://cdn3d.iconscout.com/3d/premium/thumb/star-11158872-8943500.png"
-          }
-          height={24}
-          width={24}
-        />
-      ),
-
-      name: "Board",
+      url: "/tasks",
+      image: <img src={"images/navbar/tasks.webp"} height={24} width={24} />,
+      name: "Tasks",
     },
 
     {
       url: "/dashboard",
-      image: <img src={"images/dashboard.webp"} height={24} width={24} />,
+      image: (
+        <img src={"images/navbar/dashboard.webp"} height={24} width={24} />
+      ),
 
       name: "Dashboard",
     },

@@ -27,7 +27,12 @@ const ScoreComp = () => {
         justifyContent={"center"}
         alignItems={"center"}
       >
-        <img src={"images/invite.webp"} alt="invite" width={32} height={32} />
+        <img
+          src={"images/navbar/invite.webp"}
+          alt="invite"
+          width={32}
+          height={32}
+        />
         <Typography
           style={{
             width: "100%",

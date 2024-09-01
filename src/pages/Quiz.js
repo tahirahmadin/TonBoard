@@ -63,7 +63,7 @@ const QuizPage = () => {
 
   const handleOptionSelect = React.useCallback(
     async (option) => {
-      viberate("light");
+      viberate("medium");
       if (selectedOption !== null || isTimerRunning) {
         return;
       }
@@ -82,7 +82,7 @@ const QuizPage = () => {
         if (response.isCorrect) {
           viberate("heavy");
         } else {
-          viberate("light");
+          viberate("medium");
         }
         setReward(response.result?.reward);
       }
@@ -317,59 +317,63 @@ const QuizPage = () => {
               </Box>
               {/* Timer, Claim and Boost Components */}
               <Box height={"25vh"} width="80%">
-                {selectedOption && (
-                  <Button
-                    onClick={handleNext}
-                    style={{
-                      fontWeight: 700,
-                      fontSize: "14px",
-                      display: "flex",
-                      alignItems: "center",
-                      textAlign: "center",
-                      justifyContent: "center",
-                      width: 160,
-                      margin: "0 auto",
-                      height: "38px",
-                      borderRadius: "12px",
-                      color: "#93ddff",
-                    }}
-                  >
-                    Next Question
-                  </Button>
-                )}
-
-                {!isTimerRunning && (
-                  <Box
-                    mt={2}
-                    style={{
-                      width: "100%",
-                      minHeight: "50.86px",
-                      borderRadius: "12px",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      padding: "8px 15px",
-                    }}
-                  >
-                    <Typography
+                <Box height={"5vh"}>
+                  {selectedOption && (
+                    <Button
+                      onClick={handleNext}
                       style={{
-                        width: "100%",
-                        fontFamily: "Rubik",
-                        fontWeight: 400,
-                        fontSize: 14,
-                        lineHeight: "150%",
+                        fontWeight: 700,
+                        fontSize: "14px",
+                        display: "flex",
+                        alignItems: "center",
                         textAlign: "center",
-                        color: "#ffffff",
+                        justifyContent: "center",
+                        width: 160,
+                        margin: "0 auto",
+                        height: "38px",
+                        borderRadius: "12px",
+                        color: "#93ddff",
                       }}
                     >
-                      Quiz Progress ({questionData?.summary?.attempted}/5)
-                    </Typography>
-                    <ProgressBar
-                      value={(questionData?.summary?.attempted * 100) / 5}
-                    />
-                  </Box>
-                )}
+                      Next Question
+                    </Button>
+                  )}
+                </Box>
+
+                <Box height={"15vh"}>
+                  {!isTimerRunning && (
+                    <Box
+                      mt={2}
+                      style={{
+                        width: "100%",
+                        minHeight: "50.86px",
+                        borderRadius: "12px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        padding: "8px 15px",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          width: "100%",
+                          fontFamily: "Rubik",
+                          fontWeight: 400,
+                          fontSize: 14,
+                          lineHeight: "150%",
+                          textAlign: "center",
+                          color: "#ffffff",
+                        }}
+                      >
+                        Quiz Progress ({questionData?.summary?.attempted}/5)
+                      </Typography>
+                      <ProgressBar
+                        value={(questionData?.summary?.attempted * 100) / 5}
+                      />
+                    </Box>
+                  )}
+                </Box>
               </Box>
             </Box>
           )}

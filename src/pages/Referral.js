@@ -71,7 +71,7 @@ const Referral = () => {
         }}
       >
         <img
-          src={"images/invite.webp"}
+          src={"images/navbar/invite.webp"}
           alt="invite"
           width={108}
           height={108}

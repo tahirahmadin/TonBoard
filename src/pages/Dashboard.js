@@ -104,7 +104,7 @@ const Dashboard = () => {
         }}
       >
         <img
-          src={"images/dashboard.webp"}
+          src={"images/navbar/dashboard.webp"}
           alt="dashboard"
           width={108}
           height={108}
@@ -265,8 +265,7 @@ const Dashboard = () => {
           style={{
             width: "100%",
             minHeight: 80,
-            background:
-              "linear-gradient(241.27deg, rgba(253, 255, 245, 0.12) -5.59%, rgba(253, 255, 245, 0) 100%)",
+
             borderRadius: "12px",
             display: "flex",
             flexDirection: "column",

@@ -6,6 +6,7 @@ import SingleProjectCard from "../components/SingleProjectCard";
 
 import { getProjectsDataToRedux } from "../reducers/UiReducers";
 import { useDispatch, useSelector } from "react-redux";
+import { PROJECTS_DATA } from "../utils/constants";
 
 const Work = () => {
   const dispatch = useDispatch();
@@ -48,16 +49,10 @@ const Work = () => {
         <Box
           style={{ height: "80vh", overflowY: "auto", paddingBottom: "100px" }}
         >
-          {projects &&
-            projects.map((ele) => (
+          {PROJECTS_DATA &&
+            PROJECTS_DATA.map((ele, index) => (
               <Box onClick={() => viberate("light")}>
-                <SingleProjectCard
-                  projectId={ele.id}
-                  title={ele.projectName}
-                  description={ele.description}
-                  category={ele.category}
-                  img={ele.logo}
-                />
+                <SingleProjectCard key={index} projectData={ele} />
               </Box>
             ))}
         </Box>
