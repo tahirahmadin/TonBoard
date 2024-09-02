@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useMemo } from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import OptionCard from "../components/OptionCard";
 import makeStyles from "@mui/styles/makeStyles";
@@ -316,6 +316,11 @@ const QuizPage = () => {
                 </Box>
               </Box>
               {/* Timer, Claim and Boost Components */}
+              {(loadingNext || loadingResult) && (
+                <div>
+                  <CircularProgress variant="indeterminate" />
+                </div>
+              )}
               <Box height={"25vh"} width="80%">
                 <Box height={"5vh"}>
                   {selectedOption && (
