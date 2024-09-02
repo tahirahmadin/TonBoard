@@ -1,5 +1,5 @@
 import axios from "axios";
-import constants, { testmode } from "../utils/constants";
+import constants from "../utils/constants";
 import CryptoJS from "crypto-js";
 
 let apiUrl = constants.api_url;
@@ -324,7 +324,7 @@ export const markQuizAnswer = async (userData) => {
   let url = `${apiUrl}/quiz/markAnswer`;
 
   //Encrypted data
-  let encryptedData = testmode ? { data: userData } : getCipherText(userData);
+  let encryptedData = getCipherText(userData);
 
   let response = await axios
     .post(url, encryptedData)
