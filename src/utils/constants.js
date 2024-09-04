@@ -385,4 +385,14 @@ export const QUIZ_DATA = [
   },
 ];
 
+export const CATEGORY_DATA = {
+  Blockchain:
+    "https://cdn3d.iconscout.com/3d/premium/thumb/bitcoin-3d-illustration-download-in-png-blend-fbx-gltf-file-formats--sign-symbol-logo-crypto-miscellaneous-pack-user-interface-illustrations-3364002.png",
+  NFT: "https://static.vecteezy.com/system/resources/previews/010/676/849/original/3d-nft-network-illustration-free-png.png",
+  DeFi: "https://cdn3d.iconscout.com/3d/premium/thumb/nft-stock-with-graph-4608814-3811517.png?f=webp",
+  Ethereum:
+    "https://cdn3d.iconscout.com/3d/premium/thumb/ethereum-coin-5650416-4705656.png",
+  Solana:
+    "https://cdn3d.iconscout.com/3d/premium/thumb/solana-3d-icon-download-in-png-blend-fbx-gltf-file-formats--bitcoin-logo-crypto-coin-pack-logos-icons-8263859.png?f=webp",
+};
 export default constants;

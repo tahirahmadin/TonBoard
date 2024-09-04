@@ -14,6 +14,7 @@ import {
 } from "@tonconnect/ui-react";
 import ScoreComp from "../components/Score";
 import TimeAgo from "react-timeago";
+import { CATEGORY_DATA } from "../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -328,9 +329,7 @@ const Dashboard = () => {
                     key={el?.category}
                     correctPercent={70}
                     category={el?.category}
-                    img={
-                      "https://cdn3d.iconscout.com/3d/premium/thumb/nft-stock-with-graph-4608814-3811517.png?f=webp"
-                    }
+                    img={CATEGORY_DATA[el.category]}
                     attemptedQuestions={el?.completed}
                     maxQuestions={el?.total}
                   />
