@@ -64,7 +64,12 @@ const QuizPage = () => {
   const handleOptionSelect = React.useCallback(
     async (option) => {
       viberate("medium");
-      if (selectedOption !== null || isTimerRunning) {
+      if (
+        selectedOption !== null ||
+        isTimerRunning ||
+        loadingResult ||
+        loadingNext
+      ) {
         return;
       }
 
@@ -97,6 +102,8 @@ const QuizPage = () => {
       currentQueNo,
       dispatch,
       isTimerRunning,
+      loadingNext,
+      loadingResult,
     ]
   );
 
@@ -318,7 +325,7 @@ const QuizPage = () => {
               {/* Timer, Claim and Boost Components */}
               {(loadingNext || loadingResult) && (
                 <div>
-                  <CircularProgress variant="indeterminate" />
+                  <CircularProgress variant="indeterminate" size={18} />
                 </div>
               )}
               <Box height={"25vh"} width="80%">
