@@ -18,9 +18,9 @@ function TimerComp({ endTime }) {
     let secs = Math.floor((difference / 1000) % 60);
     if (difference > 0) {
       timeLeft = {
-        HOURS: hrs < 10 ? Number(`0${hrs}`) : hrs,
-        MINS: mins < 10 ? Number(`0${mins}`) : mins,
-        SECONDS: secs < 10 ? Number(`0${secs}`) : secs,
+        HOURS: hrs < 10 ? `0${hrs}` : hrs,
+        MINS: mins < 10 ? `0${mins}` : mins,
+        SECONDS: secs < 10 ? `0${secs}` : secs,
       };
       timeString = `${timeLeft.HOURS}:${timeLeft.MINS}:${timeLeft.SECONDS}`;
     }

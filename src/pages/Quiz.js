@@ -14,6 +14,8 @@ import { useServerAuth } from "../hooks/useServerAuth";
 import { getQuizData, markQuizAnswer } from "../actions/serverActions";
 import { updateOnQuizResult, updateQuestion } from "../reducers/UiReducers";
 import useTelegramSDK from "../hooks/useTelegramSDK";
+import { CATEGORY_DATA } from "../utils/constants";
+import SummaryCard from "../components/SummaryCard";
 
 const useStyles = makeStyles((theme) => ({
   description: {
@@ -34,10 +36,10 @@ const QuizPage = () => {
   const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
   const currentQueNo = useSelector((state) => state.ui.currentQueNo);
 
-  const timerValue = useSelector((state) => state.ui.timerValue);
   const screenLoaded = useSelector((state) => state.ui.screenLoaded);
 
   const questionData = useSelector((state) => state.ui.questionData);
+
   const isQuizLoading = useSelector((state) => state.ui.isQuizLoading);
 
   const { accountSC } = useServerAuth();
@@ -144,93 +146,117 @@ const QuizPage = () => {
       {screenLoaded && (
         <Box>
           <Box
-            style={{ height: "14vh" }}
+            style={{ height: "18vh" }}
             display={"flex"}
+            flexDirection={"column"}
             justifyContent={"center"}
             alignItems={"center"}
           >
             <ScoreComp />
-          </Box>
-          {question && (
-            <Box
+            <Typography
               style={{
-                height: "85vh",
                 width: "100%",
-                position: "relative",
-                zIndex: 0,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-around",
-                alignItems: "center",
-                backgroundSize: "cover",
-                backgroundPosition: "center center",
+                fontFamily: "Rubik",
+                fontWeight: 400,
+                fontSize: 13,
+                lineHeight: "110%",
+                textAlign: "center",
+                color: "#ffffff",
               }}
             >
-              {isExploding && (
-                <ConfettiExplosion
-                  force={0.3}
-                  duration={2000}
-                  particleCount={80}
-                />
-              )}
-              {/* Quiz Components */}
-              <Box
-                style={{
-                  height: "60vh",
-                  width: "90%",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "flex-start",
-                }}
-              >
+              Total Diamonds
+            </Typography>
+          </Box>
+          <Box
+            style={{
+              height: "80vh",
+              width: "100%",
+              position: "relative",
+              zIndex: 0,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
+              alignItems: "center",
+              backgroundSize: "cover",
+              backgroundPosition: "center center",
+            }}
+          >
+            {isExploding && (
+              <ConfettiExplosion
+                force={0.3}
+                duration={2000}
+                particleCount={80}
+              />
+            )}
+            {/* Quiz Components */}
+            <Box
+              style={{
+                height: "60vh",
+                width: "90%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "flex-start",
+              }}
+            >
+              {/* Question component */}
+              {question && !isTimerRunning && (
                 <Box
                   style={{
                     display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "flex-center",
+                    flexDirection: "column",
                     alignItems: "center",
-                    backgroundColor: "#212121",
-                    borderRadius: 7,
-                    paddingRight: 12,
-                    paddingLeft: 12,
-                    paddingTop: 5,
-                    paddingBottom: 5,
+                    justifyContent: "flex-start",
                   }}
                 >
-                  <img
-                    src={"category.webp"}
-                    alt="TaskDao"
-                    width={16}
-                    height={16}
-                  />
                   <Box
                     style={{
-                      width: "100%",
-                      fontFamily: "Rubik",
-                      fontWeight: 400,
-                      fontSize: 12,
-                      lineHeight: "100%",
-                      textAlign: "center",
-                      color: "#e5e5e5",
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "flex-center",
+                      alignItems: "center",
+                      backgroundColor: "#212121",
+                      borderRadius: 7,
+                      paddingRight: 12,
+                      paddingLeft: 12,
+                      paddingTop: 5,
+                      paddingBottom: 5,
                     }}
                   >
-                    {question?.category}
+                    <img
+                      src={CATEGORY_DATA[question?.category]}
+                      alt="TaskDao"
+                      width={16}
+                      height={16}
+                    />
+                    <Box
+                      style={{
+                        width: "100%",
+                        fontFamily: "Rubik",
+                        fontWeight: 400,
+                        fontSize: 12,
+                        lineHeight: "100%",
+                        textAlign: "center",
+                        color: "#e5e5e5",
+                      }}
+                    >
+                      {question?.category}
+                    </Box>
                   </Box>
-                </Box>
-                <Typography
-                  style={{
-                    fontFamily: "Rubik",
-                    fontWeight: 600,
-                    fontSize: 22,
-                    lineHeight: "120%",
-                    textAlign: "center",
-                    color: "#ffffff",
-                  }}
-                >
-                  {question?.title}
-                </Typography>
-                {/* <a
+                  <Typography
+                    mt={1}
+                    style={{
+                      fontFamily: "Rubik",
+                      fontWeight: 600,
+                      fontSize: 22,
+                      lineHeight: "120%",
+                      textAlign: "center",
+                      color: "#ffffff",
+                    }}
+                  >
+                    {question?.title}
+                  </Typography>
+                  {/* <a
                   href="https://www.youtube.com/@tahirahmad.crypto"
                   target="_blank"
                   rel="noreferrer"
@@ -258,137 +284,131 @@ const QuizPage = () => {
                     Hint : Learn here
                   </Typography>
                 </a> */}
-                <Box
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-                    marginTop: 14,
-                  }}
-                >
-                  <OptionCard
-                    key={1}
-                    disable={isQuizLoading || selectedOption > 0}
-                    isSelected={selectedOption === 1}
-                    rewardPoints={reward}
-                    inputOption={1}
-                    title={question.option1}
-                    img="a.webp"
-                    description="32,430"
-                    handleSelect={handleOptionSelect}
-                    isCorrect={isCorrect}
-                  />
-                  <OptionCard
-                    key={2}
-                    disable={isQuizLoading || selectedOption > 0}
-                    isSelected={selectedOption === 2}
-                    isCorrect={isCorrect}
-                    rewardPoints={reward}
-                    inputOption={2}
-                    handleSelect={handleOptionSelect}
-                    title={question.option2}
-                    img="b.webp"
-                    description="1,203"
-                  />
+                  <Box
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-around",
+                      marginTop: 14,
+                    }}
+                  >
+                    <OptionCard
+                      key={1}
+                      disable={isQuizLoading || selectedOption > 0}
+                      isSelected={selectedOption === 1}
+                      rewardPoints={reward}
+                      inputOption={1}
+                      title={question.option1}
+                      img="a.webp"
+                      description="32,430"
+                      handleSelect={handleOptionSelect}
+                      isCorrect={isCorrect}
+                    />
+                    <OptionCard
+                      key={2}
+                      disable={isQuizLoading || selectedOption > 0}
+                      isSelected={selectedOption === 2}
+                      isCorrect={isCorrect}
+                      rewardPoints={reward}
+                      inputOption={2}
+                      handleSelect={handleOptionSelect}
+                      title={question.option2}
+                      img="b.webp"
+                      description="1,203"
+                    />
+                  </Box>
+                  <Typography
+                    pt={1}
+                    style={{
+                      width: "100%",
+                      fontWeight: 600,
+                      fontSize: 16,
+                      color: isCorrect ? "#64FF99" : "#ef5350",
+                      textAlign: "center",
+                    }}
+                  >
+                    {selectedOption && isCorrect && "Great! Right answer."}
+                    {selectedOption && !isCorrect && "Sorry! Try next time!"}
+                  </Typography>
                 </Box>
-                <Typography
-                  pt={1}
-                  style={{
-                    width: "100%",
-                    fontWeight: 600,
-                    fontSize: 16,
-                    color: isCorrect ? "#64FF99" : "#ef5350",
-                    textAlign: "center",
-                  }}
-                >
-                  {selectedOption && isCorrect && "Great! Right answer."}
-                  {selectedOption && !isCorrect && "Sorry! Try next time!"}
-                </Typography>
-                <Box>
-                  {isTimerRunning && (
-                    <Box height={"12vh"}>
-                      <Typography
-                        style={{
-                          textAlign: "center",
-                          color: "#e5e5e5",
-                        }}
-                      >
-                        Next slot in
-                      </Typography>
-                      <TimerComp endTime={timerValue} />
-                    </Box>
-                  )}
-                </Box>
-              </Box>
-              {/* Timer, Claim and Boost Components */}
-              {(loadingNext || loadingResult) && (
-                <div>
-                  <CircularProgress variant="indeterminate" size={18} />
-                </div>
               )}
-              <Box height={"25vh"} width="80%">
-                <Box height={"5vh"}>
-                  {selectedOption && (
-                    <Button
-                      onClick={handleNext}
-                      style={{
-                        fontWeight: 700,
-                        fontSize: "14px",
-                        display: "flex",
-                        alignItems: "center",
-                        textAlign: "center",
-                        justifyContent: "center",
-                        width: 160,
-                        margin: "0 auto",
-                        height: "38px",
-                        borderRadius: "12px",
-                        color: "#93ddff",
-                      }}
-                    >
-                      Next Question
-                    </Button>
-                  )}
-                </Box>
 
-                <Box height={"15vh"}>
-                  {!isTimerRunning && (
-                    <Box
-                      mt={2}
+              {isTimerRunning && (
+                <Box>
+                  <SummaryCard />
+                </Box>
+              )}
+            </Box>
+
+            {/* Timer, Claim and Boost Components */}
+
+            <Box height={"25vh"} width="80%">
+              <Box height={"5vh"} display={"flex"} justifyContent={"center"}>
+                {selectedOption && (
+                  <Button
+                    onClick={handleNext}
+                    style={{
+                      fontWeight: 700,
+                      fontSize: "14px",
+                      display: "flex",
+                      alignItems: "center",
+                      textAlign: "center",
+                      justifyContent: "center",
+                      width: 160,
+                      margin: "0 auto",
+                      height: "38px",
+                      borderRadius: "12px",
+                      color: "#93ddff",
+                    }}
+                  >
+                    Next Question
+                  </Button>
+                )}
+                {(loadingNext || loadingResult) && (
+                  <div>
+                    <CircularProgress variant="indeterminate" size={18} />
+                  </div>
+                )}
+              </Box>
+
+              <Box>
+                {!isTimerRunning && (
+                  <Box
+                    mt={2}
+                    style={{
+                      width: "100%",
+                      minHeight: "50.86px",
+                      borderRadius: "12px",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "8px 15px",
+                    }}
+                  >
+                    <Typography
                       style={{
                         width: "100%",
-                        minHeight: "50.86px",
-                        borderRadius: "12px",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        padding: "8px 15px",
+                        fontFamily: "Rubik",
+                        fontWeight: 400,
+                        fontSize: 14,
+                        lineHeight: "150%",
+                        textAlign: "center",
+                        color: "#ffffff",
                       }}
                     >
-                      <Typography
-                        style={{
-                          width: "100%",
-                          fontFamily: "Rubik",
-                          fontWeight: 400,
-                          fontSize: 14,
-                          lineHeight: "150%",
-                          textAlign: "center",
-                          color: "#ffffff",
-                        }}
-                      >
-                        Quiz Progress ({questionData?.summary?.attempted}/5)
-                      </Typography>
-                      <ProgressBar
-                        value={(questionData?.summary?.attempted * 100) / 5}
-                      />
-                    </Box>
-                  )}
-                </Box>
+                      Quiz Progress ({questionData?.summary?.attempted}/5)
+                    </Typography>
+                    <ProgressBar
+                      value={(questionData?.summary?.attempted * 100) / 5}
+                    />
+                  </Box>
+                )}
               </Box>
             </Box>
-          )}
+          </Box>
         </Box>
       )}
 
