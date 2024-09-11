@@ -37,7 +37,7 @@ const SummaryCard = () => {
   const timerValue = useSelector((state) => state.ui.timerValue);
 
   let progressPercent = useMemo(() => {
-    if (summaryData) {
+    if (summaryData?.attempted) {
       return parseInt((100 * summaryData.correct) / summaryData.attempted);
     } else {
       return 60;
@@ -158,7 +158,7 @@ const SummaryCard = () => {
                   color: "#e5e5e5",
                 }}
               >
-                12 correct
+                {summaryData?.correct} correct
               </Box>
             </Box>
             <Box
@@ -192,7 +192,7 @@ const SummaryCard = () => {
                   color: "#e5e5e5",
                 }}
               >
-                2 incorrect
+                {summaryData?.wrong} incorrect
               </Box>
             </Box>
           </Box>
@@ -214,14 +214,14 @@ const SummaryCard = () => {
             airdrop.
           </Typography>
         </Box>
-        <Box>
+        <Box pb={1}>
           <Typography
             style={{
               textAlign: "center",
               color: "#e5e5e5",
             }}
           >
-            Quiz will start in:
+            Next questions in
           </Typography>
           <TimerComp endTime={timerValue} />
         </Box>

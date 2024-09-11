@@ -319,6 +319,7 @@ const QuizPage = () => {
                       description="1,203"
                     />
                   </Box>
+
                   <Typography
                     pt={1}
                     style={{
@@ -332,6 +333,34 @@ const QuizPage = () => {
                     {selectedOption && isCorrect && "Great! Right answer."}
                     {selectedOption && !isCorrect && "Sorry! Try next time!"}
                   </Typography>
+                  {!selectedOption && (
+                    <Box
+                      mt={1}
+                      display={"flex"}
+                      flexDirection="row"
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                      style={{
+                        width: "100%",
+                        fontFamily: "Rubik",
+                        fontWeight: 400,
+                        fontSize: 13,
+                        lineHeight: "110%",
+                        textAlign: "center",
+                        color: "#ffffff",
+                      }}
+                    >
+                      {" "}
+                      <div>Each correct answer = </div>
+                      <img
+                        src={"images/navbar/invite.webp"}
+                        alt="invite"
+                        width={18}
+                        height={19}
+                      />
+                      <div>{10 * currentSlotNo} </div>
+                    </Box>
+                  )}
                 </Box>
               )}
 

@@ -172,15 +172,43 @@ const SingleProjectCard = ({ projectData }) => {
                     paddingLeft: 10,
                     paddingRight: 10,
                     borderRadius: "8px",
-                    background: "#FFE500",
+                    background: "transparent",
                     fontFamily: "Rubik",
                     fontWeight: 400,
                     fontSize: 12,
                     lineHeight: "100%",
-                    color: "#000000",
+                    color: "#ffffff",
+                    border: "1px solid #414141",
                   }}
                 >
-                  Join airdrop
+                  {!isCompleted ? "Join for" : "Claimed "}
+                  <Box
+                    pl={0.5}
+                    display={"flex"}
+                    flexDirection="row"
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                  >
+                    <img
+                      src={"images/navbar/invite.webp"}
+                      alt="invite"
+                      width={18}
+                      height={18}
+                    />
+                    <Typography
+                      style={{
+                        width: "100%",
+                        fontFamily: "Rubik",
+                        fontWeight: 700,
+                        fontSize: 14,
+                        lineHeight: "110%",
+                        textAlign: "center",
+                        color: "#ffffff",
+                      }}
+                    >
+                      50
+                    </Typography>
+                  </Box>
                 </Button>
               </a>
 

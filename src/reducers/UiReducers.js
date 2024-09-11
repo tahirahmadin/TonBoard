@@ -275,6 +275,7 @@ const UiReducer = createSlice({
 
       if (response) {
         state.workCompleted = response.workCompleted;
+        state.score = response.score;
       }
     });
     builder.addCase(updateTaskCompleteStatus.fulfilled, (state, action) => {
@@ -282,6 +283,7 @@ const UiReducer = createSlice({
 
       if (response) {
         state.taskCompleted = response.taskCompleted;
+        state.score = response.score;
       }
     });
   },
