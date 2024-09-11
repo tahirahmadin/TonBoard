@@ -49,7 +49,7 @@ const ActionButton = ({
     <Button
       style={{
         minWidth: 70,
-        maxWidth: 70,
+
         height: 28,
         display: "flex",
         alignItems: "center",
@@ -153,12 +153,37 @@ const SingleTask = ({
             color: "#ffffff",
           }}
         >
-          {name}
+          {name}{" "}
         </Typography>
       </Box>
 
       {!isCompleted && inProgress !== taskId && (
-        <ActionButton onClick={() => onClickAction(taskId)}>Open</ActionButton>
+        <ActionButton onClick={() => onClickAction(taskId)}>
+          Claim
+          <Box
+            display={"flex"}
+            flexDirection="row"
+            justifyContent={"flex-start"}
+            alignItems={"center"}
+            style={{
+              fontFamily: "Rubik",
+              fontWeight: 400,
+              fontSize: 12,
+              lineHeight: "110%",
+              textAlign: "left",
+              color: "#e5e5e5",
+            }}
+          >
+            <img
+              src={"images/navbar/invite.webp"}
+              alt="invite"
+              width={16}
+              height={16}
+              style={{ marginLeft: 2 }}
+            />
+            <div style={{ color: "#e5e5e5" }}>25</div>
+          </Box>
+        </ActionButton>
       )}
 
       {!isCompleted && inProgress === taskId && (

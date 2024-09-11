@@ -172,16 +172,16 @@ const SingleProjectCard = ({ projectData }) => {
                     paddingLeft: 10,
                     paddingRight: 10,
                     borderRadius: "8px",
-                    background: "transparent",
+                    background: isCompleted ? "transparent" : "#FAFF00",
                     fontFamily: "Rubik",
                     fontWeight: 400,
                     fontSize: 12,
                     lineHeight: "100%",
-                    color: "#ffffff",
+                    color: isCompleted ? "#ffffff" : "#000000",
                     border: "1px solid #414141",
                   }}
                 >
-                  {!isCompleted ? "Join for" : "Claimed "}
+                  {!isCompleted ? "Join for" : "Claimed"}
                   <Box
                     pl={0.5}
                     display={"flex"}
@@ -192,18 +192,18 @@ const SingleProjectCard = ({ projectData }) => {
                     <img
                       src={"images/navbar/invite.webp"}
                       alt="invite"
-                      width={18}
-                      height={18}
+                      width={16}
+                      height={16}
                     />
                     <Typography
                       style={{
                         width: "100%",
                         fontFamily: "Rubik",
                         fontWeight: 700,
-                        fontSize: 14,
-                        lineHeight: "110%",
+                        fontSize: 12,
+                        lineHeight: "100%",
                         textAlign: "center",
-                        color: "#ffffff",
+                        color: isCompleted ? "#ffffff" : "#000000",
                       }}
                     >
                       50
