@@ -261,6 +261,8 @@ const UiReducer = createSlice({
       }
 
       state.questionData = response.result;
+      state.timerValue = response.result.timerValue;
+      state.summaryData = response.result.summary;
     });
     builder.addCase(getProjectsDataToRedux.fulfilled, (state, action) => {
       const response = action.payload;
