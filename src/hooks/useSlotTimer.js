@@ -43,7 +43,7 @@ const useSlotTimer = (initHook) => {
 
     const intervalId = setInterval(() => {
       const currentTime = Date.now();
-      console.log("question test checking timer");
+
       if (currentTime >= timerValue) {
         handleTimerExpire();
         clearInterval(intervalId);
