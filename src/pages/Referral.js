@@ -13,7 +13,7 @@ import { getReferralsData } from "../actions/serverActions";
 
 const Referral = () => {
   const dispatch = useDispatch();
-  const { telegramUserId, viberate } = useTelegramSDK(true);
+  const { telegramUserId, viberate, telegramUsername } = useTelegramSDK(true);
 
   const [referralData, setReferralData] = useState(null);
 
@@ -27,20 +27,32 @@ const Referral = () => {
     asyncFn();
   }, [telegramUserId]);
 
+  let referralLinkShare = `${constants.botUrl}${telegramUserId}`;
+
+  let referralTextShare = `${telegramUsername} has invited you to Ton's First onboarding platform 🎁 %0A %0A
+
+Join here: ${constants.botUrl}${telegramUserId} %0A%0A
+
+Participate and Earn with TonBoard.`;
+
   const handleCopyToClipboard = () => {
     if (telegramUserId) {
-      navigator.clipboard
-        .writeText(`${constants.botUrl}${telegramUserId}`)
-        .then(
-          function () {
-            viberate("light");
-            https: console.log("Async: Copying to clipboard was successful!");
-            dispatch(setSuccessPopup(true));
-          },
-          function (err) {
-            console.error("Async: Could not copy text: ", err);
-          }
-        );
+      let referralText = `**${telegramUsername}** has invited you to Ton's First onboarding platform 🎁 
+
+Participate here: ${constants.botUrl}${telegramUserId}
+      
+Participate and Earn with TonBoard.`;
+
+      navigator.clipboard.writeText(referralText).then(
+        function () {
+          viberate("light");
+          https: console.log("Async: Copying to clipboard was successful!");
+          dispatch(setSuccessPopup(true));
+        },
+        function (err) {
+          console.error("Async: Could not copy text: ", err);
+        }
+      );
     }
   };
 
@@ -155,7 +167,7 @@ const Referral = () => {
             }}
           >
             <Link
-              to={`https://t.me/share/url?url=${constants.botUrl}${telegramUserId}`}
+              to={`https://t.me/share/url?text=${referralTextShare}&url=${referralLinkShare}`}
             >
               <Button
                 style={{

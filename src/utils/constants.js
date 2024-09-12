@@ -5,7 +5,7 @@ export const testmode = false;
 let constants;
 constants = {
   themeColor: "#40A8F8",
-  botUrl: "https://t.me/TaskDaoBot/app",
+  botUrl: "https://t.me/tonboardapp_bot/app?startapp=",
   api_url: testmode
     ? "http://localhost:5001/api"
     : "https://taskdao-backend-rho.vercel.app/api",

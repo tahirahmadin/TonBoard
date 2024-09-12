@@ -6,6 +6,7 @@ import { testmode } from "../utils/constants";
 const useTelegramSDK = (hookInit = false) => {
   const [userId, setUserID] = useState(null);
   const [referParam, setReferParam] = useState(0);
+  const [tgUsername, setTgUsername] = useState("");
   const WebApp = window.Telegram.WebApp;
 
   useEffect(() => {
@@ -16,6 +17,12 @@ const useTelegramSDK = (hookInit = false) => {
       if (WebApp.initDataUnsafe?.start_param) {
         setReferParam(WebApp.initDataUnsafe?.start_param);
       }
+      if (WebApp.initDataUnsafe?.user) {
+        setTgUsername(WebApp.initDataUnsafe.user.username);
+        ethersServiceProvider.setTGUsername(
+          WebApp.initDataUnsafe.user.username
+        );
+      }
 
       // setTimeout(() => {
       //   setUserID(1118251880);
@@ -25,10 +32,8 @@ const useTelegramSDK = (hookInit = false) => {
 
   useEffect(() => {
     if (WebApp.initDataUnsafe?.user) {
+      setTgUsername(WebApp.initDataUnsafe.user.username);
       ethersServiceProvider.setTGUsername(WebApp.initDataUnsafe.user.username);
-      ethersServiceProvider.setTGPhotoUrl(
-        JSON.stringify(WebApp.initDataUnsafe.user.photo_url)
-      );
     }
   }, []);
 
@@ -46,7 +51,7 @@ const useTelegramSDK = (hookInit = false) => {
 
   return {
     telegramUserId: userId,
-    telegramUsername: _username,
+    telegramUsername: tgUsername,
     telegramPhotoUrl: _photoUrl,
     telegramReferId: referParam,
     WebAppSDK: WebApp,
