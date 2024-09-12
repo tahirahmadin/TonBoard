@@ -193,7 +193,7 @@ const UiReducer = createSlice({
         return;
       }
 
-      state.score = state.score + response.result.reward;
+      state.score = response.result?.user?.score;
       state.ansSelected = response?.result?.user?.ansSelected;
       state.currentQueNo = response?.result?.user?.currentQueNo;
       state.currentSlotNo = response.result.user.currentSlotNo;
