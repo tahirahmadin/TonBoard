@@ -204,13 +204,13 @@ export const PROJECTS_DATA = [
   },
   {
     id: 3,
-    projectName: "Lost Dogs: The Way",
-    description: "Find an average card and win rewards",
+    projectName: "CATS Community",
+    description: "Join the biggest CAT Community and get airdrop",
     descriptionLong:
-      "Major is labeling the users based on activities. Complete tasks and share rewards.",
+      "CATS is building biggest cat community based on activities. Complete tasks and share rewards.",
     category: "Ecosystem",
-    logo: "images/airdrops/lost_dogs.webp",
-    refLink: "https://t.me/lost_dogs_bot/lodoapp?startapp=ref-u_1118251880",
+    logo: "images/airdrops/cats_community.webp",
+    refLink: "https://t.me/catsgang_bot/join?startapp=moPAOH_HJ7vH7KAErKgG4",
   },
 ];
 
