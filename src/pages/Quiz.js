@@ -356,7 +356,7 @@ const QuizPage = () => {
                         width={18}
                         height={19}
                       />
-                      <div>{10 * currentSlotNo} </div>
+                      <div>{10 * currentSlotNo + 10} </div>
                     </Box>
                   )}
                 </Box>
