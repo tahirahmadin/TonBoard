@@ -8,7 +8,7 @@ constants = {
   botUrl: "https://t.me/tonboardapp_bot/app?startapp=",
   api_url: testmode
     ? "http://localhost:5001/api"
-    : "http://98.81.206.221:5001/api",
+    : "https://taskdao-backend.vercel.app/api",
 };
 
 export const AUTH_TYPE_ENUM = {

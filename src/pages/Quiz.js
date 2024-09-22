@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import OptionCard from "../components/OptionCard";
 import makeStyles from "@mui/styles/makeStyles";
 import ScoreComp from "../components/Score";
-import TimerComp from "../components/TimerComp";
 import useSlotTimer from "../hooks/useSlotTimer";
 import ConfettiExplosion from "react-confetti-explosion";
 import LoadingScreen from "../components/LoadingScreen";
@@ -32,7 +31,6 @@ const QuizPage = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const quizzes = useSelector((state) => state.ui.quizzes);
   const currentSlotNo = useSelector((state) => state.ui.currentSlotNo);
   const currentQueNo = useSelector((state) => state.ui.currentQueNo);
 
