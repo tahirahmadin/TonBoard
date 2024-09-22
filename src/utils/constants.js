@@ -209,7 +209,7 @@ export const PROJECTS_DATA = [
     descriptionLong:
       "CATS is building biggest cat community based on activities. Complete tasks and share rewards.",
     category: "Ecosystem",
-    logo: "images/airdrops/cats_community.webp",
+    logo: "images/airdrops/cats_community.jpeg",
     refLink: "https://t.me/catsgang_bot/join?startapp=moPAOH_HJ7vH7KAErKgG4",
   },
 ];
