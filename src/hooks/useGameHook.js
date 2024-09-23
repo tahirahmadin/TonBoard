@@ -6,18 +6,21 @@ import {
   getBackendDataToRedux,
   updateCurrentQuestion,
   getProjectsDataToRedux,
+  updateUsername,
 } from "../reducers/UiReducers";
 import useTelegramSDK from "./useTelegramSDK";
 import { useServerAuth } from "./useServerAuth";
+import { updateUsernameToBackendAPI } from "../actions/serverActions";
 
 const useGameHook = (hookInit = false) => {
   const dispatch = useDispatch();
 
   const { accountSC } = useServerAuth();
-  const { viberate } = useTelegramSDK();
+  const { viberate, telegramUsername } = useTelegramSDK();
 
   const score = useSelector((state) => state.ui.score);
   const referralPoints = useSelector((state) => state.ui.referralPoints);
+  const username = useSelector((state) => state.ui.username);
 
   //1.  To Manage initial loading of the application
   useEffect(() => {
@@ -32,6 +35,30 @@ const useGameHook = (hookInit = false) => {
 
     asyncFn();
   }, [accountSC, hookInit, dispatch]);
+
+  //2.  To Update username
+  useEffect(() => {
+    async function asyncFn() {
+      if (hookInit && accountSC) {
+        // STEP:1 Update username to backend
+        if (
+          (username && telegramUsername && username === "") ||
+          username !== telegramUsername
+        ) {
+          // Update Local Data to Backend server
+          let res = await updateUsernameToBackendAPI(
+            { username: telegramUsername },
+            accountSC
+          );
+        }
+
+        //2. Disable if any multiTap is running
+        await dispatch(updateUsername(telegramUsername));
+      }
+    }
+
+    asyncFn();
+  }, [accountSC, hookInit, telegramUsername, username]);
 
   // 2. Final Score = score + referral score
   const finalScore = useMemo(() => {

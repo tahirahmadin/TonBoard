@@ -45,7 +45,8 @@ export const getUserLeaderboardData = async (userId) => {
 export const loginTelegramUserFromBackendServer = async (
   method,
   handle,
-  referId
+  referId,
+  username
 ) => {
   let url = `${apiUrl}/user/signUpUser`;
   let data = {
@@ -53,6 +54,7 @@ export const loginTelegramUserFromBackendServer = async (
     via: method,
     type: "TAP",
     referId: referId,
+    username: username,
   };
 
   //Encrypted data
@@ -117,6 +119,30 @@ export const updateTaskStatusToBackend = async (dataObj) => {
   }
 };
 
+//5. USER:: Update username to backend
+export const updateUsernameToBackendAPI = async (dataObj, userId) => {
+  let url = `${apiUrl}/user/updateUsername`;
+
+  let updateObj = { ...dataObj, userId: userId };
+  //Encrypted data
+  let encryptedData = getCipherText(updateObj);
+
+  let response = await axios
+    .post(url, encryptedData)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+
+  if (response && !response.error) {
+    return true;
+  } else {
+    console.log("error", response);
+    return false;
+  }
+};
 //5. REFERRAL:: GET User referrals Data by address
 export const getReferralsData = async (telegramId) => {
   try {

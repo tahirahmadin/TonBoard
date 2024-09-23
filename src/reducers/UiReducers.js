@@ -27,6 +27,7 @@ const initialState = {
   displayData: { progressItems: [], rankings: [], referrals: [] },
   projects: [],
   createdDate: 0,
+  username: "User",
 };
 
 // Function:: get backend data and update redux
@@ -162,6 +163,9 @@ const UiReducer = createSlice({
 
     updateReferralPoints(state, action) {
       state.referralPoints = action.payload;
+    },
+    updateUsername(state, action) {
+      state.username = action.payload;
     },
 
     updateScreenLoaded(state, action) {
@@ -306,6 +310,7 @@ export const {
   updateRefetch,
   updateOnQuizResult,
   updateQuestion,
+  updateUsername,
 } = actions;
 
 export default UiReducer;

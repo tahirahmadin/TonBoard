@@ -35,13 +35,10 @@ const useTelegramSDK = (hookInit = false) => {
 
   useEffect(() => {
     if (WebApp.initDataUnsafe?.user) {
-      if (WebApp.initDataUnsafe?.user) {
-        setTgUsername(WebApp.initDataUnsafe.user.username);
-      }
+      setTgUsername(WebApp.initDataUnsafe.user.username);
     }
-  }, []);
+  }, [WebApp]);
 
-  const _username = ethersServiceProvider.tgUsername;
   const _photoUrl = ethersServiceProvider.photoUrl;
 
   const openNewUrl = async (url) => {

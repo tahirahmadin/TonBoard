@@ -8,7 +8,8 @@ import { AUTH_TYPE_ENUM } from "../utils/constants";
 
 export const useServerAuth = (hookInit = false) => {
   const [walletStatus, setWalletStatus] = useState(0);
-  const { telegramUserId, telegramReferId } = useTelegramSDK(true);
+  const { telegramUserId, telegramReferId, telegramUsername } =
+    useTelegramSDK(true);
 
   //1. SIGNUP:: Login/SignUp User
   useEffect(() => {
@@ -43,7 +44,8 @@ export const useServerAuth = (hookInit = false) => {
     const authRes = await loginTelegramUserFromBackendServer(
       AUTH_TYPE_ENUM.TELEGRAM,
       telegramUserId,
-      telegramReferId
+      telegramReferId,
+      telegramUsername
     );
 
     if (authRes && !authRes.error) {
