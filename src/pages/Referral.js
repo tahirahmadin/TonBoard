@@ -293,7 +293,7 @@ Participate and Earn with TonBoard.`;
                           color: "#ffffff",
                         }}
                       >
-                        {ele.username}
+                        {ele.username ? ele.username : "TonBoard User"}
                       </Typography>
                       <Typography
                         style={{

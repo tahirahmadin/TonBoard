@@ -121,7 +121,7 @@ export const updateTaskStatusToBackend = async (dataObj) => {
 
 //5. USER:: Update username to backend
 export const updateUsernameToBackendAPI = async (dataObj, userId) => {
-  let url = `${apiUrl}/user/updateUsername`;
+  let url = `${apiUrl}/user/updateUserData`;
 
   let updateObj = { ...dataObj, userId: userId };
   //Encrypted data
