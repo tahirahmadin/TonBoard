@@ -23,6 +23,9 @@ const useTelegramSDK = (hookInit = false) => {
           WebApp.initDataUnsafe.user.username
         );
       }
+      if (WebApp.initDataUnsafe?.user) {
+        setTgUsername(WebApp.initDataUnsafe.user.username);
+      }
 
       // setTimeout(() => {
       //   setUserID(1118251880);
@@ -32,8 +35,9 @@ const useTelegramSDK = (hookInit = false) => {
 
   useEffect(() => {
     if (WebApp.initDataUnsafe?.user) {
-      setTgUsername(WebApp.initDataUnsafe.user.username);
-      ethersServiceProvider.setTGUsername(WebApp.initDataUnsafe.user.username);
+      if (WebApp.initDataUnsafe?.user) {
+        setTgUsername(WebApp.initDataUnsafe.user.username);
+      }
     }
   }, []);
 
