@@ -2,8 +2,8 @@
 
 **TonBoard** is a Telegram mini-app designed to engage users in crypto quizzes, leaderboard competitions, and reward them with airdrops. It leverages the power of the Telegram ecosystem to provide an intuitive and gamified experience for crypto enthusiasts.
 
-| ![TonBoard Intro](./mainscreen.png) | ![TonBoard Summary](./summary.png) |
-| ----------------------------------- | ---------------------------------- |
+| ![TonBoard Intro](./loading.png) | ![TonBoard Main](./mainscreen.png) | ![TonBoard Summary](./summary.png) |
+| -------------------------------- | ---------------------------------- | ---------------------------------- |
 
 ## 🌟 Features
 
