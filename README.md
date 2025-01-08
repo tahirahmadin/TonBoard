@@ -1,4 +1,4 @@
-# TonBoard
+# TonBoard - Telegram Onboarding makes simple
 
 **TonBoard** is a Telegram mini-app designed to engage users in crypto quizzes, leaderboard competitions, and reward them with airdrops. It leverages the power of the Telegram ecosystem to provide an intuitive and gamified experience for crypto enthusiasts.
 
@@ -12,8 +12,6 @@
 - **Leaderboards**: Compete with friends and other users to climb the leaderboard.
 - **Airdrops**: Earn exclusive airdrops based on your performance and engagement.
 - **Referral System**: Invite friends to participate and boost your rewards.
-
-![TonBoard Growth Summary](./summary.png)
 
 ## 🚀 How It Works
 
