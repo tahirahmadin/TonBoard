@@ -27,9 +27,9 @@ const useTelegramSDK = (hookInit = false) => {
         setTgUsername(WebApp.initDataUnsafe.user.username);
       }
 
-      // setTimeout(() => {
-      //   setUserID(1118251880);
-      // }, 2000);
+      setTimeout(() => {
+        setUserID(1118251880);
+      }, 2000);
     }
   }, [hookInit]);
 
